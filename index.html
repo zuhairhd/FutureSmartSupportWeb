@@ -4,40 +4,193 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Future Smart Support — AI Helpdesk & Call Center Agents</title>
-  <meta name="description" content="AI helpdesk and call center agents powered by MCP, connecting securely to your data and tools." />
+  <meta name="description" content="Future Smart Support builds AI-powered helpdesk and call center agents using the Model Context Protocol (MCP) to safely connect your data and prompts." />
+  <meta name="theme-color" content="#b8885a" />
+  <link rel="preload" href="assets/FSS_Logo.svg" as="image" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Future Smart Support — AI Helpdesk & Call Center Agents" />
+  <meta property="og:description" content="AI agents that resolve tickets, answer calls, and act on your systems — powered by MCP." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/FSS_Logo.svg" />
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Future Smart Support",
+    "url": "https://FutureSmartSupport.com",
+    "logo": "https://FutureSmartSupport.com/assets/FSS_Logo.svg",
+    "description": "AI helpdesk and call center agents powered by MCP.",
+    "sameAs": []
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
-    <h1>Future Smart Support</h1>
-    <p>AI Helpdesk & Call Center Agents powered by MCP</p>
+    <div class="container header-inner">
+      <img src="assets/FSS_Logo.svg" alt="Future Smart Support logo" class="logo" />
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#usecases">Use cases</a>
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section class="hero">
-      <h2>Smart Agents. Real Actions.</h2>
-      <p>Deploy 24/7 AI agents that resolve tickets, answer calls, and take action using your data through the <strong>Model Context Protocol (MCP)</strong>.</p>
-      <a href="#contact" class="btn">Get in Touch</a>
+      <div class="container grid">
+        <div class="hero-copy">
+          <h1>AI Helpdesk & Call Center Agents — connected to your data via <span class="accent">MCP</span></h1>
+          <p>Deploy 24/7 agents that answer, resolve, and take action. Future Smart Support uses the <strong>Model Context Protocol (MCP)</strong> to connect AI to your knowledge bases, tools, and workflows — securely and reliably.</p>
+          <div class="cta-row">
+            <a href="#contact" class="btn btn-primary">Request a demo</a>
+            <a href="#how" class="btn btn-ghost">See how it works</a>
+          </div>
+          <ul class="badges">
+            <li>No-code onboarding</li>
+            <li>Secure by design</li>
+            <li>Multi-channel: chat, email, voice</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <div class="card">
+            <h3>What our agent can do</h3>
+            <ul class="checklist">
+              <li>Answer FAQs with up-to-date knowledge</li>
+              <li>Create/Update tickets in your helpdesk</li>
+              <li>Authenticate customers and track SLAs</li>
+              <li>Escalate to human with full context</li>
+              <li>Transcribe & summarize calls</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="features">
-      <h2>Key Features</h2>
-      <ul>
-        <li>🔐 Secure data access via MCP</li>
-        <li>🧠 Actionable agents that can create and update tickets</li>
-        <li>📞 Voice-ready with transcription & summaries</li>
-        <li>🌍 Multi-language support (Arabic / English)</li>
-      </ul>
+    <section id="about" class="section">
+      <div class="container narrow">
+        <h2>About Future Smart Support</h2>
+        <p>We build production-grade AI agents for support teams. Our approach is simple: keep your data in your systems, connect via <strong>MCP connectors</strong>, craft robust prompts & policies, then observe and iterate with analytics.</p>
+      </div>
     </section>
 
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <p>Email us at <a href="mailto:hello@FutureSmartSupport.com">hello@FutureSmartSupport.com</a></p>
+    <section id="how" class="section alt">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="steps grid-3">
+          <div class="step card">
+            <div class="step-num">1</div>
+            <h3>Connect via MCP</h3>
+            <p>Use MCP clients/servers to securely expose your knowledge bases (e.g., docs, CRM, wiki) and tools (e.g., ticketing, order status) to the agent.</p>
+          </div>
+          <div class="step card">
+            <div class="step-num">2</div>
+            <h3>Design prompts & policies</h3>
+            <p>Guardrails, escalation rules, tone, language, and workflows are baked into modular prompts with clear fallbacks.</p>
+          </div>
+          <div class="step card">
+            <div class="step-num">3</div>
+            <h3>Deploy everywhere</h3>
+            <p>Serve the same agent on chat, email, and voice. Log actions, track KPIs, and continuously improve with feedback loops.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2>Key features</h2>
+        <div class="features grid-3">
+          <div class="card">
+            <h3>Secure data access</h3>
+            <p>Your data stays in place. Agents fetch context on-demand via MCP with least-privilege permissions.</p>
+          </div>
+          <div class="card">
+            <h3>Actionable agents</h3>
+            <p>Not just answers: create tickets, update records, send emails, and more using tool calls.</p>
+          </div>
+          <div class="card">
+            <h3>Voice-ready</h3>
+            <p>Natural phone support with transcription, call summaries, and CRM logging.</p>
+          </div>
+          <div class="card">
+            <h3>Multi-language</h3>
+            <p>Serve customers in Arabic and English with consistent tone and policy.</p>
+          </div>
+          <div class="card">
+            <h3>Observability</h3>
+            <p>Session replays, red-team prompts, guardrail metrics, and continuous evaluation.</p>
+          </div>
+          <div class="card">
+            <h3>Fast onboarding</h3>
+            <p>No-code starter plus expert configuration for complex environments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="usecases" class="section alt">
+      <div class="container">
+        <h2>Use cases</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>E‑commerce support</h3>
+            <p>Order tracking, returns, product Q&amp;A, and automated follow‑ups.</p>
+          </div>
+          <div class="card">
+            <h3>Banking &amp; fintech</h3>
+            <p>Account questions, card disputes triage, KYC reminders with human escalation.</p>
+          </div>
+          <div class="card">
+            <h3>Healthcare</h3>
+            <p>Appointment scheduling, pre‑visit checklists, and post‑call summaries.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container grid">
+        <div>
+          <h2>Contact us</h2>
+          <p>Ready to explore an AI agent for your team? Send us a message and we’ll get back to you shortly.</p>
+          <ul class="contact-list">
+            <li>Email: <a href="mailto:hello@FutureSmartSupport.com">hello@FutureSmartSupport.com</a></li>
+            <li>Domain: FutureSmartSupport.com</li>
+          </ul>
+        </div>
+        <form class="card form" method="POST" action="https://formspree.io/f/your-form-id">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required>
+          </label>
+          <label>
+            <span>Company</span>
+            <input type="text" name="company">
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <p class="form-note">No Formspree account? Replace the <code>action</code> with <code>mailto:hello@FutureSmartSupport.com</code>.</p>
+        </form>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>© <span id="year"></span> Future Smart Support. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Future Smart Support — All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
