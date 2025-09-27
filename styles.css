@@ -1,1 +1,30 @@
-body{font-family:system-ui;padding:2rem;}
+body {
+  font-family: system-ui, sans-serif;
+  background: #0f0f10;
+  color: #e9e6e3;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+header, main, footer {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+}
+h1, h2 { color: #b8885a; }
+a { color: #b8885a; }
+.btn {
+  display: inline-block;
+  background: #b8885a;
+  color: #1a120a;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
+footer {
+  border-top: 1px solid #333;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
