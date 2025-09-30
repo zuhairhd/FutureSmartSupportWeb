@@ -154,38 +154,51 @@
       </div>
     </section>
 
-    <section id="contact" class="section contact">
-      <div class="container grid">
-        <div>
-          <h2>Contact us</h2>
-          <p>Ready to explore an AI agent for your team? Send us a message and we’ll get back to you shortly.</p>
-          <ul class="contact-list">
-            <li>Email: <a href="mailto:hello@FutureSmartSupport.com">hello@FutureSmartSupport.com</a></li>
-            <li>Domain: FutureSmartSupport.com</li>
-          </ul>
-        </div>
-        <form class="card form" method="POST" action="https://formspree.io/f/your-form-id">
-          <label>
-            <span>Name</span>
-            <input type="text" name="name" required>
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" required>
-          </label>
-          <label>
-            <span>Company</span>
-            <input type="text" name="company">
-          </label>
-          <label>
-            <span>Message</span>
-            <textarea name="message" rows="5" required></textarea>
-          </label>
-          <button class="btn btn-primary" type="submit">Send message</button>
-          <p class="form-note">No Formspree account? Replace the <code>action</code> with <code>mailto:hello@FutureSmartSupport.com</code>.</p>
-        </form>
-      </div>
-    </section>
+<section id="contact" class="section contact">
+  <div class="container grid">
+    <div>
+      <h2>Contact us</h2>
+      <p>
+        Ready to explore an AI agent for your team? Send us a message and we’ll get back to you shortly.
+      </p>
+      <ul class="contact-list">
+        <li>Email: <a href="mailto:majedzhd@gmail.com">Send Us an Email</a></li>
+        <li>Domain: FutureSmartSupport.com</li>
+      </ul>
+    </div>
+
+    <!-- Form that opens user's email client to send message -->
+    <form
+      class="card form"
+      method="POST"
+      action="mailto:majedzhd@gmail.com"
+      enctype="text/plain"
+    >
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        <span>Company</span>
+        <input type="text" name="company">
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Send message</button>
+      <p class="form-note">
+        This form will open your default email app to send the message directly to
+        <code>majedzhd@gmail.com</code>.
+      </p>
+    </form>
+  </div>
+</section>
+
   </main>
 
   <footer class="site-footer">
