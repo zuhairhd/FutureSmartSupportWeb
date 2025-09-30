@@ -168,34 +168,31 @@
     </div>
 
     <!-- Form that opens user's email client to send message -->
-    <form
-      class="card form"
-      method="POST"
-      action="mailto:majedzhd@gmail.com"
-      enctype="text/plain"
-    >
-      <label>
-        <span>Name</span>
-        <input type="text" name="name" required>
-      </label>
-      <label>
-        <span>Email</span>
-        <input type="email" name="email" required>
-      </label>
-      <label>
-        <span>Company</span>
-        <input type="text" name="company">
-      </label>
-      <label>
-        <span>Message</span>
-        <textarea name="message" rows="5" required></textarea>
-      </label>
-      <button class="btn btn-primary" type="submit">Send message</button>
-      <p class="form-note">
-        This form will open your default email app to send the message directly to
-        <code>majedzhd@gmail.com</code>.
-      </p>
-    </form>
+<form class="card form" method="POST" action="https://formspree.io/f/xwproqvw">
+  <label>
+    <span>Name</span>
+    <input type="text" name="name" required>
+  </label>
+  <label>
+    <span>Email</span>
+    <input type="email" name="email" required>
+  </label>
+  <label>
+    <span>Company</span>
+    <input type="text" name="company">
+  </label>
+  <label>
+    <span>Message</span>
+    <textarea name="message" rows="5" required></textarea>
+  </label>
+
+  <!-- Optional: redirect after submit -->
+  <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you.html">
+
+  <button class="btn btn-primary" type="submit">Send message</button>
+  <p class="form-note">We’ll send your message to majedzhd@gmail.com.</p>
+</form>
+
   </div>
 </section>
 
