@@ -1,36 +1,40 @@
-Future Smart Support — Static Website
-====================================
+# Future Smart Support — Static Website
+AI-powered customer support and helpdesk automation platform.
 
-Deploy options (Netlify / Vercel / GitHub Pages)
-------------------------------------------------
-1) Netlify (recommended)
-   - Drag & drop the folder into https://app.netlify.com (Add new site → Deploy manually)
-   - Then add a custom domain: FutureSmartSupport.com
-   - Point DNS 'www' CNAME to your-site.netlify.app
-   - Enable HTTPS (Let's Encrypt)
+## 🚀 Live Site
+**URL:** [https://futuresmartsupport.com](https://futuresmartsupport.com)
 
-2) Vercel
-   - Import as a project (no build step required for pure static)
-   - Add your custom domain and follow the DNS wizard.
+## 🛠 Features
+- **AI Helpdesk & Call Center:** 24/7 automated agents for support teams.
+- **MCP Integration:** Uses the Model Context Protocol to connect AI to knowledge bases and workflows.
+- **Multi-channel:** Support for Web, Email, and Voice.
+- **Meta Integration:** Seamless automation for WhatsApp, Messenger, and Instagram.
 
-3) GitHub Pages
-   - Push to a repo → Settings → Pages → Deploy from /root
+## 📂 File Structure
+- `index.html` — Main landing page.
+- `terms.html` — Terms of Service (Matches site theme).
+- `privacy-policy.html` — Privacy Policy (Meta compliant).
+- `style.css` — Modern dark-theme styling with glassmorphism.
+- `script.js` — UI interactions.
+- `assets/` — Includes `FSS_Logo.svg` and other brand assets.
 
-Contact form
-------------
-- The contact form uses Formspree (placeholder action URL).
-- Replace action with your Formspree endpoint or use "mailto:hello@FutureSmartSupport.com".
+## 🌐 Deployment & Domain Setup
+### 1. GitHub Pages (Current)
+- Pushed to `zuhairhd/FutureSmartSupportWeb`.
+- Settings → Pages → Deploy from `/root`.
 
-Email on your domain
---------------------
-- Choose an email provider (e.g., Google Workspace, Microsoft 365, Zoho Mail, or Cloudflare Email Routing).
-- Create mailbox 'hello@FutureSmartSupport.com'.
-- Add MX, SPF, DKIM, and (optionally) DMARC records from your provider into your DNS.
-- Wait for DNS to propagate, then test sending/receiving.
+### 2. Custom Domain Configuration
+- **Provider:** Point DNS 'www' CNAME to your GitHub Pages URL.
+- **Apex Domain:** Configure A records to GitHub's IP addresses.
+- **HTTPS:** Ensure "Enforce HTTPS" is checked in GitHub Settings.
 
-Files
------
-- index.html  — main page
-- styles.css  — styling
-- script.js   — interactions
-- assets/FSS_Logo.svg — your logo
+## 📩 Contact Form
+- The contact form is configured for **Formspree**.
+- **Action URL:** Replace the placeholder in `index.html` with your unique Formspree endpoint or use `mailto:majid@FutureSmartSupport.com`.
+
+## ⚖️ Compliance
+The `privacy-policy.html` and `terms.html` are designed to meet Meta Developer Policy requirements. Ensure the Privacy Policy URL is correctly linked in your **Meta App Dashboard** for WhatsApp/Messenger API approval.
+
+## 📧 Support
+For technical inquiries or updates, contact:
+**Majid** - [majid@FutureSmartSupport.com](mailto:majid@FutureSmartSupport.com)

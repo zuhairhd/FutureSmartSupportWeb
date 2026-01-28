@@ -1,0 +1,23 @@
+# OS Metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (in case you use local build tools)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Logs
+logs
+*.log
+
+# Backups
+*.bak
+*.tmp
