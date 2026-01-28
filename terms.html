@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - Future Smart Support</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        /* Theme Overrides to ensure readability of long text */
+    <link rel="preload" href="assets/FSS_Logo.svg" as="image" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <style>
         body {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #f8fafc;
             min-height: 100vh;
+            margin: 0;
         }
         .legal-container {
             max-width: 900px;
@@ -26,15 +28,19 @@
         .last-updated { color: #94a3b8; margin-bottom: 30px; font-size: 0.9rem; }
         p, li { color: #cbd5e1; margin-bottom: 15px; }
         ul { padding-left: 20px; }
-        .back-home { color: #38bdf8; text-decoration: none; display: inline-block; margin-bottom: 20px; }
-        .back-home:hover { text-decoration: underline; }
+        a.accent-link { color: #38bdf8; text-decoration: none; }
+        a.accent-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <nav style="position: fixed; top: 0; width: 100%; padding: 20px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <nav style="position: fixed; top: 0; width: 100%; padding: 15px 20px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1);">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <a href="index.html" style="color: white; font-weight: bold; text-decoration: none; font-size: 1.2rem;">Future Smart Support</a>
-            <a href="index.html" class="back-home">← Back to Home</a>
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="assets/FSS_Logo.svg" alt="Future Smart Support Logo" style="height: 40px; width: auto;">
+            </a>
+            <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: 500; font-size: 0.95rem;">
+                ← Back to Home
+            </a>
         </div>
     </nav>
 
@@ -42,10 +48,10 @@
         <h1>Terms of Service</h1>
         <p class="last-updated">Last updated: 2026-01-28</p>
 
-        <p>These Terms of Service ("Terms") govern your access to and use of the website, applications, and services provided by Future Smart Support ("we", "our", or "us").</p>
+        <p>These Terms of Service ("Terms") govern your access to and use of the website, applications, and services provided by Future Smart Support ("we", "our", or "us"). By accessing or using our Services, you agree to be bound by these Terms.</p>
 
         <h2>1. Acceptance of Terms</h2>
-        <p>By accessing or using the Services, you confirm that you have read, understood, and agree to be bound by these Terms and our Privacy Policy.</p>
+        <p>By accessing or using the Services, you confirm that you have read, understood, and agree to be bound by these Terms and our Privacy Policy. If you do not agree, you must not use the Services.</p>
 
         <h2>2. Description of Services</h2>
         <p>Future Smart Support provides AI-powered customer support, helpdesk, call center, and automation services, including integrations with third-party platforms such as Meta (Facebook, Instagram, Messenger, and WhatsApp).</p>
@@ -55,19 +61,27 @@
 
         <h2>4. User Responsibilities</h2>
         <ul>
-            <li>Use the Services in compliance with all applicable laws.</li>
-            <li>Ensure data provided is accurate and lawful.</li>
-            <li>Obtain necessary consents from end users before processing data.</li>
+            <li>Use the Services in compliance with all applicable laws and regulations.</li>
+            <li>Ensure that any data you provide is accurate and lawful.</li>
+            <li>Obtain all necessary consents from your end users before processing their data.</li>
+            <li>Not misuse, disrupt, or attempt to gain unauthorized access to the Services.</li>
         </ul>
 
         <h2>5. Meta Platforms & Third-Party Services</h2>
-        <p>Your use of Meta platforms is subject to their respective terms, including Meta Platform Terms and WhatsApp Business Platform Policies. We are not responsible for changes or restrictions imposed by Meta.</p>
+        <p>Our Services integrate with Meta platforms. Your use of such platforms is subject to their respective terms and policies, including Meta Platform Terms and WhatsApp Business Platform Policies. We are not responsible for changes or restrictions imposed by third-party platforms.</p>
 
-        <h2>6. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, Future Smart Support shall not be liable for any indirect, incidental, or consequential damages arising out of your use of the Services.</p>
+        <h2>6. Intellectual Property</h2>
+        <p>All content, software, trademarks, and materials provided through the Services are owned by or licensed to Future Smart Support. You may not copy, modify, or distribute works without prior written consent.</p>
 
-        <h2>7. Contact Information</h2>
-        <p>Email: <a href="mailto:majid@FutureSmartSupport.com" style="color: #38bdf8;">majid@FutureSmartSupport.com</a></p>
+        <h2>7. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by law, Future Smart Support shall not be liable for any indirect, incidental, consequential, or special damages arising out of or related to your use of the Services.</p>
+
+        <h2>8. Governing Law</h2>
+        <p>These Terms shall be governed by and construed in accordance with the laws applicable to the jurisdiction in which Future Smart Support operates.</p>
+
+        <h2>9. Contact Information</h2>
+        <p>If you have questions about these Terms, please contact us at:</p>
+        <p><strong>Email:</strong> <a href="mailto:majid@FutureSmartSupport.com" class="accent-link">majid@FutureSmartSupport.com</a></p>
     </div>
 </body>
 </html>
