@@ -211,4 +211,12 @@ html[dir="rtl"] .bar-fill { background: linear-gradient(270deg, var(--brand), rg
 @media (max-width: 900px) {
   .local-deploy-grid { grid-template-columns: 1fr; gap: 36px; }
 }
+@media (max-width: 640px) {
+  .local-deploy-grid { gap: 28px; }
+  .deploy-sub { font-size: 15px; }
+  /* Make the CTA full-width on mobile so it doesn't sit awkwardly narrow */
+  .deploy-cta { display: flex; width: 100%; justify-content: center; }
+  .server-body { padding: 14px 12px 10px; }
+  .server-active-badge { font-size: 10px; padding: 2px 7px; }
+}
 </style>

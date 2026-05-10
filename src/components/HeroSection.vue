@@ -159,10 +159,17 @@ h1 {
   .hero { padding: 56px 0 44px; }
 }
 @media (max-width: 640px) {
-  h1 { font-size: 28px; }
-  .hero { padding: 44px 0 36px; }
-  .cta-row { flex-direction: column; align-items: stretch; }
-  .cta-row .btn { text-align: center; justify-content: center; }
+  h1 { font-size: 28px; letter-spacing: -0.01em; }
+  .hero { padding: 40px 0 32px; }
+  .cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .cta-row .btn { text-align: center; justify-content: center; width: 100%; }
   .hero-sub { font-size: 15px; }
+  .hero-tagline { font-size: 13px; }
+  .badges li { font-size: 12px; padding: 4px 10px; }
+}
+@media (max-width: 390px) {
+  h1 { font-size: 23px; }
+  .hero-eyebrow { font-size: 11px; }
+  .hero-sub { font-size: 14px; }
 }
 </style>

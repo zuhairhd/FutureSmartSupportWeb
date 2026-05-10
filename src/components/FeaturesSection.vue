@@ -74,7 +74,9 @@ const { t } = useLanguage()
 @media (max-width: 900px) {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 580px) {
+@media (max-width: 640px) {
+  /* Two columns are too narrow below 640px with icon + long Arabic text */
   .features-grid { grid-template-columns: 1fr; }
+  .section-header { margin-bottom: 28px; }
 }
 </style>

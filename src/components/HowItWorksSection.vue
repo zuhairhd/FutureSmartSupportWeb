@@ -82,5 +82,10 @@ html[dir="rtl"] .steps-grid::before {
 @media (max-width: 900px) {
   .steps-grid { grid-template-columns: 1fr; gap: 16px; }
   .steps-grid::before { display: none; }
+  .section-header { margin-bottom: 28px; }
+}
+@media (max-width: 640px) {
+  .step-card h3 { font-size: 16px; }
+  .step-card p { font-size: 14px; }
 }
 </style>

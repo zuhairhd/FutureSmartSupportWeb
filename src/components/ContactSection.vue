@@ -115,6 +115,9 @@ function reset() {
 .contact-email a {
   color: var(--brand);
   text-decoration: underline;
+  /* Long email addresses must wrap rather than overflow */
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 .contact-email a:hover { opacity: 0.85; }
 
@@ -189,5 +192,13 @@ function reset() {
 
 @media (max-width: 900px) {
   .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 640px) {
+  .form-card { padding: 20px 16px; }
+  /* 16px prevents iOS auto-zoom on input focus */
+  .field input,
+  .field textarea { font-size: 16px; padding: 10px 12px; }
+  .contact-sub { font-size: 15px; }
+  .success-state h3 { font-size: 18px; }
 }
 </style>

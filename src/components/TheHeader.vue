@@ -143,9 +143,10 @@ onUnmounted(() => {
 
 @media (max-width: 820px) {
   .hamburger { display: flex; }
-  /* Hide the desktop lang toggle inside header-actions on mobile — shown in nav */
   .header-actions .lang-toggle { display: none; }
   .nav .lang-toggle { display: block; }
+  /* Reduce logo on tablet */
+  .logo { height: 36px; }
 
   .nav {
     position: fixed;
@@ -161,6 +162,8 @@ onUnmounted(() => {
     transform: translateX(100%);
     transition: transform 0.3s ease;
     border-top: 1px solid var(--line);
+    /* Prevent the off-screen nav from contributing to scroll width */
+    overflow: hidden;
   }
   html[dir="rtl"] .nav {
     transform: translateX(-100%);
@@ -171,5 +174,12 @@ onUnmounted(() => {
   .nav a { font-size: 18px; opacity: 0.9; }
   .nav-cta { font-size: 15px !important; padding: 12px 24px; }
   .nav .lang-toggle { font-size: 15px; padding: 10px 20px; }
+}
+
+@media (max-width: 480px) {
+  .logo { height: 30px; }
+  .header-inner { min-height: 60px; gap: 10px; }
+  /* Keep nav top aligned with actual header height */
+  .nav { top: 60px; }
 }
 </style>
