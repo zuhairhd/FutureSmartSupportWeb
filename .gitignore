@@ -21,3 +21,12 @@ logs
 # Backups
 *.bak
 *.tmp
+
+# Vite build output
+dist/
+
+# Local env
+.env
+.env.local
+.env.*.local.claude/
+.claude/
