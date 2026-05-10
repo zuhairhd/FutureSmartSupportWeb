@@ -44,7 +44,7 @@ export default {
     steps: [
       {
         title: 'We Install at Your Site',
-        desc: 'Our team installs the FSS Voice system on a server at your business premises. Quick setup — no cloud subscription required.',
+        desc: 'Our team installs the FSS Voice system on a server at your business premises, with secure integration to the AI services needed for voice and intelligence.',
       },
       {
         title: 'Your AI Answers Every Call',
