@@ -5,6 +5,7 @@
         <img src="/assets/FSS_Logo.svg" alt="Future Smart Support" class="logo" />
       </router-link>
 
+      <!-- Desktop nav: inline flex row. Mobile nav: dropdown panel below header. -->
       <nav class="nav" :class="{ open: menuOpen }">
         <router-link :to="{ path: '/', hash: '#about' }" @click="close">{{ t('nav.about') }}</router-link>
         <router-link :to="{ path: '/', hash: '#how' }" @click="close">{{ t('nav.howItWorks') }}</router-link>
@@ -13,11 +14,18 @@
         <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary nav-cta" @click="close">
           {{ t('nav.requestDemo') }}
         </router-link>
-        <button class="lang-toggle" @click="toggleLang">{{ t('nav.switchLang') }}</button>
       </nav>
 
+      <!--
+        header-actions DOM order: [lang-toggle] then [hamburger].
+        In RTL flex the visual order reverses to [hamburger][lang-toggle][logo].
+        In LTR the visual order is [logo][lang-toggle][hamburger].
+        Both match the requested mobile layout with no JS needed.
+      -->
       <div class="header-actions">
-        <button class="lang-toggle" @click="toggleLang">{{ t('nav.switchLang') }}</button>
+        <button class="lang-toggle" @click="toggleLang" :aria-label="t('nav.switchLang')">
+          {{ t('nav.switchLang') }}
+        </button>
         <button
           class="hamburger"
           :class="{ active: menuOpen }"
@@ -56,6 +64,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* ─── SHARED / DESKTOP ────────────────────────────────── */
 .site-header {
   position: sticky;
   top: 0;
@@ -68,6 +77,7 @@ onUnmounted(() => {
 .site-header.scrolled {
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
 }
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -75,9 +85,11 @@ onUnmounted(() => {
   min-height: 68px;
   gap: 16px;
 }
+
 .logo-link { display: flex; align-items: center; flex-shrink: 0; }
 .logo { height: 42px; width: auto; }
 
+/* Desktop nav: horizontal flex row */
 .nav {
   display: flex;
   align-items: center;
@@ -92,9 +104,6 @@ onUnmounted(() => {
 .nav a:hover { opacity: 1; }
 .nav .router-link-active:not(.btn) { color: var(--brand); opacity: 1; }
 .nav-cta { margin-inline-start: 4px; font-size: 14px !important; }
-
-/* Lang toggle inside nav — hidden on desktop (shown in header-actions) */
-.nav .lang-toggle { display: none; }
 
 .header-actions {
   display: flex;
@@ -111,7 +120,7 @@ onUnmounted(() => {
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, color 0.2s;
   white-space: nowrap;
 }
 .lang-toggle:hover {
@@ -128,6 +137,7 @@ onUnmounted(() => {
   cursor: pointer;
   padding: 8px 6px;
   border-radius: 8px;
+  flex-shrink: 0;
 }
 .hamburger span {
   display: block;
@@ -141,45 +151,83 @@ onUnmounted(() => {
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* ─── MOBILE ≤820px ───────────────────────────────────── */
 @media (max-width: 820px) {
-  .hamburger { display: flex; }
-  .header-actions .lang-toggle { display: none; }
-  .nav .lang-toggle { display: block; }
-  /* Reduce logo on tablet */
   .logo { height: 36px; }
+  .hamburger { display: flex; }
 
+  /*
+    Lang toggle stays visible in the header bar on mobile.
+    No longer hidden. Sits between logo and hamburger due to flex direction.
+  */
+  .lang-toggle {
+    font-size: 12px;
+    padding: 6px 11px;
+    border-color: rgba(184, 136, 90, 0.4);
+    color: var(--brand);
+  }
+  .lang-toggle:hover {
+    border-color: var(--brand);
+    background: var(--brand-dim);
+  }
+
+  /*
+    Nav becomes a dropdown panel anchored to the bottom of the sticky header.
+    position: absolute relative to .site-header (position: sticky = containing block).
+    Animates in with opacity + slight upward translate.
+  */
   .nav {
-    position: fixed;
-    top: 68px;
+    position: absolute;
+    top: 100%;
     inset-inline-start: 0;
     inset-inline-end: 0;
-    bottom: 0;
-    background: var(--bg);
+    background: rgba(15, 15, 16, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 28px;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    border-top: 1px solid var(--line);
-    /* Prevent the off-screen nav from contributing to scroll width */
-    overflow: hidden;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    /* Hidden state */
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  html[dir="rtl"] .nav {
-    transform: translateX(-100%);
-  }
+
   .nav.open {
-    transform: translateX(0) !important;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
-  .nav a { font-size: 18px; opacity: 0.9; }
-  .nav-cta { font-size: 15px !important; padding: 12px 24px; }
-  .nav .lang-toggle { font-size: 15px; padding: 10px 20px; }
+
+  /* Text nav links: full-width rows with border separators */
+  .nav a:not(.nav-cta) {
+    display: block;
+    padding: 15px 20px;
+    font-size: 16px;
+    opacity: 0.85;
+    border-bottom: 1px solid var(--line);
+    font-weight: 400;
+  }
+  .nav a:not(.nav-cta):hover { opacity: 1; color: var(--brand); }
+  .nav .router-link-active:not(.btn) { color: var(--brand); opacity: 1; }
+
+  /* CTA button: inset from edges with top/bottom breathing room */
+  .nav .nav-cta {
+    display: flex;
+    margin-top: 14px;
+    margin-bottom: 16px;
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+    justify-content: center;
+    font-size: 15px !important;
+  }
 }
 
+/* ─── VERY SMALL ≤480px ───────────────────────────────── */
 @media (max-width: 480px) {
   .logo { height: 30px; }
-  .header-inner { min-height: 60px; gap: 10px; }
-  /* Keep nav top aligned with actual header height */
-  .nav { top: 60px; }
+  .header-inner { min-height: 60px; gap: 8px; }
 }
 </style>
