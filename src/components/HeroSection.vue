@@ -13,10 +13,14 @@
           <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary">
             {{ t('hero.ctaPrimary') }}
           </router-link>
-          <router-link :to="{ path: '/', hash: '#how' }" class="btn btn-ghost">
+          <router-link :to="{ path: '/', hash: '#offer' }" class="btn btn-ghost">
             {{ t('hero.ctaSecondary') }}
           </router-link>
         </div>
+        <p class="hero-trust-line">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" aria-hidden="true" class="trust-icon"><path d="M8 1.5l6 2.5v4c0 3.5-2.5 6-6 7C2.5 14 0 11.5 0 8V4l6-2.5z" stroke-width="1.3"/></svg>
+          {{ t('hero.trustLine') }}
+        </p>
         <ul class="badges">
           <li v-for="badge in t('hero.badges', [])" :key="badge">{{ badge }}</li>
         </ul>
@@ -88,6 +92,19 @@ h1 {
   font-weight: 500;
   margin: 0 0 28px;
   opacity: 0.9;
+}
+
+.hero-trust-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+.trust-icon {
+  color: var(--brand);
+  flex-shrink: 0;
 }
 
 .cta-row {

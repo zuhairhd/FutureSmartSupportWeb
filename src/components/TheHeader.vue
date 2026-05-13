@@ -7,9 +7,9 @@
 
       <!-- Desktop nav: inline flex row. Mobile nav: dropdown panel below header. -->
       <nav class="nav" :class="{ open: menuOpen }">
-        <router-link :to="{ path: '/', hash: '#about' }" @click="close">{{ t('nav.about') }}</router-link>
         <router-link :to="{ path: '/', hash: '#how' }" @click="close">{{ t('nav.howItWorks') }}</router-link>
         <router-link :to="{ path: '/', hash: '#features' }" @click="close">{{ t('nav.features') }}</router-link>
+        <router-link :to="{ path: '/', hash: '#offer' }" @click="close">{{ t('nav.offer') }}</router-link>
         <router-link :to="{ path: '/', hash: '#industries' }" @click="close">{{ t('nav.industries') }}</router-link>
         <router-link :to="{ path: '/', hash: '#contact' }" class="btn btn-primary nav-cta" @click="close">
           {{ t('nav.requestDemo') }}

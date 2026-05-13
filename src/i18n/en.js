@@ -1,116 +1,250 @@
 export default {
   nav: {
-    about: 'About',
     howItWorks: 'How It Works',
     features: 'Features',
+    offer: 'Special Offer',
     industries: 'Industries',
-    requestDemo: 'Request a Demo',
+    requestDemo: 'Request Demo',
     switchLang: 'العربية',
   },
 
   hero: {
-    eyebrow: 'AI Voice Receptionist',
-    headline: 'Smart AI Receptionist',
-    headlineAccent: 'for Your Business',
-    sub: 'Answer customer calls 24/7 with an AI receptionist that speaks Arabic and English, records call activity, sends alerts, and helps your team manage follow-ups from a private local dashboard.',
-    tagline: 'Installed locally. Built for privacy. Designed for business growth.',
-    ctaPrimary: 'Request a Demo',
-    ctaSecondary: 'See How It Works',
-    badges: ['24/7 Arabic & English', 'Installed Locally', 'Privacy-First', 'Oman & Gulf Ready'],
-    cardTitle: 'What FSS Voice does',
+    eyebrow: 'VoiceGate AI — AI Voice Receptionist',
+    headline: 'Never Miss a',
+    headlineAccent: 'Customer Call Again',
+    sub: 'VoiceGate AI is an Arabic & English AI receptionist for businesses in Oman. It answers calls 24/7, captures customer requests, and gives you a cloud dashboard for calls, recordings, transcripts, analytics, and follow-ups.',
+    tagline: 'Local server deployment + cloud dashboard access',
+    ctaPrimary: 'Request Demo',
+    ctaSecondary: 'View Special Offer',
+    trustLine: 'Local server deployment + cloud dashboard access',
+    badges: ['24/7 Arabic & English', 'Local + Cloud System', 'Oman & Gulf Ready', 'Recordings & Transcripts'],
+    cardTitle: 'VoiceGate AI handles your calls',
     cardItems: [
-      'Answers every call, even outside business hours',
-      'Speaks Arabic and English naturally',
-      'Logs every call with full details',
-      'Sends email alerts to your team',
-      'Runs on your own local server — no cloud required',
+      'Answers every call 24/7, in Arabic or English',
+      'Captures appointment and order requests',
+      'Logs every call with recordings and transcripts',
+      'Cloud dashboard for your team, anywhere',
+      'Live monitoring of your local AI server',
     ],
-    cardStatus: 'FSS Voice — Active',
+    cardStatus: 'VoiceGate AI — Active',
   },
 
   trustStrip: {
     items: [
-      { value: '24/7', label: 'Always Available' },
-      { value: '100%', label: 'Calls Answered' },
+      { value: '24/7', label: 'Always Answering' },
       { value: '2 Languages', label: 'Arabic & English' },
-      { value: 'On-Premise', label: 'Your Server' },
+      { value: 'Local + Cloud', label: 'Complete System' },
+      { value: 'Oman', label: 'Gulf-Ready' },
     ],
+  },
+
+  offer: {
+    label: 'Special Offer',
+    badge: 'Limited Time',
+    title: 'Limited-Time Setup Offer',
+    price: '372 OMR',
+    priceLabel: 'One-time setup fee',
+    sub: 'Get a complete VoiceGate AI receptionist system, fully installed and configured at your business premises.',
+    includesTitle: "What's included",
+    includes: [
+      'Local AI server hardware',
+      'Professional installation and setup',
+      'Grandstream HT813 VoIP adapter',
+      'Grandstream GXP1625 HD IP Phone',
+      'AI receptionist configuration',
+      'Arabic and English language support',
+      'Cloud dashboard access',
+      'Call logs, transcripts, and recordings',
+      'Usage statistics and analytics',
+      'Service monitoring and support',
+    ],
+    subscriptionNote: 'A monthly AI service subscription applies for cloud access, ongoing support, updates, monitoring, and AI processing.',
+    ctaPrimary: 'Request Demo',
+    ctaSecondary: 'Contact Us',
   },
 
   howItWorks: {
     label: 'How It Works',
-    title: 'Three simple steps',
+    title: 'Up and running in days',
     sub: 'From installation to a fully running AI receptionist in days, not months.',
     steps: [
       {
         title: 'We Install at Your Site',
-        desc: 'Our team installs the FSS Voice system on a server at your business premises, with secure integration to the AI services needed for voice and intelligence.',
+        desc: 'Our team installs the VoiceGate AI server at your business and connects it to your phone line. We configure the AI with your services, hours, and business information.',
       },
       {
-        title: 'Your AI Answers Every Call',
-        desc: 'Customers call your number. The AI answers in Arabic or English, handles the inquiry, records the call, and saves it to your local dashboard.',
+        title: 'VoiceGate AI Answers Every Call',
+        desc: 'Customers call your number. The AI answers in Arabic or English, handles the inquiry, captures requests, records the call, and saves everything to your dashboard.',
       },
       {
         title: 'Your Team Stays in Control',
-        desc: 'Review call logs, listen to recordings, manage follow-ups, and receive email alerts — all from a private portal on your local network.',
+        desc: 'Review call logs, listen to recordings, read transcripts, manage follow-ups, and track analytics — all from the cloud dashboard, from anywhere.',
       },
     ],
   },
 
   features: {
     label: 'Features',
-    title: 'Everything you need for a professional reception',
-    sub: 'A complete AI receptionist system built for the Gulf business environment.',
+    title: 'A complete AI receptionist system',
+    sub: 'Everything you need to handle calls professionally, with full visibility into every conversation.',
     list: [
-      { icon: 'clock',   title: '24/7 Call Answering',        desc: 'Never miss a customer call. The AI receptionist is always on, even outside business hours and on holidays.' },
-      { icon: 'globe',   title: 'Arabic & English',            desc: 'Natural conversation in both languages. The AI detects the caller\'s language and responds accordingly.' },
-      { icon: 'server',  title: 'Local Server Deployment',     desc: 'Installed on hardware at your premises. No reliance on third-party cloud services.' },
-      { icon: 'shield',  title: 'Privacy by Default',          desc: 'Your business call data stays inside your local environment. No call content ever leaves your premises.' },
-      { icon: 'layout',  title: 'Call Dashboard',              desc: 'View call history, caller info, recordings, and follow-up requests through a secure local portal.' },
-      { icon: 'bell',    title: 'Email Alerts',                desc: 'Instant notifications when calls arrive, when voicemails are left, or when action is needed.' },
-      { icon: 'mic',     title: 'Voice Messaging',             desc: 'When no one is available, the system records a voicemail and saves it to your portal for follow-up.' },
-      { icon: 'chart',   title: 'Usage Monitoring',            desc: 'Track call volume, voice minutes, and system activity. Full visibility into AI receptionist performance.' },
-      { icon: 'star',    title: 'Future Features',             desc: 'Appointment booking, follow-up management, customer reminders, and business system integrations — coming soon.' },
+      { icon: 'clock',    title: '24/7 AI Call Answering',          desc: 'Never miss a call. VoiceGate AI is always on — outside business hours, weekends, and public holidays.' },
+      { icon: 'globe',    title: 'Arabic & English Conversations',   desc: 'Natural conversation in both languages. Detects the caller\'s language automatically and responds accordingly.' },
+      { icon: 'calendar', title: 'Appointment Booking Workflows',    desc: 'Callers can request appointments directly. Details are captured and saved for your team to confirm and manage.' },
+      { icon: 'cart',     title: 'Order Taking Workflows',           desc: 'Configurable order-taking workflow. The AI captures order details and logs them for your team to process.' },
+      { icon: 'file',     title: 'Call Logs & Transcripts',          desc: 'Every call is logged and transcribed. Search and review the full text of any conversation at any time.' },
+      { icon: 'play',     title: 'Secure Recording Playback',        desc: 'Listen to any recorded call directly from the cloud dashboard. Recordings are stored securely.' },
+      { icon: 'chart',    title: 'Cloud Analytics Dashboard',        desc: 'Track call volume, patterns, and performance through an easy-to-use cloud dashboard accessible from anywhere.' },
+      { icon: 'server',   title: 'Local Server + Cloud Monitoring',  desc: 'Real-time visibility into your on-premise server health and cloud service status — all in one view.' },
+      { icon: 'repeat',   title: 'Follow-up Management',             desc: 'The system logs follow-up requests and alerts your team. No customer falls through the cracks.' },
+      { icon: 'phone',    title: 'Human Transfer When Available',    desc: 'When a team member is available, VoiceGate AI can transfer the call to a human operator seamlessly.' },
+    ],
+  },
+
+  whyUs: {
+    label: 'Why VoiceGate AI',
+    title: 'More than software — a complete local system',
+    sub: 'Unlike generic cloud-only AI receptionists, VoiceGate AI is built for Oman and Gulf businesses with local deployment and full enterprise features.',
+    advantages: [
+      {
+        icon: 'server',
+        title: 'Local Oman-Focused Deployment',
+        desc: 'Installed on-site at your business. Your data stays in Oman, not on a foreign cloud. Full privacy control.',
+      },
+      {
+        icon: 'shield',
+        title: 'On-Premise Server Option',
+        desc: 'Run on your own hardware for maximum control, security, and reliability — no dependency on third-party infrastructure.',
+      },
+      {
+        icon: 'layout',
+        title: 'Full Cloud Dashboard',
+        desc: 'Access call logs, analytics, recordings, and transcripts from anywhere through a secure cloud dashboard.',
+      },
+      {
+        icon: 'globe',
+        title: 'Arabic & Gulf Market Tuning',
+        desc: 'Designed for Arabic-speaking callers in Oman and the Gulf. Natural business conversation, not generic multilingual AI.',
+      },
+      {
+        icon: 'play',
+        title: 'Call Replay & Transcript Review',
+        desc: 'Listen to every recorded call and read full transcripts. Full context from every customer conversation, always accessible.',
+      },
+      {
+        icon: 'chart',
+        title: 'Live Server Monitoring',
+        desc: 'Real-time visibility into your AI system health, call volume, and service status from the cloud dashboard.',
+      },
+      {
+        icon: 'star',
+        title: 'Real Business Support',
+        desc: 'Backed by a local team in Oman. We install, configure, and support your system in person, not just over email.',
+      },
     ],
   },
 
   localDeploy: {
-    label: 'Privacy & Security',
-    title: 'Your Data, Your Server',
-    sub: 'Unlike cloud-based solutions, FSS Voice is installed directly on a server at your business. Your call recordings, customer data, and conversation logs never leave your premises.',
+    label: 'Local + Cloud System',
+    title: 'Local server. Cloud dashboard.',
+    sub: 'VoiceGate AI is not just cloud software. We install a dedicated AI server at your business that handles all your calls locally, while a cloud dashboard gives your team access from anywhere.',
     points: [
-      'On-site hardware installation',
-      'No external cloud dependency',
-      'Data stays inside your network',
-      'Full control over your data',
+      'On-site AI server installation',
+      'Call processing runs locally on your hardware',
+      'Cloud dashboard for remote access and analytics',
+      'Recordings and transcripts accessible from cloud',
     ],
-    cta: 'Request a Demo',
-    badge: 'On-Premise Deployment',
+    cta: 'Request Demo',
+    badge: 'Local + Cloud Architecture',
     serverLabel: 'Your Server',
     serverStatus: 'Active — Local Network',
-    serverProduct: 'FSS Voice',
+    serverProduct: 'VoiceGate AI',
   },
 
   industries: {
     label: 'Industries',
     title: 'Built for Oman & Gulf businesses',
-    sub: 'FSS Voice serves businesses across the region that need professional call handling without the overhead of a full-time receptionist.',
+    sub: 'VoiceGate AI serves businesses across Oman that need professional call handling without the cost of a full-time receptionist.',
     list: [
       {
         title: 'Clinics & Medical Centers',
         desc: 'Manage patient inquiries, appointment requests, and after-hours calls without a full-time receptionist.',
       },
       {
-        title: 'Retail & Service Businesses',
-        desc: 'Handle product questions, order follow-ups, and customer support around the clock.',
+        title: 'Beauty Salons & Spas',
+        desc: 'Handle booking requests, service inquiries, and customer calls around the clock.',
+      },
+      {
+        title: 'Auto Workshops & Service Centers',
+        desc: 'Capture service requests, booking inquiries, and job status questions professionally.',
       },
       {
         title: 'Real Estate Agencies',
-        desc: 'Capture every lead with 24/7 call answering and automatic call logging. No opportunity missed.',
+        desc: 'Never miss a lead. Every call is answered and logged — 24/7, even outside office hours.',
       },
       {
-        title: 'Professional Services',
-        desc: 'Law firms, accounting offices, and consultancies that need every call answered professionally and every detail logged.',
+        title: 'Law Offices & Consultancies',
+        desc: 'Every call answered professionally, every detail logged. Full transcript review for your records.',
+      },
+      {
+        title: 'Restaurants & Food Services',
+        desc: 'Handle reservations, order inquiries, and customer questions — even during peak hours.',
+      },
+      {
+        title: 'Service Companies & SMEs',
+        desc: 'A professional reception for any service business — without the overhead of a full-time hire.',
+      },
+      {
+        title: 'Retail & E-commerce',
+        desc: 'Handle product questions, order follow-ups, and customer support around the clock.',
+      },
+    ],
+  },
+
+  faq: {
+    label: 'FAQ',
+    title: 'Frequently Asked Questions',
+    sub: 'Everything you need to know about VoiceGate AI.',
+    items: [
+      {
+        q: 'What is VoiceGate AI?',
+        a: 'VoiceGate AI is a complete AI receptionist system for businesses in Oman and the Gulf. It answers calls 24/7 in Arabic and English, logs every conversation, and gives you a cloud dashboard for call recordings, transcripts, analytics, and follow-up management.',
+      },
+      {
+        q: 'Does it work in Arabic and English?',
+        a: "Yes. VoiceGate AI automatically detects the caller's language and responds in Arabic or English. It is specifically tuned for Gulf Arabic and professional business conversations.",
+      },
+      {
+        q: 'Can it answer questions about my business?',
+        a: "Yes. During setup, we configure the AI with your business information — services, location, hours, pricing, and FAQs. The AI answers caller questions based on the knowledge we configure for your business.",
+      },
+      {
+        q: 'Can it book appointments?',
+        a: "Yes. Appointment booking is configured as a workflow for your business. Callers can request appointments, and details are captured in the system for your team to confirm and manage.",
+      },
+      {
+        q: 'Can it take orders?',
+        a: "Yes. Order-taking can be configured as a business workflow. The AI captures order details from callers and logs them for your team to process.",
+      },
+      {
+        q: 'Can I review recordings and transcripts?',
+        a: "Yes. Every call is recorded and transcribed. You can listen to recordings and read full transcripts from the cloud dashboard, at any time.",
+      },
+      {
+        q: 'Is it cloud only?',
+        a: "No. VoiceGate AI includes a local AI server installed at your business. The local server handles call processing. The cloud dashboard lets you access call data, analytics, and recordings from anywhere.",
+      },
+      {
+        q: 'What does the 372 OMR setup offer include?',
+        a: "The setup offer includes the local AI server, professional installation, a Grandstream HT813 VoIP adapter, a Grandstream GXP1625 HD IP Phone, AI receptionist configuration, Arabic and English support, and cloud dashboard access.",
+      },
+      {
+        q: 'Is there a monthly subscription?',
+        a: "Yes. A monthly AI service subscription applies. This covers cloud dashboard access, ongoing support, software updates, system monitoring, and AI processing. Contact us for subscription details.",
+      },
+      {
+        q: 'Can it transfer calls to a human?',
+        a: "Yes. When a team member is available, VoiceGate AI can transfer the call to a human operator. This is configurable based on your business hours and team availability.",
       },
     ],
   },
@@ -118,7 +252,7 @@ export default {
   contact: {
     label: 'Get in Touch',
     title: 'Request a Demo',
-    sub: 'Ready to see FSS Voice in action? Fill in your details and we\'ll get back to you shortly.',
+    sub: "Ready to see VoiceGate AI in action? Fill in your details and we'll get back to you shortly.",
     emailLabel: 'Email us:',
     nameLabel: 'Name',
     emailFieldLabel: 'Email',
@@ -127,7 +261,7 @@ export default {
     submit: 'Send Message',
     submitting: 'Sending...',
     successTitle: 'Thank you for your message!',
-    successText: 'We\'ve received your inquiry and will get back to you shortly.',
+    successText: "We've received your inquiry and will get back to you shortly.",
     sendAnother: 'Send another message',
     errorText: 'Something went wrong. Please email us directly at majid@FutureSmartSupport.com',
     note: 'Your inquiry will be handled with priority by our team.',
@@ -142,7 +276,7 @@ export default {
   privacy: {
     title: 'Privacy Policy',
     lastUpdated: 'Last updated: January 28, 2026',
-    intro: 'At Future Smart Support, we prioritize the privacy of our users and their customers. This policy details how we handle information across our AI Voice Receptionist services.',
+    intro: 'At Future Smart Support, we prioritize the privacy of our users and their customers. This policy details how we handle information across our VoiceGate AI services.',
     sections: [
       {
         title: '1. Information We Collect',
@@ -150,7 +284,7 @@ export default {
       },
       {
         title: '2. Local Data Storage',
-        body: 'FSS Voice is an on-premise system. All call recordings, caller information, voicemails, and conversation logs are stored on the server installed at your business premises. This data remains under your full control and never leaves your local network.',
+        body: 'VoiceGate AI is an on-premise system. All call recordings, caller information, voicemails, and conversation logs are stored on the server installed at your business premises. This data remains under your full control and never leaves your local network.',
       },
       {
         title: '3. Data We Process',
@@ -182,7 +316,7 @@ export default {
       },
       {
         title: '2. Description of Services',
-        body: 'Future Smart Support provides an AI-powered Voice Receptionist system installed on-premise at your business location. The system includes call handling, local call logging, voicemail recording, a local dashboard portal, and email alerts.',
+        body: 'Future Smart Support provides VoiceGate AI — an AI-powered Voice Receptionist system installed on-premise at your business location. The system includes call handling, cloud and local call logging, recording, a cloud dashboard portal, transcripts, analytics, and service monitoring.',
       },
       {
         title: '3. Eligibility',
