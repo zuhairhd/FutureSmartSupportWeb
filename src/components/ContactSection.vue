@@ -55,7 +55,7 @@
 import { ref } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 
-const { t } = useLanguage()
+const { t, lang } = useLanguage()
 const uid = Math.random().toString(36).slice(2, 7)
 
 const form = ref({ name: '', email: '', company: '', message: '' })
@@ -67,12 +67,15 @@ async function handleSubmit() {
   submitting.value = true
   errorMsg.value = ''
   try {
-    const data = new FormData()
-    Object.entries(form.value).forEach(([k, v]) => data.append(k, v))
-    const res = await fetch('https://formspree.io/f/xwproqvw', {
+    const res = await fetch('https://api.futuresmartsupport.com/api/v1/public/contact/', {
       method: 'POST',
-      body: data,
-      headers: { Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        ...form.value,
+        language: lang.value,
+        source: 'marketing_website',
+        website: '',   // honeypot — intentionally blank
+      }),
     })
     if (res.ok) {
       submitted.value = true
