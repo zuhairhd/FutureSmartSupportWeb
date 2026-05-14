@@ -2,7 +2,7 @@
   <header class="site-header" :class="{ scrolled }">
     <div class="container header-inner">
       <router-link to="/" class="logo-link" @click="close">
-        <img src="/assets/FSS_Logo.svg" alt="Future Smart Support" class="logo" />
+        <img :src="logoUrl" alt="Future Smart Support" class="logo" />
       </router-link>
 
       <!-- Desktop nav: inline flex row. Mobile nav: dropdown panel below header. -->
@@ -43,6 +43,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
+import logoUrl from '../../assets/FSS_Logo.svg'
 
 const { t, lang, setLang } = useLanguage()
 const menuOpen = ref(false)
