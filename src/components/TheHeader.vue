@@ -2,7 +2,7 @@
   <header class="site-header" :class="{ scrolled }">
     <div class="container header-inner">
       <router-link to="/" class="logo-link" @click="close">
-        <img :src="logoUrl" alt="Future Smart Support" class="logo" />
+        <img :src="logoUrl" alt="Future Smart Support VoiceGate AI logo" class="logo" />
       </router-link>
 
       <!-- Desktop nav: inline flex row. Mobile nav: dropdown panel below header. -->

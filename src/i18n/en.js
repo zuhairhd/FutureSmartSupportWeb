@@ -9,11 +9,11 @@ export default {
   },
 
   hero: {
-    eyebrow: 'VoiceGate AI — AI Voice Receptionist',
-    headline: 'Never Miss a',
-    headlineAccent: 'Customer Call Again',
-    sub: 'VoiceGate AI is an Arabic & English AI receptionist for businesses in Oman. It answers calls 24/7, captures customer requests, and gives you a cloud dashboard for calls, recordings, transcripts, analytics, and follow-ups.',
-    tagline: 'Local server deployment + cloud dashboard access',
+    eyebrow: 'VoiceGate AI — AI Voice Receptionist in Oman',
+    headline: 'AI Voice Receptionist',
+    headlineAccent: 'for Oman Businesses',
+    sub: 'VoiceGate AI is an AI voice receptionist for businesses in Oman and the Gulf. It answers calls 24/7 in Arabic and English, handles AI appointment booking and customer requests, and gives you a cloud dashboard with call recordings, transcripts, and AI call analytics.',
+    tagline: 'Local server deployment + cloud dashboard · Oman & Gulf',
     ctaPrimary: 'Request Demo',
     ctaSecondary: 'View Special Offer',
     trustLine: 'Local server deployment + cloud dashboard access',
@@ -271,6 +271,9 @@ export default {
     copyright: '© {year} Future Smart Support — All rights reserved.',
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
+    location: 'Muscat, Oman · Serving Oman & GCC',
+    tagline: 'AI Voice Receptionist for businesses in Oman and the Gulf',
+    contactLabel: 'Contact:',
   },
 
   privacy: {

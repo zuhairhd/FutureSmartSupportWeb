@@ -1,5 +1,15 @@
 <template>
   <footer class="site-footer">
+    <div class="container footer-local">
+      <p class="footer-tagline">{{ t('footer.tagline') }}</p>
+      <p class="footer-location">
+        <span>{{ t('footer.location') }}</span>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <span>{{ t('footer.contactLabel') }}
+          <a href="mailto:majid@FutureSmartSupport.com" class="footer-email">majid@FutureSmartSupport.com</a>
+        </span>
+      </p>
+    </div>
     <div class="container footer-inner">
       <p class="copyright">{{ copyright }}</p>
       <nav class="footer-links">
@@ -22,8 +32,38 @@ const copyright = computed(() => t('footer.copyright').replace('{year}', year))
 <style scoped>
 .site-footer {
   border-top: 1px solid var(--line);
-  padding: 28px 0;
+  padding: 28px 0 20px;
 }
+
+.footer-local {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.footer-location {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.footer-sep { opacity: 0.4; }
+
+.footer-email {
+  color: var(--brand);
+  transition: opacity 0.15s;
+}
+.footer-email:hover { opacity: 0.8; }
 .footer-inner {
   display: flex;
   align-items: center;
