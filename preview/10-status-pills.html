@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Status pills</title>
+<link rel="stylesheet" href="_card.css"><style>
+.row { gap: 10px; flex-wrap: wrap; align-items: center; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 500;
+  border: 1px solid;
+}
+.pill .dot { width: 6px; height: 6px; border-radius: 50%; }
+.pill.success { background: rgba(111,191,115,0.12); color: var(--success); border-color: rgba(111,191,115,0.25); }
+.pill.success .dot { background: var(--success); animation: pulse 2s infinite; }
+.pill.warn { background: rgba(212,160,41,0.12); color: #d4a029; border-color: rgba(212,160,41,0.25); }
+.pill.warn .dot { background: #d4a029; }
+.pill.err { background: rgba(224,92,92,0.12); color: var(--error); border-color: rgba(224,92,92,0.25); }
+.pill.err .dot { background: var(--error); }
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.02);
+  color: var(--muted);
+  font-size: 13px;
+}
+.dot-set { display: inline-flex; gap: 6px; }
+.dot-set span { width: 10px; height: 10px; border-radius: 50%; }
+.dot-set .r { background: #e05c5c; opacity: 0.7; }
+.dot-set .y { background: #d4a029; opacity: 0.7; }
+.dot-set .g { background: #6fbf73; opacity: 0.7; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+</style></head><body>
+<div class="row">
+  <span class="pill success"><span class="dot"></span>VoiceGate AI · Active</span>
+  <span class="pill warn"><span class="dot"></span>Warming up</span>
+  <span class="pill err"><span class="dot"></span>Offline</span>
+  <span class="chip">24/7 Arabic & English</span>
+  <span class="dot-set"><span class="r"></span><span class="y"></span><span class="g"></span></span>
+</div>
+<div class="lbl" style="margin-top: 14px;">Animated live dot · chip badge · server traffic-lights</div>
+</body></html>

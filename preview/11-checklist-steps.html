@@ -1,0 +1,52 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Checklist + steps</title>
+<link rel="stylesheet" href="_card.css"><style>
+.row { gap: 22px; flex-wrap: wrap; align-items: flex-start; }
+ul.checklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 240px;}
+ul.checklist li { display: flex; align-items: flex-start; gap: 10px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+ul.checklist li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 18px; height: 18px; margin-top: 2px;
+  border-radius: 50%;
+  background: var(--brand-dim);
+  border: 1.5px solid var(--brand);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 6l2.5 2.5 4.5-5' stroke='%23b8885a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center; background-size: 12px 12px;
+}
+.steps { display: flex; gap: 14px; align-items: center; flex: 0 0 auto; }
+.step-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--brand-dim);
+  border: 1.5px solid var(--brand);
+  color: var(--brand);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 15px;
+}
+.connector { width: 36px; height: 1px; background: linear-gradient(90deg, var(--brand), var(--line), var(--brand)); opacity: 0.5; }
+.ind-num {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: var(--brand-dim);
+  border: 1px solid rgba(184,136,90,0.3);
+  display: grid; place-items: center;
+  font-size: 13px; font-weight: 700; color: var(--brand);
+}
+</style></head><body>
+<div class="row">
+  <ul class="checklist">
+    <li>Answers every call 24/7, in Arabic or English</li>
+    <li>Captures appointment and order requests</li>
+    <li>Logs every call with recordings and transcripts</li>
+  </ul>
+  <div class="steps">
+    <span class="step-num">1</span>
+    <span class="connector"></span>
+    <span class="step-num">2</span>
+    <span class="connector"></span>
+    <span class="step-num">3</span>
+    <span class="ind-num" style="margin-inline-start: 16px;">7</span>
+  </div>
+</div>
+<div class="lbl" style="margin-top: 12px;">.checklist (tick well) · step-num (round) · industry-num (square 10px)</div>
+</body></html>

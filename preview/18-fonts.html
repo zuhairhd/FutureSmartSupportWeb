@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Font specimens</title>
+<link rel="stylesheet" href="_card.css"><style>
+.row { gap: 24px; align-items: stretch; }
+.face {
+  flex: 1; min-width: 260px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.face .name {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 8px; margin-bottom: 8px;
+}
+.face .nm { font-size: 13px; font-weight: 600; }
+.face .meta { font-family: ui-monospace, Menlo, monospace; font-size: 10px; color: var(--muted); }
+.face .glyphs { font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; }
+.face.cairo .glyphs { font-family: 'Cairo', sans-serif; direction: rtl; text-align: right; }
+.face .word { font-size: 17px; color: var(--muted); margin-top: 4px; }
+.face.cairo .word { direction: rtl; text-align: right; }
+</style></head><body>
+<div class="row">
+  <div class="face">
+    <div class="name"><span class="nm">Inter</span><span class="meta">variable · 100–900 · roman + italic</span></div>
+    <div class="glyphs">AaBbCc 0123 — &amp;</div>
+    <div class="word">Future Smart Support &middot; VoiceGate AI</div>
+  </div>
+  <div class="face cairo">
+    <div class="name" style="direction: ltr;"><span class="nm">Cairo</span><span class="meta">variable · 200–1000 · slnt axis</span></div>
+    <div class="glyphs">أبتثجح 0123</div>
+    <div class="word">فيوتشر سمارت سبورت &middot; مساعد ذكي</div>
+  </div>
+</div>
+</body></html>

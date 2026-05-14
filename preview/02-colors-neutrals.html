@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Neutral scale</title>
+<link rel="stylesheet" href="_card.css"><style>
+.swatch { flex: 1; min-width: 130px; border-radius: 14px; padding: 14px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; min-height: 110px; color: var(--fg); }
+.swatch .top { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.12); }
+.hex { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted); }
+.swatch.ink-9 { background: #0f0f10; }
+.swatch.ink-8 { background: #161617; }
+.swatch.ink-7 { background: #1c1c1e; }
+.swatch.ink-6 { background: #262628; }
+.swatch.paper { background: #e9e6e3; color: #0f0f10; }
+.swatch.paper .hex { color: rgba(15,15,16,0.65); }
+.swatch.paper-2 { background: #bfb6ae; color: #0f0f10; }
+.swatch.paper-2 .hex { color: rgba(15,15,16,0.65); }
+</style></head><body>
+<div class="row">
+  <div class="swatch ink-9"><div class="top"><span class="dot" style="background:#0f0f10"></span> Ink 900</div>
+    <div><div class="hex">#0f0f10</div><div class="hex">--bg</div></div></div>
+  <div class="swatch ink-8"><div class="top"><span class="dot" style="background:#161617"></span> Ink 800</div>
+    <div><div class="hex">#161617</div><div class="hex">--surface</div></div></div>
+  <div class="swatch ink-7"><div class="top"><span class="dot" style="background:#1c1c1e"></span> Ink 700</div>
+    <div><div class="hex">#1c1c1e</div><div class="hex">--surface-2</div></div></div>
+  <div class="swatch ink-6"><div class="top"><span class="dot" style="background:#262628"></span> Ink 600</div>
+    <div><div class="hex">#262628</div><div class="hex">--line</div></div></div>
+  <div class="swatch paper"><div class="top"><span class="dot" style="background:#e9e6e3"></span> Paper</div>
+    <div><div class="hex">#e9e6e3</div><div class="hex">--fg</div></div></div>
+  <div class="swatch paper-2"><div class="top"><span class="dot" style="background:#bfb6ae"></span> Paper 2</div>
+    <div><div class="hex">#bfb6ae</div><div class="hex">--muted</div></div></div>
+</div>
+</body></html>

@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Icon sprite</title>
+<link rel="stylesheet" href="_card.css"><style>
+.grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; }
+.cell {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 12px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.cell .ic-tile {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--brand-dim);
+  border: 1px solid rgba(184,136,90,0.25);
+  display: grid; place-items: center;
+  color: var(--brand);
+}
+.cell .nm { font-family: ui-monospace, Menlo, monospace; font-size: 9px; color: var(--muted); }
+</style></head><body>
+<div class="grid">
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#clock"/></svg></span><span class="nm">clock</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#globe"/></svg></span><span class="nm">globe</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#server"/></svg></span><span class="nm">server</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#shield"/></svg></span><span class="nm">shield</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#layout"/></svg></span><span class="nm">layout</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#bell"/></svg></span><span class="nm">bell</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#mic"/></svg></span><span class="nm">mic</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#chart"/></svg></span><span class="nm">chart</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#star"/></svg></span><span class="nm">star</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#calendar"/></svg></span><span class="nm">calendar</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#cart"/></svg></span><span class="nm">cart</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#file"/></svg></span><span class="nm">file</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#play"/></svg></span><span class="nm">play</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#phone"/></svg></span><span class="nm">phone</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#repeat"/></svg></span><span class="nm">repeat</span></div>
+  <div class="cell"><span class="ic-tile"><svg width="20" height="20"><use href="../assets/icons.svg#check"/></svg></span><span class="nm">check</span></div>
+</div>
+</body></html>

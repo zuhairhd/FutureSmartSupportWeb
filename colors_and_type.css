@@ -1,0 +1,225 @@
+/* ============================================================
+   FUTURE SMART SUPPORT — colors_and_type.css
+   ------------------------------------------------------------
+   Single source of truth for color + type tokens.
+   Pulled from source/styles/base.css and per-component styles.
+   ============================================================ */
+
+/* ----- Webfonts (self-hosted) --------------------------------------
+   Inter and Cairo are both variable fonts. Inter covers Latin
+   (100–900 weight, normal + italic). Cairo covers Arabic + Latin
+   numerals (200–1000 weight, with a slnt slant axis).                */
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/InterVariable.ttf') format('truetype-variations'),
+       url('fonts/InterVariable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/InterVariable-Italic.ttf') format('truetype-variations'),
+       url('fonts/InterVariable-Italic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cairo';
+  src: url('fonts/Cairo-VariableFont_slnt_wght.ttf') format('truetype-variations'),
+       url('fonts/Cairo-VariableFont_slnt_wght.ttf') format('truetype');
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* =========================================================
+     COLORS
+     ========================================================= */
+
+  /* — Base palette (raw tokens) — */
+  --fss-ink-900:  #0f0f10;   /* canvas / page bg */
+  --fss-ink-800:  #161617;   /* card surface */
+  --fss-ink-700:  #1c1c1e;   /* card hover */
+  --fss-ink-600:  #262628;   /* hairline / line */
+
+  --fss-paper:    #e9e6e3;   /* primary text on ink */
+  --fss-paper-2:  #bfb6ae;   /* muted text / labels */
+
+  /* — Brand: warm copper/tan — derived from the FSS logo (#cdab8f)
+     The product palette uses a slightly more saturated working tone. */
+  --fss-brand:        #b8885a;
+  --fss-brand-soft:   #cdab8f;  /* logo tint, light mode accents */
+  --fss-brand-dim:    rgba(184, 136, 90, 0.15);  /* tinted fill */
+  --fss-brand-glow:   rgba(184, 136, 90, 0.30);  /* shadow / focus halo */
+  --fss-brand-line:   rgba(184, 136, 90, 0.30);  /* tinted border */
+  --fss-brand-line-strong: rgba(184, 136, 90, 0.40);
+
+  /* — Semantic state colors — */
+  --fss-success:      #6fbf73;
+  --fss-success-dim:  rgba(111, 191, 115, 0.15);
+  --fss-success-line: rgba(111, 191, 115, 0.30);
+  --fss-warning:      #d4a029;
+  --fss-error:        #e05c5c;
+
+  /* =========================================================
+     SEMANTIC ALIASES (use these in product code)
+     ========================================================= */
+  --bg:           var(--fss-ink-900);
+  --surface:      var(--fss-ink-800);
+  --surface-2:    var(--fss-ink-700);
+  --fg:           var(--fss-paper);
+  --fg-on-brand:  #1a120a;            /* dark ink for text on brand fill */
+  --muted:        var(--fss-paper-2);
+  --line:         var(--fss-ink-600);
+  --brand:        var(--fss-brand);
+  --brand-dim:    var(--fss-brand-dim);
+  --brand-glow:   var(--fss-brand-glow);
+  --card:         var(--fss-ink-800);
+  --card-hover:   var(--fss-ink-700);
+  --success:      var(--fss-success);
+  --error:        var(--fss-error);
+
+  /* =========================================================
+     TYPOGRAPHY
+     =========================================================
+     Stack:
+       - Inter (variable, 100–900) — primary Latin face. Self-hosted
+         at fonts/InterVariable.ttf. Used for all UI, body, headings
+         in LTR mode.
+       - Cairo — primary Arabic face. Used automatically in RTL via
+         the --font-arabic alias; also reads well for Latin so it's
+         the preferred fallback after Inter.                          */
+  --font-base:    'Inter', 'Cairo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-arabic:  'Cairo', 'Inter', system-ui, sans-serif;
+
+  /* Size scale */
+  --fs-eyebrow:   11px;    /* uppercase, letter-spaced label */
+  --fs-meta:      12px;    /* badge text, small label */
+  --fs-caption:   13px;    /* form labels, fine print */
+  --fs-body-s:    14px;    /* secondary body */
+  --fs-body:      15px;    /* primary body */
+  --fs-body-l:    16px;    /* lead paragraph */
+  --fs-body-xl:   17px;    /* hero sub */
+  --fs-h3:        17px;    /* card heading */
+  --fs-h2:        30px;    /* section title */
+  --fs-h1:        42px;    /* hero headline */
+  --fs-display:   48px;    /* price / display */
+
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-black:     800;
+
+  --lh-tight:     1.12;    /* h1 */
+  --lh-snug:      1.2;     /* h2 */
+  --lh-normal:    1.4;
+  --lh-relaxed:   1.6;     /* body */
+  --lh-loose:     1.7;     /* sub paragraphs */
+  --lh-page:      1.65;    /* base */
+
+  --tracking-wide:  0.06em;
+  --tracking-wider: 0.10em;   /* eyebrow / uppercase label */
+  --tracking-tight: -0.02em;  /* h1 / display */
+
+  /* =========================================================
+     SPACING / RADIUS / SHADOW
+     ========================================================= */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  --radius-sm:  8px;    /* tag, lang-toggle */
+  --radius-md:  10px;   /* input, small icon-tile */
+  --radius-lg:  12px;   /* button, faq-item */
+  --radius-xl:  16px;   /* card, server-card */
+  --radius-pill: 999px; /* badge, dot, chip */
+
+  /* Subtle glassy elevations only. The brand stays flat. */
+  --shadow-scroll-header: 0 4px 32px rgba(0, 0, 0, 0.50);
+  --shadow-cta-hover:     0 4px 16px var(--fss-brand-glow);
+  --shadow-card-glow:     0 0 40px rgba(184, 136, 90, 0.08), 0 0 0 1px var(--line);
+
+  /* =========================================================
+     MOTION
+     ========================================================= */
+  --ease-out:    cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast:    0.15s;
+  --dur-base:    0.20s;
+  --dur-slow:    0.25s;
+  --dur-panel:   0.30s;
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES
+   Drop a class on raw HTML to get a branded specimen.
+   ============================================================ */
+.fss-h1 {
+  font-family: var(--font-base);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+.fss-h2 {
+  font-family: var(--font-base);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  margin: 0;
+}
+.fss-h3 {
+  font-family: var(--font-base);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-normal);
+  margin: 0;
+}
+.fss-body {
+  font-family: var(--font-base);
+  font-size: var(--fs-body);
+  color: var(--fg);
+  line-height: var(--lh-relaxed);
+}
+.fss-sub {
+  font-family: var(--font-base);
+  font-size: var(--fs-body-l);
+  color: var(--muted);
+  line-height: var(--lh-loose);
+}
+.fss-eyebrow {
+  font-family: var(--font-base);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--brand);
+}
+.fss-price {
+  font-family: var(--font-base);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-black);
+  color: var(--brand);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+}
+.fss-mono {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: var(--fs-body-s);
+}
+
+/* Accent — used on the second half of the hero headline */
+.fss-accent { color: var(--brand); }
