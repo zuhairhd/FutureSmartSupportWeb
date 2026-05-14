@@ -43,7 +43,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import logoUrl from '../../assets/FSS_Logo.svg'
+import logoUrl from '../../assets/FSS_Logo.png'
 
 const { t, lang, setLang } = useLanguage()
 const menuOpen = ref(false)
