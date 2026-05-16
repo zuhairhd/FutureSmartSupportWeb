@@ -57,7 +57,7 @@
                   <path d="M4.5 6V4a2.5 2.5 0 0 1 5 0v2"/>
                 </svg>
               </span>
-              Data stays inside your network
+              Data stays inside your network — never leaves your premises
             </span>
           </div>
         </div>

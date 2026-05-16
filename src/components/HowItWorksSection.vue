@@ -11,6 +11,10 @@
           <div class="step-num">{{ index + 1 }}</div>
           <h3>{{ step.title }}</h3>
           <p>{{ step.desc }}</p>
+          <div v-if="step.detail" class="step-detail">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" width="13" height="13" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 6h14"/><circle cx="4" cy="9" r="0.8" fill="currentColor" stroke="none"/></svg>
+            {{ step.detail }}
+          </div>
         </div>
       </div>
     </div>
@@ -51,6 +55,8 @@ html[dir="rtl"] .steps-grid::before {
 .step-card {
   position: relative;
   padding-top: 24px;
+  display: flex;
+  flex-direction: column;
 }
 .step-card h3 {
   font-size: 17px;
@@ -60,8 +66,9 @@ html[dir="rtl"] .steps-grid::before {
 .step-card p {
   color: var(--muted);
   font-size: 15px;
-  margin: 0;
+  margin: 0 0 16px;
   line-height: 1.65;
+  flex: 1;
 }
 
 .step-num {
@@ -77,12 +84,30 @@ html[dir="rtl"] .steps-grid::before {
   font-size: 15px;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
+}
+
+.step-detail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--brand);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  background: var(--brand-dim);
+  border: 1px solid rgba(184,136,90,0.2);
+  border-radius: 8px;
+  margin-top: auto;
 }
 
 @media (max-width: 900px) {
   .steps-grid { grid-template-columns: 1fr; gap: 16px; }
   .steps-grid::before { display: none; }
   .section-header { margin-bottom: 28px; }
+  .step-card p { margin-bottom: 12px; }
 }
 @media (max-width: 640px) {
   .step-card h3 { font-size: 16px; }

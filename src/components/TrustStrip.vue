@@ -38,7 +38,7 @@ const { t } = useLanguage()
 .trust-item:last-child { border-inline-end: none; }
 
 .trust-value {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--brand);
   line-height: 1.2;
