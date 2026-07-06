@@ -174,7 +174,7 @@ export default {
     label: 'Launch Package',
     badge: 'Limited Time',
     title: 'Complete Setup — Ready to Deploy',
-    price: '372 OMR',
+    price: '673 OMR',
     priceLabel: 'One-time setup fee',
     sub: 'Get a complete VoiceGate AI system, fully installed and configured at your business. Everything you need — hardware, software, installation, and configuration.',
     includesTitle: "What's included",
@@ -245,7 +245,7 @@ export default {
         a: "No. VoiceGate AI includes a local AI server installed at your business. The local server handles all call processing. The cloud dashboard lets your team access call data, analytics, and recordings from anywhere.",
       },
       {
-        q: 'What does the 372 OMR package include?',
+        q: 'What does the 673 OMR package include?',
         a: "The setup package includes the local AI server, professional on-site installation, a Grandstream HT813 VoIP adapter, a Grandstream GXP1625 HD IP Phone, AI receptionist configuration, Arabic and English support, and cloud dashboard access. A monthly subscription applies for ongoing service.",
       },
     ],
