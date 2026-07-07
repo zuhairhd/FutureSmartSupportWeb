@@ -12,6 +12,9 @@
           {{ t('finalCta.ctaSecondary') }}
         </router-link>
       </div>
+      <router-link to="/voicegate-demo" class="final-cta-demo-link">
+        {{ t('finalCta.demoPageLink') }}
+      </router-link>
       <p class="final-cta-trust">{{ t('finalCta.trust') }}</p>
     </div>
   </section>
@@ -72,6 +75,14 @@ const { t } = useLanguage()
   padding: 14px 28px;
   font-size: 16px;
 }
+
+.final-cta-demo-link {
+  font-size: 14px;
+  color: var(--brand);
+  text-decoration: underline;
+  margin-bottom: 14px;
+}
+.final-cta-demo-link:hover { opacity: 0.8; }
 
 .final-cta-trust {
   font-size: 12px;

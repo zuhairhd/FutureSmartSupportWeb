@@ -5,6 +5,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: HomeView },
+    { path: '/voicegate-demo', component: () => import('../views/VoicegateDemoView.vue') },
     { path: '/privacy', component: () => import('../views/PrivacyView.vue') },
     { path: '/terms', component: () => import('../views/TermsView.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/' },
