@@ -34,7 +34,7 @@ const { lang } = useLanguage()
 const year = new Date().getFullYear()
 const c = computed(() => lang.value === 'ar'
   ? {tagline:'مُجيب · ذكاء اصطناعي لاتصالات الأعمال',description:'حلول عملية لاتصالات العملاء تناسب الأعمال الصغيرة والمتوسطة في سلطنة عُمان.',explore:'استكشف',offer:'العرض',benefits:'المزايا',cloud:'البوابة السحابية',demo:'اطلب تجربة',mojebPage:'صفحة مُجيب التعريفية',contactForm:'نموذج التواصل',whatsapp:'واتساب',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
-  : {tagline:'Mojeb · AI-powered business communications',description:'Practical customer communication solutions for small and growing businesses in Oman.',explore:'Explore',offer:'The offer',benefits:'Benefits',cloud:'Cloud portal',demo:'Request demo',mojebPage:'Mojeb product page',contactForm:'Contact form',whatsapp:'WhatsApp',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
+  : {tagline:'Mojeeb AI · AI-powered business communications',description:'Practical customer communication solutions for small and growing businesses in Oman.',explore:'Explore',offer:'The offer',benefits:'Benefits',cloud:'Cloud portal',demo:'Request demo',mojebPage:'Mojeeb AI product page',contactForm:'Contact form',whatsapp:'WhatsApp',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
 </script>
 <style scoped>
 .fss-footer { background:#05192e; color:#fff; padding:57px 0 21px; }

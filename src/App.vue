@@ -17,8 +17,8 @@ onMounted(() => {
 })
 watch([lang, () => route.path], ([l, path]) => {
   document.title = path === '/voicegate-demo'
-    ? (l === 'ar' ? 'اطلب تجربة مُجيب | Future Smart Support' : 'Request a Mojeb Demo | Future Smart Support')
-    : (l === 'ar' ? 'مُجيب | اتصالات أعمال ذكية في عُمان | Future Smart Support' : 'Mojeb | Smart Business Telephony in Oman | Future Smart Support')
+    ? (l === 'ar' ? 'اطلب تجربة مُجيب | Future Smart Support' : 'Request a Mojeeb AI Demo | Future Smart Support')
+    : (l === 'ar' ? 'مُجيب | اتصالات أعمال ذكية في عُمان | Future Smart Support' : 'Mojeeb AI | Smart Business Telephony in Oman | Future Smart Support')
 }, { immediate: true })
 </script>
 <style>

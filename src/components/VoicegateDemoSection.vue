@@ -116,7 +116,7 @@ async function handleSubmit() {
     name: f.name,
     email: f.email,
     company: f.company,
-    message: `Mojeb demo request (377 R.O offer page)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
+    message: `Mojeeb AI demo request (377 R.O offer page)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
     website: f.website,
     language: lang.value,
     source: 'marketing_website',

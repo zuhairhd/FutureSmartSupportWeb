@@ -1,7 +1,7 @@
 <template>
   <section class="vg-hero">
     <div class="container vg-hero-inner">
-      <div class="vg-kicker">FSS · MOJEB · VOICEGATE AI</div>
+      <div class="vg-kicker">{{ c.kicker }}</div>
       <h1>{{ c.title }} <span>{{ c.accent }}</span></h1>
       <p class="vg-hero-sub">{{ c.sub }}</p>
       <div class="vg-action-row">
@@ -18,8 +18,8 @@ import { useLanguage } from '../composables/useLanguage.js'
 import { WHATSAPP_URL } from '../constants.js'
 const { lang } = useLanguage()
 const c = computed(()=>lang.value==='ar'
- ? {title:'تعرّف على مُجيب',accent:'وجرّبه في عملك.',sub:'موظف استقبال ذكي لمعالجة مكالمات العملاء محلياً، مع خيارات متابعة سحابية حسب حاجة نشاطك.',demo:'اطلب عرضاً مباشراً',whatsapp:'تواصل عبر واتساب',badge1:'العربية + الإنجليزية',badge2:'معالجة محلية',badge3:'حل للأعمال الصغيرة'}
- : {title:'Meet Mojeb.',accent:'Hear the difference.',sub:'An on-premise AI receptionist for customer calls, with optional cloud follow-up as your business grows.',demo:'Request a live demo',whatsapp:'Chat on WhatsApp',badge1:'Arabic + English',badge2:'Local processing',badge3:'Made for small businesses'})
+ ? {kicker:'Future Smart Support · مُجيب',title:'تعرّف على مُجيب',accent:'وجرّبه في عملك.',sub:'موظف استقبال ذكي لمعالجة مكالمات العملاء محلياً، مع خيارات متابعة سحابية حسب حاجة نشاطك.',demo:'اطلب عرضاً مباشراً',whatsapp:'تواصل عبر واتساب',badge1:'العربية + الإنجليزية',badge2:'معالجة محلية',badge3:'حل للأعمال الصغيرة'}
+ : {kicker:'FUTURE SMART SUPPORT · MOJEEB AI',title:'Meet Mojeeb AI.',accent:'Hear the difference.',sub:'An on-premise AI receptionist for customer calls, with optional cloud follow-up as your business grows.',demo:'Request a live demo',whatsapp:'Chat on WhatsApp',badge1:'Arabic + English',badge2:'Local processing',badge3:'Made for small businesses'})
 </script>
 <style scoped>
 .vg-hero { padding:92px 0 82px; background:radial-gradient(circle at 76% 7%,#174e70,transparent 40%),linear-gradient(125deg,#061b30,#103a57) !important; color:#fff; border-bottom:4px solid #1ad1c7; }

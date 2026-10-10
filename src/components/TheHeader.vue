@@ -3,7 +3,7 @@
   <header class="site-header" :class="{ scrolled }">
     <div class="container header-inner">
       <router-link to="/" class="brand-link" @click="closeMenu" aria-label="Future Smart Support">
-        <img :src="logoUrl" alt="Future Smart Support" class="brand-logo" width="589" height="200" />
+        <img :src="logoUrl" alt="Future Smart Support — Mojeeb AI" class="brand-logo" width="589" height="200" />
         <span class="brand-product">{{ c.product }}</span>
       </router-link>
       <nav id="fss-primary-navigation" class="site-nav" :class="{ open: menuOpen }" :aria-label="c.navLabel">
@@ -37,7 +37,7 @@ const menuOpen = ref(false)
 const scrolled = ref(false)
 const c = computed(() => lang.value === 'ar'
   ? {skip:'انتقل إلى المحتوى',product:'مُجيب',navLabel:'القائمة الرئيسية',solution:'الحل',how:'كيف يعمل',benefits:'المزايا',offer:'العرض',cloud:'البوابة السحابية',demo:'اطلب تجربة',switchLabel:'Switch language to English',switchText:'English',menu:'فتح القائمة'}
-  : {skip:'Skip to content',product:'Mojeb',navLabel:'Main navigation',solution:'Solution',how:'How it works',benefits:'Benefits',offer:'Offer',cloud:'Cloud portal',demo:'Request demo',switchLabel:'التبديل إلى العربية',switchText:'العربية',menu:'Toggle navigation'})
+  : {skip:'Skip to content',product:'Mojeeb AI',navLabel:'Main navigation',solution:'Solution',how:'How it works',benefits:'Benefits',offer:'Offer',cloud:'Cloud portal',demo:'Request demo',switchLabel:'التبديل إلى العربية',switchText:'العربية',menu:'Toggle navigation'})
 function closeMenu() { menuOpen.value = false }
 function toggleLanguage() { setLang(lang.value === 'ar' ? 'en' : 'ar'); closeMenu() }
 function onScroll() { scrolled.value = window.scrollY > 8 }
