@@ -296,9 +296,9 @@ export default {
       ],
     },
     demo: {
-      label: 'Request a Demo or Quotation',
+      label: 'Register Interest or Request a Demo',
       title: 'See Mojeeb AI Working for Your Business',
-      text: 'Interested in Mojeeb AI for your business? Request a live demonstration or a quotation for the 377 R.O introductory package (excl. VAT). Mojeeb AI is offered for purchase; no free trial is currently available.',
+      text: 'Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the 377 R.O introductory package (excl. VAT). Orders, delivery dates and AI usage pricing will be confirmed at launch; no free trial is currently available.',
       nameLabel: 'Full Name',
       companyLabel: 'Company / Business Name',
       phoneLabel: 'Phone Number',
@@ -308,7 +308,7 @@ export default {
       businessTypes: ['Clinic', 'Restaurant', 'Home Services', 'Retail', 'Professional Office', 'Other'],
       messageLabel: 'Message / Requirements',
       submit: 'Send Request',
-      note: 'Our team will contact you as soon as possible to arrange a demonstration or quotation.',
+      note: 'Our team will contact you as soon as possible to arrange a demonstration.',
       successTitle: 'Thank you.',
       successText: 'Our team will contact you as soon as possible.',
       sendAnother: 'Send another request',
@@ -434,7 +434,7 @@ export default {
       },
       {
         title: '3. Optional and separately priced services',
-        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (currently 10% of the package price); network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
+        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (currently 10% of the package price); usage of the external AI services that power Mojeeb AI conversations; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
       },
       {
         title: '4. Prices and taxes',
@@ -453,8 +453,8 @@ export default {
         body: 'The Mojeeb appliance carries a one-month replacement warranty, subject to FSS written warranty terms. Warranty arrangements for other items are stated in your quotation.',
       },
       {
-        title: '8. Trials',
-        body: 'FSS does not currently offer free trials. Demonstrations may be arranged on request.',
+        title: '8. Trials and availability',
+        body: 'FSS does not currently offer free trials. Demonstrations may be arranged on request. Mojeeb AI is in a pre-launch stage: product information on this website is not an offer to sell, and orders, delivery dates and final prices are confirmed in writing.',
       },
       {
         title: '9. Eligibility',
