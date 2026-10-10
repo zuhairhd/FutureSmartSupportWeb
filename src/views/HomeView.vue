@@ -13,7 +13,7 @@
           <router-link class="hero-price" :to="{ path: '/', hash: '#offer' }">
             <span class="hero-price-tag">{{ s.offer.ribbon }}</span>
             <span class="hero-price-amount"><strong>377</strong> {{ currency }}</span>
-            <span class="hero-price-once">{{ s.offer.once }}</span>
+            <span class="hero-price-once">{{ s.offer.heroNote }}</span>
           </router-link>
           <div class="hero-actions">
             <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.hero.demoCta }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
@@ -52,7 +52,7 @@
     <section class="trust-row" :aria-label="s.trust.aria">
       <div class="container trust-content">
         <div v-for="(item, i) in s.trust.items" :key="i" class="trust-item">
-          <span class="trust-icon"><MarketingIcon :name="['phone', 'shield', 'globe'][i]" :size="22" /></span>
+          <span class="trust-icon"><MarketingIcon :name="['phone', 'server', 'globe'][i]" :size="22" /></span>
           <span><b>{{ item.title }}</b><small>{{ item.sub }}</small></span>
         </div>
       </div>
@@ -69,15 +69,17 @@
             <div class="price-kicker">{{ s.offer.priceIntro }}</div>
             <div class="price-main"><strong>377</strong><span class="currency">{{ currency }}</span></div>
             <div class="price-once">{{ s.offer.once }}</div>
-            <div class="price-divider"></div>
-            <p class="price-description">{{ s.offer.priceDesc }}</p>
+            <dl class="price-rows">
+              <div v-for="row in s.offer.rows" :key="row.label" :class="{ total: row.total }"><dt>{{ row.label }}</dt><dd><bdi>{{ row.value }}</bdi> {{ currency }}</dd></div>
+            </dl>
+            <p class="price-vat">{{ s.offer.vatNote }}</p>
             <a class="price-whatsapp" :href="whatsappLink" target="_blank" rel="noopener noreferrer">
               <span class="pw-label"><MarketingIcon name="whatsapp" :size="18" />{{ s.offer.quoteCta }}</span> <MarketingIcon name="arrow" :size="18" class="flip-rtl" />
             </a>
             <p class="price-terms">{{ s.offer.terms }}</p>
           </div>
           <div class="package-panel">
-            <div class="package-heading"><div><p class="section-label">{{ s.offer.includedLabel }}</p><h3>{{ s.offer.includedTitle }}</h3></div><span class="package-pill">FSS STARTER</span></div>
+            <div class="package-heading"><div><p class="section-label">{{ s.offer.includedLabel }}</p><h3>{{ s.offer.includedTitle }}</h3></div><span class="package-pill">MOJEEB AI STARTER</span></div>
             <div class="package-list">
               <div class="package-item" v-for="item in s.offer.items" :key="item.title">
                 <span class="package-icon"><MarketingIcon :name="item.icon" :size="27" /></span>
@@ -85,8 +87,16 @@
                 <MarketingIcon name="check" class="package-check" :size="18" />
               </div>
             </div>
-            <div class="package-highlight"><MarketingIcon name="cloud" :size="19" />{{ s.offer.highlight }}</div>
+            <ul class="package-facts">
+              <li v-for="fact in s.offer.facts" :key="fact.text"><MarketingIcon :name="fact.icon" :size="19" /><span>{{ fact.text }}</span></li>
+            </ul>
             <router-link class="btn btn-primary package-cta" :to="{ path: '/', hash: '#demo' }">{{ s.offer.demoCta }}</router-link>
+          </div>
+        </div>
+        <div class="requirements">
+          <h3 class="req-title">{{ s.offer.reqTitle }}</h3>
+          <div class="req-grid">
+            <div class="req-item" v-for="req in s.offer.reqs" :key="req.title"><span class="req-icon"><MarketingIcon :name="req.icon" :size="21" /></span><div><b>{{ req.title }}</b><p>{{ req.desc }}</p></div></div>
           </div>
         </div>
       </div>
@@ -152,6 +162,18 @@
       </div>
     </section>
 
+    <section class="section faq-section" id="faq">
+      <div class="container faq-grid">
+        <div><p class="section-label">{{ s.faq.eyebrow }}</p><h2 class="section-title">{{ s.faq.title }}</h2><p class="section-sub">{{ s.faq.sub }}</p></div>
+        <div class="faq-list">
+          <details v-for="(item, i) in s.faq.items" :key="i" class="faq-item">
+            <summary><span>{{ item.q }}</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+            <p>{{ item.a }}</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="pre-contact-section">
       <div class="container">
         <div class="cta-ribbon"><div><p class="cta-eyebrow">{{ s.final.eyebrow }}</p><h2>{{ s.final.title }}</h2><p>{{ s.final.sub }}</p></div>
@@ -183,42 +205,91 @@ const messages = {
     hero: {
       eyebrow: 'SMART COMMUNICATIONS. STRONGER BUSINESSES.', product: 'Introducing Mojeeb AI · FSS AI Agent',
       headline: 'Manage your customer communications', accent: 'from anywhere.',
-      sub: 'Meet Mojeeb AI: your on-premise AI receptionist, connected to your existing telephone line. Answer customers, keep important call context, and help your team follow up with confidence.',
-      offerCta: 'View special offer', demoCta: 'Request a demo', whatsappCta: 'WhatsApp us',
-      badges: ['Arabic & English', 'Local AI processing', 'Built for Oman SMEs'],
+      sub: 'Meet Mojeeb AI: your own Ubuntu-based AI receptionist appliance for growing businesses in Oman. Keep your compatible existing line, add one IP desk phone, and add cloud services only when you need them.',
+      offerCta: 'View the 377 R.O offer', demoCta: 'Request a demo or quotation', whatsappCta: 'WhatsApp us',
+      badges: ['Arabic & English', 'Your own local appliance', 'No recurring licence fee'],
       visualLabel: 'Illustrative call flow showing an incoming call, the Mojeeb AI agent and follow-up.'
     },
-    visual: { status:'AI agent ready', incoming:'Incoming customer call', incomingSub:'Via your existing telephone line', aiLabel:'YOUR AI RECEPTIONIST', agent:'Mojeeb is here to help', agentDesc:'Answers · captures context · assists with follow-up', followup:'Customer conversation', context:'Follow-up ready', footer:'Local-first call processing', language:'Arabic + English' },
-    trust: { aria:'Product highlights', items:[{title:'Use your current line',sub:'Compatible analog lines converted to SIP'},{title:'Local-first technology',sub:'AI processing on your premises'},{title:'Arabic + English',sub:'Communicate with more customers'}] },
+    visual: { status:'AI agent ready', incoming:'Incoming customer call', incomingSub:'Via your compatible telephone line', aiLabel:'YOUR AI RECEPTIONIST', agent:'Mojeeb is here to help', agentDesc:'Answers · captures context · assists with follow-up', followup:'Customer conversation', context:'Follow-up ready', footer:'Calls handled by your Mojeeb appliance', language:'Arabic + English' },
+    trust: { aria:'Product highlights', items:[{title:'Keep your number',sub:'Where your line is compatible'},{title:'Your own appliance',sub:'Ubuntu-based Mojeeb AI server on-site'},{title:'Arabic + English',sub:'Communicate with more customers'}] },
     offer: {
-      eyebrow:'THE FSS STARTER PACKAGE', title:'Everything you need to get started.', sub:'An accessible path to smarter business calls — hardware and Mojeeb together in one introductory offer.', ribbon:'Limited time offer', priceIntro:'INTRODUCTORY PACKAGE', once:'One-time cost', priceDesc:'Upgrade your business communications without investing in an expensive traditional PBX setup.', quoteCta:'Ask about this offer on WhatsApp', terms:'One-time price for the advertised package only. VAT, telecom-provider charges, ongoing services and the optional cloud portal are not included. Gateway compatibility depends on your telephone line; installation scope, warranty and final terms are confirmed in your quotation.', includedLabel:'WHAT IS INCLUDED', includedTitle:'Three essentials. One smart solution.', highlight:'The optional FSS Cloud Portal is not part of this package and is quoted separately.', demoCta:'Request a demo for this package',
-      items:[{icon:'bot',title:'Mojeeb (FSS AI Agent)',sub:'An on-premise AI receptionist for business calls.'},{icon:'gateway',title:'Analog telephone to SIP conversion',sub:'Converts a compatible existing analog line to SIP, e.g. with a Grandstream HT813 gateway.'},{icon:'deskphone',title:'1 IP desk phone',sub:'A modern business IP handset for your team.'}]
+      eyebrow:'THE MOJEEB AI STARTER PACKAGE', title:'Everything you need to get started.', sub:'Own the core local solution: the Mojeeb AI appliance, a line gateway and an IP desk phone in one introductory package.',
+      ribbon:'Special introductory offer', heroNote:'excl. VAT · one-time', priceIntro:'SPECIAL INTRODUCTORY PRICE', once:'One-time appliance package · excl. VAT',
+      rows:[{label:'Mojeeb AI starter package',value:'377.000'},{label:'Optional professional installation (10%)',value:'37.700'},{label:'Package + standard installation',value:'414.700',total:true}],
+      vatNote:'All prices exclude VAT. VAT is added where applicable.',
+      quoteCta:'Ask about this offer on WhatsApp',
+      terms:'Installation (10%), network or internet readiness work, telecom-provider fees and optional FSS Cloud Portal services are additional where applicable. Standard installation requires an existing LAN and a compatible ADSL service. Terms and compatibility are confirmed in your quotation.',
+      includedLabel:'WHAT IS INCLUDED', includedTitle:'Three essentials. One smart solution.', demoCta:'Request a quotation for this package',
+      items:[{icon:'server',title:'Mojeeb AI appliance',sub:'Your own physical local server running Ubuntu Server and the FSS AI agent.'},{icon:'gateway',title:'Grandstream HT813 gateway',sub:'Connects one compatible analog telephone line to the system over SIP.'},{icon:'deskphone',title:'One IP desk phone',sub:'For your team to take and return calls through the configured system.'}],
+      facts:[{icon:'wallet',text:'No recurring Mojeeb software licence fee for the appliance.'},{icon:'shield',text:'One-month replacement warranty on the Mojeeb appliance, subject to FSS warranty terms.'},{icon:'cloud',text:'The optional FSS Cloud Portal is not included and is priced separately.'}],
+      reqTitle:'Before you buy: installation, site and line requirements',
+      reqs:[{icon:'tool',title:'Optional professional installation',desc:'10% of the package price (currently 37.700 R.O excl. VAT). New cabling, LAN setup, internet activation and other non-standard work are quoted separately.'},{icon:'network',title:'LAN and ADSL required',desc:'Standard installation needs a working local network (LAN) and a compatible, active ADSL internet connection. Other connection types are checked case by case.'},{icon:'phone',title:'Your number and Caller ID',desc:'Keep your existing business number where the line and provider service are compatible. Caller ID works when your provider enables it and the line supports it; provider fees may apply.'}]
     },
-    how: { eyebrow:'HOW MOJEEB AI WORKS',title:'Your current phone line. A smarter way to work.',sub:'We connect Mojeeb to your existing telephone line, run the AI agent on a local server at your premises, and help your team follow up with customers.',
-      localTitle:'On your premises',localDesc:'The gateway, the IP desk phone and the Mojeeb AI server are installed locally. Calls are answered and processed on-site.',
-      cloudTitle:'Optional, in the cloud',cloudDesc:'With a separate cloud-portal subscription, supported call information and email alerts can be reviewed remotely.',
-      steps:[{icon:'phone',title:'Analog phone line',desc:'Customers keep calling your existing business number on a compatible analog line.'},{icon:'gateway',title:'SIP gateway',desc:'An analog-to-SIP gateway (e.g. Grandstream HT813) connects the line to the IP system.'},{icon:'server',title:'Mojeeb AI local server',desc:'Mojeeb greets callers in Arabic or English, answers common questions and captures requests.'},{icon:'cloud',title:'Follow-up & cloud portal',tag:'Optional portal',desc:'Your team follows up on the IP desk phone. The cloud portal adds remote call visibility and alerts.'}] },
-    benefits: { eyebrow:'WHY MOJEEB AI',title:'More than answering the phone.',sub:'Give every customer a more consistent first contact — and your team the context to respond.',items:[{icon:'bot',title:'AI-assisted call answering',desc:'Mojeeb can greet callers and handle common questions when your team is busy or outside office hours.'},{icon:'globe',title:'Arabic + English',desc:'Welcome callers and answer common questions in both languages.'},{icon:'gateway',title:'Analog-to-SIP compatibility',desc:'Modernize a compatible analog line without replacing your business number.'},{icon:'deskphone',title:'One IP desk phone',desc:'A modern IP handset is included so your team can take and return calls.'},{icon:'messages',title:'Improved follow-up',desc:'Captured caller details help your team respond to enquiries more consistently.'},{icon:'server',title:'Local server deployment',desc:'The AI agent runs on a local FSS server at your premises.'},{icon:'wallet',title:'Affordable business telephony',desc:'A one-time introductory package instead of an expensive traditional PBX project.'},{icon:'people',title:'Built for SMEs',desc:'A practical fit for growing teams that need a professional phone presence.'}] },
-    cloud: { badge:'OPTIONAL CLOUD PORTAL',title:'Stay close to your customers,',accent:'wherever you work.',desc:'Add the FSS Cloud Portal to review supported call information remotely and receive configurable email alerts — so you know which enquiries need a response without staying at the office.',cta:'Request a demo',disclaimer:'Illustrative dashboard. The cloud portal is optional, is not included in the 377 R.O package and may require a separate subscription. Available features are confirmed in your quotation.',illustrationLabel:'Illustrative FSS cloud portal interface',preview:'ILLUSTRATIVE PORTAL PREVIEW',dashboardTitle:'Customer communications',items:[{icon:'cloud',title:'Remote call visibility',sub:'Check activity securely while away from the office.'},{icon:'bell',title:'Email call alerts',sub:'Know when a new call or missed enquiry needs attention.'},{icon:'phone',title:'Missed-call follow-up',sub:'See missed calls and enquiries so your team can call customers back.'}], kpis:[{label:'Call activity',value:'View'},{label:'Email alerts',value:'On'},{label:'Follow-up',value:'Track'}],activity:'Call activity',ready:'Connected',activities:['Incoming call received','Email notification available','Follow-up context saved'] },
+    how: { eyebrow:'HOW MOJEEB AI WORKS',title:'Your current phone line. A smarter way to work.',sub:'We connect Mojeeb to your compatible telephone line through the gateway. The Mojeeb AI appliance at your premises handles the calls, and your team follows up on the IP desk phone.',
+      localTitle:'On your premises',localDesc:'The gateway, the IP desk phone and the Mojeeb AI appliance sit at your premises and handle your calls. AI speech and language features use connected AI services over your internet connection.',
+      cloudTitle:'Optional, in the cloud',cloudDesc:'With a separately priced cloud-portal plan, your team can review calls, notifications and follow-ups remotely.',
+      steps:[{icon:'phone',title:'Compatible phone line',desc:'Customers keep calling your business number on a compatible analog line from your provider.'},{icon:'gateway',title:'HT813 gateway',desc:'Connects the analog line to the system over SIP. It is the line interface, not the AI.'},{icon:'server',title:'Mojeeb AI appliance',desc:'Greets callers in Arabic or English, answers common questions and captures requests.'},{icon:'cloud',title:'Follow-up & cloud portal',tag:'Optional',desc:'Your team follows up on the IP desk phone. The optional cloud portal adds remote visibility.'}] },
+    benefits: { eyebrow:'WHY MOJEEB AI',title:'More than answering the phone.',sub:'Give every customer a more consistent first contact — and your team the context to respond.',items:[{icon:'bot',title:'AI-assisted call answering',desc:'Mojeeb can greet callers and handle common questions when your team is busy or outside office hours.'},{icon:'globe',title:'Arabic + English',desc:'Welcome callers and answer common questions in both languages.'},{icon:'phone',title:'Keep your number',desc:'Use your existing business number where the line is compatible, with Caller ID where your provider enables it.'},{icon:'deskphone',title:'One IP desk phone',desc:'A modern IP handset is included so your team can take and return calls.'},{icon:'messages',title:'Improved follow-up',desc:'Caller details captured by Mojeeb help your team respond to enquiries more consistently.'},{icon:'server',title:'Your own appliance',desc:'A dedicated Ubuntu-based Mojeeb AI server at your premises, not a cloud-only app.'},{icon:'wallet',title:'No recurring licence fee',desc:'No recurring Mojeeb software licence fee for the appliance. Add cloud services only if you need them.'},{icon:'people',title:'Built for SMEs',desc:'A practical fit for growing teams that need a professional phone presence.'}] },
+    cloud: { badge:'OPTIONAL CLOUD PORTAL',title:'Stay close to your customers,',accent:'wherever you work.',desc:'Add the optional FSS Cloud Portal to view calls handled by Mojeeb away from the office and to use the monitoring, maintenance and notification services in your plan.',cta:'Request a demo',disclaimer:'Illustrative dashboard. The cloud portal is optional, is not included in the 377 R.O package and requires a separately priced plan. Features and support terms are defined in your cloud-service plan.',illustrationLabel:'Illustrative FSS cloud portal interface',preview:'ILLUSTRATIVE PORTAL PREVIEW',dashboardTitle:'Customer communications',
+      items:[{icon:'cloud',title:'Remote call activity',sub:'Review calls handled by Mojeeb: caller number, time, duration and outcome.'},{icon:'bell',title:'Portal notifications',sub:'See missed-call and voicemail notifications when you log in.'},{icon:'phone',title:'Missed-call follow-up',sub:'Missed calls and voicemails can create follow-up tasks for your team.'},{icon:'tool',title:'Connected maintenance and updates',sub:'Maintenance and Mojeeb software updates are provided according to your selected plan.'}],
+      kpis:[{label:'Call activity',value:'View'},{label:'Notifications',value:'Portal'},{label:'Follow-ups',value:'Track'}],activity:'Call activity',ready:'Connected',activities:['Incoming call handled','Missed-call notification','Follow-up task created'] },
     sectors:{eyebrow:'WHO IS IT FOR?',title:'Built for small and medium businesses in Oman.',sub:'From first enquiries to follow-up, Mojeeb fits customer-facing businesses that rely on the phone.',items:['Clinics & health services','Restaurants & cafés','Retail stores','Professional offices','Home-service businesses','Other SMEs']},
-    final:{eyebrow:'YOUR CUSTOMERS ARE CALLING',title:'Ready for a smarter first impression?',sub:'Ask for a live demonstration of Mojeeb AI and confirm the limited-time package for your business.',demoCta:'Request a demo',whatsappLabel:'WhatsApp'}
+    faq:{eyebrow:'QUESTIONS & ANSWERS',title:'Good to know before you buy.',sub:'Clear answers about the package, pricing, requirements and optional services.',
+      items:[
+        {q:'What does the 377 R.O package include?',a:'The Mojeeb AI appliance (a physical local server running Ubuntu Server and the FSS AI agent), one Grandstream HT813 analog-to-SIP gateway and one IP desk phone. The price is 377.000 R.O excluding VAT.'},
+        {q:'Is VAT included?',a:'No. The introductory price excludes VAT. VAT is added where applicable, and the final amount is shown in your quotation.'},
+        {q:'Is installation included?',a:'Professional installation is optional and charged at 10% of the package price: currently 37.700 R.O excluding VAT, or 414.700 R.O for the package with standard installation. Standard installation assumes a working LAN and a compatible ADSL connection. Extra network or cabling work is quoted separately.'},
+        {q:'Can I keep my business number? What about Caller ID?',a:'You can keep your existing business landline number, or a voice number supplied with a compatible ADSL service (for example from Omantel), when the line and provider service are compatible. Caller ID can be configured when your provider enables it and the line supports it; provider fees may apply. We check compatibility before installation.'},
+        {q:'Are there recurring fees?',a:'There is no recurring Mojeeb software licence fee for the appliance. Your telephone line, internet connection, the optional FSS Cloud Portal and other separately contracted services may have ongoing charges.'},
+        {q:'Does Mojeeb AI need an internet connection?',a:'Yes. A compatible ADSL internet connection is required. Call handling runs on the appliance at your premises, while speech recognition, AI responses and voice generation use connected AI services.'},
+        {q:'What does the optional cloud portal add?',a:'With a separately priced FSS Cloud Portal plan, your team can log in to review calls handled by Mojeeb, see missed-call and voicemail notifications, and manage follow-up tasks. Connected maintenance, software updates and other services depend on the plan you choose.'},
+        {q:'What warranty is provided?',a:'The Mojeeb appliance has a one-month replacement warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.'},
+        {q:'Is there a free trial?',a:'No. Mojeeb AI is offered for purchase. You can request a live demonstration and a quotation before you decide.'}
+      ]},
+    final:{eyebrow:'YOUR CUSTOMERS ARE CALLING',title:'Ready for a smarter first impression?',sub:'Ask for a live demonstration of Mojeeb AI and a quotation for the introductory package.',demoCta:'Request a demo or quotation',whatsappLabel:'WhatsApp'}
   },
   ar: {
-    whatsapp:'مرحباً فريق Future Smart Support، أرغب في عرض توضيحي وتسعيرة باقة مُجيب الترويجية بسعر 377 ر.ع.',
-    hero:{eyebrow:'اتصالات أذكى. أعمال أقوى.',product:'تعرّف على مُجيب · وكيل FSS الذكي',headline:'أدر اتصالات عملائك',accent:'من أي مكان.',sub:'مُجيب موظف استقبال ذكي يعمل محلياً ويتصل بخط هاتفك الحالي. يساعدك في الرد على العملاء وتوثيق معلومات المكالمات ومتابعة فرص العمل بكفاءة.',offerCta:'شاهد العرض الخاص',demoCta:'اطلب عرضاً تجريبياً',whatsappCta:'تواصل عبر واتساب',badges:['العربية والإنجليزية','معالجة محلية','مصمم لأعمال عُمان'],visualLabel:'رسم توضيحي لمسار مكالمة واردة عبر مُجيب ثم متابعة العميل.'},
-    visual:{status:'مُجيب جاهز',incoming:'مكالمة عميل واردة',incomingSub:'عبر خط الهاتف الحالي',aiLabel:'مُجيب · وكيلك الذكي',agent:'مُجيب في خدمتك',agentDesc:'يرد · يوثّق · يدعم المتابعة',followup:'محادثة العميل',context:'جاهز للمتابعة',footer:'معالجة محلية للمكالمات',language:'العربية + الإنجليزية'},
-    trust:{aria:'مميزات المنتج',items:[{title:'استخدم خطك الحالي',sub:'تحويل الخطوط التناظرية المتوافقة إلى SIP'},{title:'تقنية تعمل محلياً',sub:'معالجة الذكاء الاصطناعي داخل مقر العمل'},{title:'العربية + الإنجليزية',sub:'تواصل مع عدد أكبر من العملاء'}]},
-    offer:{eyebrow:'باقة البداية من FSS',title:'كل ما تحتاجه لتبدأ بذكاء.',sub:'حل ميسور لتطوير اتصالات الأعمال يجمع التجهيزات الأساسية مع مُجيب في عرض واحد.',ribbon:'عرض لفترة محدودة',priceIntro:'سعر الباقة الترويجي',once:'تكلفة لمرة واحدة',priceDesc:'طوّر اتصالات أعمالك دون الحاجة إلى تجهيزات هاتف مؤسسية باهظة.',quoteCta:'استفسر عن العرض عبر واتساب',terms:'سعر لمرة واحدة للباقة المعلنة فقط. لا يشمل ضريبة القيمة المضافة ورسوم مزود الاتصالات والخدمات المستمرة والبوابة السحابية الاختيارية. يعتمد توافق البوابة على خط الهاتف لديك، ويُؤكَّد نطاق التركيب والضمان والشروط النهائية في عرض السعر.',includedLabel:'محتويات العرض',includedTitle:'ثلاثة عناصر. حل ذكي واحد.',highlight:'بوابة FSS السحابية الاختيارية ليست ضمن هذه الباقة وتُسعّر بشكل منفصل.',demoCta:'اطلب عرضاً تجريبياً لهذه الباقة',items:[{icon:'bot',title:'مُجيب (وكيل FSS الذكي)',sub:'موظف استقبال صوتي ذكي يعمل داخل مقر عملك.'},{icon:'gateway',title:'تحويل الهاتف التناظري إلى SIP',sub:'تحويل خط تناظري حالي متوافق إلى SIP، مثلاً عبر بوابة Grandstream HT813.'},{icon:'deskphone',title:'هاتف IP واحد',sub:'هاتف مكتبي حديث لاستخدام فريق العمل.'}]},
-    how:{eyebrow:'كيف يعمل مُجيب',title:'خط هاتفك الحالي. تجربة أعمال أكثر ذكاءً.',sub:'نربط مُجيب بخط هاتفك الحالي، ونشغّل الوكيل الذكي على خادم محلي داخل مقر عملك، وندعم فريقك في متابعة العملاء.',
-      localTitle:'داخل مقر عملك',localDesc:'تُركَّب البوابة وهاتف IP المكتبي وخادم مُجيب محلياً، ويتم الرد على المكالمات ومعالجتها داخل المقر.',
-      cloudTitle:'اختياري عبر السحابة',cloudDesc:'باشتراك منفصل في البوابة السحابية، يمكن مراجعة معلومات المكالمات المدعومة وتلقي التنبيهات البريدية عن بُعد.',
-      steps:[{icon:'phone',title:'خط الهاتف التناظري',desc:'يواصل العملاء الاتصال برقم نشاطك الحالي على خط تناظري متوافق.'},{icon:'gateway',title:'بوابة SIP',desc:'بوابة تحويل من تناظري إلى SIP (مثل Grandstream HT813) تربط الخط بنظام IP.'},{icon:'server',title:'خادم مُجيب المحلي',desc:'يرحّب مُجيب بالمتصلين بالعربية أو الإنجليزية، ويجيب عن الأسئلة الشائعة ويسجّل الطلبات.'},{icon:'cloud',title:'المتابعة والبوابة السحابية',tag:'بوابة اختيارية',desc:'يتابع فريقك عبر هاتف IP المكتبي، وتضيف البوابة السحابية متابعة المكالمات والتنبيهات عن بُعد.'}]},
-    benefits:{eyebrow:'لماذا مُجيب؟',title:'أكثر من مجرد الرد على الهاتف.',sub:'امنح كل عميل تجربة استقبال أفضل، وزوّد فريقك بالمعلومات اللازمة للمتابعة.',items:[{icon:'bot',title:'رد ذكي على المكالمات',desc:'يرحّب مُجيب بالمتصلين ويتعامل مع الأسئلة الشائعة عند انشغال فريقك أو خارج أوقات الدوام.'},{icon:'globe',title:'العربية والإنجليزية',desc:'الترحيب بالمتصلين والإجابة عن الأسئلة الشائعة باللغتين.'},{icon:'gateway',title:'توافق من التناظري إلى SIP',desc:'حدّث خطك التناظري المتوافق دون تغيير رقم نشاطك.'},{icon:'deskphone',title:'هاتف IP مكتبي واحد',desc:'هاتف IP حديث ضمن الباقة لاستقبال المكالمات ومعاودة الاتصال.'},{icon:'messages',title:'متابعة أفضل للعملاء',desc:'تساعد بيانات المتصلين المسجّلة فريقك على الرد على الاستفسارات بانتظام.'},{icon:'server',title:'تشغيل على خادم محلي',desc:'يعمل الوكيل الذكي على خادم FSS محلي داخل مقر نشاطك.'},{icon:'wallet',title:'اتصالات أعمال بتكلفة مناسبة',desc:'باقة ترويجية لمرة واحدة بدلاً من مشروع مقسم هاتفي تقليدي مكلف.'},{icon:'people',title:'مصمم للمؤسسات الصغيرة والمتوسطة',desc:'حل عملي للفرق التي تحتاج إلى حضور احترافي عبر الهاتف.'}]},
-    cloud:{badge:'بوابة سحابية اختيارية',title:'ابقَ قريباً من عملائك',accent:'أينما كنت.',desc:'يمكنك إضافة بوابة FSS السحابية لمراجعة معلومات المكالمات المدعومة عن بُعد وتلقي تنبيهات بريدية قابلة للتخصيص، لمعرفة الاستفسارات التي تحتاج إلى رد دون البقاء داخل المكتب.',cta:'اطلب عرضاً تجريبياً',disclaimer:'واجهة توضيحية. البوابة السحابية اختيارية وليست ضمن باقة 377 ر.ع وقد تتطلب اشتراكاً منفصلاً، وتُؤكّد المزايا المتاحة في عرض السعر.',illustrationLabel:'واجهة توضيحية لبوابة FSS السحابية',preview:'عرض توضيحي للبوابة',dashboardTitle:'إدارة اتصالات العملاء',items:[{icon:'cloud',title:'متابعة المكالمات عن بُعد',sub:'اطلع على النشاط بشكل آمن عندما تكون خارج المكتب.'},{icon:'bell',title:'تنبيهات البريد الإلكتروني',sub:'اعرف متى تحتاج المكالمات الواردة أو الفائتة إلى متابعة.'},{icon:'phone',title:'متابعة المكالمات الفائتة',sub:'اطّلع على المكالمات والاستفسارات الفائتة ليعاود فريقك الاتصال بالعملاء.'}],kpis:[{label:'نشاط المكالمات',value:'عرض'},{label:'تنبيهات البريد',value:'مفعّلة'},{label:'المتابعة',value:'منظمة'}],activity:'نشاط الاتصالات',ready:'متصل',activities:['تم استقبال مكالمة','تنبيه بريدي متاح','حفظ تفاصيل للمتابعة']},
+    whatsapp:'مرحباً فريق Future Smart Support، أرغب في عرض توضيحي وتسعيرة لباقة مُجيب التعريفية بسعر 377 ر.ع.',
+    hero:{eyebrow:'اتصالات أذكى. أعمال أقوى.',product:'تعرّف على مُجيب · وكيل FSS الذكي',headline:'أدر اتصالات عملائك',accent:'من أي مكان.',sub:'مُجيب جهاز استقبال ذكي خاص بك يعمل بنظام Ubuntu للأعمال النامية في عُمان. احتفظ بخطك الحالي المتوافق، وأضف هاتفاً مكتبياً بتقنية IP، واشترك في الخدمات السحابية فقط عندما تحتاج إليها.',offerCta:'شاهد عرض 377 ر.ع',demoCta:'اطلب عرضاً تجريبياً أو عرض سعر',whatsappCta:'تواصل عبر واتساب',badges:['العربية والإنجليزية','جهاز محلي خاص بك','بدون رسوم ترخيص دورية'],visualLabel:'رسم توضيحي لمسار مكالمة واردة عبر مُجيب ثم متابعة العميل.'},
+    visual:{status:'مُجيب جاهز',incoming:'مكالمة عميل واردة',incomingSub:'عبر خط هاتفك المتوافق',aiLabel:'مُجيب · وكيلك الذكي',agent:'مُجيب في خدمتك',agentDesc:'يرد · يوثّق · يدعم المتابعة',followup:'محادثة العميل',context:'جاهز للمتابعة',footer:'يتولى جهاز مُجيب استقبال المكالمات',language:'العربية + الإنجليزية'},
+    trust:{aria:'مميزات المنتج',items:[{title:'احتفظ برقمك',sub:'متى كان خطك متوافقاً'},{title:'جهاز خاص بك',sub:'خادم مُجيب يعمل بنظام Ubuntu داخل مقرك'},{title:'العربية + الإنجليزية',sub:'تواصل مع عدد أكبر من العملاء'}]},
+    offer:{eyebrow:'باقة البداية من مُجيب',title:'كل ما تحتاجه لتبدأ بذكاء.',sub:'امتلك الحل المحلي الأساسي: جهاز مُجيب الذكي وبوابة لخط الهاتف وهاتفاً مكتبياً بتقنية IP في باقة تعريفية واحدة.',
+      ribbon:'عرض تعريفي خاص',heroNote:'غير شامل الضريبة · لمرة واحدة',priceIntro:'سعر تعريفي خاص',once:'باقة الجهاز لمرة واحدة · غير شامل ضريبة القيمة المضافة',
+      rows:[{label:'باقة بداية مُجيب',value:'377.000'},{label:'التركيب الاحترافي الاختياري (10%)',value:'37.700'},{label:'الباقة مع التركيب الاعتيادي',value:'414.700',total:true}],
+      vatNote:'جميع الأسعار غير شاملة ضريبة القيمة المضافة، وتُضاف الضريبة حيثما تنطبق.',
+      quoteCta:'استفسر عن العرض عبر واتساب',
+      terms:'يُضاف التركيب (10%) وأعمال تجهيز الشبكة أو الإنترنت ورسوم مزوّد الاتصالات وخدمات بوابة FSS السحابية الاختيارية حيثما تنطبق. يشترط للتركيب الاعتيادي توفر شبكة LAN قائمة وخدمة ADSL متوافقة. وتُؤكَّد الشروط والتوافق في عرض السعر.',
+      includedLabel:'محتويات العرض',includedTitle:'ثلاثة عناصر. حل ذكي واحد.',demoCta:'اطلب عرض سعر لهذه الباقة',
+      items:[{icon:'server',title:'جهاز مُجيب الذكي',sub:'خادم محلي خاص بك يعمل بنظام Ubuntu Server ويشغّل وكيل FSS الذكي.'},{icon:'gateway',title:'بوابة Grandstream HT813',sub:'تربط خط هاتف تناظري واحد متوافق بالنظام عبر SIP.'},{icon:'deskphone',title:'هاتف مكتبي واحد بتقنية IP',sub:'لاستقبال المكالمات ومعاودة الاتصال عبر النظام المُهيّأ.'}],
+      facts:[{icon:'wallet',text:'لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب.'},{icon:'shield',text:'ضمان استبدال جهاز مُجيب لمدة شهر واحد، وفق شروط الضمان من FSS.'},{icon:'cloud',text:'بوابة FSS السحابية الاختيارية غير مشمولة وتُسعّر بشكل منفصل.'}],
+      reqTitle:'قبل الشراء: متطلبات التركيب والموقع والخط',
+      reqs:[{icon:'tool',title:'التركيب الاحترافي الاختياري',desc:'بنسبة 10% من سعر الباقة (حالياً 37.700 ر.ع غير شامل ضريبة القيمة المضافة). يُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.'},{icon:'network',title:'شبكة LAN واتصال ADSL',desc:'يتطلب التركيب الاعتيادي شبكة محلية (LAN) جاهزة واتصال إنترنت ADSL متوافقاً وفعّالاً. تُدرس أنواع الاتصال الأخرى لكل حالة على حدة.'},{icon:'phone',title:'رقمك وخدمة إظهار رقم المتصل',desc:'احتفظ برقم نشاطك الحالي متى كان الخط وخدمة المزوّد متوافقين. تعمل خدمة إظهار رقم المتصل (Caller ID) عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد.'}]
+    },
+    how:{eyebrow:'كيف يعمل مُجيب',title:'خط هاتفك الحالي. تجربة أعمال أكثر ذكاءً.',sub:'نربط مُجيب بخط هاتفك المتوافق عبر البوابة، ويتولى جهاز مُجيب داخل مقرك التعامل مع المكالمات، ويتابع فريقك عبر هاتف IP المكتبي.',
+      localTitle:'داخل مقر عملك',localDesc:'تُركَّب البوابة وهاتف IP المكتبي وجهاز مُجيب داخل مقرك وتتولى التعامل مع مكالماتك. وتستخدم مزايا الكلام واللغة الذكية خدمات ذكاء اصطناعي متصلة عبر الإنترنت.',
+      cloudTitle:'اختياري عبر السحابة',cloudDesc:'مع خطة اشتراك منفصلة في البوابة السحابية، يمكن لفريقك مراجعة المكالمات والتنبيهات والمتابعات عن بُعد.',
+      steps:[{icon:'phone',title:'خط هاتف متوافق',desc:'يواصل العملاء الاتصال برقم نشاطك على خط تناظري متوافق من مزوّد الخدمة.'},{icon:'gateway',title:'بوابة HT813',desc:'تربط الخط التناظري بالنظام عبر SIP، وهي واجهة الخط وليست الذكاء الاصطناعي.'},{icon:'server',title:'جهاز مُجيب الذكي',desc:'يرحّب بالمتصلين بالعربية أو الإنجليزية، ويجيب عن الأسئلة الشائعة ويسجّل الطلبات.'},{icon:'cloud',title:'المتابعة والبوابة السحابية',tag:'اختياري',desc:'يتابع فريقك عبر هاتف IP المكتبي، وتضيف البوابة السحابية الاختيارية المتابعة عن بُعد.'}]},
+    benefits:{eyebrow:'لماذا مُجيب؟',title:'أكثر من مجرد الرد على الهاتف.',sub:'امنح كل عميل تجربة استقبال أفضل، وزوّد فريقك بالمعلومات اللازمة للمتابعة.',items:[{icon:'bot',title:'رد ذكي على المكالمات',desc:'يرحّب مُجيب بالمتصلين ويتعامل مع الأسئلة الشائعة عند انشغال فريقك أو خارج أوقات الدوام.'},{icon:'globe',title:'العربية والإنجليزية',desc:'الترحيب بالمتصلين والإجابة عن الأسئلة الشائعة باللغتين.'},{icon:'phone',title:'احتفظ برقمك',desc:'استخدم رقم نشاطك الحالي متى كان الخط متوافقاً، مع إظهار رقم المتصل حيث يفعّله مزوّد الخدمة.'},{icon:'deskphone',title:'هاتف IP مكتبي واحد',desc:'هاتف IP حديث ضمن الباقة لاستقبال المكالمات ومعاودة الاتصال.'},{icon:'messages',title:'متابعة أفضل للعملاء',desc:'تساعد بيانات المتصلين التي يسجّلها مُجيب فريقك على الرد على الاستفسارات بانتظام.'},{icon:'server',title:'جهاز خاص بك',desc:'خادم مُجيب مخصص يعمل بنظام Ubuntu داخل مقرك، وليس تطبيقاً سحابياً فقط.'},{icon:'wallet',title:'بدون رسوم ترخيص دورية',desc:'لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. أضف الخدمات السحابية فقط عند الحاجة.'},{icon:'people',title:'مصمم للمؤسسات الصغيرة والمتوسطة',desc:'حل عملي للفرق التي تحتاج إلى حضور احترافي عبر الهاتف.'}]},
+    cloud:{badge:'بوابة سحابية اختيارية',title:'ابقَ قريباً من عملائك',accent:'أينما كنت.',desc:'أضف بوابة FSS السحابية الاختيارية لمتابعة المكالمات التي يتعامل معها مُجيب من خارج المكتب، والاستفادة من خدمات المتابعة والصيانة والتنبيهات المشمولة في خطتك.',cta:'اطلب عرضاً تجريبياً',disclaimer:'واجهة توضيحية. البوابة السحابية اختيارية وليست ضمن باقة 377 ر.ع وتتطلب خطة اشتراك منفصلة، وتُحدَّد المزايا وشروط الدعم في خطة الخدمة السحابية.',illustrationLabel:'واجهة توضيحية لبوابة FSS السحابية',preview:'عرض توضيحي للبوابة',dashboardTitle:'إدارة اتصالات العملاء',
+      items:[{icon:'cloud',title:'نشاط المكالمات عن بُعد',sub:'راجع المكالمات التي تعامل معها مُجيب: رقم المتصل والوقت والمدة والنتيجة.'},{icon:'bell',title:'تنبيهات داخل البوابة',sub:'اطّلع على تنبيهات المكالمات الفائتة والرسائل الصوتية عند تسجيل الدخول.'},{icon:'phone',title:'متابعة المكالمات الفائتة',sub:'يمكن أن تُنشئ المكالمات الفائتة والرسائل الصوتية مهام متابعة لفريقك.'},{icon:'tool',title:'صيانة وتحديثات متصلة',sub:'تُقدَّم الصيانة وتحديثات برنامج مُجيب وفق خطة الاشتراك التي تختارها.'}],
+      kpis:[{label:'نشاط المكالمات',value:'عرض'},{label:'التنبيهات',value:'البوابة'},{label:'المتابعات',value:'تتبّع'}],activity:'نشاط الاتصالات',ready:'متصل',activities:['تم التعامل مع مكالمة واردة','تنبيه مكالمة فائتة','إنشاء مهمة متابعة']},
     sectors:{eyebrow:'لمن هذا الحل؟',title:'مصمم للمؤسسات الصغيرة والمتوسطة في عُمان.',sub:'من الاستفسار الأول إلى المتابعة، يخدم مُجيب الأعمال التي تعتمد على الهاتف في التواصل مع عملائها.',items:['العيادات والخدمات الصحية','المطاعم والمقاهي','متاجر التجزئة','المكاتب المهنية','شركات الخدمات المنزلية','مؤسسات صغيرة ومتوسطة أخرى']},
-    final:{eyebrow:'عملاؤك يتصلون الآن',title:'هل أنت جاهز لتجربة استقبال أذكى؟',sub:'اطلب عرضاً مباشراً لمُجيب وتعرّف على تفاصيل الباقة الترويجية لنشاطك.',demoCta:'اطلب عرضاً تجريبياً',whatsappLabel:'واتساب'}
+    faq:{eyebrow:'أسئلة وأجوبة',title:'معلومات مهمة قبل الشراء.',sub:'إجابات واضحة عن الباقة والأسعار والمتطلبات والخدمات الاختيارية.',
+      items:[
+        {q:'ماذا تشمل باقة 377 ر.ع؟',a:'جهاز مُجيب الذكي (خادم محلي يعمل بنظام Ubuntu Server ويشغّل وكيل FSS الذكي)، وبوابة Grandstream HT813 لتحويل الخط التناظري إلى SIP، وهاتفاً مكتبياً واحداً بتقنية IP. السعر 377.000 ر.ع غير شامل ضريبة القيمة المضافة.'},
+        {q:'هل السعر شامل ضريبة القيمة المضافة؟',a:'لا. السعر التعريفي غير شامل ضريبة القيمة المضافة، وتُضاف الضريبة حيثما تنطبق ويظهر المبلغ النهائي في عرض السعر.'},
+        {q:'هل التركيب مشمول؟',a:'التركيب الاحترافي اختياري ويُحتسب بنسبة 10% من سعر الباقة: حالياً 37.700 ر.ع غير شامل ضريبة القيمة المضافة، أو 414.700 ر.ع للباقة مع التركيب الاعتيادي. يفترض التركيب الاعتيادي وجود شبكة LAN جاهزة واتصال ADSL متوافق، وتُقدَّم أعمال الشبكة أو الكابلات الإضافية بعرض سعر منفصل.'},
+        {q:'هل يمكنني الاحتفاظ برقم نشاطي؟ وماذا عن إظهار رقم المتصل؟',a:'يمكنك الاحتفاظ برقم هاتفك الأرضي الحالي، أو رقم الهاتف المقدم ضمن خدمة ADSL متوافقة (مثلاً من عُمانتل)، متى كان الخط وخدمة المزوّد متوافقين. ويمكن تهيئة خدمة إظهار رقم المتصل عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد. نتحقق من التوافق قبل التركيب.'},
+        {q:'هل توجد رسوم دورية؟',a:'لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. وقد تترتب رسوم مستمرة على خط الهاتف واتصال الإنترنت وبوابة FSS السحابية الاختيارية وأي خدمات أخرى يتم التعاقد عليها بشكل منفصل.'},
+        {q:'هل يحتاج مُجيب إلى اتصال بالإنترنت؟',a:'نعم، يلزم اتصال إنترنت ADSL متوافق. يتم التعامل مع المكالمات على الجهاز داخل مقرك، بينما تستخدم خدمات التعرّف على الكلام والردود الذكية وتوليد الصوت خدمات ذكاء اصطناعي متصلة.'},
+        {q:'ماذا تضيف البوابة السحابية الاختيارية؟',a:'مع خطة اشتراك منفصلة في بوابة FSS السحابية، يمكن لفريقك تسجيل الدخول لمراجعة المكالمات التي تعامل معها مُجيب، والاطلاع على تنبيهات المكالمات الفائتة والرسائل الصوتية، وإدارة مهام المتابعة. وتعتمد الصيانة المتصلة والتحديثات البرمجية والخدمات الأخرى على الخطة التي تختارها.'},
+        {q:'ما الضمان المقدم؟',a:'يتمتع جهاز مُجيب بضمان استبدال لمدة شهر واحد وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.'},
+        {q:'هل تتوفر تجربة مجانية؟',a:'لا. مُجيب منتج متاح للشراء، ويمكنك طلب عرض توضيحي مباشر وعرض سعر قبل اتخاذ قرارك.'}
+      ]},
+    final:{eyebrow:'عملاؤك يتصلون الآن',title:'هل أنت جاهز لتجربة استقبال أذكى؟',sub:'اطلب عرضاً توضيحياً مباشراً لمُجيب وعرض سعر للباقة التعريفية.',demoCta:'اطلب عرضاً تجريبياً أو عرض سعر',whatsappLabel:'واتساب'}
   }
 }
+
 </script>
 
 <style scoped>
@@ -252,6 +323,35 @@ h1 span { display:inline; color:#29dcd1; }
 html[dir='rtl'] .flip-rtl { transform:scaleX(-1); }
 .pw-label { display:inline-flex; align-items:center; gap:9px; }
 .package-cta { width:100%; margin-top:16px; }
+.price-rows { position:relative; z-index:1; width:100%; margin:18px 0 0; display:grid; gap:0; border-top:1px solid rgba(255,255,255,.22); }
+.price-rows > div { display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.16); font-size:13px; }
+.price-rows dt { color:#d5fcff; }
+.price-rows dd { margin:0; font-weight:800; white-space:nowrap; font-variant-numeric:tabular-nums; color:#fff; }
+.price-rows .total dt, .price-rows .total dd { font-weight:850; color:#fff; }
+.price-vat { position:relative; z-index:1; margin:12px 0 20px; font-size:12px; font-weight:700; color:#e4fffd; }
+.package-facts { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.package-facts li { display:flex; align-items:flex-start; gap:11px; border-radius:12px; padding:12px 14px; background:#e8faf8; color:#05656c; font-size:13px; font-weight:700; line-height:1.55; }
+.package-facts svg { flex:0 0 19px; margin-top:1px; }
+.requirements { margin-top:26px; }
+.req-title { margin:0 0 14px; font-size:18px; }
+.req-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.req-item { display:flex; gap:13px; align-items:flex-start; padding:18px; border-radius:18px; background:#fff; border:1px solid #d5e9f1; }
+.req-icon { flex:0 0 42px; height:42px; display:grid; place-items:center; border-radius:13px; background:#e0f8f7; color:#006d6d; }
+.req-item b { display:block; font-size:14px; margin-bottom:4px; }
+.req-item p { margin:0; color:var(--muted); font-size:13px; line-height:1.65; }
+.faq-section { background:#fff; }
+.faq-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:56px; align-items:start; }
+.faq-list { display:grid; gap:10px; }
+.faq-item { border:1px solid #d7e9f1; border-radius:14px; background:#fbfdff; }
+.faq-item[open] { border-color:#9de0df; background:#fff; }
+.faq-item summary { display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 18px; cursor:pointer; list-style:none; font-weight:750; font-size:15px; }
+.faq-item summary::-webkit-details-marker { display:none; }
+.faq-item summary:focus-visible { outline:3px solid #31d5cf; outline-offset:2px; border-radius:14px; }
+.faq-toggle { position:relative; flex:0 0 18px; height:18px; }
+.faq-toggle::before, .faq-toggle::after { content:''; position:absolute; inset-inline-start:2px; top:8px; width:14px; height:2px; border-radius:2px; background:#00757b; transition:transform .2s; }
+.faq-toggle::after { transform:rotate(90deg); }
+.faq-item[open] .faq-toggle::after { transform:rotate(0deg); }
+.faq-item p { margin:0; padding:0 18px 16px; color:var(--muted); font-size:14px; line-height:1.75; }
 .step-tag { display:inline-block; vertical-align:middle; margin-inline-start:6px; font-size:10px; font-weight:800; letter-spacing:.04em; color:#185ea6; background:#e6f1ff; border:1px solid #c5ddfa; border-radius:999px; padding:2px 8px; }
 .how-card-optional { border-style:dashed; border-color:#a9c9ea; }
 .how-zones { display:grid; grid-template-columns:3fr 1fr; gap:14px; margin-top:22px; }
@@ -299,7 +399,7 @@ html[dir='rtl'] .flip-rtl { transform:scaleX(-1); }
 .price-panel::after { content:''; position:absolute; width:290px; height:290px; background:rgba(255,255,255,.06); border-radius:50%; bottom:-170px; inset-inline-end:-130px; }
 .price-kicker { position:relative; z-index:1; color:#d3fffa; font-weight:800; letter-spacing:.11em; font-size:11px; text-transform:uppercase; }
 .price-main { display:flex; align-items:baseline; flex-direction:row; gap:10px; line-height:1; margin:16px 0 6px; }.price-main strong { font-size:clamp(86px,8vw,125px); letter-spacing:-.07em; font-weight:900; }.currency { font-size:26px; font-weight:800; }
-.price-once { font-size:22px; font-weight:800; }.price-divider { height:1px; width:100%; background:rgba(255,255,255,.25); margin:23px 0; }.price-description { font-size:15px; line-height:1.8; color:#d5fcff; margin:0 0 28px; max-width:350px; }
+.price-once { font-size:18px; font-weight:800; line-height:1.4; }.price-divider { height:1px; width:100%; background:rgba(255,255,255,.25); margin:23px 0; }.price-description { font-size:15px; line-height:1.8; color:#d5fcff; margin:0 0 28px; max-width:350px; }
 .price-whatsapp { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; padding:14px 18px; background:#fff; color:#007b81; border-radius:12px; font-weight:850; position:relative; z-index:1; }.price-whatsapp:hover { opacity:1; background:#efffff; }.price-terms { font-size:11px; color:#c9eaf0; line-height:1.65; margin:17px 0 0; position:relative; z-index:1; }
 .package-panel { border-radius:26px; background:#fff; border:1px solid #d5e9f1; padding:33px; box-shadow:0 16px 60px rgba(10,57,87,.04); }
 .package-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }.package-heading h3 { margin:0; font-size:24px; line-height:1.35; }.package-pill { border:1px solid #d1e7ed; padding:5px 11px; border-radius:999px; font-size:10px; font-weight:850; white-space:nowrap; color:#296f86; }
@@ -312,6 +412,6 @@ html[dir='rtl'] .flip-rtl { transform:scaleX(-1); }
 .sectors-section { background:#f7fbfd; }.sectors-grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:65px; align-items:center; }.sectors-tags { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }.sectors-tags span { display:flex; align-items:center; gap:9px; padding:16px; background:#fff; border:1px solid #d7e9f1; border-radius:14px; font-size:13px; font-weight:750; }.sectors-tags svg { color:#0eaaa7; flex:0 0 17px; }
 .pre-contact-section { padding:35px 0; background:#f7fbfd; }.cta-ribbon { display:flex; align-items:center; justify-content:space-between; gap:38px; border-radius:25px; padding:48px; background:linear-gradient(125deg,#092d48,#0d5870); color:#fff; }.cta-eyebrow { color:#55dfd3; font-size:11px; font-weight:850; letter-spacing:.13em; margin:0 0 8px; }.cta-ribbon h2 { margin:0 0 10px; font-size:clamp(24px,2.7vw,35px); }.cta-ribbon p:not(.cta-eyebrow) { color:#c2dde9; margin:0; }.cta-ribbon-actions { display:flex; flex-wrap:wrap; gap:10px; flex:0 0 auto; }.cta-outline { color:#fff; border-color:#5f9ab0; }.cta-outline:hover { background:rgba(255,255,255,.08); }
 @media(max-width:1100px){.how-cards { grid-template-columns:1fr 1fr; gap:14px; }.how-arrow { display:none; }.how-zones { grid-template-columns:1fr 1fr; }.benefits-grid { grid-template-columns:repeat(2,1fr); }.hero-grid,.cloud-grid { gap:35px; }.floating-label { inset-inline-end:-8px; }.price-panel { padding:36px 30px; }.cta-ribbon { flex-wrap:wrap; }}
-@media(max-width:900px){.marketing-hero { padding:70px 0; }.hero-grid,.cloud-grid,.sectors-grid { grid-template-columns:1fr; }.hero-art { max-width:610px; width:100%; margin-inline:auto; }.offer-layout { grid-template-columns:1fr; }.trust-item { padding-inline:5px; }.benefits-grid { grid-template-columns:repeat(2,1fr); }.cta-ribbon { padding:36px; }}
+@media(max-width:900px){.req-grid { grid-template-columns:1fr; }.faq-grid { grid-template-columns:1fr; gap:26px; }.marketing-hero { padding:70px 0; }.hero-grid,.cloud-grid,.sectors-grid { grid-template-columns:1fr; }.hero-art { max-width:610px; width:100%; margin-inline:auto; }.offer-layout { grid-template-columns:1fr; }.trust-item { padding-inline:5px; }.benefits-grid { grid-template-columns:repeat(2,1fr); }.cta-ribbon { padding:36px; }}
 @media(max-width:690px){.marketing-hero { padding:55px 0 60px; }.hero-copy h1 { font-size:clamp(35px,9vw,51px); }.hero-sub { font-size:15px; }.hero-actions { flex-direction:column; align-items:stretch; }.hero-actions .btn { width:100%; }.hero-art { padding:18px 16px; min-height:390px; }.audio-bars { display:none; }.floating-label { bottom:70px; font-size:10px; padding:8px; }.trust-content { grid-template-columns:1fr; gap:0; }.trust-item { padding:15px 0; border-inline-end:0; border-bottom:1px solid #cee5ed; }.trust-item:last-child { border:0; }.offer-heading { align-items:flex-start; flex-direction:column; }.limited-pill { margin-top:0; }.price-panel { padding:32px 24px; }.price-main strong { font-size:93px; }.package-panel { padding:24px 20px; }.package-pill { display:none; }.package-item { gap:12px; }.package-icon { flex-basis:47px; height:47px; }.how-cards { grid-template-columns:1fr; gap:10px; }.how-card { min-height:0; }.how-zones { grid-template-columns:1fr; }.hero-price { width:100%; }.benefits-grid { grid-template-columns:1fr; }.benefit-card { padding:24px; }.portal-window-inner { padding:15px; }.portal-kpis { gap:6px; }.portal-kpis>div { padding:12px 8px; }.sectors-tags { grid-template-columns:1fr; }.cta-ribbon { padding:26px; }.cta-ribbon-actions { flex-direction:column; width:100%; }.cta-ribbon-actions .btn { width:100%; }}
 </style>
