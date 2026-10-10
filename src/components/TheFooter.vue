@@ -1,92 +1,50 @@
 <template>
-  <footer class="site-footer">
-    <div class="container footer-local">
-      <p class="footer-tagline">{{ t('footer.tagline') }}</p>
-      <p class="footer-location">
-        <span>{{ t('footer.location') }}</span>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <span>{{ t('footer.contactLabel') }}
-          <a href="mailto:majid@FutureSmartSupport.com" class="footer-email">majid@FutureSmartSupport.com</a>
-        </span>
-      </p>
+  <footer class="fss-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo"><img :src="logoUrl" alt="Future Smart Support" width="589" height="200" /><small>{{ c.tagline }}</small></div>
+        <p>{{ c.description }}</p>
+      </div>
+      <div class="footer-column"><b>{{ c.explore }}</b>
+        <router-link :to="{path:'/',hash:'#offer'}">{{ c.offer }}</router-link>
+        <router-link :to="{path:'/',hash:'#features'}">{{ c.benefits }}</router-link>
+        <router-link :to="{path:'/',hash:'#cloud'}">{{ c.cloud }}</router-link>
+        <router-link :to="{path:'/',hash:'#faq'}">{{ c.faq }}</router-link>
+        <router-link :to="{path:'/',hash:'#demo'}">{{ c.demo }}</router-link>
+        <router-link to="/voicegate-demo">{{ c.mojebPage }}</router-link>
+        <router-link :to="{path:'/',hash:'#contact'}">{{ c.contactForm }}</router-link>
+      </div>
+      <div class="footer-column"><b>{{ c.contact }}</b>
+        <a :href="WHATSAPP_URL" target="_blank" rel="noopener noreferrer">{{ c.whatsapp }} <bdi dir="ltr">+968 9277 1730</bdi></a>
+        <a href="mailto:majid@FutureSmartSupport.com">majid@FutureSmartSupport.com</a>
+        <span>{{ c.location }}</span>
+      </div>
     </div>
-    <div class="container footer-inner">
-      <p class="copyright">{{ copyright }}</p>
-      <nav class="footer-links">
-        <router-link to="/privacy">{{ t('footer.privacy') }}</router-link>
-        <router-link to="/terms">{{ t('footer.terms') }}</router-link>
-      </nav>
+    <div class="container footer-bottom">
+      <span>© {{ year }} Future Smart Support. {{ c.rights }}</span>
+      <nav :aria-label="c.legal"><router-link to="/privacy">{{ c.privacy }}</router-link><router-link to="/terms">{{ c.terms }}</router-link></nav>
     </div>
   </footer>
 </template>
-
 <script setup>
 import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-
-const { t } = useLanguage()
+import { WHATSAPP_URL } from '../constants.js'
+import logoUrl from '../../assets/FSS_Logo_light.png'
+const { lang } = useLanguage()
 const year = new Date().getFullYear()
-const copyright = computed(() => t('footer.copyright').replace('{year}', year))
+const c = computed(() => lang.value === 'ar'
+  ? {tagline:'مُجيب · ذكاء اصطناعي لاتصالات الأعمال',description:'حلول عملية لاتصالات العملاء تناسب الأعمال الصغيرة والمتوسطة في سلطنة عُمان.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'المزايا',cloud:'البوابة السحابية',demo:'اطلب تجربة',mojebPage:'صفحة مُجيب التعريفية',contactForm:'نموذج التواصل',whatsapp:'واتساب',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
+  : {tagline:'Mojeeb AI · AI-powered business communications',description:'Practical customer communication solutions for small and growing businesses in Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'Benefits',cloud:'Cloud portal',demo:'Request demo',mojebPage:'Mojeeb AI product page',contactForm:'Contact form',whatsapp:'WhatsApp',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
 </script>
-
 <style scoped>
-.site-footer {
-  border-top: 1px solid var(--line);
-  padding: 28px 0 20px;
-}
-
-.footer-local {
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-}
-
-.footer-tagline {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0 0 6px;
-}
-
-.footer-location {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0;
-}
-
-.footer-sep { opacity: 0.4; }
-
-.footer-email {
-  color: var(--brand);
-  transition: opacity 0.15s;
-}
-.footer-email:hover { opacity: 0.8; }
-.footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.copyright {
-  color: var(--muted);
-  font-size: 14px;
-  margin: 0;
-}
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-.footer-links a {
-  color: var(--muted);
-  font-size: 14px;
-  transition: color 0.15s;
-}
-.footer-links a:hover {
-  color: var(--brand);
-  opacity: 1;
-}
+.fss-footer { background:#05192e; color:#fff; padding:57px 0 21px; }
+.footer-main { display:grid; grid-template-columns:1.6fr .7fr 1fr; gap:70px; padding-bottom:50px; }
+.footer-logo { display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+.footer-logo img { height:52px; width:auto; }.footer-logo small { font-size:12px; color:#42ddd4; font-weight:700; }
+.footer-brand p { max-width:330px; color:#97b6c7; font-size:13px; line-height:1.8; margin-top:19px; }
+.footer-column { display:flex; flex-direction:column; align-items:flex-start; gap:13px; font-size:13px; }.footer-column b { margin-bottom:8px; font-size:14px; }.footer-column a,.footer-column span { color:#a8c3d1; }.footer-column a:hover { color:#4be3d7; opacity:1; }
+.footer-bottom { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:18px; color:#84a4b6; border-top:1px solid rgba(173,210,226,.15); padding-top:20px; font-size:12px; }.footer-bottom nav { display:flex; gap:22px; }.footer-bottom a:hover { color:#4be3d7; }
+@media(max-width:800px) { .footer-main { grid-template-columns:1fr 1fr; gap:35px; }.footer-brand { grid-column:1/-1; } }
+@media(max-width:520px) { .footer-main { grid-template-columns:1fr; gap:30px; }.footer-brand { grid-column:1; }.footer-bottom { flex-direction:column; align-items:flex-start; } }
 </style>

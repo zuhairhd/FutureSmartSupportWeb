@@ -9,7 +9,7 @@ export default {
   },
 
   hero: {
-    eyebrow: 'VoiceGate AI — AI Voice Receptionist for Oman & GCC',
+    eyebrow: 'Mojeeb AI — AI Voice Receptionist for Oman & GCC',
     headline: 'Never Miss a',
     headlineAccent: 'Customer Call Again',
     sub: 'An AI voice receptionist that answers every call 24/7 — in Arabic and English. Installed at your business, fully operational in days.',
@@ -18,7 +18,7 @@ export default {
     ctaSecondary: 'See the Package',
     trustLine: 'On-premise deployment with real-time cloud monitoring',
     badges: ['24/7 Arabic & English', 'On-Premise + Cloud', 'Omantel Compatible', 'Local Installation'],
-    cardTitle: 'VoiceGate AI — Live',
+    cardTitle: 'Mojeeb AI — Live',
     cardItems: [
       'Answers every call 24/7, in Arabic or English',
       'Captures appointments, orders, and requests',
@@ -26,7 +26,7 @@ export default {
       'Cloud dashboard access from anywhere',
       'Real-time local server monitoring',
     ],
-    cardStatus: 'VoiceGate AI — Active',
+    cardStatus: 'Mojeeb AI — Active',
   },
 
   trustStrip: {
@@ -64,7 +64,7 @@ export default {
         desc: 'Without recordings and transcripts, important requests get missed, misremembered, or forgotten.',
       },
     ],
-    solution: 'VoiceGate AI answers every call — 24/7, in Arabic and English — so you never lose a customer to an unanswered phone.',
+    solution: 'Mojeeb AI answers every call — 24/7, in Arabic and English — so you never lose a customer to an unanswered phone.',
   },
 
   howItWorks: {
@@ -74,12 +74,12 @@ export default {
     steps: [
       {
         title: 'We Install at Your Site',
-        desc: 'Our local team installs the VoiceGate AI server at your business and connects it to your existing phone system. We configure the AI with your services, hours, FAQs, and business information — tuned for your specific operation.',
+        desc: 'Our local team installs the Mojeeb AI server at your business and connects it to your existing phone system. We configure the AI with your services, hours, FAQs, and business information — tuned for your specific operation.',
         detail: 'Grandstream HT813 + IP Phone included',
       },
       {
         title: 'AI Answers and Understands',
-        desc: 'Customers call your number. VoiceGate AI answers in Arabic or English — detecting the language automatically. It handles inquiries, captures appointment and order requests, transfers calls when needed, and records every conversation.',
+        desc: 'Customers call your number. Mojeeb AI answers in Arabic or English — detecting the language automatically. It handles inquiries, captures appointment and order requests, transfers calls when needed, and records every conversation.',
         detail: 'SIP · Asterisk · Omantel compatible',
       },
       {
@@ -95,9 +95,9 @@ export default {
     title: 'A complete AI call infrastructure',
     sub: 'Everything your business needs to handle calls professionally — with full visibility into every conversation.',
     list: [
-      { icon: 'clock',    title: '24/7 AI Call Answering',          desc: 'Never miss a call. VoiceGate AI is always on — outside business hours, weekends, and public holidays.' },
+      { icon: 'clock',    title: '24/7 AI Call Answering',          desc: 'Never miss a call. Mojeeb AI is always on — outside business hours, weekends, and public holidays.' },
       { icon: 'globe',    title: 'Arabic & English Conversations',   desc: 'Natural conversation in both languages. Detects the caller\'s language automatically and responds accordingly.' },
-      { icon: 'phone',    title: 'Intelligent Call Transfer',        desc: 'When a team member is available, VoiceGate AI transfers the call seamlessly. Configurable by hours and availability.' },
+      { icon: 'phone',    title: 'Intelligent Call Transfer',        desc: 'When a team member is available, Mojeeb AI transfers the call seamlessly. Configurable by hours and availability.' },
       { icon: 'calendar', title: 'Appointment Booking Workflows',    desc: 'Callers can request appointments directly. Details are captured and saved for your team to confirm and manage.' },
       { icon: 'file',     title: 'Call Logs & Full Transcripts',     desc: 'Every call is logged and transcribed. Search and review the full text of any conversation at any time.' },
       { icon: 'play',     title: 'Secure Call Recording Playback',   desc: 'Listen to any recorded call directly from the cloud dashboard. Stored securely on your local server.' },
@@ -109,9 +109,9 @@ export default {
   },
 
   whyUs: {
-    label: 'Why VoiceGate AI',
+    label: 'Why Mojeeb AI',
     title: 'Not cloud software. Production infrastructure.',
-    sub: 'Most AI receptionists are SaaS tools you subscribe to. VoiceGate AI is a deployed system — installed at your premises with local support, local data storage, and enterprise-grade monitoring.',
+    sub: 'Most AI receptionists are SaaS tools you subscribe to. Mojeeb AI is a deployed system — installed at your premises with local support, local data storage, and enterprise-grade monitoring.',
     advantages: [
       {
         icon: 'server',
@@ -139,7 +139,7 @@ export default {
   localDeploy: {
     label: 'Infrastructure & Privacy',
     title: 'Your server. Your data. Your control.',
-    sub: 'VoiceGate AI is not cloud-only software. We install a dedicated AI server at your business premises. All call processing happens locally — giving you maximum uptime, data privacy, and operational control. The cloud dashboard gives your team access from anywhere.',
+    sub: 'Mojeeb AI is not cloud-only software. We install a dedicated AI server at your business premises. All call processing happens locally — giving you maximum uptime, data privacy, and operational control. The cloud dashboard gives your team access from anywhere.',
     points: [
       'On-site AI server — installed at your business',
       'Call processing runs locally on dedicated hardware',
@@ -151,13 +151,13 @@ export default {
     badge: 'On-Premise + Cloud Architecture',
     serverLabel: 'Your Server',
     serverStatus: 'Active — Local Network',
-    serverProduct: 'VoiceGate AI',
+    serverProduct: 'Mojeeb AI',
   },
 
   industries: {
     label: 'Industries',
     title: 'Built for Oman & GCC businesses',
-    sub: 'VoiceGate AI is configured for your specific industry — with knowledge, workflows, and language tuned to how your customers communicate.',
+    sub: 'Mojeeb AI is configured for your specific industry — with knowledge, workflows, and language tuned to how your customers communicate.',
     list: [
       { icon: 'clinic',    title: 'Clinics & Medical Centers',       desc: 'Handle patient inquiries, appointment requests, and after-hours calls without a full-time receptionist at every station.' },
       { icon: 'scissors',  title: 'Beauty Salons & Spas',            desc: 'Handle booking requests, service inquiries, and customer calls around the clock. Never miss a booking inquiry.' },
@@ -171,57 +171,46 @@ export default {
   },
 
   offer: {
-    label: 'Launch Package',
-    badge: 'Limited Time',
-    title: 'Complete Setup — Ready to Deploy',
-    price: '673 OMR',
-    priceLabel: 'One-time setup fee',
-    sub: 'Get a complete VoiceGate AI system, fully installed and configured at your business. Everything you need — hardware, software, installation, and configuration.',
-    includesTitle: "What's included",
-    includes: [
-      'Local AI server hardware',
-      'Professional on-site installation and configuration',
-      'Grandstream HT813 VoIP adapter',
-      'Grandstream GXP1625 HD IP Phone',
-      'AI receptionist configuration for your business',
-      'Arabic and English language support',
-      'Cloud dashboard access and setup',
-      'Call logs, transcripts, and recordings',
-      'Usage statistics and analytics',
-      'Service monitoring and local support',
+    label: 'Mojeeb AI Starter Package', badge: 'Special Introductory Offer',
+    title: 'Mojeeb AI — Smart Business Telephony',
+    price: '377 R.O', priceLabel: 'One-time introductory package price, excluding VAT',
+    sub: 'Mojeeb (FSS AI Agent), analog-to-SIP gateway conversion and one IP desk phone. Optional cloud services are priced separately.',
+    includesTitle: "What's included", includes: [
+      'Mojeeb (FSS AI Agent) for local business calls',
+      'Analog-to-SIP gateway for an existing telephone line',
+      'One IP desk phone',
     ],
-    subscriptionNote: 'A monthly AI service subscription applies for cloud dashboard access, ongoing support, software updates, system monitoring, and AI processing.',
-    ctaPrimary: 'Request Installation',
-    ctaSecondary: 'Contact Us',
+    subscriptionNote: 'VAT, telecom charges, ongoing services and the optional cloud portal are separate where applicable; final terms are confirmed in your quotation.',
+    ctaPrimary: 'Request a Demo', ctaSecondary: 'Contact Us',
   },
 
   faq: {
     label: 'FAQ',
     title: 'Frequently Asked Questions',
-    sub: 'Everything you need to know about VoiceGate AI — from how it works to how it\'s deployed.',
+    sub: 'Everything you need to know about Mojeeb AI — from how it works to how it\'s deployed.',
     items: [
       {
-        q: 'What is VoiceGate AI?',
-        a: 'VoiceGate AI is a complete AI voice receptionist system for businesses in Oman and the GCC. It answers calls 24/7 in Arabic and English, records and transcribes every conversation, and gives you a cloud dashboard for call recordings, transcripts, analytics, and follow-up management.',
+        q: 'What is Mojeeb AI?',
+        a: 'Mojeeb AI is a complete AI voice receptionist system for businesses in Oman and the GCC. It answers calls 24/7 in Arabic and English, records and transcribes every conversation, and gives you a cloud dashboard for call recordings, transcripts, analytics, and follow-up management.',
       },
       {
         q: 'Does it work in Arabic and English?',
-        a: "Yes. VoiceGate AI automatically detects the caller's language and responds in Arabic or English. It is specifically tuned for Gulf Arabic and professional business conversations — not generic multilingual AI.",
+        a: "Yes. Mojeeb AI automatically detects the caller's language and responds in Arabic or English. It is specifically tuned for Gulf Arabic and professional business conversations — not generic multilingual AI.",
       },
       {
         q: 'Does it replace my receptionist?',
-        a: "VoiceGate AI works alongside your team — handling all calls that would otherwise go unanswered, while transferring to human staff when they're available. Most businesses use it as a 24/7 first-response layer that their team stays in control of.",
+        a: "Mojeeb AI works alongside your team — handling all calls that would otherwise go unanswered, while transferring to human staff when they're available. Most businesses use it as a 24/7 first-response layer that their team stays in control of.",
       },
       {
         q: 'Does it work with Omantel?',
-        a: "Yes. VoiceGate AI integrates with Omantel's telephone network using the Grandstream HT813 analog adapter and standard SIP protocols. It works with your existing phone number and line — no new line required.",
+        a: "Yes. Mojeeb AI integrates with Omantel's telephone network using the Grandstream HT813 analog adapter and standard SIP protocols. It works with your existing phone number and line — no new line required.",
       },
       {
         q: 'What happens if the internet goes down?',
         a: "Core call handling runs on the local AI server installed at your premises. In the event of an internet outage, the local server continues to handle calls. The cloud dashboard and remote access require internet connectivity, but the core call-answering function is protected by on-premise deployment.",
       },
       {
-        q: 'Can VoiceGate AI work across multiple branches?',
+        q: 'Can Mojeeb AI work across multiple branches?',
         a: "Yes. Multi-branch deployment is supported. Each branch can have its own local AI server with its own business configuration, all accessible from a unified cloud dashboard. Contact us for multi-location setup and pricing.",
       },
       {
@@ -234,7 +223,7 @@ export default {
       },
       {
         q: 'Can it transfer calls to a human?',
-        a: "Yes. When a team member is available, VoiceGate AI transfers the call to a human operator seamlessly. This is configurable based on your business hours and team availability.",
+        a: "Yes. When a team member is available, Mojeeb AI transfers the call to a human operator seamlessly. This is configurable based on your business hours and team availability.",
       },
       {
         q: 'Can I review recordings and transcripts?',
@@ -242,28 +231,28 @@ export default {
       },
       {
         q: 'Is it cloud only?',
-        a: "No. VoiceGate AI includes a local AI server installed at your business. The local server handles all call processing. The cloud dashboard lets your team access call data, analytics, and recordings from anywhere.",
+        a: "No. Mojeeb AI includes a local AI server installed at your business. The local server handles all call processing. The cloud dashboard lets your team access call data, analytics, and recordings from anywhere.",
       },
       {
-        q: 'What does the 673 OMR package include?',
-        a: "The setup package includes the local AI server, professional on-site installation, a Grandstream HT813 VoIP adapter, a Grandstream GXP1625 HD IP Phone, AI receptionist configuration, Arabic and English support, and cloud dashboard access. A monthly subscription applies for ongoing service.",
+        q: 'What does the 377 R.O introductory package include?',
+        a: "The one-time package includes Mojeeb (FSS AI Agent), conversion of a compatible existing analog telephone line to SIP (for example with a Grandstream HT813 gateway), and one IP desk phone. VAT, telecom charges, ongoing services and the optional cloud portal are not included; final terms are confirmed in your quotation.",
       },
     ],
   },
 
   finalCta: {
     title: 'Your next customer is calling right now.',
-    sub: 'Don\'t let it go unanswered. Book a demo and see VoiceGate AI handling real calls for your business.',
+    sub: 'Don\'t let it go unanswered. Book a demo and see Mojeeb AI handling real calls for your business.',
     ctaPrimary: 'Book a Demo',
     ctaSecondary: 'Request Installation',
     trust: 'Local Oman installation · Arabic & English AI · 24/7 operation · Your data stays local',
-    demoPageLink: 'See the VoiceGate AI demo page',
+    demoPageLink: 'See the Mojeeb AI demo page',
   },
 
   contact: {
     label: 'Get in Touch',
-    title: 'Book a Demo',
-    sub: "See VoiceGate AI answering real calls for your business. Fill in your details and we'll get back to you within one business day.",
+    title: 'Send Us a Message',
+    sub: "Have a general question about Mojeeb AI, the 377 R.O introductory offer or our services? Send us a message and our team will contact you as soon as possible.",
     emailLabel: 'Email us:',
     nameLabel: 'Name',
     emailFieldLabel: 'Email',
@@ -271,45 +260,45 @@ export default {
     messageLabel: 'Message',
     submit: 'Send Message',
     submitting: 'Sending...',
-    successTitle: 'Thank you — we\'ll be in touch.',
-    successText: "We've received your inquiry. Our local team in Oman will contact you within one business day.",
+    successTitle: 'Thank you.',
+    successText: 'Our team will contact you as soon as possible.',
     sendAnother: 'Send another message',
     errorText: 'Something went wrong. Please email us directly at majid@FutureSmartSupport.com',
-    note: 'Your inquiry will be handled by our local Oman team.',
+    note: 'Your enquiry will be handled by our team in Oman.',
   },
 
   voicegateDemo: {
     hero: {
-      eyebrow: 'VoiceGate AI — Product Demo',
-      headline: 'See VoiceGate AI in Action',
-      sub: 'Manage your customer communications from anywhere with an on-premise AI voice receptionist and a secure portal for call logs, recordings, transcripts, and follow-up.',
+      eyebrow: 'Mojeeb AI — Product Demo',
+      headline: 'See Mojeeb AI in Action',
+      sub: 'Your own Mojeeb AI appliance for business calls, with an optional cloud portal for remote call visibility and follow-up.',
       ctaDemo: 'Request a Demo',
       ctaWhatsapp: 'Contact Us on WhatsApp',
     },
     explain: {
       label: 'How It Works',
-      title: 'Two Components. One Complete System.',
-      sub: 'VoiceGate AI combines an on-premise AI receptionist with a secure cloud portal — so every call is answered, and every conversation is visible to your team.',
+      title: 'Your Own Appliance, With Optional Cloud Visibility',
+      sub: 'Mojeeb AI runs on a dedicated Ubuntu-based appliance at your premises. An optional cloud portal, priced separately, lets your team review calls and follow-ups remotely.',
       localServer: {
-        title: 'AI-Agent Local Server',
-        desc: 'Installed at your workplace and connected to your existing phone system. It handles AI voice interactions, business rules, FAQs, and local call processing.',
+        title: 'Mojeeb AI Appliance',
+        desc: 'A physical local server installed at your workplace and connected to your compatible telephone line through the HT813 gateway. It handles your calls, business rules and common questions; AI speech and language features use connected AI services over your internet connection.',
       },
       portal: {
-        title: 'AI-Agent Portal',
-        desc: 'A secure dashboard for monitoring calls, reviewing recordings, reading transcripts, checking customer inquiries, and managing follow-up actions.',
+        title: 'Optional Cloud Portal',
+        desc: 'An optional, separately priced secure portal where your team can review calls handled by Mojeeb, see missed-call and voicemail notifications, and manage follow-up tasks.',
       },
       points: [
-        '24/7 call answering',
+        'AI-assisted call answering, including outside office hours',
         'Arabic and English support',
-        'Works with your existing phone system',
-        'Local, on-premise data control',
-        'Call logs, recordings, transcripts, and follow-up — from one portal',
+        'Works with a compatible existing line through an analog-to-SIP gateway',
+        'Call handling on your own appliance',
+        'Call activity and follow-up in the optional cloud portal',
       ],
     },
     demo: {
-      label: 'Request a Demo',
-      title: 'See VoiceGate AI Working for Your Business',
-      text: 'Interested in testing VoiceGate AI in your business? Contact us to request a live demo. For qualified businesses, a 7–10 day trial period may be available after initial review, subject to business requirements.',
+      label: 'Register Interest or Request a Demo',
+      title: 'See Mojeeb AI Working for Your Business',
+      text: 'Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the 377 R.O introductory package (excl. VAT). Orders and delivery dates will be confirmed at launch; AI provider charges are separate, and no free trial is currently available.',
       nameLabel: 'Full Name',
       companyLabel: 'Company / Business Name',
       phoneLabel: 'Phone Number',
@@ -318,40 +307,40 @@ export default {
       businessTypePlaceholder: 'Select business type',
       businessTypes: ['Clinic', 'Restaurant', 'Home Services', 'Retail', 'Professional Office', 'Other'],
       messageLabel: 'Message / Requirements',
-      submit: 'Request Demo',
-      note: 'Our team will contact you to confirm demo availability and trial eligibility.',
-      successTitle: 'Thank you — we\'ll be in touch.',
-      successText: 'We\'ve received your demo request. Our local team in Oman will contact you soon.',
+      submit: 'Send Request',
+      note: 'Our team will contact you as soon as possible to arrange a demonstration.',
+      successTitle: 'Thank you.',
+      successText: 'Our team will contact you as soon as possible.',
       sendAnother: 'Send another request',
     },
     whatsapp: {
       label: 'Direct Contact',
       title: 'Contact Us on WhatsApp',
-      text: 'Prefer direct communication? Contact us on WhatsApp to discuss your business requirements and request a VoiceGate AI demo.',
+      text: 'Prefer direct communication? Contact us on WhatsApp to discuss your business requirements and request a Mojeeb AI demo or quotation.',
       button: 'Contact Us on WhatsApp',
     },
     portalPreview: {
-      label: 'AI-Agent Portal',
-      title: 'Everything in One Place',
-      sub: 'Monitor and manage every customer interaction from a single secure dashboard.',
+      label: 'Optional Cloud Portal',
+      title: 'Your Calls and Follow-ups in One Place',
+      sub: 'With the optional FSS Cloud Portal (separately priced plan), your team can review calls and follow-ups from one secure portal. Features are confirmed in your cloud-service plan.',
       cards: [
-        { icon: 'file',   title: 'Call Logs',          desc: 'Every call recorded and logged automatically.' },
-        { icon: 'play',   title: 'Recordings',          desc: 'Listen back to any conversation, anytime.' },
-        { icon: 'layout', title: 'Transcripts',         desc: 'Full text of every call — searchable and reviewable.' },
-        { icon: 'repeat', title: 'Follow-up Actions',   desc: 'Track and manage follow-ups so nothing is missed.' },
-        { icon: 'users',  title: 'Customer Inquiries',  desc: 'Review inquiries and requests captured by the AI.' },
-        { icon: 'chart',  title: 'Dashboard Overview',  desc: 'A real-time view of call volume, performance, and activity.' },
+        { icon: 'file',   title: 'Call Activity',        desc: 'Review calls handled by Mojeeb AI: caller number, time, duration and outcome.' },
+        { icon: 'layout', title: 'Portal Notifications', desc: 'See missed-call and voicemail notifications when you log in.' },
+        { icon: 'play',   title: 'Voicemail Playback',   desc: 'Listen to voicemails on request, where voicemail is enabled.' },
+        { icon: 'repeat', title: 'Follow-up Tasks',      desc: 'Track and manage follow-up tasks created from missed calls and voicemails.' },
+        { icon: 'users',  title: 'Caller Records',       desc: 'See callers and their call history in one place.' },
+        { icon: 'chart',  title: 'Dashboard',            desc: 'An overview of recent call activity.' },
       ],
     },
     benefits: {
       label: 'Benefits',
-      title: 'Why Businesses Choose VoiceGate AI',
+      title: 'Why Businesses Choose Mojeeb AI',
       list: [
-        'No missed customer calls',
+        'Fewer missed customer enquiries',
         'Faster customer response',
-        'Local data control',
+        'Your own on-site appliance',
         'Arabic + English communication',
-        'Easy follow-up from one portal',
+        'Easier customer follow-up',
         'Suitable for clinics, restaurants, home services, retail, and professional offices',
       ],
     },
@@ -370,7 +359,7 @@ export default {
   },
 
   footer: {
-    tagline: 'VoiceGate AI — AI Voice Receptionist for Oman & GCC businesses.',
+    tagline: 'Mojeeb AI — AI Voice Receptionist for Oman & GCC businesses.',
     location: 'Oman',
     contactLabel: 'Contact:',
     copyright: '© {year} Future Smart Support — All rights reserved.',
@@ -380,28 +369,48 @@ export default {
 
   privacy: {
     title: 'Privacy Policy',
-    lastUpdated: 'Last updated: January 28, 2026',
-    intro: 'At Future Smart Support, we prioritize the privacy of our users and their customers. This policy details how we handle information across our VoiceGate AI services.',
+    lastUpdated: 'Last updated: 10 October 2026',
+    intro: 'This policy explains how Future Smart Support ("FSS") handles information through this website and in connection with Mojeeb AI. It distinguishes between the Mojeeb AI appliance installed at your premises, the connected AI services it uses, and the optional FSS Cloud Portal.',
     sections: [
       {
-        title: '1. Information We Collect',
-        body: 'We collect information you provide directly to us, such as when you contact us or request a demo. Call recordings and logs are processed and stored locally on your own server — we do not collect or store customer call content on our systems.',
+        title: '1. Information you send us through this website',
+        body: 'When you use our contact or demo-request forms, or contact us by email or WhatsApp, we receive the details you provide, such as your name, email address, phone number, company name, business type and message. We use this information to respond to your enquiry, arrange demonstrations and prepare quotations. Form submissions are stored in FSS systems and forwarded to our team by email. Messages sent through WhatsApp are also subject to WhatsApp\'s own terms and privacy policy.',
       },
       {
-        title: '2. Local Data Storage',
-        body: 'VoiceGate AI is an on-premise system. All call recordings, caller information, voicemails, and conversation logs are stored on the server installed at your business premises. This data remains under your full control and never leaves your local network.',
+        title: '2. Call information on the Mojeeb AI appliance',
+        body: 'The Mojeeb AI appliance is installed at your premises and handles calls on your telephone line. Depending on its configuration, it may process and store call details such as the caller\'s number (where Caller ID is available), call times and duration, conversation content, voicemails and follow-up information.',
       },
       {
-        title: '3. Data We Process',
-        body: 'We use contact information you provide (name, email, company) solely to respond to your inquiries and deliver our services. We do not sell, rent, or share your personal information with third parties.',
+        title: '3. Connected AI services',
+        body: 'To understand callers and respond to them, Mojeeb AI uses third-party AI services over the internet for speech recognition, language processing and voice generation. Audio and text from calls are sent to these service providers so they can be processed. An internet connection is therefore required for these features. Where your business uses its own AI provider account, the provider processes this data under the agreement between your business and that provider.',
       },
       {
-        title: '4. Security',
-        body: 'We implement technical and organizational measures to protect your data, including encryption in transit and access controls. The on-premise design ensures your business call data is protected within your own network.',
+        title: '4. The optional FSS Cloud Portal',
+        body: 'If your business subscribes to the optional FSS Cloud Portal, call information is sent from the appliance to FSS cloud services so that your authorised users can view it remotely. This can include caller numbers and names, call times, duration and outcome, the text of the conversation between the caller and Mojeeb AI, voicemail and transfer information, and follow-up tasks. Voicemail audio is uploaded on request for playback and kept only temporarily.',
       },
       {
-        title: '5. Your Rights',
-        body: 'You have the right to access, correct, or delete any personal information we hold about you. To exercise these rights, contact us at the email below.',
+        title: '5. Who can access information',
+        body: 'Information in the FSS Cloud Portal is available to the users your business authorises, according to their assigned roles, and to FSS personnel who need it to provide, maintain and support the service.',
+      },
+      {
+        title: '6. Sharing',
+        body: 'We do not sell personal information. We share information only with service providers that help us operate our services, such as the connected AI services described above and our email delivery provider; with services your business chooses to connect; or where required by law.',
+      },
+      {
+        title: '7. Security',
+        body: 'We use access controls and secure (HTTPS) connections for this website and our cloud services. No system is completely secure. You are responsible for securing your premises, local network and user accounts.',
+      },
+      {
+        title: '8. Retention',
+        body: 'We keep information for as long as it is needed to provide our services and to meet legal obligations. Contact us for details about specific information.',
+      },
+      {
+        title: '9. Your responsibilities when using Mojeeb AI',
+        body: 'Your business decides how Mojeeb AI is used with your callers. You are responsible for informing callers and obtaining any consent required by law, for example for call recording or the collection of caller numbers.',
+      },
+      {
+        title: '10. Your rights',
+        body: 'You may ask to access, correct or delete personal information we hold about you. To make a request, contact us at the email address below.',
       },
     ],
     contactTitle: 'Contact Us',
@@ -412,39 +421,63 @@ export default {
 
   terms: {
     title: 'Terms of Service',
-    lastUpdated: 'Last updated: January 28, 2026',
-    intro: 'These Terms of Service ("Terms") govern your access to and use of the website and services provided by Future Smart Support. By using our services, you agree to be bound by these Terms.',
+    lastUpdated: 'Last updated: 10 October 2026',
+    intro: 'These Terms of Service ("Terms") govern your access to and use of the website, products and services provided by Future Smart Support ("FSS"). By using our services, you agree to be bound by these Terms.',
     sections: [
       {
         title: '1. Acceptance of Terms',
         body: 'By accessing or using our services, you confirm that you have read, understood, and agree to be bound by these Terms and our Privacy Policy.',
       },
       {
-        title: '2. Description of Services',
-        body: 'Future Smart Support provides VoiceGate AI — an AI-powered Voice Receptionist system installed on-premise at your business location. The system includes call handling, cloud and local call logging, recording, a cloud dashboard portal, transcripts, analytics, and service monitoring.',
+        title: '2. Mojeeb AI and the Starter Package',
+        body: 'FSS provides Mojeeb AI, an AI receptionist appliance installed at the customer\'s premises. The Mojeeb AI Starter Package includes the Mojeeb AI appliance (a physical server running Ubuntu Server and the FSS AI agent), one Grandstream HT813 analog-to-SIP gateway and one IP desk phone.',
       },
       {
-        title: '3. Eligibility',
+        title: '3. Optional and separately priced services',
+        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (currently 10% of the package price); charges for the external AI services that power Mojeeb AI conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
+      },
+      {
+        title: '4. Prices and taxes',
+        body: 'Advertised prices are in Omani Rials and exclude VAT. VAT is added where applicable. The final price, scope and any additional charges are set out in your quotation.',
+      },
+      {
+        title: '5. Software licence and ongoing charges',
+        body: 'There is no recurring licence fee for the Mojeeb software on the appliance. Telephone, internet, connected AI services, the optional FSS Cloud Portal and other third-party or separately contracted services may involve ongoing charges.',
+      },
+      {
+        title: '6. Compatibility and site requirements',
+        body: 'Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. Use of an existing telephone number and Caller ID depends on your line, your telephone provider\'s service and the configuration of the equipment.',
+      },
+      {
+        title: '7. Warranty',
+        body: 'The Mojeeb appliance carries a one-month replacement warranty, subject to FSS written warranty terms. Warranty arrangements for other items are stated in your quotation.',
+      },
+      {
+        title: '8. Trials and availability',
+        body: 'FSS does not currently offer free trials. Demonstrations may be arranged on request. Mojeeb AI is in a pre-launch stage: product information on this website is not an offer to sell, and orders, delivery dates and final prices are confirmed in writing.',
+      },
+      {
+        title: '9. Eligibility',
         body: 'You must be at least 18 years old and legally capable of entering into binding contracts to use our services.',
       },
       {
-        title: '4. User Responsibilities',
+        title: '10. User Responsibilities',
         body: 'You agree to: use the services in compliance with all applicable laws and regulations; ensure that any data you provide is accurate and lawful; obtain all necessary consents from your callers and customers; not misuse, disrupt, or attempt to gain unauthorized access to the services.',
       },
       {
-        title: '5. Intellectual Property',
+        title: '11. Intellectual Property',
         body: 'All software, trademarks, and materials provided through the services are owned by or licensed to Future Smart Support. You may not copy, modify, or distribute them without prior written consent.',
       },
       {
-        title: '6. Limitation of Liability',
+        title: '12. Limitation of Liability',
         body: 'To the maximum extent permitted by law, Future Smart Support shall not be liable for any indirect, incidental, consequential, or special damages arising out of or related to your use of the services.',
       },
       {
-        title: '7. Governing Law',
+        title: '13. Governing Law',
         body: 'These Terms shall be governed by and construed in accordance with the laws applicable to the jurisdiction in which Future Smart Support operates.',
       },
       {
-        title: '8. Contact Information',
+        title: '14. Contact Information',
         body: 'If you have questions about these Terms, please contact us at: majid@FutureSmartSupport.com',
       },
     ],

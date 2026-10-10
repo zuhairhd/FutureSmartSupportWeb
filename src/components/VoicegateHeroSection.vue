@@ -1,84 +1,31 @@
 <template>
   <section class="vg-hero">
     <div class="container vg-hero-inner">
-      <p class="vg-eyebrow">{{ t('voicegateDemo.hero.eyebrow') }}</p>
-      <h1>{{ t('voicegateDemo.hero.headline') }}</h1>
-      <p class="vg-hero-sub">{{ t('voicegateDemo.hero.sub') }}</p>
-      <div class="cta-row vg-cta-row">
-        <router-link :to="{ path: '/voicegate-demo', hash: '#demo' }" class="btn btn-primary">
-          {{ t('voicegateDemo.hero.ctaDemo') }}
-        </router-link>
-        <a :href="whatsappUrl" target="_blank" rel="noopener" class="btn btn-ghost vg-whatsapp-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-          </svg>
-          {{ t('voicegateDemo.hero.ctaWhatsapp') }}
-        </a>
+      <div class="vg-kicker">{{ c.kicker }}</div>
+      <h1>{{ c.title }} <span>{{ c.accent }}</span></h1>
+      <p class="vg-hero-sub">{{ c.sub }}</p>
+      <div class="vg-action-row">
+        <router-link :to="{path:'/voicegate-demo',hash:'#demo'}" class="btn btn-primary">{{ c.demo }}</router-link>
+        <a :href="WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="btn vg-secondary">{{ c.whatsapp }}</a>
       </div>
+      <div class="vg-badges"><span>{{ c.badge1 }}</span><span>{{ c.badge2 }}</span><span>{{ c.badge3 }}</span></div>
     </div>
   </section>
 </template>
-
 <script setup>
+import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { WHATSAPP_URL } from '../constants.js'
-
-const { t } = useLanguage()
-const whatsappUrl = WHATSAPP_URL
+const { lang } = useLanguage()
+const c = computed(()=>lang.value==='ar'
+ ? {kicker:'Future Smart Support · مُجيب',title:'تعرّف على مُجيب',accent:'وشاهده يعمل لنشاطك.',sub:'جهاز استقبال ذكي خاص بك للتعامل مع مكالمات العملاء داخل مقرك، مع بوابة سحابية اختيارية للمتابعة عن بُعد.',demo:'اطلب عرضاً مباشراً',whatsapp:'تواصل عبر واتساب',badge1:'العربية + الإنجليزية',badge2:'جهاز خاص بك',badge3:'حل للأعمال الصغيرة'}
+ : {kicker:'FUTURE SMART SUPPORT · MOJEEB AI',title:'Meet Mojeeb AI.',accent:'Hear the difference.',sub:'Your own AI receptionist appliance for customer calls, with an optional cloud portal for remote follow-up.',demo:'Request a live demo',whatsapp:'Chat on WhatsApp',badge1:'Arabic + English',badge2:'Your own appliance',badge3:'Made for small businesses'})
 </script>
-
 <style scoped>
-.vg-hero {
-  padding: 80px 0 64px;
-  background: radial-gradient(ellipse 1200px 500px at 50% -5%, rgba(184,136,90,0.12), transparent 70%);
-  text-align: center;
-}
-
-.vg-hero-inner {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.vg-eyebrow {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--brand);
-  font-weight: 600;
-  margin: 0 0 14px;
-}
-
-h1 {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.15;
-  margin: 0 0 18px;
-  letter-spacing: -0.02em;
-}
-
-.vg-hero-sub {
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.7;
-  margin: 0 0 32px;
-}
-
-.vg-cta-row {
-  justify-content: center;
-}
-
-.vg-whatsapp-btn svg { flex-shrink: 0; }
-
-@media (max-width: 900px) {
-  h1 { font-size: 34px; }
-  .vg-hero-sub { font-size: 16px; }
-  .vg-hero { padding: 56px 0 44px; }
-}
-@media (max-width: 640px) {
-  h1 { font-size: 28px; letter-spacing: -0.01em; }
-  .vg-hero { padding: 40px 0 32px; }
-  .vg-cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
-  .vg-cta-row .btn { text-align: center; justify-content: center; width: 100%; }
-  .vg-hero-sub { font-size: 15px; }
-}
+.vg-hero { padding:92px 0 82px; background:radial-gradient(circle at 76% 7%,#174e70,transparent 40%),linear-gradient(125deg,#061b30,#103a57) !important; color:#fff; border-bottom:4px solid #1ad1c7; }
+.vg-hero-inner { max-width:860px; margin-inline:auto; text-align:center; }.vg-kicker { color:#49ded7; font-size:12px; font-weight:800; letter-spacing:.14em; margin-bottom:22px; }
+h1 { font-size:clamp(36px,5vw,60px); line-height:1.25; margin:0 0 19px; }h1 span { color:#3bddd2; }
+.vg-hero-sub { max-width:650px; margin:0 auto 29px; font-size:17px; line-height:1.85; color:#d0e2ec; }.vg-action-row { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }.vg-action-row .btn { min-width:190px; }
+.vg-secondary { color:#fff; border:1px solid #6790aa; }.vg-badges { display:flex; justify-content:center; flex-wrap:wrap; gap:16px; margin-top:31px; color:#a3d4df; font-size:12px; }.vg-badges span::before { content:'✓'; color:#41e4ca; margin-inline-end:6px; }
+@media(max-width:600px) { .vg-hero { padding:63px 0 56px; }.vg-hero-sub { font-size:15px; }.vg-action-row { flex-direction:column; }.vg-action-row .btn { width:100%; } }
 </style>
