@@ -15,11 +15,13 @@
         <form v-if="!submitted" @submit.prevent="handleSubmit" novalidate>
           <div class="field">
             <label :for="'name-' + uid">{{ t('contact.nameLabel') }}</label>
-            <input :id="'name-' + uid" type="text" name="name" v-model="form.name" required dir="auto" />
+            <input :id="'name-' + uid" type="text" name="name" v-model="form.name" :aria-invalid="!!fieldErrors.name" required dir="auto" autocomplete="name" />
+            <small v-if="fieldErrors.name" class="field-error">{{ fieldErrors.name }}</small>
           </div>
           <div class="field">
             <label :for="'email-' + uid">{{ t('contact.emailFieldLabel') }}</label>
-            <input :id="'email-' + uid" type="email" name="email" v-model="form.email" required dir="auto" />
+            <input :id="'email-' + uid" type="email" name="email" v-model="form.email" :aria-invalid="!!fieldErrors.email" required dir="ltr" autocomplete="email" />
+            <small v-if="fieldErrors.email" class="field-error">{{ fieldErrors.email }}</small>
           </div>
           <div class="field">
             <label :for="'company-' + uid">{{ t('contact.companyLabel') }}</label>
@@ -27,16 +29,21 @@
           </div>
           <div class="field">
             <label :for="'message-' + uid">{{ t('contact.messageLabel') }}</label>
-            <textarea :id="'message-' + uid" name="message" v-model="form.message" rows="5" required dir="auto"></textarea>
+            <textarea :id="'message-' + uid" name="message" v-model="form.message" :aria-invalid="!!fieldErrors.message" rows="5" required dir="auto"></textarea>
+            <small v-if="fieldErrors.message" class="field-error">{{ fieldErrors.message }}</small>
           </div>
-          <p v-if="errorMsg" class="form-error">{{ errorMsg }}</p>
+          <div class="visually-hidden" aria-hidden="true">
+            <label :for="'website-' + uid">Website</label>
+            <input :id="'website-' + uid" type="text" v-model="form.website" tabindex="-1" autocomplete="off" />
+          </div>
+          <p v-if="errorMsg" class="form-error" role="alert">{{ errorMsg }}</p>
           <p class="form-note">{{ t('contact.note') }}</p>
           <button type="submit" class="btn btn-primary submit-btn" :disabled="submitting">
             {{ submitting ? t('contact.submitting') : t('contact.submit') }}
           </button>
         </form>
 
-        <div v-else class="success-state">
+        <div v-else class="success-state" role="status">
           <div class="success-check">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
               <path d="M20 6L9 17l-5-5"/>
@@ -54,45 +61,53 @@
 <script setup>
 import { ref } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
+import { useContactSubmit, formError, EMAIL_RE, MIN_MESSAGE_LENGTH } from '../composables/useContactSubmit.js'
 
 const { t, lang } = useLanguage()
+const { submitting, submit } = useContactSubmit()
 const uid = Math.random().toString(36).slice(2, 7)
 
-const form = ref({ name: '', email: '', company: '', message: '' })
-const submitting = ref(false)
+const form = ref({ name: '', email: '', company: '', message: '', website: '' })
 const submitted = ref(false)
 const errorMsg = ref('')
+const fieldErrors = ref({})
+
+function validate() {
+  const f = form.value, e = {}, L = lang.value
+  if (!f.name.trim()) e.name = formError(L, 'name')
+  if (!EMAIL_RE.test(f.email.trim())) e.email = formError(L, 'email')
+  if (f.message.trim().length < MIN_MESSAGE_LENGTH) e.message = formError(L, 'message')
+  fieldErrors.value = e
+  return Object.keys(e).length === 0
+}
 
 async function handleSubmit() {
-  submitting.value = true
+  if (submitting.value) return
   errorMsg.value = ''
-  try {
-    const res = await fetch('https://api.futuresmartsupport.com/api/v1/public/contact/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({
-        ...form.value,
-        language: lang.value,
-        source: 'marketing_website',
-        website: '',   // honeypot — intentionally blank
-      }),
-    })
-    if (res.ok) {
-      submitted.value = true
-    } else {
-      throw new Error('server')
+  if (!validate()) { errorMsg.value = formError(lang.value, 'invalid'); return }
+  const result = await submit({
+    ...form.value,
+    language: lang.value,
+    source: 'marketing_website',
+  })
+  if (result.ok) { submitted.value = true; return }
+  if (result.reason === 'busy') return
+  if (result.reason === 'invalid') {
+    const fe = result.fields || {}
+    fieldErrors.value = {
+      ...(fe.name && { name: formError(lang.value, 'name') }),
+      ...(fe.email && { email: formError(lang.value, 'email') }),
+      ...(fe.message && { message: formError(lang.value, 'message') }),
     }
-  } catch {
-    errorMsg.value = t('contact.errorText')
-  } finally {
-    submitting.value = false
   }
+  errorMsg.value = result.reason === 'server' ? t('contact.errorText') : formError(lang.value, result.reason)
 }
 
 function reset() {
-  form.value = { name: '', email: '', company: '', message: '' }
+  form.value = { name: '', email: '', company: '', message: '', website: '' }
   submitted.value = false
   errorMsg.value = ''
+  fieldErrors.value = {}
 }
 </script>
 
@@ -144,7 +159,7 @@ function reset() {
   padding: 11px 14px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,0.03);
+  background: #fff;
   color: var(--fg);
   font-family: inherit;
   font-size: 15px;
@@ -163,6 +178,9 @@ function reset() {
   margin: 0 0 16px;
   line-height: 1.5;
 }
+.field-error { font-size: 12px; color: #b62133; }
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] { border-color: var(--error); }
 .form-error {
   font-size: 13px;
   color: var(--error);
