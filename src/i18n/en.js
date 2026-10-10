@@ -298,7 +298,7 @@ export default {
     demo: {
       label: 'Register Interest or Request a Demo',
       title: 'See Mojeeb AI Working for Your Business',
-      text: 'Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the 377 R.O introductory package (excl. VAT). Orders, delivery dates and AI usage pricing will be confirmed at launch; no free trial is currently available.',
+      text: 'Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the 377 R.O introductory package (excl. VAT). Orders and delivery dates will be confirmed at launch; AI provider charges are separate, and no free trial is currently available.',
       nameLabel: 'Full Name',
       companyLabel: 'Company / Business Name',
       phoneLabel: 'Phone Number',
@@ -382,11 +382,11 @@ export default {
       },
       {
         title: '3. Connected AI services',
-        body: 'To understand callers and respond to them, Mojeeb AI uses third-party AI services over the internet for speech recognition, language processing and voice generation. Audio and text from calls are sent to these service providers so they can be processed. An internet connection is therefore required for these features.',
+        body: 'To understand callers and respond to them, Mojeeb AI uses third-party AI services over the internet for speech recognition, language processing and voice generation. Audio and text from calls are sent to these service providers so they can be processed. An internet connection is therefore required for these features. Where your business uses its own AI provider account, the provider processes this data under the agreement between your business and that provider.',
       },
       {
         title: '4. The optional FSS Cloud Portal',
-        body: 'If your business subscribes to the optional FSS Cloud Portal, call information is sent from the appliance to FSS cloud services so that your authorised users can view it remotely. This can include caller numbers and names, call times, duration and outcome, voicemail and transfer information, and follow-up tasks. Voicemail audio is uploaded on request for playback and kept only temporarily.',
+        body: 'If your business subscribes to the optional FSS Cloud Portal, call information is sent from the appliance to FSS cloud services so that your authorised users can view it remotely. This can include caller numbers and names, call times, duration and outcome, the text of the conversation between the caller and Mojeeb AI, voicemail and transfer information, and follow-up tasks. Voicemail audio is uploaded on request for playback and kept only temporarily.',
       },
       {
         title: '5. Who can access information',
@@ -434,7 +434,7 @@ export default {
       },
       {
         title: '3. Optional and separately priced services',
-        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (currently 10% of the package price); usage of the external AI services that power Mojeeb AI conversations; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
+        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (currently 10% of the package price); charges for the external AI services that power Mojeeb AI conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
       },
       {
         title: '4. Prices and taxes',
