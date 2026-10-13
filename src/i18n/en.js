@@ -173,7 +173,7 @@ export default {
   offer: {
     label: 'Mojeeb AI Starter Package', badge: 'Special Introductory Offer',
     title: 'Mojeeb AI — Smart Business Telephony',
-    price: '377 R.O', priceLabel: 'One-time introductory package price, excluding VAT',
+    price: '599 R.O', priceLabel: 'One-time introductory package price, excluding VAT',
     sub: 'Mojeeb (FSS AI Agent), analog-to-SIP gateway conversion and one IP desk phone. Optional cloud services are priced separately.',
     includesTitle: "What's included", includes: [
       'Mojeeb (FSS AI Agent) for local business calls',
@@ -234,7 +234,7 @@ export default {
         a: "No. Mojeeb AI includes a local AI server installed at your business. The local server handles all call processing. The cloud dashboard lets your team access call data, analytics, and recordings from anywhere.",
       },
       {
-        q: 'What does the 377 R.O introductory package include?',
+        q: 'What does the 599 R.O introductory package include?',
         a: "The one-time package includes Mojeeb (FSS AI Agent), conversion of a compatible existing analog telephone line to SIP (for example with a Grandstream HT813 gateway), and one IP desk phone. VAT, telecom charges, ongoing services and the optional cloud portal are not included; final terms are confirmed in your quotation.",
       },
     ],
@@ -252,7 +252,7 @@ export default {
   contact: {
     label: 'Get in Touch',
     title: 'Send Us a Message',
-    sub: "Have a general question about Mojeeb AI, the 377 R.O introductory offer or our services? Send us a message and our team will contact you as soon as possible.",
+    sub: "Have a general question about Mojeeb AI, the 599 R.O introductory offer or our services? Send us a message and our team will contact you as soon as possible.",
     emailLabel: 'Email us:',
     nameLabel: 'Name',
     emailFieldLabel: 'Email',
@@ -298,7 +298,7 @@ export default {
     demo: {
       label: 'Register Interest or Request a Demo',
       title: 'See Mojeeb AI Working for Your Business',
-      text: 'Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the 377 R.O introductory package (excl. VAT). Orders and delivery dates will be confirmed at launch; AI provider charges are separate, and no free trial is currently available.',
+      text: 'Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the 599 R.O introductory package (excl. VAT). Orders and delivery dates will be confirmed at launch; AI provider charges are separate, and no free trial is currently available.',
       nameLabel: 'Full Name',
       companyLabel: 'Company / Business Name',
       phoneLabel: 'Phone Number',

@@ -6,7 +6,7 @@
         <h2 class="section-title">{{ t('voicegateDemo.demo.title') }}</h2>
         <p class="vg-demo-text">{{ t('voicegateDemo.demo.text') }}</p>
         <div class="vg-offer-note">
-          <span class="vg-offer-price" dir="ltr">377 <small>{{ lang === 'ar' ? 'ر.ع' : 'R.O' }}</small></span>
+          <span class="vg-offer-price" dir="ltr">599 <small>{{ lang === 'ar' ? 'ر.ع' : 'R.O' }}</small></span>
           <span>{{ lang === 'ar' ? 'عرض تعريفي خاص · غير شامل ضريبة القيمة المضافة' : 'Special introductory offer · excl. VAT' }}</span>
         </div>
         <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري تواصل معنا عبر واتساب.' : 'For an immediate enquiry, contact us on WhatsApp.' }}</p>
@@ -116,7 +116,7 @@ async function handleSubmit() {
     name: f.name,
     email: f.email,
     company: f.company,
-    message: `Mojeeb AI interest / demo request (pre-launch, 377 R.O introductory package)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
+    message: `Mojeeb AI interest / demo request (pre-launch, 599 R.O introductory package)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
     website: f.website,
     language: lang.value,
     source: 'marketing_website',
