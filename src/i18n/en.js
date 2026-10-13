@@ -434,7 +434,7 @@ export default {
       },
       {
         title: '3. Optional and separately priced services',
-        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (currently 10% of the package price); charges for the external AI services that power Mojeeb AI conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
+        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (a fixed fee of 30.000 R.O); charges for the external AI services that power Mojeeb AI conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
       },
       {
         title: '4. Prices and taxes',
