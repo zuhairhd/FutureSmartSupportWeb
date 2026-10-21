@@ -1,11 +1,13 @@
-// Derived pricing values and shared pricing copy. Edit ../pricing.json, not this file.
+// Derived campaign values and shared offer copy. Edit ../pricing.json, not this file.
 import pricing from '../pricing.json'
+import { WHATSAPP_NUMBER } from './constants.js'
 
 const toBaisa = n => Math.round(Number(n) * 1000)
 
 export const PACKAGE = pricing.packagePrice
-export const INSTALLATION = pricing.installationPrice
-export const TOTAL = (toBaisa(PACKAGE) + toBaisa(INSTALLATION)) / 1000
+export const INSTALLATION_FREE = pricing.installationFree
+export const PORTAL_FREE_MONTHS = pricing.portalFreeMonths
+export const INCLUDED_PHONES = pricing.includedIpPhones
 export const VAT_ADDED = pricing.vat.added
 
 /** 599 -> '599.000' */
@@ -21,8 +23,23 @@ export const VAT = {
   ar: { statement: fill(pricing.vat.statement.ar), short: pricing.vat.short.ar, detail: fill(pricing.vat.detail.ar) },
 }
 
-// Approved customer-facing pricing summary (keep wording in sync with the commercial decision).
-export const PRICE_SUMMARY = {
-  en: `Mojeeb starter package: OMR ${omr(PACKAGE)}. Standard professional installation: OMR ${omr(INSTALLATION)} fixed. Total with standard installation: OMR ${omr(TOTAL)}. ${VAT.en.statement} Additional network work, external AI-provider usage, telecommunications charges and optional FSS Cloud services are priced separately where applicable.`,
-  ar: `باقة مُجيب الأساسية: ${omr(PACKAGE)} ر.ع. التركيب الاحترافي الاعتيادي: ${omr(INSTALLATION)} ر.ع بسعر ثابت. الإجمالي مع التركيب الاعتيادي: ${omr(TOTAL)} ر.ع. ${VAT.ar.statement} وتُسعّر أعمال الشبكة الإضافية ورسوم مزوّد الذكاء الاصطناعي ورسوم الاتصالات وخدمات بوابة FSS السحابية الاختيارية بشكل منفصل عند انطباقها.`,
+const P = omr(PACKAGE), M = PORTAL_FREE_MONTHS
+
+// Complete offer in one sentence group, reused by the offer panel, Terms and the demo section.
+export const OFFER_SUMMARY = {
+  en: `MOJEEB package: OMR ${P}. Includes the MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone. Standard installation: FREE. Portal subscription: FREE for the first ${M} months. ${VAT.en.statement} Additional phones, additional network work, external AI-provider usage, telecommunications charges and portal access after the free period are priced separately where applicable.`,
+  ar: `باقة مُجيب: ${P} ر.ع. تشمل جهاز مُجيب الذكي ونظام سنترال داخلي (PBX) وبوابة Grandstream HT813 واحدة وهاتف IP مكتبياً واحداً. التركيب الاعتيادي: مجانًا. اشتراك البوابة: مجانًا لأول ${M} أشهر. ${VAT.ar.statement} وتُسعّر الهواتف الإضافية وأعمال الشبكة الإضافية ورسوم مزوّد الذكاء الاصطناعي ورسوم الاتصالات والاشتراك في البوابة بعد الفترة المجانية بشكل منفصل عند انطباقها.`,
 }
+
+// Approved one-phone wording (brochure campaign).
+export const PHONES_NOTE = {
+  en: 'One IP phone included. Add more compatible phones and connect your team with internal extensions. Additional phones are not included.',
+  ar: 'يشمل العرض هاتف IP واحدًا، مع إمكانية إضافة هواتف متوافقة أخرى وربط موظفي الشركة بتحويلات داخلية. الهواتف الإضافية غير مشمولة بالعرض.',
+}
+
+export const WHATSAPP_MESSAGE = {
+  en: `Hello, I'm interested in the MOJEEB + PBX package for OMR ${P}. Please arrange a demonstration for my business.`,
+  ar: `مرحبًا، أنا مهتم بباقة مُجيب مع نظام PBX بسعر ${P} ريالًا عُمانيًا، وأرغب في عرض توضيحي لشركتي.`,
+}
+
+export const whatsappHref = lang => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE[lang] || WHATSAPP_MESSAGE.en)}`

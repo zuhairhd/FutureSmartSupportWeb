@@ -1,7 +1,9 @@
 {
-  "_readme": "Single source of truth for Mojeeb pricing and VAT wording on the website. Amounts are in Omani Rials. The total is always packagePrice + installationPrice (installation is a fixed amount, never a percentage). After editing, run `npm run build` and redeploy. {threshold} is replaced with vat.threshold.",
+  "_readme": "Single source of truth for the current MOJEEB campaign: price, free benefits, inclusions and VAT wording. Amounts are in Omani Rials. After editing, run `npm run build` and redeploy. {threshold} is replaced with vat.threshold.",
   "packagePrice": 599,
-  "installationPrice": 30,
+  "installationFree": true,
+  "portalFreeMonths": 6,
+  "includedIpPhones": 1,
   "vat": {
     "added": false,
     "threshold": 38000,

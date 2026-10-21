@@ -16,10 +16,11 @@
 
 <script setup>
 import { useLanguage } from '../composables/useLanguage.js'
-import { WHATSAPP_URL } from '../constants.js'
+import { computed } from 'vue'
+import { whatsappHref } from '../pricing.js'
 
-const { t } = useLanguage()
-const whatsappUrl = WHATSAPP_URL
+const { t, lang } = useLanguage()
+const whatsappUrl = computed(() => whatsappHref(lang.value))
 </script>
 
 <style scoped>
