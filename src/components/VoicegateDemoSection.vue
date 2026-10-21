@@ -7,7 +7,7 @@
         <p class="vg-demo-text">{{ t('voicegateDemo.demo.text') }}</p>
         <div class="vg-offer-note">
           <span class="vg-offer-price" dir="ltr">{{ omr(PACKAGE) }} <small>{{ lang === 'ar' ? 'ر.ع' : 'OMR' }}</small></span>
-          <span>{{ lang === 'ar' ? `عرض لفترة محدودة · مُجيب + سنترال داخلي · التركيب مجانًا (بدلًا من ${omr(INSTALLATION)} ر.ع) · البوابة مجانًا لمدة ${PORTAL_FREE_MONTHS} أشهر` : `Limited-time offer · MOJEEB + in-house PBX · FREE installation (normally OMR ${omr(INSTALLATION)}) · ${PORTAL_FREE_MONTHS} months of portal access FREE` }}</span>
+          <span>{{ lang === 'ar' ? `عرض لفترة محدودة · مُجيب مع نظام PBX مدمج · التركيب مجاناً (بقيمة ${omr(INSTALLATION)} ر.ع) · البوابة مجاناً لمدة ${PORTAL_FREE_MONTHS} أشهر (بقيمة ${omr(PORTAL_VALUE)} ر.ع)` : `Limited-time offer · MOJEEB with built-in PBX · FREE installation (worth OMR ${omr(INSTALLATION)}) · ${PORTAL_FREE_MONTHS}-month portal FREE (worth OMR ${omr(PORTAL_VALUE)})` }}</span>
         </div>
         <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري تواصل معنا عبر واتساب.' : 'For an immediate enquiry, contact us on WhatsApp.' }}</p>
         <a :href="whatsappHref(lang)" target="_blank" rel="noopener noreferrer" class="btn btn-ghost vg-wa">
@@ -76,7 +76,7 @@
 import { ref, nextTick } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { useContactSubmit, formError, EMAIL_RE } from '../composables/useContactSubmit.js'
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, omr, whatsappHref } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, omr, whatsappHref } from '../pricing.js'
 import MarketingIcon from './MarketingIcon.vue'
 
 const { t, lang } = useLanguage()

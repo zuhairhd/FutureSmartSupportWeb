@@ -1,4 +1,4 @@
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, omr3 } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, omr3 } from '../pricing.js'
 
 export default {
   nav: {
@@ -174,11 +174,11 @@ export default {
 
   offer: {
     label: 'MOJEEB + PBX Package', badge: 'Limited-time offer',
-    title: 'MOJEEB — AI answering + an in-house PBX',
+    title: 'MOJEEB — AI voice assistant + built-in PBX',
     price: `OMR ${omr(PACKAGE)}`, priceLabel: `One-time package price · FREE standard installation (regular price OMR ${omr(INSTALLATION)}) · ${PORTAL_FREE_MONTHS} months of portal access FREE`,
-    sub: 'The MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone.',
+    sub: 'The MOJEEB AI appliance (AI voice assistant with a built-in PBX), one Grandstream HT813 gateway and one IP desk phone.',
     includesTitle: "What's included", includes: [
-      'MOJEEB AI appliance', 'In-house PBX system',
+      'MOJEEB AI appliance', 'Built-in PBX system',
       'One Grandstream HT813 gateway',
       'One IP desk phone',
     ],
@@ -273,28 +273,28 @@ export default {
     hero: {
       eyebrow: 'Mojeeb AI — Product Demo',
       headline: 'See Mojeeb AI in Action',
-      sub: 'Your own Mojeeb AI appliance for business calls, with an optional cloud portal for remote call visibility and follow-up.',
+      sub: 'Your own Mojeeb AI appliance for business calls, with a built-in PBX and the FSS portal for remote call visibility and follow-up.',
       ctaDemo: 'Request a Demo',
       ctaWhatsapp: 'Contact Us on WhatsApp',
     },
     explain: {
       label: 'How It Works',
       title: 'Your Own Appliance, With Portal Follow-up',
-      sub: `MOJEEB runs on a dedicated Ubuntu-based appliance at your premises, alongside the in-house PBX included in the package. The FSS portal is free for the first ${PORTAL_FREE_MONTHS} months, so your team can review calls and follow-ups remotely.`,
+      sub: `MOJEEB runs on a dedicated Ubuntu-based appliance at your premises, with the built-in PBX included in the package. The FSS portal is free for the first ${PORTAL_FREE_MONTHS} months, so your team can review calls and follow-ups remotely.`,
       localServer: {
         title: 'Mojeeb AI Appliance',
         desc: 'A physical local server installed at your workplace and connected to your compatible telephone line through the HT813 gateway. It handles your calls, business rules and common questions; AI speech and language features use connected AI services over your internet connection.',
       },
       portal: {
         title: `FSS Portal (${PORTAL_FREE_MONTHS} months FREE)`,
-        desc: `A secure portal where your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks. Free for the first ${PORTAL_FREE_MONTHS} months; continuing afterwards is optional and priced separately.`,
+        desc: `A secure portal where your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks. Free for the first ${PORTAL_FREE_MONTHS} months; then renewed according to the selected plan.`,
       },
       points: [
         'AI-assisted call answering, including outside office hours',
         'Arabic and English support',
         'Works with a compatible existing line through an analog-to-SIP gateway',
         'Call handling on your own appliance',
-        'Call activity and follow-up in the optional cloud portal',
+        `Call activity and follow-up in the FSS portal (free for the first ${PORTAL_FREE_MONTHS} months)`,
       ],
     },
     demo: {
@@ -324,7 +324,7 @@ export default {
     portalPreview: {
       label: 'FSS Portal',
       title: 'Your Calls and Follow-ups in One Place',
-      sub: `With the FSS portal, free for the first ${PORTAL_FREE_MONTHS} months, your team can review calls and follow-ups from one secure portal. Continuing after the free period is optional and priced separately.`,
+      sub: `With the FSS portal, free for the first ${PORTAL_FREE_MONTHS} months, your team can review calls and follow-ups from one secure portal. After the free period it is renewed according to the selected plan.`,
       cards: [
         { icon: 'file',   title: 'Call Activity',        desc: 'Review calls handled by Mojeeb AI: caller number, time, duration and outcome.' },
         { icon: 'layout', title: 'Portal Notifications', desc: 'See missed-call and voicemail notifications when you log in.' },
@@ -432,11 +432,11 @@ export default {
       },
       {
         title: '2. MOJEEB and the MOJEEB + PBX package',
-        body: `FSS provides MOJEEB, an AI phone assistant appliance installed at the customer's premises. The current MOJEEB package includes the MOJEEB AI appliance (a physical server running Ubuntu Server and the FSS AI agent), an in-house PBX system, one Grandstream HT813 analog-to-SIP gateway and one IP desk phone. ${PHONES_NOTE.en}`,
+        body: `FSS provides MOJEEB, an AI phone assistant appliance installed at the customer's premises. The current MOJEEB package includes the MOJEEB AI appliance (a physical server running Ubuntu Server, the FSS AI agent and a built-in PBX), one Grandstream HT813 analog-to-SIP gateway and one IP desk phone. ${PHONES_NOTE.en}`,
       },
       {
         title: '3. Promotional benefits and separately priced services',
-        body: `Standard installation has a fixed price of OMR ${omr3(INSTALLATION)}. Under the current limited-time offer, standard installation is provided free of charge, and the FSS portal subscription is free for the first ${PORTAL_FREE_MONTHS} months. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; continued portal access after the free period; charges for the external AI services that power MOJEEB conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
+        body: `Standard installation has a fixed price of OMR ${omr3(INSTALLATION)}. Under the current limited-time offer, standard installation is provided free of charge, and the FSS portal subscription is free for the first ${PORTAL_FREE_MONTHS} months (worth OMR ${omr(PORTAL_VALUE)}), then renewed according to the selected plan. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; continued portal access after the free period; charges for the external AI services that power MOJEEB conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
       },
       {
         title: '4. Prices and taxes',

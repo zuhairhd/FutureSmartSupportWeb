@@ -15,12 +15,12 @@
 <script setup>
 import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { PACKAGE, omr, whatsappHref } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, omr, whatsappHref } from '../pricing.js'
 const { lang } = useLanguage()
-const P = omr(PACKAGE)
+const P = omr(PACKAGE), I = omr(INSTALLATION), M = PORTAL_FREE_MONTHS, V = omr(PORTAL_VALUE)
 const c = computed(()=>lang.value==='ar'
- ? {kicker:'Future Smart Support · مُجيب',title:'كل مكالمة فائتة',accent:'قد تعني خسارة صفقة',sub:`شاهد كيف يرد مُجيب على عملائك ويسجّل التفاصيل، مع سنترال داخلي يربط فريقك. كلاهما ضمن باقة ${P} ريالًا عُمانيًا.`,demo:'اطلب عرضًا توضيحيًا',whatsapp:'تواصل عبر واتساب',badge1:'العربية + الإنجليزية',badge2:'سنترال داخلي مشمول',badge3:'التركيب مجانًا'}
- : {kicker:'FUTURE SMART SUPPORT · MOJEEB',title:'Every missed call',accent:'could mean a lost deal.',sub:`See how MOJEEB answers customer calls and captures the details, with an in-house PBX that connects your team. Both are included in the OMR ${P} package.`,demo:'Request a Demo',whatsapp:'Chat on WhatsApp',badge1:'Arabic + English',badge2:'In-house PBX included',badge3:'FREE installation'})
+ ? {kicker:'Future Smart Support · مُجيب',title:'كل مكالمة فائتة',accent:'قد تعني خسارة صفقة',sub:`مُجيب يرد على عملائك ويسجّل التفاصيل لتتابع فرصك، مع نظام PBX مدمج يربط فريقك. باقة مُجيب الكاملة ${P} ر.ع لمرة واحدة، مع التركيب الاحترافي مجاناً (بقيمة ${I} ر.ع) واشتراك البوابة مجاناً لمدة ${M} أشهر (بقيمة ${V} ر.ع).`,demo:'اطلب عرضاً توضيحياً',whatsapp:'تواصل عبر واتساب',badge1:'عرض لفترة محدودة',badge2:'نظام PBX مدمج مشمول',badge3:'العربية والإنجليزية'}
+ : {kicker:'FUTURE SMART SUPPORT · MOJEEB',title:'Never Miss',accent:'Another Customer',sub:`Every missed call could be a lost deal. MOJEEB answers your calls 24/7, handles customer inquiries, and helps your business grow — in Arabic and English. Complete MOJEEB package: OMR ${P} one-time, with FREE professional installation (worth OMR ${I}) and a FREE ${M}-month portal subscription (worth OMR ${V}).`,demo:'Request a Demo',whatsapp:'Chat on WhatsApp',badge1:'Limited-time offer',badge2:'Built-in PBX included',badge3:'Arabic & English'})
 </script>
 <style scoped>
 .vg-hero { padding:92px 0 82px; background:radial-gradient(circle at 76% 7%,#174e70,transparent 40%),linear-gradient(125deg,#061b30,#103a57) !important; color:#fff; border-bottom:4px solid #1ad1c7; }

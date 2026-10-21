@@ -1,24 +1,32 @@
 <template>
   <div class="campaign-home">
-    <!-- A. Hero: missed-call message, MOJEEB + PBX value, offer and actions -->
+    <!-- A. Hero: brochure headline, MOJEEB + built-in PBX value, offer and actions -->
     <section class="hero" id="solution" aria-labelledby="hero-title">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="missed-pill"><MarketingIcon name="missed" :size="16" />{{ s.hero.missed }}</p>
+          <p class="missed-pill"><MarketingIcon name="missed" :size="16" />{{ s.hero.eyebrow }}</p>
           <h1 id="hero-title">{{ s.hero.headline }} <span>{{ s.hero.accent }}</span></h1>
           <p class="hero-sub">{{ s.hero.sub }}</p>
           <p class="hero-value"><strong>{{ s.value.title }}</strong> {{ s.value.sub }}</p>
+          <ul class="feature-row" :aria-label="s.features.aria">
+            <li v-for="f in s.features.items" :key="f.text"><MarketingIcon :name="f.icon" :size="15" />{{ f.text }}</li>
+          </ul>
           <router-link class="hero-offer" :to="{ path: '/', hash: '#offer' }" :aria-label="s.hero.offerAria">
+            <!-- TODO(owner): "50% OFF" badge / original price only after the reference price is confirmed. -->
             <span class="offer-tag">{{ s.limited }}</span>
-            <span class="hero-offer-price"><bdi><strong>{{ P }}</strong> {{ currency }}</bdi></span>
-            <span class="hero-free-list"><span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.freeInstall }} <span class="was"><span class="visually-hidden">{{ s.regular }}</span><s><bdi>{{ installWas }}</bdi></s></span></span>
-            <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.freePortal }}</span></span>
+            <span class="hero-offer-price"><bdi><strong>{{ P }}</strong> {{ currency }}</bdi> <small>{{ s.oneTime }}</small></span>
+            <span class="hero-free-list">
+              <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.install }} <em>{{ s.worthInstall }}</em></span>
+              <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.portal }} <em>{{ s.worthPortal }}</em></span>
+            </span>
           </router-link>
           <div class="hero-actions">
             <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
             <a class="btn btn-wa" :href="whatsappLink" target="_blank" rel="noopener noreferrer"><MarketingIcon name="whatsapp" :size="18" />{{ s.cta.whatsapp }}</a>
           </div>
+          <p class="hero-tagline">{{ s.hero.tagline }}</p>
+          <!-- TODO(owner): keep or drop the pre-launch status; it conflicts with "Get MOJEEB today before the offer ends". -->
           <p class="hero-status"><span class="status-dot" aria-hidden="true"></span>{{ s.hero.status }}</p>
         </div>
 
@@ -46,6 +54,16 @@
       </div>
     </section>
 
+    <!-- Trust row (brochure footer strip) -->
+    <section class="trust" :aria-label="s.trust.aria">
+      <div class="container trust-grid">
+        <div class="trust-item" v-for="t in s.trust.items" :key="t.title">
+          <span class="trust-icon"><MarketingIcon :name="t.icon" :size="22" /></span>
+          <div><b>{{ t.title }}</b><small>{{ t.sub }}</small></div>
+        </div>
+      </div>
+    </section>
+
     <!-- B. Business benefits -->
     <section class="section benefits" id="features">
       <div class="container">
@@ -66,25 +84,28 @@
         <div class="include-grid">
           <article class="include" v-for="item in s.pkg.items" :key="item.title" :class="{ 'include-pbx': item.pbx }">
             <span class="include-icon"><MarketingIcon :name="item.icon" :size="30" /></span>
-            <span class="include-badge"><MarketingIcon name="check" :size="13" />{{ s.pkg.included }}</span>
+            <span class="include-badge"><MarketingIcon name="check" :size="13" />{{ s.included }}</span>
             <h3>{{ item.title }}</h3><p>{{ item.desc }}</p>
           </article>
         </div>
         <div class="free-row">
-          <div class="free-card"><span class="free-icon"><MarketingIcon name="tool" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.freeInstall }} <span class="was"><span class="visually-hidden">{{ s.regular }}</span><s><bdi>{{ installWas }}</bdi></s></span></b><small>{{ s.pkg.installNote }}</small></div></div>
-          <div class="free-card"><span class="free-icon"><MarketingIcon name="cloud" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.freePortal }}</b><small>{{ s.pkg.portalNote }}</small></div></div>
+          <div class="free-card"><span class="free-icon"><MarketingIcon name="tool" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.install }} <em class="worth">{{ s.worthInstall }}</em></b><small>{{ s.pkg.installNote }}</small></div></div>
+          <div class="free-card"><span class="free-icon"><MarketingIcon name="cloud" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.portal }} <em class="worth">{{ s.worthPortal }}</em></b><small>{{ s.pkg.portalNote }}</small></div></div>
         </div>
       </div>
     </section>
 
-    <!-- D. PBX expansion: one included phone, additional phones not included -->
+    <!-- D. Built-in PBX: one included phone, more phones can be added (not included) -->
     <section class="section pbx" id="pbx">
       <div class="container pbx-grid">
         <div>
           <p class="section-label">{{ s.pbx.eyebrow }}</p>
-          <h2 class="section-title">{{ s.value.title }}</h2>
-          <p class="pbx-accent">{{ s.value.sub }}</p>
-          <p class="pbx-text">{{ phonesNote }}</p>
+          <h2 class="section-title">{{ s.pbx.title }}</h2>
+          <p class="pbx-text">{{ s.pbx.body }}</p>
+          <ul class="pbx-bullets">
+            <li v-for="b in s.pbx.bullets" :key="b"><MarketingIcon name="check" :size="18" />{{ b }}</li>
+          </ul>
+          <p class="pbx-note">{{ phonesNote }}</p>
         </div>
         <figure class="pbx-diagram" :aria-label="s.pbx.diagramLabel">
           <div class="pbx-node"><MarketingIcon name="network" :size="22" /><span>{{ s.pbx.node }}</span></div>
@@ -116,25 +137,24 @@
       </div>
     </section>
 
-    <!-- F. Offer panel -->
+    <!-- F. Offer panel with value stack -->
     <section class="section offer" id="offer" aria-labelledby="offer-title">
       <div class="container">
         <div class="offer-panel">
           <div class="offer-price">
+            <!-- TODO(owner): "50% OFF" badge / original price only after the reference price is confirmed. Offer end date also unconfirmed. -->
             <span class="offer-tag">{{ s.limited }}</span>
             <h2 id="offer-title">{{ s.offer.title }}</h2>
             <p class="offer-amount"><bdi><strong>{{ P }}</strong><span>{{ currency }}</span></bdi></p>
-            <p class="offer-once">{{ s.offer.once }}</p>
-            <div class="offer-free">
-              <span><b>{{ s.free }}</b>{{ s.freeInstall }} <span class="was"><span class="visually-hidden">{{ s.regular }}</span><s><bdi>{{ installWas }}</bdi></s></span></span>
-              <span><b>{{ s.free }}</b>{{ s.freePortal }}</span>
-            </div>
+            <p class="offer-once">{{ s.oneTime }}</p>
           </div>
           <div class="offer-details">
-            <h3>{{ s.offer.includesTitle }}</h3>
-            <ul class="offer-list">
-              <li v-for="item in s.pkg.items" :key="item.title"><MarketingIcon name="check" :size="18" />{{ item.short }}</li>
-            </ul>
+            <dl class="value-stack">
+              <div v-for="row in s.offer.stack" :key="row.label" :class="{ free: row.free }">
+                <dt><MarketingIcon :name="row.free ? 'gift' : 'check'" :size="18" />{{ row.label }}</dt>
+                <dd><b>{{ row.value }}</b><small v-if="row.note">{{ row.note }}</small></dd>
+              </div>
+            </dl>
             <p class="offer-phones">{{ phonesNote }}</p>
             <p class="offer-closing">{{ s.offer.closing }}</p>
             <div class="offer-actions">
@@ -178,8 +198,7 @@
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, whatsappHref } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, whatsappHref } from '../pricing.js'
 import MarketingIcon from '../components/MarketingIcon.vue'
 import ContactSection from '../components/ContactSection.vue'
 import VoicegateDemoSection from '../components/VoicegateDemoSection.vue'
@@ -192,9 +211,9 @@ const vat = computed(() => VAT[lang.value])
 const phonesNote = computed(() => PHONES_NOTE[lang.value])
 const whatsappLink = computed(() => whatsappHref(lang.value))
 const P = omr(PACKAGE)
-const M = PORTAL_FREE_MONTHS
 const I = omr(INSTALLATION)
-const installWas = computed(() => (lang.value === 'ar' ? `${I} ر.ع` : `OMR ${I}`))
+const M = PORTAL_FREE_MONTHS
+const V = omr(PORTAL_VALUE)
 
 // Mobile sticky bar: visible only between the hero and the demo/contact/footer area.
 const stickyVisible = ref(false)
@@ -216,157 +235,207 @@ const messages = {
   en: {
     limited: 'Limited-time offer',
     free: 'FREE',
-    freeInstall: 'Standard installation',
-    regular: 'Regular price:',
-    freePortal: `${M} months of portal access`,
+    included: 'Included',
+    oneTime: 'One-time cost',
+    install: 'Professional installation',
+    portal: `${M}-month portal subscription`,
+    worthInstall: `(worth OMR ${I})`,
+    worthPortal: `(worth OMR ${V})`,
     cta: { demo: 'Request a Demo', whatsapp: 'Chat on WhatsApp' },
-    value: { title: 'AI answering + an in-house PBX.', sub: `Included in your OMR ${P} package.` },
+    value: { title: 'AI answering + a built-in PBX.', sub: `Included in your OMR ${P} package.` },
     hero: {
-      missed: 'Missed call',
-      headline: 'Every missed call', accent: 'could mean a lost deal.',
-      sub: 'MOJEEB answers customer calls and captures the details to help your team follow up on opportunities.',
-      offerAria: `Limited-time offer: OMR ${P}, free standard installation (regular price OMR ${I}) and ${M} months of free portal access. View the offer.`,
+      eyebrow: 'Turn every call into an opportunity',
+      headline: 'Never Miss', accent: 'Another Customer',
+      sub: 'Every missed call could be a lost deal. MOJEEB answers your calls 24/7, handles customer inquiries, and helps your business grow — in Arabic and English.',
+      tagline: 'Same number. Smarter business.',
+      offerAria: `Limited-time offer: OMR ${P} one-time, free professional installation worth OMR ${I} and a free ${M}-month portal subscription worth OMR ${V}. View the offer.`,
       status: 'Pre-launch: book a demonstration now. Orders and delivery dates are confirmed in writing at launch.',
     },
+    features: { aria: 'Key features', items: [{ icon: 'globe', text: 'Arabic & English' }, { icon: 'form', text: 'Call details captured' }, { icon: 'cloud', text: 'Follow-up in the portal' }] },
     visual: {
       label: 'Illustration: a customer call is answered by MOJEEB, the details are captured, and the team follows up.',
       missed: 'Customer calling', missedSub: 'Your team is busy or out of office',
       answer: 'MOJEEB answers', answerSub: 'In Arabic or English',
       details: 'Details captured for follow-up', detailItems: ['Caller number', 'Customer request', 'Follow-up task in the portal'],
-      pbx: 'In-house PBX connects your team', note: 'Illustration',
+      pbx: 'Built-in PBX connects your team', note: 'Illustration',
+    },
+    trust: {
+      aria: 'Why businesses choose MOJEEB',
+      items: [
+        { icon: 'tool', title: 'Easy setup', sub: 'We install it for you — FREE' },
+        { icon: 'clock', title: 'Reliable 24/7', sub: 'Answers calls around the clock' },
+        { icon: 'people', title: 'More customers', sub: 'Turn calls into sales opportunities' },
+        { icon: 'wallet', title: 'Cost effective', sub: 'Professional solution at a special price' },
+        { icon: 'shield', title: 'Reliable & secure', sub: 'Runs on your own local server' },
+        { icon: 'globe', title: 'Local support', sub: 'Oman-based team' },
+      ],
     },
     benefits: {
-      eyebrow: 'Why MOJEEB', title: 'Answer more calls. Follow up on more opportunities.',
+      eyebrow: 'How MOJEEB helps your business', title: 'Answer more calls. Follow up on more opportunities.',
       items: [
-        { icon: 'globe', title: 'Arabic and English call handling', desc: 'MOJEEB greets callers and answers common questions in Arabic or English, including when your team is busy or outside office hours.' },
-        { icon: 'form', title: 'Customer details captured', desc: 'Caller details and requests are recorded, so your team knows who called and what they needed.' },
-        { icon: 'cloud', title: 'Follow up through the portal', desc: `Review calls and follow-up tasks in the FSS portal, free for the first ${M} months.` },
-        { icon: 'network', title: 'PBX internal extensions', desc: 'The in-house PBX lets your staff reach each other on internal extensions as you add compatible IP phones.' },
+        { icon: 'clock', title: 'Answers calls 24/7', desc: 'MOJEEB greets callers and handles common questions, including when your team is busy or outside office hours.' },
+        { icon: 'form', title: 'Captures customer details and follow-ups', desc: 'Caller details and requests are recorded, so your team knows who called, what they needed and who to call back.' },
+        { icon: 'chart', title: 'Helps you grow your business', desc: `Review calls and follow-ups in the FSS portal — free for the first ${M} months — and respond to more enquiries.` },
+        { icon: 'globe', title: 'Arabic & English', desc: 'Natural, professional conversations with callers in Arabic or English.' },
       ],
     },
     pkg: {
-      eyebrow: 'What the package includes', title: 'Everything you need to get started.', sub: `One package, one price: OMR ${P}, with a two-year MOJEEB hardware warranty.`,
-      included: 'Included',
+      eyebrow: 'Package includes', title: 'Everything you need to get started.', sub: `One package, one price: OMR ${P} one-time, with a two-year MOJEEB hardware warranty.`,
       items: [
-        { icon: 'server', title: 'MOJEEB AI appliance', short: 'MOJEEB AI appliance', desc: 'Your own AI phone assistant on a dedicated local appliance. It answers calls and records caller details.' },
-        { icon: 'network', pbx: true, title: 'In-house PBX system', short: 'In-house PBX system', desc: 'A business phone system for your office. Connect your team with internal extensions as you add compatible IP phones.' },
-        { icon: 'gateway', title: 'Grandstream HT813 gateway', short: 'One Grandstream HT813 gateway', desc: 'Connects one compatible analog telephone line to the system over SIP, so customers keep calling your number.' },
-        { icon: 'deskphone', title: 'One IP desk phone', short: 'One IP desk phone', desc: 'Ready for your team to take and return calls. One phone is included in the package.' },
+        { icon: 'server', title: 'MOJEEB AI appliance', desc: 'AI voice assistant and PBX system. Answers customer calls in Arabic and English and records caller details.' },
+        { icon: 'network', pbx: true, title: 'Built-in PBX system', desc: 'Built into the MOJEEB appliance. Set up internal extensions and add more IP phones on the same PBX.' },
+        { icon: 'gateway', title: 'Grandstream HT813', desc: 'Converts your analog phone line to SIP, so customers keep calling your usual number.' },
+        { icon: 'deskphone', title: '1 IP phone', desc: 'Ready to use for your team to take and return calls. One phone is included.' },
       ],
-      installNote: `Fixed price of OMR ${I}, free during this limited-time offer. Requires a working LAN and a compatible ADSL connection; extra network or cabling work is quoted separately.`,
-      portalNote: `Free for the first ${M} months. Continuing afterwards is optional and priced separately.`,
+      installNote: `FREE within the offer (worth OMR ${I}). Requires an existing LAN and a compatible ADSL connection; cabling, network setup, internet activation and other non-standard work are quoted separately.`,
+      portalNote: `FREE for the first ${M} months (worth OMR ${V}), then renewed according to the selected plan.`,
     },
     pbx: {
-      eyebrow: 'Built-in PBX', node: 'PBX', diagramLabel: 'Diagram: the PBX connects to one included IP phone. Additional phones can be connected but are not included.',
+      eyebrow: 'Built-in PBX', title: 'You also get a built-in PBX system',
+      body: 'The package includes a full PBX system. The included IP phone is just the first one — add more IP phones anytime on the same PBX.',
+      bullets: ['Use multiple IP phones in your office', 'Connect branches and departments', 'Professional and flexible communication', 'All included in the same package'],
+      node: 'PBX', diagramLabel: 'Diagram: the built-in PBX connects to one included IP phone. More phones can be added but are not included.',
       includedPhone: 'Included phone', qtyOne: '1 unit', extraPhones: 'Additional phones — not included',
     },
     how: {
-      eyebrow: 'How it works', title: 'From missed call to follow-up.',
+      eyebrow: 'How MOJEEB works', title: 'Simple. Secure. Effective.',
       steps: [
-        { icon: 'phone', title: 'Customer calls', desc: 'Customers call your usual business number on your compatible line.' },
-        { icon: 'bot', title: 'MOJEEB answers', desc: 'MOJEEB greets the caller and handles common questions in Arabic or English.' },
-        { icon: 'form', title: 'Details are captured', desc: 'The caller’s details and request are recorded for your team.' },
-        { icon: 'cloud', title: 'Your team follows up', desc: 'Your team reviews the call in the portal and calls the customer back.' },
+        { icon: 'phone', title: 'Customer calls your number', desc: 'Customers keep calling your usual business number on your compatible line.' },
+        { icon: 'bot', title: 'MOJEEB answers', desc: 'MOJEEB answers in Arabic or English and handles common questions.' },
+        { icon: 'form', title: 'Captures details and follows up', desc: 'Caller details and requests are recorded and follow-up tasks are created for your team.' },
+        { icon: 'chart', title: 'You get reports and grow', desc: 'Review calls and follow-ups in the portal and grow your business.' },
       ],
     },
     offer: {
-      title: 'The complete MOJEEB package', once: 'One-time package price',
-      includesTitle: 'Included in your package',
-      closing: 'Get MOJEEB today before the offer ends.',
+      title: 'Complete MOJEEB package',
+      stack: [
+        { label: 'Complete MOJEEB package', value: `OMR ${P}`, note: 'one-time' },
+        { label: 'Professional installation', value: 'FREE', note: `worth OMR ${I}`, free: true },
+        { label: `${M}-month portal subscription`, value: 'FREE', note: `worth OMR ${V}`, free: true },
+        { label: 'Built-in PBX system', value: 'Included' },
+        { label: '1 IP phone', value: 'Included' },
+      ],
+      closing: 'Get MOJEEB today before the offer ends!',
       terms: 'Standard installation requires an existing LAN and a compatible ADSL service. Final availability, compatibility, delivery and any non-standard work are confirmed in writing.',
     },
     faq: {
       eyebrow: 'Questions & answers', title: 'Good to know before you buy.',
       items: [
-        { q: `What does the OMR ${P} package include?`, a: `The MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone, plus standard installation (regular fixed price OMR ${I}) free during this limited-time offer and a free portal subscription for the first ${M} months. External AI-provider usage, telecom charges and additional phones are not included.` },
-        { q: 'Is the PBX included?', a: `Yes. An in-house PBX system is part of the OMR ${P} package. It lets your team use internal extensions as you add compatible IP phones.` },
-        { q: 'How many phones are included?', a: 'One IP desk phone is included in the package.' },
-        { q: 'Can more phones be added?', a: `${PHONES_NOTE.en} Compatibility and pricing for additional phones are confirmed in your quotation.` },
-        { q: 'What is included in installation?', a: `Standard installation has a fixed price of OMR ${I} and is free during this limited-time offer. Our team sets up the package at your premises: the MOJEEB appliance, the PBX, the HT813 gateway and the included IP phone. Standard installation requires a working local network (LAN) and a compatible ADSL internet connection; new cabling, network setup, internet activation and other non-standard work require a separate quotation.` },
-        { q: `What happens after the ${M} free portal months?`, a: `The portal subscription is free for the first ${M} months. Continuing after that is optional and priced separately; the price is confirmed in your written quotation. Without the portal, the appliance’s on-site dashboard remains available on your office network.` },
+        { q: `What does the OMR ${P} package include?`, a: `The MOJEEB AI appliance (AI voice assistant with a built-in PBX), one Grandstream HT813 gateway and one IP phone, plus free professional installation (worth OMR ${I}) and a free ${M}-month portal subscription (worth OMR ${V}). External AI-provider usage, telecom charges and additional phones are not included.` },
+        { q: 'Is installation included?', a: `Yes. Standard professional installation is free within this limited-time offer (worth OMR ${I}). It requires an existing LAN and a compatible ADSL connection; extra cabling, network setup, internet activation and other non-standard work are quoted separately.` },
+        { q: 'Is the PBX included?', a: `Yes. MOJEEB includes a built-in PBX as part of the OMR ${P} package, so your team can use internal extensions.` },
+        { q: 'How many phones are included?', a: 'One IP phone is included in the package.' },
+        { q: 'Can I add more phones?', a: `Yes. MOJEEB includes a built-in PBX: the package includes one IP phone, and you can add more IP phones and extensions on the same PBX and connect branches and departments. Additional phones are not included in the package price; compatibility and pricing are confirmed in your quotation.` },
+        { q: 'Are there recurring fees?', a: `There is no recurring software licence fee for the MOJEEB appliance. AI-provider usage is separate: you normally use your own AI-provider account and pay the provider directly. The portal subscription is free for the first ${M} months, then renewed according to the selected plan. Your telephone line and internet connection are billed by your providers.` },
+        { q: 'What does the portal add?', a: `The first ${M} months of the FSS portal subscription are free (worth OMR ${V}). In the portal your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks from outside the office. After the free period it is renewed according to the selected plan; the appliance’s on-site dashboard remains available on your office network.` },
         { q: 'How can my business request a demonstration?', a: 'Fill in the demo request form on this page, visit futuresmartsupport.com/voicegate-demo, or message us on WhatsApp at +968 9277 1730.' },
         { q: 'Is VAT added to the price?', a: `${VAT.en.statement} ${VAT.en.detail}` },
         { q: 'Can I keep my business number? What about Caller ID?', a: 'You can keep your existing business landline number, or a voice number supplied with a compatible ADSL service (for example from Omantel), when the line and provider service are compatible. Caller ID can be configured when your provider enables it and the line supports it; provider fees may apply. We check compatibility before installation.' },
-        { q: 'Does MOJEEB need an internet connection? Are there usage charges?', a: 'Yes. A compatible ADSL internet connection is required. Speech recognition, AI responses and voice use external AI services over the internet, so MOJEEB does not offer offline AI conversations. AI-provider usage is separate: you normally use your own AI-provider account and pay the provider directly, and our technicians can help you set it up. There is no recurring MOJEEB software licence fee for the appliance.' },
+        { q: 'Does MOJEEB need an internet connection?', a: 'Yes. A compatible ADSL internet connection is required. Speech recognition, AI responses and voice use external AI services over the internet, so MOJEEB does not offer offline AI conversations.' },
         { q: 'What warranty is provided?', a: 'The MOJEEB appliance hardware has a two-year warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.' },
       ],
     },
   },
   ar: {
     limited: 'عرض لفترة محدودة',
-    free: 'مجانًا',
-    freeInstall: 'التركيب الاعتيادي',
-    regular: 'السعر المعتاد:',
-    freePortal: `اشتراك البوابة لمدة ${M} أشهر`,
-    cta: { demo: 'اطلب عرضًا توضيحيًا', whatsapp: 'تواصل عبر واتساب' },
-    value: { title: 'مُجيب يردّ على عملائك… وسنترال داخلي يربط فريقك.', sub: `كلاهما ضمن باقة ${P} ريالًا عُمانيًا.` },
+    free: 'مجاناً',
+    included: 'مشمول',
+    oneTime: 'لمرة واحدة',
+    install: 'التركيب الاحترافي',
+    portal: `اشتراك البوابة لمدة ${M} أشهر`,
+    worthInstall: `(بقيمة ${I} ر.ع)`,
+    worthPortal: `(بقيمة ${V} ر.ع)`,
+    cta: { demo: 'اطلب عرضاً توضيحياً', whatsapp: 'تواصل عبر واتساب' },
+    value: { title: 'مُجيب يردّ على عملائك… ونظام PBX مدمج يربط فريقك.', sub: `كلاهما ضمن باقة ${P} ريالاً عُمانياً.` },
     hero: {
-      missed: 'مكالمة فائتة',
+      eyebrow: 'حوّل كل مكالمة إلى فرصة',
       headline: 'كل مكالمة فائتة', accent: 'قد تعني خسارة صفقة',
-      sub: 'مُجيب يرد على عملائك ويسجّل التفاصيل لتتمكن من متابعة فرصك.',
-      offerAria: `عرض لفترة محدودة: ${P} ر.ع مع التركيب الاعتيادي مجانًا (سعره المعتاد ${I} ر.ع) واشتراك البوابة مجانًا لمدة ${M} أشهر. شاهد العرض.`,
-      status: 'مرحلة ما قبل الإطلاق: احجز عرضًا توضيحيًا الآن، وتُؤكَّد الطلبات ومواعيد التسليم كتابيًا عند الإطلاق.',
+      sub: 'مُجيب يرد على عملائك ويسجّل التفاصيل لتتابع فرصك.',
+      tagline: 'نفس الرقم. أعمال أذكى.',
+      offerAria: `عرض لفترة محدودة: ${P} ر.ع لمرة واحدة، مع التركيب الاحترافي مجاناً بقيمة ${I} ر.ع واشتراك البوابة مجاناً لمدة ${M} أشهر بقيمة ${V} ر.ع. شاهد العرض.`,
+      status: 'مرحلة ما قبل الإطلاق: احجز عرضاً توضيحياً الآن، وتُؤكَّد الطلبات ومواعيد التسليم كتابياً عند الإطلاق.',
     },
+    features: { aria: 'المزايا الرئيسية', items: [{ icon: 'globe', text: 'العربية والإنجليزية' }, { icon: 'form', text: 'تسجيل تفاصيل المكالمات' }, { icon: 'cloud', text: 'متابعة عبر البوابة' }] },
     visual: {
       label: 'رسم توضيحي: مكالمة عميل يرد عليها مُجيب، وتُسجَّل التفاصيل، ثم يتابع الفريق.',
       missed: 'عميل يتصل', missedSub: 'فريقك مشغول أو خارج الدوام',
       answer: 'مُجيب يرد', answerSub: 'بالعربية أو الإنجليزية',
       details: 'تسجيل التفاصيل للمتابعة', detailItems: ['رقم المتصل', 'طلب العميل', 'مهمة متابعة في البوابة'],
-      pbx: 'سنترال داخلي يربط فريقك', note: 'رسم توضيحي',
+      pbx: 'نظام PBX مدمج يربط فريقك', note: 'رسم توضيحي',
+    },
+    trust: {
+      aria: 'لماذا تختار الشركات مُجيب',
+      items: [
+        { icon: 'tool', title: 'تركيب سهل', sub: 'نركّبه لك مجاناً' },
+        { icon: 'clock', title: 'موثوق على مدار الساعة', sub: 'يرد على المكالمات ليلاً ونهاراً' },
+        { icon: 'people', title: 'عملاء أكثر', sub: 'حوّل المكالمات إلى فرص بيع' },
+        { icon: 'wallet', title: 'تكلفة مناسبة', sub: 'حل احترافي بسعر خاص' },
+        { icon: 'shield', title: 'موثوق وآمن', sub: 'يعمل على خادمك المحلي' },
+        { icon: 'globe', title: 'دعم محلي', sub: 'فريق في سلطنة عُمان' },
+      ],
     },
     benefits: {
-      eyebrow: 'لماذا مُجيب؟', title: 'ردّ على مكالمات أكثر، وتابِع فرصًا أكثر.',
+      eyebrow: 'كيف يساعد مُجيب أعمالك', title: 'ردّ على مكالمات أكثر، وتابِع فرصاً أكثر.',
       items: [
-        { icon: 'globe', title: 'الرد بالعربية والإنجليزية', desc: 'يرحّب مُجيب بالمتصلين ويجيب عن الأسئلة الشائعة بالعربية أو الإنجليزية، حتى عند انشغال فريقك أو خارج أوقات الدوام.' },
-        { icon: 'form', title: 'تسجيل تفاصيل العملاء', desc: 'تُسجَّل بيانات المتصل وطلبه، ليعرف فريقك من اتصل وماذا يحتاج.' },
-        { icon: 'cloud', title: 'المتابعة عبر البوابة', desc: `راجع المكالمات ومهام المتابعة في بوابة FSS، مجانًا لأول ${M} أشهر.` },
-        { icon: 'network', title: 'تحويلات داخلية عبر السنترال', desc: 'يتيح السنترال الداخلي (PBX) لموظفيك التواصل فيما بينهم بتحويلات داخلية عند إضافة هواتف IP متوافقة.' },
+        { icon: 'clock', title: 'يرد على المكالمات على مدار الساعة', desc: 'يرحّب مُجيب بالمتصلين ويتعامل مع الأسئلة الشائعة، حتى عند انشغال فريقك أو خارج أوقات الدوام.' },
+        { icon: 'form', title: 'يسجّل تفاصيل العملاء والمتابعات', desc: 'تُسجَّل بيانات المتصل وطلبه، ليعرف فريقك من اتصل وماذا يحتاج ومن يجب معاودة الاتصال به.' },
+        { icon: 'chart', title: 'يساعدك على تنمية أعمالك', desc: `راجع المكالمات والمتابعات في بوابة FSS — مجاناً لأول ${M} أشهر — واستجب لاستفسارات أكثر.` },
+        { icon: 'globe', title: 'العربية والإنجليزية', desc: 'محادثات طبيعية واحترافية مع المتصلين بالعربية أو الإنجليزية.' },
       ],
     },
     pkg: {
-      eyebrow: 'محتويات الباقة', title: 'كل ما تحتاجه لتبدأ.', sub: `باقة واحدة بسعر واحد: ${P} ر.ع، مع ضمان على جهاز مُجيب لمدة سنتين.`,
-      included: 'مشمول',
+      eyebrow: 'يشمل العرض', title: 'كل ما تحتاجه لتبدأ.', sub: `باقة واحدة بسعر واحد: ${P} ر.ع لمرة واحدة، مع ضمان على جهاز مُجيب لمدة سنتين.`,
       items: [
-        { icon: 'server', title: 'جهاز مُجيب الذكي', short: 'جهاز مُجيب الذكي', desc: 'مساعدك الهاتفي الذكي على جهاز محلي مخصص، يرد على المكالمات ويسجّل بيانات المتصلين.' },
-        { icon: 'network', pbx: true, title: 'سنترال داخلي (PBX)', short: 'نظام سنترال داخلي (PBX)', desc: 'نظام هاتف لمكتبك يربط فريقك بتحويلات داخلية عند إضافة هواتف IP متوافقة.' },
-        { icon: 'gateway', title: 'بوابة Grandstream HT813', short: 'بوابة Grandstream HT813 واحدة', desc: 'تربط خط هاتف تناظري متوافق بالنظام عبر SIP، ليواصل عملاؤك الاتصال برقمك المعتاد.' },
-        { icon: 'deskphone', title: 'هاتف IP مكتبي واحد', short: 'هاتف IP مكتبي واحد', desc: 'جاهز لفريقك لاستقبال المكالمات ومعاودة الاتصال. تشمل الباقة هاتفًا واحدًا.' },
+        { icon: 'server', title: 'جهاز مُجيب الذكي', desc: 'مساعد صوتي ذكي ونظام PBX. يرد على مكالمات العملاء بالعربية والإنجليزية ويسجّل بيانات المتصلين.' },
+        { icon: 'network', pbx: true, title: 'نظام PBX مدمج', desc: 'مدمج في جهاز مُجيب. يتيح تركيب التحويلات الداخلية وإضافة هواتف IP أخرى على نفس النظام.' },
+        { icon: 'gateway', title: 'بوابة Grandstream HT813', desc: 'تحوّل خط الهاتف التناظري إلى SIP، ليواصل عملاؤك الاتصال برقمك المعتاد.' },
+        { icon: 'deskphone', title: 'هاتف IP واحد', desc: 'جاهز للاستخدام لاستقبال المكالمات ومعاودة الاتصال. يشمل العرض هاتفاً واحداً.' },
       ],
-      installNote: `سعره الثابت ${I} ر.ع، ومجاني خلال فترة العرض. يتطلب شبكة LAN جاهزة واتصال ADSL متوافقًا، وتُسعَّر أعمال الشبكة أو الكابلات الإضافية بعرض سعر منفصل.`,
-      portalNote: `مجانًا لأول ${M} أشهر، والاستمرار بعدها اختياري ويُسعَّر بشكل منفصل.`,
+      installNote: `مجاني ضمن العرض (بقيمة ${I} ر.ع). يتطلب شبكة LAN قائمة واتصال ADSL متوافقاً، ويُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.`,
+      portalNote: `مجاني لأول ${M} أشهر (بقيمة ${V} ر.ع)، ثم يُجدَّد حسب الخطة المختارة.`,
     },
     pbx: {
-      eyebrow: 'سنترال داخلي مشمول', node: 'PBX', diagramLabel: 'رسم توضيحي: السنترال متصل بهاتف IP واحد مشمول، ويمكن إضافة هواتف أخرى غير مشمولة بالعرض.',
+      eyebrow: 'نظام PBX مدمج', title: 'بهذا المبلغ تحصل أيضاً على نظام PBX',
+      body: 'يتيح تركيب التحويلات والهواتف داخل شركتك بسهولة. يشمل العرض هاتفاً واحداً، ويمكن إضافة هواتف أخرى تعمل على نفس نظام PBX.',
+      bullets: ['استخدم عدة هواتف IP في مكتبك', 'اربط الفروع والأقسام', 'اتصالات احترافية ومرنة', 'كل ذلك ضمن الباقة نفسها'],
+      node: 'PBX', diagramLabel: 'رسم توضيحي: نظام PBX المدمج متصل بهاتف IP واحد مشمول، ويمكن إضافة هواتف أخرى غير مشمولة بالعرض.',
       includedPhone: 'الهاتف المشمول', qtyOne: 'جهاز واحد', extraPhones: 'هواتف إضافية — غير مشمولة',
     },
     how: {
-      eyebrow: 'كيف يعمل', title: 'من المكالمة إلى المتابعة.',
+      eyebrow: 'كيف يعمل مُجيب', title: 'بسيط. آمن. فعّال.',
       steps: [
-        { icon: 'phone', title: 'العميل يتصل', desc: 'يتصل عملاؤك برقم نشاطك المعتاد عبر خطك المتوافق.' },
-        { icon: 'bot', title: 'مُجيب يرد', desc: 'يرحّب مُجيب بالمتصل ويتعامل مع الأسئلة الشائعة بالعربية أو الإنجليزية.' },
-        { icon: 'form', title: 'تسجيل التفاصيل', desc: 'تُسجَّل بيانات المتصل وطلبه لفريقك.' },
-        { icon: 'cloud', title: 'فريقك يتابع', desc: 'يراجع فريقك المكالمة في البوابة ويعاود الاتصال بالعميل.' },
+        { icon: 'phone', title: 'العميل يتصل برقمك', desc: 'يواصل عملاؤك الاتصال برقم نشاطك المعتاد عبر خطك المتوافق.' },
+        { icon: 'bot', title: 'مُجيب يرد', desc: 'يرد مُجيب بالعربية أو الإنجليزية ويتعامل مع الأسئلة الشائعة.' },
+        { icon: 'form', title: 'يسجّل التفاصيل ويتابع', desc: 'تُسجَّل بيانات المتصل وطلبه وتُنشأ مهام متابعة لفريقك.' },
+        { icon: 'chart', title: 'تحصل على التقارير وتنمو أعمالك', desc: 'راجع المكالمات والمتابعات في البوابة ونمِّ أعمالك.' },
       ],
     },
     offer: {
-      title: 'باقة مُجيب الكاملة', once: 'سعر الباقة لمرة واحدة',
-      includesTitle: 'يشمل العرض',
-      closing: 'احصل على مُجيب اليوم قبل انتهاء العرض.',
-      terms: 'يشترط للتركيب الاعتيادي توفر شبكة LAN قائمة وخدمة ADSL متوافقة. ويُؤكَّد التوفر والتوافق والتسليم وأي أعمال غير اعتيادية كتابيًا.',
+      title: 'باقة مُجيب الكاملة',
+      stack: [
+        { label: 'باقة مُجيب الكاملة', value: `${P} ر.ع`, note: 'لمرة واحدة' },
+        { label: 'التركيب الاحترافي', value: 'مجاناً', note: `بقيمة ${I} ر.ع`, free: true },
+        { label: `اشتراك البوابة لمدة ${M} أشهر`, value: 'مجاناً', note: `بقيمة ${V} ر.ع`, free: true },
+        { label: 'نظام PBX مدمج', value: 'مشمول' },
+        { label: 'هاتف IP واحد', value: 'مشمول' },
+      ],
+      closing: 'احصل على مُجيب اليوم قبل انتهاء العرض',
+      terms: 'يشترط للتركيب الاعتيادي توفر شبكة LAN قائمة وخدمة ADSL متوافقة. ويُؤكَّد التوفر والتوافق والتسليم وأي أعمال غير اعتيادية كتابياً.',
     },
     faq: {
       eyebrow: 'أسئلة وأجوبة', title: 'معلومات مهمة قبل الشراء.',
       items: [
-        { q: `ماذا تشمل باقة ${P} ر.ع؟`, a: `جهاز مُجيب الذكي، ونظام سنترال داخلي (PBX)، وبوابة Grandstream HT813 واحدة، وهاتف IP مكتبي واحد، مع التركيب الاعتيادي (سعره الثابت المعتاد ${I} ر.ع) مجانًا خلال فترة العرض واشتراك البوابة مجانًا لأول ${M} أشهر. ولا تشمل رسوم استخدام مزوّد الذكاء الاصطناعي ورسوم الاتصالات والهواتف الإضافية.` },
-        { q: 'هل السنترال (PBX) مشمول؟', a: `نعم. نظام السنترال الداخلي جزء من باقة ${P} ر.ع، ويتيح لفريقك استخدام تحويلات داخلية عند إضافة هواتف IP متوافقة.` },
-        { q: 'كم عدد الهواتف المشمولة؟', a: 'تشمل الباقة هاتف IP مكتبيًا واحدًا.' },
-        { q: 'هل يمكن إضافة هواتف أخرى؟', a: `${PHONES_NOTE.ar} ويُؤكَّد التوافق وسعر الهواتف الإضافية في عرض السعر.` },
-        { q: 'ماذا يشمل التركيب؟', a: `التركيب الاعتيادي بسعر ثابت قدره ${I} ر.ع، وهو مجاني خلال فترة العرض. ويتولى فريقنا تركيب الباقة في مقرك: جهاز مُجيب والسنترال وبوابة HT813 والهاتف المشمول. ويتطلب التركيب الاعتيادي شبكة محلية (LAN) جاهزة واتصال إنترنت ADSL متوافقًا، بينما تتطلب أعمال تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت وغيرها من الأعمال غير الاعتيادية عرض سعر منفصلًا.` },
-        { q: `ماذا يحدث بعد أشهر البوابة المجانية الـ${M}؟`, a: `اشتراك البوابة مجاني لأول ${M} أشهر، والاستمرار بعدها اختياري ويُسعَّر بشكل منفصل، ويُؤكَّد السعر في عرض السعر المكتوب. ودون البوابة تبقى لوحة المعلومات المحلية في الجهاز متاحة على شبكة مكتبك.` },
-        { q: 'كيف تطلب شركتي عرضًا توضيحيًا؟', a: 'املأ نموذج طلب العرض التوضيحي في هذه الصفحة، أو زر futuresmartsupport.com/voicegate-demo، أو راسلنا عبر واتساب على ‎+968 9277 1730.' },
+        { q: `ماذا تشمل باقة ${P} ر.ع؟`, a: `جهاز مُجيب الذكي (مساعد صوتي ذكي مع نظام PBX مدمج)، وبوابة Grandstream HT813 واحدة، وهاتف IP واحد، مع التركيب الاحترافي مجاناً (بقيمة ${I} ر.ع) واشتراك البوابة مجاناً لمدة ${M} أشهر (بقيمة ${V} ر.ع). ولا تشمل رسوم استخدام مزوّد الذكاء الاصطناعي ورسوم الاتصالات والهواتف الإضافية.` },
+        { q: 'هل التركيب مشمول؟', a: `نعم. التركيب الاحترافي الاعتيادي مجاني ضمن العرض لفترة محدودة (بقيمة ${I} ر.ع). ويتطلب شبكة LAN قائمة واتصال ADSL متوافقاً، ويُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.` },
+        { q: 'هل نظام PBX مشمول؟', a: `نعم. يتضمن مُجيب نظام PBX مدمجاً ضمن باقة ${P} ر.ع، ليستخدم فريقك التحويلات الداخلية.` },
+        { q: 'كم عدد الهواتف المشمولة؟', a: 'يشمل العرض هاتف IP واحداً.' },
+        { q: 'هل يمكنني إضافة هواتف أخرى؟', a: 'نعم. يتضمن مُجيب نظام PBX مدمجاً؛ يشمل العرض هاتف IP واحداً، ويمكنك إضافة هواتف IP وتحويلات أخرى على نفس النظام وربط الفروع والأقسام. والهواتف الإضافية غير مشمولة في سعر الباقة، ويُؤكَّد التوافق والسعر في عرض السعر.' },
+        { q: 'هل توجد رسوم دورية؟', a: `لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. ورسوم استخدام مزوّد الذكاء الاصطناعي منفصلة: عادةً تستخدم حسابك الخاص لدى المزوّد وتدفع له مباشرة. واشتراك البوابة مجاني لأول ${M} أشهر، ثم يُجدَّد حسب الخطة المختارة. ويُحاسَب خط الهاتف واتصال الإنترنت من قِبل مزوّديهما.` },
+        { q: 'ماذا تضيف البوابة؟', a: `أول ${M} أشهر من اشتراك بوابة FSS مجانية (بقيمة ${V} ر.ع). ومن خلال البوابة يراجع فريقك المكالمات التي تعامل معها مُجيب، ويطّلع على تنبيهات المكالمات الفائتة والرسائل الصوتية، ويدير مهام المتابعة من خارج المكتب. وبعد الفترة المجانية يُجدَّد الاشتراك حسب الخطة المختارة، وتبقى لوحة المعلومات المحلية في الجهاز متاحة على شبكة مكتبك.` },
+        { q: 'كيف تطلب شركتي عرضاً توضيحياً؟', a: 'املأ نموذج طلب العرض التوضيحي في هذه الصفحة، أو زر futuresmartsupport.com/voicegate-demo، أو راسلنا عبر واتساب على ‎+968 9277 1730.' },
         { q: 'هل تُضاف ضريبة القيمة المضافة إلى السعر؟', a: `${VAT.ar.statement} ${VAT.ar.detail}` },
         { q: 'هل يمكنني الاحتفاظ برقم نشاطي؟ وماذا عن إظهار رقم المتصل؟', a: 'يمكنك الاحتفاظ برقم هاتفك الأرضي الحالي، أو رقم الهاتف المقدم ضمن خدمة ADSL متوافقة (مثلاً من عُمانتل)، متى كان الخط وخدمة المزوّد متوافقين. ويمكن تهيئة خدمة إظهار رقم المتصل عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد. نتحقق من التوافق قبل التركيب.' },
-        { q: 'هل يحتاج مُجيب إلى اتصال بالإنترنت؟ وهل توجد رسوم استخدام؟', a: 'نعم، يلزم اتصال إنترنت ADSL متوافق. يعتمد التعرّف على الكلام والردود الذكية وتوليد الصوت على خدمات ذكاء اصطناعي خارجية عبر الإنترنت، لذا لا يقدّم مُجيب محادثات ذكية دون اتصال. ورسوم استخدام مزوّد الذكاء الاصطناعي منفصلة: عادةً تستخدم حسابك الخاص لدى المزوّد وتدفع له مباشرة، ويمكن لفنيّينا مساعدتك في إعداده. ولا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب.' },
+        { q: 'هل يحتاج مُجيب إلى اتصال بالإنترنت؟', a: 'نعم، يلزم اتصال إنترنت ADSL متوافق. يعتمد التعرّف على الكلام والردود الذكية وتوليد الصوت على خدمات ذكاء اصطناعي خارجية عبر الإنترنت، لذا لا يقدّم مُجيب محادثات ذكية دون اتصال.' },
         { q: 'ما الضمان المقدم؟', a: 'يتمتع جهاز مُجيب بضمان على الأجهزة لمدة سنتين وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.' },
       ],
     },
@@ -401,8 +470,6 @@ h1 span { display: block; color: var(--mint); }
 .hero-free-list { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.12); }
 .hero-free { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; color: #d9eef4; }
 .hero-free b { font-size: 16px; }
-.was { font-size: .88em; font-weight: 600; opacity: .75; }
-.was s { text-decoration-thickness: 2px; }
 .hero-free b { color: var(--mint); font-weight: 900; }
 .hero-free svg { color: var(--mint); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -564,4 +631,39 @@ h1 span { display: block; color: var(--mint); }
   .sticky-cta .btn-wa { flex: 0 0 52px; min-height: 46px; padding: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
+</style>
+
+<style scoped>
+/* Brochure campaign additions: feature row, trust strip, value stack, PBX bullets */
+.feature-row { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: -8px 0 24px; padding: 0; color: #bfe9e4; font-size: 14px; font-weight: 700; }
+.feature-row li { display: inline-flex; align-items: center; gap: 6px; }
+.feature-row svg { color: var(--mint); }
+.hero-offer-price small { margin-inline-start: 6px; font-size: 13px; font-weight: 700; color: #a9c9d8; }
+.hero-free em, .worth { font-style: normal; font-weight: 600; opacity: .8; }
+.hero-tagline { margin: 18px 0 0; color: var(--mint); font-weight: 800; font-size: 15px; }
+.trust { background: #e8f5f8; border-bottom: 1px solid #d4eaf0; }
+.trust-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; padding-block: 24px; }
+.trust-item { display: flex; align-items: center; gap: 12px; }
+.trust-icon { flex: 0 0 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; border: 1px solid #b7e5eb; background: #fff; color: #00888b; }
+.trust-item b { display: block; font-size: 13.5px; color: #10304a; line-height: 1.35; }
+.trust-item small { display: block; font-size: 12px; color: #4a6578; line-height: 1.45; }
+.pbx-bullets { list-style: none; margin: 18px 0; padding: 0; display: grid; gap: 10px; }
+.pbx-bullets li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.pbx-bullets svg { flex: 0 0 18px; color: #0aa79d; }
+.pbx-note { margin: 0; padding: 12px 16px; border-radius: 12px; background: #eef8fb; color: #285066; font-size: 14px; line-height: 1.65; }
+.value-stack { margin: 0 0 18px; display: grid; border-top: 1px solid #e1edf3; }
+.value-stack > div { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #e1edf3; }
+.value-stack dt { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.value-stack dt svg { flex: 0 0 18px; color: #0aa79d; }
+.value-stack dd { margin: 0; text-align: end; white-space: nowrap; }
+.value-stack dd b { font-size: 16px; color: var(--navy); }
+.value-stack dd small { display: block; font-size: 12px; color: var(--muted); }
+.value-stack .free dd b { color: #007a73; font-size: 18px; font-weight: 900; }
+.value-stack .free dt svg { color: #d92d31; }
+@media (max-width: 1100px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 690px) {
+  .trust-grid { grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+  .trust-icon { flex-basis: 36px; height: 36px; }
+  .value-stack dd { white-space: normal; }
+}
 </style>

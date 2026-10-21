@@ -34,8 +34,8 @@ import logoUrl from '../../assets/FSS_Logo_light.png'
 const { lang } = useLanguage()
 const year = new Date().getFullYear()
 const c = computed(() => lang.value === 'ar'
-  ? {tagline:'مُجيب · رد ذكي وسنترال داخلي',description:'حلول عملية لاتصالات العملاء تناسب الأعمال الصغيرة والمتوسطة في سلطنة عُمان.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'المزايا',pbx:'السنترال الداخلي',demo:'اطلب عرضًا توضيحيًا',mojebPage:'صفحة العرض التوضيحي',contactForm:'نموذج التواصل',whatsapp:'واتساب',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
-  : {tagline:'MOJEEB · AI answering + an in-house PBX',description:'Practical customer communication solutions for small and growing businesses in Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'Benefits',pbx:'In-house PBX',demo:'Request a Demo',mojebPage:'MOJEEB demo page',contactForm:'Contact form',whatsapp:'WhatsApp',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
+  ? {tagline:'مُجيب · مساعد صوتي ذكي ونظام PBX مدمج',description:'أشخاص. تقنية. غدٌ أذكى. من أجل عُمان أذكى.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'المزايا',pbx:'نظام PBX المدمج',demo:'اطلب عرضًا توضيحيًا',mojebPage:'صفحة العرض التوضيحي',contactForm:'نموذج التواصل',whatsapp:'واتساب',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
+  : {tagline:'MOJEEB · AI voice assistant + built-in PBX',description:'People. Technology. A Smarter Tomorrow. For a Smarter Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'Benefits',pbx:'Built-in PBX',demo:'Request a Demo',mojebPage:'MOJEEB demo page',contactForm:'Contact form',whatsapp:'WhatsApp',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
 </script>
 <style scoped>
 .fss-footer { background:#05192e; color:#fff; padding:57px 0 21px; }
