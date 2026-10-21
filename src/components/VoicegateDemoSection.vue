@@ -6,8 +6,8 @@
         <h2 class="section-title">{{ t('voicegateDemo.demo.title') }}</h2>
         <p class="vg-demo-text">{{ t('voicegateDemo.demo.text') }}</p>
         <div class="vg-offer-note">
-          <span class="vg-offer-price" dir="ltr">599 <small>{{ lang === 'ar' ? 'ر.ع' : 'R.O' }}</small></span>
-          <span>{{ lang === 'ar' ? 'عرض تعريفي خاص · غير شامل ضريبة القيمة المضافة' : 'Special introductory offer · excl. VAT' }}</span>
+          <span class="vg-offer-price" dir="ltr">{{ omr(PACKAGE) }} <small>{{ lang === 'ar' ? 'ر.ع' : 'OMR' }}</small></span>
+          <span>{{ lang === 'ar' ? `عرض تعريفي خاص · ${omr(TOTAL)} ر.ع مع التركيب الاعتيادي · ${VAT.ar.short}` : `Special introductory offer · OMR ${omr(TOTAL)} with standard installation · ${VAT.en.short}` }}</span>
         </div>
         <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري تواصل معنا عبر واتساب.' : 'For an immediate enquiry, contact us on WhatsApp.' }}</p>
         <a :href="WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="btn btn-ghost vg-wa">
@@ -77,6 +77,7 @@ import { ref, nextTick } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { useContactSubmit, formError, EMAIL_RE } from '../composables/useContactSubmit.js'
 import { WHATSAPP_URL } from '../constants.js'
+import { PACKAGE, INSTALLATION, TOTAL, VAT, omr } from '../pricing.js'
 import MarketingIcon from './MarketingIcon.vue'
 
 const { t, lang } = useLanguage()
@@ -116,7 +117,7 @@ async function handleSubmit() {
     name: f.name,
     email: f.email,
     company: f.company,
-    message: `Mojeeb AI interest / demo request (pre-launch, 599 R.O introductory package)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
+    message: `Mojeeb AI interest / demo request (pre-launch, OMR ${omr(PACKAGE)} starter package; OMR ${omr(TOTAL)} with OMR ${omr(INSTALLATION)} fixed standard installation)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
     website: f.website,
     language: lang.value,
     source: 'marketing_website',

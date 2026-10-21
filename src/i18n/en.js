@@ -1,3 +1,5 @@
+import { PACKAGE, INSTALLATION, TOTAL, VAT, PRICE_SUMMARY, omr, omr3 } from '../pricing.js'
+
 export default {
   nav: {
     howItWorks: 'How It Works',
@@ -173,14 +175,14 @@ export default {
   offer: {
     label: 'Mojeeb AI Starter Package', badge: 'Special Introductory Offer',
     title: 'Mojeeb AI — Smart Business Telephony',
-    price: '599 R.O', priceLabel: 'One-time introductory package price, excluding VAT',
+    price: `OMR ${omr(PACKAGE)}`, priceLabel: `One-time introductory package price · ${VAT.en.short}`,
     sub: 'Mojeeb (FSS AI Agent), analog-to-SIP gateway conversion and one IP desk phone. Optional cloud services are priced separately.',
     includesTitle: "What's included", includes: [
       'Mojeeb (FSS AI Agent) for local business calls',
       'Analog-to-SIP gateway for an existing telephone line',
       'One IP desk phone',
     ],
-    subscriptionNote: 'VAT, telecom charges, ongoing services and the optional cloud portal are separate where applicable; final terms are confirmed in your quotation.',
+    subscriptionNote: PRICE_SUMMARY.en,
     ctaPrimary: 'Request a Demo', ctaSecondary: 'Contact Us',
   },
 
@@ -234,8 +236,8 @@ export default {
         a: "No. Mojeeb AI includes a local AI server installed at your business. The local server handles all call processing. The cloud dashboard lets your team access call data, analytics, and recordings from anywhere.",
       },
       {
-        q: 'What does the 599 R.O introductory package include?',
-        a: "The one-time package includes Mojeeb (FSS AI Agent), conversion of a compatible existing analog telephone line to SIP (for example with a Grandstream HT813 gateway), and one IP desk phone. VAT, telecom charges, ongoing services and the optional cloud portal are not included; final terms are confirmed in your quotation.",
+        q: `What does the OMR ${omr(PACKAGE)} introductory package include?`,
+        a: `The one-time package includes Mojeeb (FSS AI Agent), conversion of a compatible existing analog telephone line to SIP (for example with a Grandstream HT813 gateway), and one IP desk phone. Standard professional installation is a fixed OMR ${omr(INSTALLATION)} (OMR ${omr(TOTAL)} in total). External AI-provider usage, telecom charges and the optional FSS Cloud Portal are separate. ${VAT.en.statement}`,
       },
     ],
   },
@@ -252,7 +254,7 @@ export default {
   contact: {
     label: 'Get in Touch',
     title: 'Send Us a Message',
-    sub: "Have a general question about Mojeeb AI, the 599 R.O introductory offer or our services? Send us a message and our team will contact you as soon as possible.",
+    sub: `Have a general question about Mojeeb AI, the OMR ${omr(PACKAGE)} introductory offer or our services? Send us a message and our team will contact you as soon as possible.`,
     emailLabel: 'Email us:',
     nameLabel: 'Name',
     emailFieldLabel: 'Email',
@@ -298,7 +300,7 @@ export default {
     demo: {
       label: 'Register Interest or Request a Demo',
       title: 'See Mojeeb AI Working for Your Business',
-      text: 'Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the 599 R.O introductory package (excl. VAT). Orders and delivery dates will be confirmed at launch; AI provider charges are separate, and no free trial is currently available.',
+      text: `Mojeeb AI is in pre-launch. Register your interest or request a live demonstration of the OMR ${omr(PACKAGE)} starter package (OMR ${omr(TOTAL)} with standard professional installation). Orders and delivery dates will be confirmed at launch; AI provider charges are separate, and no free trial is currently available.`,
       nameLabel: 'Full Name',
       companyLabel: 'Company / Business Name',
       phoneLabel: 'Phone Number',
@@ -421,7 +423,7 @@ export default {
 
   terms: {
     title: 'Terms of Service',
-    lastUpdated: 'Last updated: 10 October 2026',
+    lastUpdated: 'Last updated: 17 October 2026',
     intro: 'These Terms of Service ("Terms") govern your access to and use of the website, products and services provided by Future Smart Support ("FSS"). By using our services, you agree to be bound by these Terms.',
     sections: [
       {
@@ -434,11 +436,11 @@ export default {
       },
       {
         title: '3. Optional and separately priced services',
-        body: 'The following are not included in the package price and are provided only when separately agreed: professional installation (a fixed fee of 30.000 R.O); charges for the external AI services that power Mojeeb AI conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan.',
+        body: `The following are not included in the package price and are provided only when separately agreed: standard professional installation (a fixed price of OMR ${omr3(INSTALLATION)}, not a percentage of the package price, making OMR ${omr3(TOTAL)} for the package with standard installation); charges for the external AI services that power Mojeeb AI conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; network, cabling or internet work; and the optional FSS Cloud Portal, including connected maintenance, software updates, remote call visibility and notifications, as defined in the selected cloud-service plan. Additional network, cabling, internet and non-standard installation work requires a separate quotation.`,
       },
       {
         title: '4. Prices and taxes',
-        body: 'Advertised prices are in Omani Rials and exclude VAT. VAT is added where applicable. The final price, scope and any additional charges are set out in your quotation.',
+        body: `Advertised prices are in Omani Rials. The Mojeeb starter package is OMR ${omr3(PACKAGE)}. ${VAT.en.statement} ${VAT.en.detail} Final availability, compatibility, delivery, price, scope and any non-standard work are confirmed in writing.`,
       },
       {
         title: '5. Software licence and ongoing charges',
