@@ -12,7 +12,7 @@
           <router-link class="hero-offer" :to="{ path: '/', hash: '#offer' }" :aria-label="s.hero.offerAria">
             <span class="offer-tag">{{ s.limited }}</span>
             <span class="hero-offer-price"><bdi><strong>{{ P }}</strong> {{ currency }}</bdi></span>
-            <span class="hero-free-list"><span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.freeInstall }}</span>
+            <span class="hero-free-list"><span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.freeInstall }} <span class="was"><span class="visually-hidden">{{ s.regular }}</span><s><bdi>{{ installWas }}</bdi></s></span></span>
             <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.freePortal }}</span></span>
           </router-link>
           <div class="hero-actions">
@@ -71,7 +71,7 @@
           </article>
         </div>
         <div class="free-row">
-          <div class="free-card"><span class="free-icon"><MarketingIcon name="tool" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.freeInstall }}</b><small>{{ s.pkg.installNote }}</small></div></div>
+          <div class="free-card"><span class="free-icon"><MarketingIcon name="tool" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.freeInstall }} <span class="was"><span class="visually-hidden">{{ s.regular }}</span><s><bdi>{{ installWas }}</bdi></s></span></b><small>{{ s.pkg.installNote }}</small></div></div>
           <div class="free-card"><span class="free-icon"><MarketingIcon name="cloud" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.freePortal }}</b><small>{{ s.pkg.portalNote }}</small></div></div>
         </div>
       </div>
@@ -126,7 +126,7 @@
             <p class="offer-amount"><bdi><strong>{{ P }}</strong><span>{{ currency }}</span></bdi></p>
             <p class="offer-once">{{ s.offer.once }}</p>
             <div class="offer-free">
-              <span><b>{{ s.free }}</b>{{ s.freeInstall }}</span>
+              <span><b>{{ s.free }}</b>{{ s.freeInstall }} <span class="was"><span class="visually-hidden">{{ s.regular }}</span><s><bdi>{{ installWas }}</bdi></s></span></span>
               <span><b>{{ s.free }}</b>{{ s.freePortal }}</span>
             </div>
           </div>
@@ -179,7 +179,7 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 
-import { PACKAGE, PORTAL_FREE_MONTHS, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, whatsappHref } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, whatsappHref } from '../pricing.js'
 import MarketingIcon from '../components/MarketingIcon.vue'
 import ContactSection from '../components/ContactSection.vue'
 import VoicegateDemoSection from '../components/VoicegateDemoSection.vue'
@@ -193,6 +193,8 @@ const phonesNote = computed(() => PHONES_NOTE[lang.value])
 const whatsappLink = computed(() => whatsappHref(lang.value))
 const P = omr(PACKAGE)
 const M = PORTAL_FREE_MONTHS
+const I = omr(INSTALLATION)
+const installWas = computed(() => (lang.value === 'ar' ? `${I} ر.ع` : `OMR ${I}`))
 
 // Mobile sticky bar: visible only between the hero and the demo/contact/footer area.
 const stickyVisible = ref(false)
@@ -215,6 +217,7 @@ const messages = {
     limited: 'Limited-time offer',
     free: 'FREE',
     freeInstall: 'Standard installation',
+    regular: 'Regular price:',
     freePortal: `${M} months of portal access`,
     cta: { demo: 'Request a Demo', whatsapp: 'Chat on WhatsApp' },
     value: { title: 'AI answering + an in-house PBX.', sub: `Included in your OMR ${P} package.` },
@@ -222,7 +225,7 @@ const messages = {
       missed: 'Missed call',
       headline: 'Every missed call', accent: 'could mean a lost deal.',
       sub: 'MOJEEB answers customer calls and captures the details to help your team follow up on opportunities.',
-      offerAria: `Limited-time offer: OMR ${P}, free standard installation and ${M} months of free portal access. View the offer.`,
+      offerAria: `Limited-time offer: OMR ${P}, free standard installation (regular price OMR ${I}) and ${M} months of free portal access. View the offer.`,
       status: 'Pre-launch: book a demonstration now. Orders and delivery dates are confirmed in writing at launch.',
     },
     visual: {
@@ -242,7 +245,7 @@ const messages = {
       ],
     },
     pkg: {
-      eyebrow: 'What the package includes', title: 'Everything you need to get started.', sub: `One package, one price: OMR ${P}.`,
+      eyebrow: 'What the package includes', title: 'Everything you need to get started.', sub: `One package, one price: OMR ${P}, with a two-year MOJEEB hardware warranty.`,
       included: 'Included',
       items: [
         { icon: 'server', title: 'MOJEEB AI appliance', short: 'MOJEEB AI appliance', desc: 'Your own AI phone assistant on a dedicated local appliance. It answers calls and records caller details.' },
@@ -250,7 +253,7 @@ const messages = {
         { icon: 'gateway', title: 'Grandstream HT813 gateway', short: 'One Grandstream HT813 gateway', desc: 'Connects one compatible analog telephone line to the system over SIP, so customers keep calling your number.' },
         { icon: 'deskphone', title: 'One IP desk phone', short: 'One IP desk phone', desc: 'Ready for your team to take and return calls. One phone is included in the package.' },
       ],
-      installNote: 'Requires a working LAN and a compatible ADSL connection. Extra network or cabling work is quoted separately.',
+      installNote: `Fixed price of OMR ${I}, free during this limited-time offer. Requires a working LAN and a compatible ADSL connection; extra network or cabling work is quoted separately.`,
       portalNote: `Free for the first ${M} months. Continuing afterwards is optional and priced separately.`,
     },
     pbx: {
@@ -275,17 +278,17 @@ const messages = {
     faq: {
       eyebrow: 'Questions & answers', title: 'Good to know before you buy.',
       items: [
-        { q: `What does the OMR ${P} package include?`, a: `The MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone, plus free standard installation and a free portal subscription for the first ${M} months. External AI-provider usage, telecom charges and additional phones are not included.` },
+        { q: `What does the OMR ${P} package include?`, a: `The MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone, plus standard installation (regular fixed price OMR ${I}) free during this limited-time offer and a free portal subscription for the first ${M} months. External AI-provider usage, telecom charges and additional phones are not included.` },
         { q: 'Is the PBX included?', a: `Yes. An in-house PBX system is part of the OMR ${P} package. It lets your team use internal extensions as you add compatible IP phones.` },
         { q: 'How many phones are included?', a: 'One IP desk phone is included in the package.' },
         { q: 'Can more phones be added?', a: `${PHONES_NOTE.en} Compatibility and pricing for additional phones are confirmed in your quotation.` },
-        { q: 'What is included in installation?', a: 'Standard installation is free. Our team sets up the package at your premises: the MOJEEB appliance, the PBX, the HT813 gateway and the included IP phone. Standard installation requires a working local network (LAN) and a compatible ADSL internet connection; new cabling, network setup, internet activation and other non-standard work require a separate quotation.' },
+        { q: 'What is included in installation?', a: `Standard installation has a fixed price of OMR ${I} and is free during this limited-time offer. Our team sets up the package at your premises: the MOJEEB appliance, the PBX, the HT813 gateway and the included IP phone. Standard installation requires a working local network (LAN) and a compatible ADSL internet connection; new cabling, network setup, internet activation and other non-standard work require a separate quotation.` },
         { q: `What happens after the ${M} free portal months?`, a: `The portal subscription is free for the first ${M} months. Continuing after that is optional and priced separately; the price is confirmed in your written quotation. Without the portal, the appliance’s on-site dashboard remains available on your office network.` },
         { q: 'How can my business request a demonstration?', a: 'Fill in the demo request form on this page, visit futuresmartsupport.com/voicegate-demo, or message us on WhatsApp at +968 9277 1730.' },
         { q: 'Is VAT added to the price?', a: `${VAT.en.statement} ${VAT.en.detail}` },
         { q: 'Can I keep my business number? What about Caller ID?', a: 'You can keep your existing business landline number, or a voice number supplied with a compatible ADSL service (for example from Omantel), when the line and provider service are compatible. Caller ID can be configured when your provider enables it and the line supports it; provider fees may apply. We check compatibility before installation.' },
         { q: 'Does MOJEEB need an internet connection? Are there usage charges?', a: 'Yes. A compatible ADSL internet connection is required. Speech recognition, AI responses and voice use external AI services over the internet, so MOJEEB does not offer offline AI conversations. AI-provider usage is separate: you normally use your own AI-provider account and pay the provider directly, and our technicians can help you set it up. There is no recurring MOJEEB software licence fee for the appliance.' },
-        { q: 'What warranty is provided?', a: 'The MOJEEB appliance has a one-month replacement warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.' },
+        { q: 'What warranty is provided?', a: 'The MOJEEB appliance hardware has a two-year warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.' },
       ],
     },
   },
@@ -293,6 +296,7 @@ const messages = {
     limited: 'عرض لفترة محدودة',
     free: 'مجانًا',
     freeInstall: 'التركيب الاعتيادي',
+    regular: 'السعر المعتاد:',
     freePortal: `اشتراك البوابة لمدة ${M} أشهر`,
     cta: { demo: 'اطلب عرضًا توضيحيًا', whatsapp: 'تواصل عبر واتساب' },
     value: { title: 'مُجيب يردّ على عملائك… وسنترال داخلي يربط فريقك.', sub: `كلاهما ضمن باقة ${P} ريالًا عُمانيًا.` },
@@ -300,7 +304,7 @@ const messages = {
       missed: 'مكالمة فائتة',
       headline: 'كل مكالمة فائتة', accent: 'قد تعني خسارة صفقة',
       sub: 'مُجيب يرد على عملائك ويسجّل التفاصيل لتتمكن من متابعة فرصك.',
-      offerAria: `عرض لفترة محدودة: ${P} ر.ع مع التركيب الاعتيادي مجانًا واشتراك البوابة مجانًا لمدة ${M} أشهر. شاهد العرض.`,
+      offerAria: `عرض لفترة محدودة: ${P} ر.ع مع التركيب الاعتيادي مجانًا (سعره المعتاد ${I} ر.ع) واشتراك البوابة مجانًا لمدة ${M} أشهر. شاهد العرض.`,
       status: 'مرحلة ما قبل الإطلاق: احجز عرضًا توضيحيًا الآن، وتُؤكَّد الطلبات ومواعيد التسليم كتابيًا عند الإطلاق.',
     },
     visual: {
@@ -320,7 +324,7 @@ const messages = {
       ],
     },
     pkg: {
-      eyebrow: 'محتويات الباقة', title: 'كل ما تحتاجه لتبدأ.', sub: `باقة واحدة بسعر واحد: ${P} ر.ع.`,
+      eyebrow: 'محتويات الباقة', title: 'كل ما تحتاجه لتبدأ.', sub: `باقة واحدة بسعر واحد: ${P} ر.ع، مع ضمان على جهاز مُجيب لمدة سنتين.`,
       included: 'مشمول',
       items: [
         { icon: 'server', title: 'جهاز مُجيب الذكي', short: 'جهاز مُجيب الذكي', desc: 'مساعدك الهاتفي الذكي على جهاز محلي مخصص، يرد على المكالمات ويسجّل بيانات المتصلين.' },
@@ -328,7 +332,7 @@ const messages = {
         { icon: 'gateway', title: 'بوابة Grandstream HT813', short: 'بوابة Grandstream HT813 واحدة', desc: 'تربط خط هاتف تناظري متوافق بالنظام عبر SIP، ليواصل عملاؤك الاتصال برقمك المعتاد.' },
         { icon: 'deskphone', title: 'هاتف IP مكتبي واحد', short: 'هاتف IP مكتبي واحد', desc: 'جاهز لفريقك لاستقبال المكالمات ومعاودة الاتصال. تشمل الباقة هاتفًا واحدًا.' },
       ],
-      installNote: 'يتطلب شبكة LAN جاهزة واتصال ADSL متوافقًا، وتُسعَّر أعمال الشبكة أو الكابلات الإضافية بعرض سعر منفصل.',
+      installNote: `سعره الثابت ${I} ر.ع، ومجاني خلال فترة العرض. يتطلب شبكة LAN جاهزة واتصال ADSL متوافقًا، وتُسعَّر أعمال الشبكة أو الكابلات الإضافية بعرض سعر منفصل.`,
       portalNote: `مجانًا لأول ${M} أشهر، والاستمرار بعدها اختياري ويُسعَّر بشكل منفصل.`,
     },
     pbx: {
@@ -353,17 +357,17 @@ const messages = {
     faq: {
       eyebrow: 'أسئلة وأجوبة', title: 'معلومات مهمة قبل الشراء.',
       items: [
-        { q: `ماذا تشمل باقة ${P} ر.ع؟`, a: `جهاز مُجيب الذكي، ونظام سنترال داخلي (PBX)، وبوابة Grandstream HT813 واحدة، وهاتف IP مكتبي واحد، مع التركيب الاعتيادي مجانًا واشتراك البوابة مجانًا لأول ${M} أشهر. ولا تشمل رسوم استخدام مزوّد الذكاء الاصطناعي ورسوم الاتصالات والهواتف الإضافية.` },
+        { q: `ماذا تشمل باقة ${P} ر.ع؟`, a: `جهاز مُجيب الذكي، ونظام سنترال داخلي (PBX)، وبوابة Grandstream HT813 واحدة، وهاتف IP مكتبي واحد، مع التركيب الاعتيادي (سعره الثابت المعتاد ${I} ر.ع) مجانًا خلال فترة العرض واشتراك البوابة مجانًا لأول ${M} أشهر. ولا تشمل رسوم استخدام مزوّد الذكاء الاصطناعي ورسوم الاتصالات والهواتف الإضافية.` },
         { q: 'هل السنترال (PBX) مشمول؟', a: `نعم. نظام السنترال الداخلي جزء من باقة ${P} ر.ع، ويتيح لفريقك استخدام تحويلات داخلية عند إضافة هواتف IP متوافقة.` },
         { q: 'كم عدد الهواتف المشمولة؟', a: 'تشمل الباقة هاتف IP مكتبيًا واحدًا.' },
         { q: 'هل يمكن إضافة هواتف أخرى؟', a: `${PHONES_NOTE.ar} ويُؤكَّد التوافق وسعر الهواتف الإضافية في عرض السعر.` },
-        { q: 'ماذا يشمل التركيب؟', a: 'التركيب الاعتيادي مجاني، ويتولى فريقنا تركيب الباقة في مقرك: جهاز مُجيب والسنترال وبوابة HT813 والهاتف المشمول. ويتطلب التركيب الاعتيادي شبكة محلية (LAN) جاهزة واتصال إنترنت ADSL متوافقًا، بينما تتطلب أعمال تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت وغيرها من الأعمال غير الاعتيادية عرض سعر منفصلًا.' },
+        { q: 'ماذا يشمل التركيب؟', a: `التركيب الاعتيادي بسعر ثابت قدره ${I} ر.ع، وهو مجاني خلال فترة العرض. ويتولى فريقنا تركيب الباقة في مقرك: جهاز مُجيب والسنترال وبوابة HT813 والهاتف المشمول. ويتطلب التركيب الاعتيادي شبكة محلية (LAN) جاهزة واتصال إنترنت ADSL متوافقًا، بينما تتطلب أعمال تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت وغيرها من الأعمال غير الاعتيادية عرض سعر منفصلًا.` },
         { q: `ماذا يحدث بعد أشهر البوابة المجانية الـ${M}؟`, a: `اشتراك البوابة مجاني لأول ${M} أشهر، والاستمرار بعدها اختياري ويُسعَّر بشكل منفصل، ويُؤكَّد السعر في عرض السعر المكتوب. ودون البوابة تبقى لوحة المعلومات المحلية في الجهاز متاحة على شبكة مكتبك.` },
         { q: 'كيف تطلب شركتي عرضًا توضيحيًا؟', a: 'املأ نموذج طلب العرض التوضيحي في هذه الصفحة، أو زر futuresmartsupport.com/voicegate-demo، أو راسلنا عبر واتساب على ‎+968 9277 1730.' },
         { q: 'هل تُضاف ضريبة القيمة المضافة إلى السعر؟', a: `${VAT.ar.statement} ${VAT.ar.detail}` },
         { q: 'هل يمكنني الاحتفاظ برقم نشاطي؟ وماذا عن إظهار رقم المتصل؟', a: 'يمكنك الاحتفاظ برقم هاتفك الأرضي الحالي، أو رقم الهاتف المقدم ضمن خدمة ADSL متوافقة (مثلاً من عُمانتل)، متى كان الخط وخدمة المزوّد متوافقين. ويمكن تهيئة خدمة إظهار رقم المتصل عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد. نتحقق من التوافق قبل التركيب.' },
         { q: 'هل يحتاج مُجيب إلى اتصال بالإنترنت؟ وهل توجد رسوم استخدام؟', a: 'نعم، يلزم اتصال إنترنت ADSL متوافق. يعتمد التعرّف على الكلام والردود الذكية وتوليد الصوت على خدمات ذكاء اصطناعي خارجية عبر الإنترنت، لذا لا يقدّم مُجيب محادثات ذكية دون اتصال. ورسوم استخدام مزوّد الذكاء الاصطناعي منفصلة: عادةً تستخدم حسابك الخاص لدى المزوّد وتدفع له مباشرة، ويمكن لفنيّينا مساعدتك في إعداده. ولا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب.' },
-        { q: 'ما الضمان المقدم؟', a: 'يتمتع جهاز مُجيب بضمان استبدال لمدة شهر واحد وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.' },
+        { q: 'ما الضمان المقدم؟', a: 'يتمتع جهاز مُجيب بضمان على الأجهزة لمدة سنتين وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.' },
       ],
     },
   },
@@ -397,6 +401,8 @@ h1 span { display: block; color: var(--mint); }
 .hero-free-list { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.12); }
 .hero-free { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; color: #d9eef4; }
 .hero-free b { font-size: 16px; }
+.was { font-size: .88em; font-weight: 600; opacity: .75; }
+.was s { text-decoration-thickness: 2px; }
 .hero-free b { color: var(--mint); font-weight: 900; }
 .hero-free svg { color: var(--mint); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }

@@ -5,7 +5,8 @@ import { WHATSAPP_NUMBER } from './constants.js'
 const toBaisa = n => Math.round(Number(n) * 1000)
 
 export const PACKAGE = pricing.packagePrice
-export const INSTALLATION_FREE = pricing.installationFree
+export const INSTALLATION = pricing.installationPrice
+export const INSTALLATION_FREE = pricing.installationFreeDuringOffer
 export const PORTAL_FREE_MONTHS = pricing.portalFreeMonths
 export const INCLUDED_PHONES = pricing.includedIpPhones
 export const VAT_ADDED = pricing.vat.added
@@ -23,12 +24,12 @@ export const VAT = {
   ar: { statement: fill(pricing.vat.statement.ar), short: pricing.vat.short.ar, detail: fill(pricing.vat.detail.ar) },
 }
 
-const P = omr(PACKAGE), M = PORTAL_FREE_MONTHS
+const P = omr(PACKAGE), I = omr(INSTALLATION), M = PORTAL_FREE_MONTHS
 
 // Complete offer in one sentence group, reused by the offer panel, Terms and the demo section.
 export const OFFER_SUMMARY = {
-  en: `MOJEEB package: OMR ${P}. Includes the MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone. Standard installation: FREE. Portal subscription: FREE for the first ${M} months. ${VAT.en.statement} Additional phones, additional network work, external AI-provider usage, telecommunications charges and portal access after the free period are priced separately where applicable.`,
-  ar: `باقة مُجيب: ${P} ر.ع. تشمل جهاز مُجيب الذكي ونظام سنترال داخلي (PBX) وبوابة Grandstream HT813 واحدة وهاتف IP مكتبياً واحداً. التركيب الاعتيادي: مجانًا. اشتراك البوابة: مجانًا لأول ${M} أشهر. ${VAT.ar.statement} وتُسعّر الهواتف الإضافية وأعمال الشبكة الإضافية ورسوم مزوّد الذكاء الاصطناعي ورسوم الاتصالات والاشتراك في البوابة بعد الفترة المجانية بشكل منفصل عند انطباقها.`,
+  en: `MOJEEB package: OMR ${P}. Includes the MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone. Standard installation (regular fixed price OMR ${I}): FREE during this limited-time offer. Portal subscription: FREE for the first ${M} months. ${VAT.en.statement} Additional phones, additional network work, external AI-provider usage, telecommunications charges and portal access after the free period are priced separately where applicable.`,
+  ar: `باقة مُجيب: ${P} ر.ع. تشمل جهاز مُجيب الذكي ونظام سنترال داخلي (PBX) وبوابة Grandstream HT813 واحدة وهاتف IP مكتبياً واحداً. التركيب الاعتيادي (سعره الثابت المعتاد ${I} ر.ع): مجانًا خلال فترة العرض. اشتراك البوابة: مجانًا لأول ${M} أشهر. ${VAT.ar.statement} وتُسعّر الهواتف الإضافية وأعمال الشبكة الإضافية ورسوم مزوّد الذكاء الاصطناعي ورسوم الاتصالات والاشتراك في البوابة بعد الفترة المجانية بشكل منفصل عند انطباقها.`,
 }
 
 // Approved one-phone wording (brochure campaign).

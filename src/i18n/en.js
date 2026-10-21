@@ -1,4 +1,4 @@
-import { PACKAGE, PORTAL_FREE_MONTHS, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, omr3 } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, omr3 } from '../pricing.js'
 
 export default {
   nav: {
@@ -175,7 +175,7 @@ export default {
   offer: {
     label: 'MOJEEB + PBX Package', badge: 'Limited-time offer',
     title: 'MOJEEB — AI answering + an in-house PBX',
-    price: `OMR ${omr(PACKAGE)}`, priceLabel: `One-time package price · FREE standard installation · ${PORTAL_FREE_MONTHS} months of portal access FREE`,
+    price: `OMR ${omr(PACKAGE)}`, priceLabel: `One-time package price · FREE standard installation (regular price OMR ${omr(INSTALLATION)}) · ${PORTAL_FREE_MONTHS} months of portal access FREE`,
     sub: 'The MOJEEB AI appliance, an in-house PBX system, one Grandstream HT813 gateway and one IP desk phone.',
     includesTitle: "What's included", includes: [
       'MOJEEB AI appliance', 'In-house PBX system',
@@ -300,7 +300,7 @@ export default {
     demo: {
       label: 'Request a Demo',
       title: 'See MOJEEB Working for Your Business',
-      text: `MOJEEB is in pre-launch. Request a live demonstration of the OMR ${omr(PACKAGE)} MOJEEB + PBX package, with FREE standard installation and ${PORTAL_FREE_MONTHS} months of portal access FREE. Orders and delivery dates are confirmed in writing at launch; AI-provider usage is separate, and no free trial is currently available.`,
+      text: `MOJEEB is in pre-launch. Request a live demonstration of the OMR ${omr(PACKAGE)} MOJEEB + PBX package, with FREE standard installation (regular fixed price OMR ${omr(INSTALLATION)}) and ${PORTAL_FREE_MONTHS} months of portal access FREE. Orders and delivery dates are confirmed in writing at launch; AI-provider usage is separate, and no free trial is currently available.`,
       nameLabel: 'Full Name',
       companyLabel: 'Company / Business Name',
       phoneLabel: 'Phone Number',
@@ -436,7 +436,7 @@ export default {
       },
       {
         title: '3. Promotional benefits and separately priced services',
-        body: `Under the current offer, standard installation is provided free of charge, and the FSS portal subscription is free for the first ${PORTAL_FREE_MONTHS} months. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; continued portal access after the free period; charges for the external AI services that power MOJEEB conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
+        body: `Standard installation has a fixed price of OMR ${omr3(INSTALLATION)}. Under the current limited-time offer, standard installation is provided free of charge, and the FSS portal subscription is free for the first ${PORTAL_FREE_MONTHS} months. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; continued portal access after the free period; charges for the external AI services that power MOJEEB conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
       },
       {
         title: '4. Prices and taxes',
@@ -452,7 +452,7 @@ export default {
       },
       {
         title: '7. Warranty',
-        body: 'The Mojeeb appliance carries a one-month replacement warranty, subject to FSS written warranty terms. Warranty arrangements for other items are stated in your quotation.',
+        body: 'The MOJEEB appliance hardware carries a two-year warranty, subject to FSS written warranty terms. Warranty arrangements for other items are stated in your quotation.',
       },
       {
         title: '8. Trials and availability',
