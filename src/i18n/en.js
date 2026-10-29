@@ -369,12 +369,12 @@ export default {
 
   privacy: {
     title: 'Privacy Policy',
-    lastUpdated: 'Last updated: 10 October 2026',
+    lastUpdated: 'Last updated: 29 October 2026',
     intro: 'This policy explains how Future Smart Support ("FSS") handles information through this website and in connection with Mojeeb AI. It distinguishes between the Mojeeb AI appliance installed at your premises, the connected AI services it uses, and the optional FSS Cloud Portal.',
     sections: [
       {
         title: '1. Information you send us through this website',
-        body: 'When you use our contact or demo-request forms, or contact us by email or WhatsApp, we receive the details you provide, such as your name, email address, phone number, company name, business type and message. We use this information to respond to your enquiry, arrange demonstrations and prepare quotations. Form submissions are stored in FSS systems and forwarded to our team by email. Messages sent through WhatsApp are also subject to WhatsApp\'s own terms and privacy policy.',
+        body: 'When you use our contact or demo-request forms, or contact us by email or phone, we receive the details you provide, such as your name, email address, phone number, company name, business type and message. We use this information to respond to your enquiry, arrange demonstrations and prepare quotations. Form submissions are stored in FSS systems and forwarded to our team by email. Calls to our company number +968 2420 2829 are answered by Mojeeb AI, so the call information described in sections 2 and 3 also applies to those calls.',
       },
       {
         title: '2. Call information on the Mojeeb AI appliance',
