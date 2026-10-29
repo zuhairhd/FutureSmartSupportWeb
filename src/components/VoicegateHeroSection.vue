@@ -6,7 +6,7 @@
       <p class="vg-hero-sub">{{ c.sub }}</p>
       <div class="vg-action-row">
         <router-link :to="{path:'/voicegate-demo',hash:'#demo'}" class="btn btn-primary">{{ c.demo }}</router-link>
-        <a :href="WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="btn vg-secondary">{{ c.whatsapp }}</a>
+        <a :href="PHONE_URL" class="btn vg-secondary">{{ c.call }}</a>
       </div>
       <div class="vg-badges"><span>{{ c.badge1 }}</span><span>{{ c.badge2 }}</span><span>{{ c.badge3 }}</span></div>
     </div>
@@ -15,11 +15,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { WHATSAPP_URL } from '../constants.js'
+import { PHONE_URL } from '../constants.js'
 const { lang } = useLanguage()
 const c = computed(()=>lang.value==='ar'
- ? {kicker:'Future Smart Support · مُجيب',title:'تعرّف على مُجيب',accent:'وشاهده يعمل لنشاطك.',sub:'جهاز استقبال ذكي خاص بك للتعامل مع مكالمات العملاء داخل مقرك، مع بوابة سحابية اختيارية للمتابعة عن بُعد.',demo:'اطلب عرضاً مباشراً',whatsapp:'تواصل عبر واتساب',badge1:'العربية + الإنجليزية',badge2:'جهاز خاص بك',badge3:'حل للأعمال الصغيرة'}
- : {kicker:'FUTURE SMART SUPPORT · MOJEEB AI',title:'Meet Mojeeb AI.',accent:'Hear the difference.',sub:'Your own AI receptionist appliance for customer calls, with an optional cloud portal for remote follow-up.',demo:'Request a live demo',whatsapp:'Chat on WhatsApp',badge1:'Arabic + English',badge2:'Your own appliance',badge3:'Made for small businesses'})
+ ? {kicker:'Future Smart Support · مُجيب',title:'تعرّف على مُجيب',accent:'وشاهده يعمل لنشاطك.',sub:'جهاز استقبال ذكي خاص بك للتعامل مع مكالمات العملاء داخل مقرك، مع بوابة سحابية اختيارية للمتابعة عن بُعد.',demo:'اطلب عرضاً مباشراً',call:'اتصل بنا',badge1:'العربية + الإنجليزية',badge2:'جهاز خاص بك',badge3:'حل للأعمال الصغيرة'}
+ : {kicker:'FUTURE SMART SUPPORT · MOJEEB AI',title:'Meet Mojeeb AI.',accent:'Hear the difference.',sub:'Your own AI receptionist appliance for customer calls, with an optional cloud portal for remote follow-up.',demo:'Request a live demo',call:'Call us',badge1:'Arabic + English',badge2:'Your own appliance',badge3:'Made for small businesses'})
 </script>
 <style scoped>
 .vg-hero { padding:92px 0 82px; background:radial-gradient(circle at 76% 7%,#174e70,transparent 40%),linear-gradient(125deg,#061b30,#103a57) !important; color:#fff; border-bottom:4px solid #1ad1c7; }

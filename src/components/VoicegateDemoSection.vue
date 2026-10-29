@@ -9,10 +9,10 @@
           <span class="vg-offer-price" dir="ltr">599 <small>{{ lang === 'ar' ? 'ر.ع' : 'R.O' }}</small></span>
           <span>{{ lang === 'ar' ? 'عرض تعريفي خاص · غير شامل ضريبة القيمة المضافة' : 'Special introductory offer · excl. VAT' }}</span>
         </div>
-        <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري تواصل معنا عبر واتساب.' : 'For an immediate enquiry, contact us on WhatsApp.' }}</p>
-        <a :href="WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="btn btn-ghost vg-wa">
-          <MarketingIcon name="whatsapp" :size="18" />
-          <span>{{ lang === 'ar' ? 'واتساب' : 'WhatsApp' }} <bdi dir="ltr">+968 9277 1730</bdi></span>
+        <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري اتصل بنا، وسيرد عليك مُجيب.' : 'For an immediate enquiry, call us. Mojeeb answers.' }}</p>
+        <a :href="PHONE_URL" class="btn btn-ghost vg-wa">
+          <MarketingIcon name="phone" :size="18" />
+          <span>{{ lang === 'ar' ? 'اتصل بنا' : 'Call us' }} <bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></span>
         </a>
       </div>
       <div class="card form-card">
@@ -76,7 +76,7 @@
 import { ref, nextTick } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { useContactSubmit, formError, EMAIL_RE } from '../composables/useContactSubmit.js'
-import { WHATSAPP_URL } from '../constants.js'
+import { PHONE_URL, PHONE_DISPLAY } from '../constants.js'
 import MarketingIcon from './MarketingIcon.vue'
 
 const { t, lang } = useLanguage()
