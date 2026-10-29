@@ -9,10 +9,10 @@
           <span class="vg-offer-price" dir="ltr">{{ omr(PACKAGE) }} <small>{{ lang === 'ar' ? 'ر.ع' : 'OMR' }}</small></span>
           <span>{{ lang === 'ar' ? `عرض لفترة محدودة · مُجيب مع نظام PBX مدمج · التركيب مجاناً (بقيمة ${omr(INSTALLATION)} ر.ع) · البوابة مجاناً لمدة ${PORTAL_FREE_MONTHS} أشهر (بقيمة ${omr(PORTAL_VALUE)} ر.ع)` : `Limited-time offer · MOJEEB with built-in PBX · FREE installation (worth OMR ${omr(INSTALLATION)}) · ${PORTAL_FREE_MONTHS}-month portal FREE (worth OMR ${omr(PORTAL_VALUE)})` }}</span>
         </div>
-        <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري تواصل معنا عبر واتساب.' : 'For an immediate enquiry, contact us on WhatsApp.' }}</p>
-        <a :href="whatsappHref(lang)" target="_blank" rel="noopener noreferrer" class="btn btn-ghost vg-wa">
-          <MarketingIcon name="whatsapp" :size="18" />
-          <span>{{ lang === 'ar' ? 'واتساب' : 'WhatsApp' }} <bdi dir="ltr">+968 9277 1730</bdi></span>
+        <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري اتصل بنا، وسيرد عليك مُجيب.' : 'For an immediate enquiry, call us. Mojeeb answers.' }}</p>
+        <a :href="phoneHref()" class="btn btn-ghost vg-wa">
+          <MarketingIcon name="phone" :size="18" />
+          <span>{{ lang === 'ar' ? 'اتصل بنا' : 'Call us' }} <bdi dir="ltr">+968 2420 2829</bdi></span>
         </a>
       </div>
       <div class="card form-card">
@@ -76,7 +76,7 @@
 import { ref, nextTick } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { useContactSubmit, formError, EMAIL_RE } from '../composables/useContactSubmit.js'
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, omr, whatsappHref } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, omr, phoneHref } from '../pricing.js'
 import MarketingIcon from './MarketingIcon.vue'
 
 const { t, lang } = useLanguage()

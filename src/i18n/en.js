@@ -275,7 +275,7 @@ export default {
       headline: 'See Mojeeb AI in Action',
       sub: 'Your own Mojeeb AI appliance for business calls, with a built-in PBX and the FSS portal for remote call visibility and follow-up.',
       ctaDemo: 'Request a Demo',
-      ctaWhatsapp: 'Contact Us on WhatsApp',
+      ctaWhatsapp: 'Call Us',
     },
     explain: {
       label: 'How It Works',
@@ -317,9 +317,9 @@ export default {
     },
     whatsapp: {
       label: 'Direct Contact',
-      title: 'Contact Us on WhatsApp',
-      text: 'Prefer direct communication? Contact us on WhatsApp to discuss your business requirements and request a Mojeeb AI demo or quotation.',
-      button: 'Contact Us on WhatsApp',
+      title: 'Call Us',
+      text: 'Prefer direct communication? Call +968 2420 2829 to discuss your business requirements and request a Mojeeb AI demo or quotation.',
+      button: 'Call +968 2420 2829',
     },
     portalPreview: {
       label: 'FSS Portal',

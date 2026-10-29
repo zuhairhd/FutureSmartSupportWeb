@@ -1,6 +1,6 @@
 // Derived campaign values and shared offer copy. Edit ../pricing.json, not this file.
 import pricing from '../pricing.json'
-import { WHATSAPP_NUMBER } from './constants.js'
+import { PHONE_URL } from './constants.js'
 
 const toBaisa = n => Math.round(Number(n) * 1000)
 
@@ -39,9 +39,4 @@ export const PHONES_NOTE = {
   ar: 'يشمل العرض هاتف IP واحدًا، مع إمكانية إضافة هواتف متوافقة أخرى وربط موظفي الشركة بتحويلات داخلية. الهواتف الإضافية غير مشمولة بالعرض.',
 }
 
-export const WHATSAPP_MESSAGE = {
-  en: `Hello, I'm interested in the MOJEEB + PBX package for OMR ${P}. Please arrange a demonstration for my business.`,
-  ar: `مرحبًا، أنا مهتم بباقة مُجيب مع نظام PBX بسعر ${P} ريالًا عُمانيًا، وأرغب في عرض توضيحي لشركتي.`,
-}
-
-export const whatsappHref = lang => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE[lang] || WHATSAPP_MESSAGE.en)}`
+export const phoneHref = () => PHONE_URL

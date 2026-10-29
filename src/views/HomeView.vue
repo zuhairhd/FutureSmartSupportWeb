@@ -23,7 +23,7 @@
           </router-link>
           <div class="hero-actions">
             <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
-            <a class="btn btn-wa" :href="whatsappLink" target="_blank" rel="noopener noreferrer"><MarketingIcon name="whatsapp" :size="18" />{{ s.cta.whatsapp }}</a>
+            <a class="btn btn-wa" :href="phoneLink"><MarketingIcon name="phone" :size="18" />{{ s.cta.whatsapp }}</a>
           </div>
           <p class="hero-tagline">{{ s.hero.tagline }}</p>
           <!-- TODO(owner): keep or drop the pre-launch status; it conflicts with "Get MOJEEB today before the offer ends". -->
@@ -159,7 +159,7 @@
             <p class="offer-closing">{{ s.offer.closing }}</p>
             <div class="offer-actions">
               <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }}</router-link>
-              <a class="btn btn-wa-light" :href="whatsappLink" target="_blank" rel="noopener noreferrer"><MarketingIcon name="whatsapp" :size="18" />{{ s.cta.whatsapp }} <bdi dir="ltr">+968 9277 1730</bdi></a>
+              <a class="btn btn-wa-light" :href="phoneLink"><MarketingIcon name="phone" :size="18" />{{ s.cta.whatsapp }} <bdi dir="ltr">+968 2420 2829</bdi></a>
             </div>
           </div>
           <div class="offer-terms">
@@ -190,7 +190,7 @@
     <!-- Compact mobile contact bar; hidden while the hero, demo form, contact form or footer is on screen -->
     <div class="sticky-cta" :class="{ show: stickyVisible }" :aria-hidden="!stickyVisible">
       <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }" :tabindex="stickyVisible ? 0 : -1">{{ s.cta.demo }}</router-link>
-      <a class="btn btn-wa" :href="whatsappLink" target="_blank" rel="noopener noreferrer" :aria-label="s.cta.whatsapp" :tabindex="stickyVisible ? 0 : -1"><MarketingIcon name="whatsapp" :size="20" /></a>
+      <a class="btn btn-wa" :href="phoneLink" :aria-label="s.cta.whatsapp" :tabindex="stickyVisible ? 0 : -1"><MarketingIcon name="phone" :size="20" /></a>
     </div>
   </div>
 </template>
@@ -198,7 +198,7 @@
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, whatsappHref } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, phoneHref } from '../pricing.js'
 import MarketingIcon from '../components/MarketingIcon.vue'
 import ContactSection from '../components/ContactSection.vue'
 import VoicegateDemoSection from '../components/VoicegateDemoSection.vue'
@@ -209,7 +209,7 @@ const currency = computed(() => (lang.value === 'ar' ? 'ر.ع' : 'OMR'))
 const summary = computed(() => OFFER_SUMMARY[lang.value])
 const vat = computed(() => VAT[lang.value])
 const phonesNote = computed(() => PHONES_NOTE[lang.value])
-const whatsappLink = computed(() => whatsappHref(lang.value))
+const phoneLink = phoneHref()
 const P = omr(PACKAGE)
 const I = omr(INSTALLATION)
 const M = PORTAL_FREE_MONTHS
@@ -241,7 +241,7 @@ const messages = {
     portal: `${M}-month portal subscription`,
     worthInstall: `(worth OMR ${I})`,
     worthPortal: `(worth OMR ${V})`,
-    cta: { demo: 'Request a Demo', whatsapp: 'Chat on WhatsApp' },
+    cta: { demo: 'Request a Demo', whatsapp: 'Call us' },
     value: { title: 'AI answering + a built-in PBX.', sub: `Included in your OMR ${P} package.` },
     hero: {
       eyebrow: 'Turn every call into an opportunity',
@@ -328,7 +328,7 @@ const messages = {
         { q: 'Can I add more phones?', a: `Yes. MOJEEB includes a built-in PBX: the package includes one IP phone, and you can add more IP phones and extensions on the same PBX and connect branches and departments. Additional phones are not included in the package price; compatibility and pricing are confirmed in your quotation.` },
         { q: 'Are there recurring fees?', a: `There is no recurring software licence fee for the MOJEEB appliance. AI-provider usage is separate: you normally use your own AI-provider account and pay the provider directly. The portal subscription is free for the first ${M} months, then renewed according to the selected plan. Your telephone line and internet connection are billed by your providers.` },
         { q: 'What does the portal add?', a: `The first ${M} months of the FSS portal subscription are free (worth OMR ${V}). In the portal your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks from outside the office. After the free period it is renewed according to the selected plan; the appliance’s on-site dashboard remains available on your office network.` },
-        { q: 'How can my business request a demonstration?', a: 'Fill in the demo request form on this page, visit futuresmartsupport.com/voicegate-demo, or message us on WhatsApp at +968 9277 1730.' },
+        { q: 'How can my business request a demonstration?', a: 'Fill in the demo request form on this page, visit futuresmartsupport.com/voicegate-demo, or call us on +968 2420 2829.' },
         { q: 'Is VAT added to the price?', a: `${VAT.en.statement} ${VAT.en.detail}` },
         { q: 'Can I keep my business number? What about Caller ID?', a: 'You can keep your existing business landline number, or a voice number supplied with a compatible ADSL service (for example from Omantel), when the line and provider service are compatible. Caller ID can be configured when your provider enables it and the line supports it; provider fees may apply. We check compatibility before installation.' },
         { q: 'Does MOJEEB need an internet connection?', a: 'Yes. A compatible ADSL internet connection is required. Speech recognition, AI responses and voice use external AI services over the internet, so MOJEEB does not offer offline AI conversations.' },
@@ -345,7 +345,7 @@ const messages = {
     portal: `اشتراك البوابة لمدة ${M} أشهر`,
     worthInstall: `(بقيمة ${I} ر.ع)`,
     worthPortal: `(بقيمة ${V} ر.ع)`,
-    cta: { demo: 'اطلب عرضاً توضيحياً', whatsapp: 'تواصل عبر واتساب' },
+    cta: { demo: 'اطلب عرضاً توضيحياً', whatsapp: 'اتصل بنا' },
     value: { title: 'مُجيب يردّ على عملائك… ونظام PBX مدمج يربط فريقك.', sub: `كلاهما ضمن باقة ${P} ريالاً عُمانياً.` },
     hero: {
       eyebrow: 'حوّل كل مكالمة إلى فرصة',
@@ -432,7 +432,7 @@ const messages = {
         { q: 'هل يمكنني إضافة هواتف أخرى؟', a: 'نعم. يتضمن مُجيب نظام PBX مدمجاً؛ يشمل العرض هاتف IP واحداً، ويمكنك إضافة هواتف IP وتحويلات أخرى على نفس النظام وربط الفروع والأقسام. والهواتف الإضافية غير مشمولة في سعر الباقة، ويُؤكَّد التوافق والسعر في عرض السعر.' },
         { q: 'هل توجد رسوم دورية؟', a: `لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. ورسوم استخدام مزوّد الذكاء الاصطناعي منفصلة: عادةً تستخدم حسابك الخاص لدى المزوّد وتدفع له مباشرة. واشتراك البوابة مجاني لأول ${M} أشهر، ثم يُجدَّد حسب الخطة المختارة. ويُحاسَب خط الهاتف واتصال الإنترنت من قِبل مزوّديهما.` },
         { q: 'ماذا تضيف البوابة؟', a: `أول ${M} أشهر من اشتراك بوابة FSS مجانية (بقيمة ${V} ر.ع). ومن خلال البوابة يراجع فريقك المكالمات التي تعامل معها مُجيب، ويطّلع على تنبيهات المكالمات الفائتة والرسائل الصوتية، ويدير مهام المتابعة من خارج المكتب. وبعد الفترة المجانية يُجدَّد الاشتراك حسب الخطة المختارة، وتبقى لوحة المعلومات المحلية في الجهاز متاحة على شبكة مكتبك.` },
-        { q: 'كيف تطلب شركتي عرضاً توضيحياً؟', a: 'املأ نموذج طلب العرض التوضيحي في هذه الصفحة، أو زر futuresmartsupport.com/voicegate-demo، أو راسلنا عبر واتساب على ‎+968 9277 1730.' },
+        { q: 'كيف تطلب شركتي عرضاً توضيحياً؟', a: 'املأ نموذج طلب العرض التوضيحي في هذه الصفحة، أو زر futuresmartsupport.com/voicegate-demo، أو اتصل بنا على ‎+968 2420 2829.' },
         { q: 'هل تُضاف ضريبة القيمة المضافة إلى السعر؟', a: `${VAT.ar.statement} ${VAT.ar.detail}` },
         { q: 'هل يمكنني الاحتفاظ برقم نشاطي؟ وماذا عن إظهار رقم المتصل؟', a: 'يمكنك الاحتفاظ برقم هاتفك الأرضي الحالي، أو رقم الهاتف المقدم ضمن خدمة ADSL متوافقة (مثلاً من عُمانتل)، متى كان الخط وخدمة المزوّد متوافقين. ويمكن تهيئة خدمة إظهار رقم المتصل عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد. نتحقق من التوافق قبل التركيب.' },
         { q: 'هل يحتاج مُجيب إلى اتصال بالإنترنت؟', a: 'نعم، يلزم اتصال إنترنت ADSL متوافق. يعتمد التعرّف على الكلام والردود الذكية وتوليد الصوت على خدمات ذكاء اصطناعي خارجية عبر الإنترنت، لذا لا يقدّم مُجيب محادثات ذكية دون اتصال.' },
