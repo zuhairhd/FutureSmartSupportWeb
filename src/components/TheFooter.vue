@@ -15,7 +15,7 @@
         <router-link :to="{path:'/',hash:'#contact'}">{{ c.contactForm }}</router-link>
       </div>
       <div class="footer-column"><b>{{ c.contact }}</b>
-        <a :href="WHATSAPP_URL" target="_blank" rel="noopener noreferrer">{{ c.whatsapp }} <bdi dir="ltr">+968 9277 1730</bdi></a>
+        <a :href="PHONE_URL">{{ c.phone }} <bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></a>
         <a href="mailto:majid@FutureSmartSupport.com">majid@FutureSmartSupport.com</a>
         <span>{{ c.location }}</span>
       </div>
@@ -29,13 +29,13 @@
 <script setup>
 import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { WHATSAPP_URL } from '../constants.js'
+import { PHONE_URL, PHONE_DISPLAY } from '../constants.js'
 import logoUrl from '../../assets/FSS_Logo_light.png'
 const { lang } = useLanguage()
 const year = new Date().getFullYear()
 const c = computed(() => lang.value === 'ar'
-  ? {tagline:'مُجيب · ذكاء اصطناعي لاتصالات الأعمال',description:'حلول عملية لاتصالات العملاء تناسب الأعمال الصغيرة والمتوسطة في سلطنة عُمان.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'المزايا',cloud:'البوابة السحابية',demo:'اطلب تجربة',mojebPage:'صفحة مُجيب التعريفية',contactForm:'نموذج التواصل',whatsapp:'واتساب',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
-  : {tagline:'Mojeeb AI · AI-powered business communications',description:'Practical customer communication solutions for small and growing businesses in Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'Benefits',cloud:'Cloud portal',demo:'Request demo',mojebPage:'Mojeeb AI product page',contactForm:'Contact form',whatsapp:'WhatsApp',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
+  ? {tagline:'مُجيب · ذكاء اصطناعي لاتصالات الأعمال',description:'حلول عملية لاتصالات العملاء تناسب الأعمال الصغيرة والمتوسطة في سلطنة عُمان.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'المزايا',cloud:'البوابة السحابية',demo:'اطلب تجربة',mojebPage:'صفحة مُجيب التعريفية',contactForm:'نموذج التواصل',phone:'هاتف',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
+  : {tagline:'Mojeeb AI · AI-powered business communications',description:'Practical customer communication solutions for small and growing businesses in Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'Benefits',cloud:'Cloud portal',demo:'Request demo',mojebPage:'Mojeeb AI product page',contactForm:'Contact form',phone:'Phone',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
 </script>
 <style scoped>
 .fss-footer { background:#05192e; color:#fff; padding:57px 0 21px; }

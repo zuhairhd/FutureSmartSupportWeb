@@ -18,7 +18,7 @@
           <div class="hero-actions">
             <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.hero.demoCta }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
             <router-link class="btn hero-outline" :to="{ path: '/', hash: '#offer' }">{{ s.hero.offerCta }}</router-link>
-            <a class="btn hero-whatsapp" :href="whatsappLink" target="_blank" rel="noopener noreferrer"><MarketingIcon name="whatsapp" :size="18" />{{ s.hero.whatsappCta }}</a>
+            <a class="btn hero-whatsapp" :href="PHONE_URL"><MarketingIcon name="phone" :size="18" />{{ s.hero.whatsappCta }}</a>
           </div>
           <div class="hero-badges">
             <span v-for="badge in s.hero.badges" :key="badge"><MarketingIcon name="check" :size="15" />{{ badge }}</span>
@@ -74,8 +74,8 @@
               <div v-for="row in s.offer.rows" :key="row.label" :class="{ total: row.total }"><dt>{{ row.label }}</dt><dd><bdi>{{ row.value }}</bdi> {{ currency }}</dd></div>
             </dl>
             <p class="price-vat">{{ s.offer.vatNote }}</p>
-            <a class="price-whatsapp" :href="whatsappLink" target="_blank" rel="noopener noreferrer">
-              <span class="pw-label"><MarketingIcon name="whatsapp" :size="18" />{{ s.offer.quoteCta }}</span> <MarketingIcon name="arrow" :size="18" class="flip-rtl" />
+            <a class="price-whatsapp" :href="PHONE_URL">
+              <span class="pw-label"><MarketingIcon name="phone" :size="18" />{{ s.offer.quoteCta }}</span> <MarketingIcon name="arrow" :size="18" class="flip-rtl" />
             </a>
             <p class="price-terms">{{ s.offer.terms }}</p>
           </div>
@@ -178,7 +178,7 @@
     <section class="pre-contact-section">
       <div class="container">
         <div class="cta-ribbon"><div><p class="cta-eyebrow">{{ s.final.eyebrow }}</p><h2>{{ s.final.title }}</h2><p>{{ s.final.sub }}</p></div>
-          <div class="cta-ribbon-actions"><router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.final.demoCta }}</router-link><a :href="whatsappLink" target="_blank" rel="noopener noreferrer" class="btn cta-outline"><MarketingIcon name="whatsapp" :size="18" />{{ s.final.whatsappLabel }} <bdi dir="ltr">+968 9277 1730</bdi></a></div>
+          <div class="cta-ribbon-actions"><router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.final.demoCta }}</router-link><a :href="PHONE_URL" class="btn cta-outline"><MarketingIcon name="phone" :size="18" />{{ s.final.whatsappLabel }} <bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></a></div>
         </div>
       </div>
     </section>
@@ -190,7 +190,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { WHATSAPP_NUMBER } from '../constants.js'
+import { PHONE_URL, PHONE_DISPLAY } from '../constants.js'
 import MarketingIcon from '../components/MarketingIcon.vue'
 import ContactSection from '../components/ContactSection.vue'
 import VoicegateDemoSection from '../components/VoicegateDemoSection.vue'
@@ -198,16 +198,14 @@ import VoicegateDemoSection from '../components/VoicegateDemoSection.vue'
 const { lang } = useLanguage()
 const s = computed(() => messages[lang.value] || messages.en)
 const currency = computed(() => (lang.value === 'ar' ? 'ر.ع' : 'R.O'))
-const whatsappLink = computed(() => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(s.value.whatsapp)}`)
 
 const messages = {
   en: {
-    whatsapp: 'Hello Future Smart Support. I would like a demo and quotation for the Mojeeb AI 599 R.O introductory package.',
     hero: {
       eyebrow: 'SMART COMMUNICATIONS. STRONGER BUSINESSES.', product: 'Introducing Mojeeb AI · FSS AI Agent',
       headline: 'Manage your customer communications', accent: 'from anywhere.',
       sub: 'Meet Mojeeb AI: your own Ubuntu-based AI receptionist appliance for growing businesses in Oman. Keep your compatible existing line, add one IP desk phone, and add cloud services only when you need them.',
-      offerCta: 'View the 599 R.O offer', demoCta: 'Register interest or request a demo', whatsappCta: 'WhatsApp us',
+      offerCta: 'View the 599 R.O offer', demoCta: 'Register interest or request a demo', whatsappCta: 'Call us',
       status: 'Pre-launch: Mojeeb AI is preparing for launch in Oman. Register your interest or book a demonstration; orders and delivery dates will be confirmed at launch.',
       badges: ['Arabic & English', 'Your own local appliance', 'No recurring licence fee'],
       visualLabel: 'Illustrative call flow showing an incoming call, the Mojeeb AI agent and follow-up.'
@@ -219,7 +217,7 @@ const messages = {
       ribbon:'Special introductory offer', heroNote:'excl. VAT · one-time', priceIntro:'SPECIAL INTRODUCTORY PRICE', once:'One-time appliance package · excl. VAT',
       rows:[{label:'Mojeeb AI starter package',value:'599.000'},{label:'Optional professional installation (10%)',value:'59.900'},{label:'Package + standard installation',value:'658.900',total:true}],
       vatNote:'All prices exclude VAT. VAT is added where applicable.',
-      quoteCta:'Ask about this offer on WhatsApp',
+      quoteCta:'Call us about this offer',
       terms:'Installation (10%), AI provider charges, network or internet readiness work, telecom-provider fees and optional FSS Cloud Portal services are additional where applicable. Standard installation requires an existing LAN and a compatible ADSL service. Terms and compatibility are confirmed in your quotation.',
       includedLabel:'WHAT IS INCLUDED', includedTitle:'Three essentials. One smart solution.', demoCta:'Register interest in this package',
       items:[{icon:'server',title:'Mojeeb AI appliance',sub:'Your own physical local server running Ubuntu Server and the FSS AI agent.'},{icon:'gateway',title:'Grandstream HT813 gateway',sub:'Connects one compatible analog telephone line to the system over SIP.'},{icon:'deskphone',title:'One IP desk phone',sub:'For your team to take and return calls through the configured system.'}],
@@ -249,18 +247,17 @@ const messages = {
         {q:'What warranty is provided?',a:'The Mojeeb appliance has a one-month replacement warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.'},
         {q:'Can I order now? Is there a free trial?',a:'Mojeeb AI is in pre-launch. You can register your interest and book a live demonstration now; orders and delivery dates will be confirmed at launch. No free trial is currently offered.'}
       ]},
-    final:{eyebrow:'YOUR CUSTOMERS ARE CALLING',title:'Ready for a smarter first impression?',sub:'Register your interest in Mojeeb AI and book a live demonstration ahead of launch.',demoCta:'Register interest or request a demo',whatsappLabel:'WhatsApp'}
+    final:{eyebrow:'YOUR CUSTOMERS ARE CALLING',title:'Ready for a smarter first impression?',sub:'Register your interest in Mojeeb AI and book a live demonstration ahead of launch.',demoCta:'Register interest or request a demo',whatsappLabel:'Call us'}
   },
   ar: {
-    whatsapp:'مرحباً فريق Future Smart Support، أرغب في عرض توضيحي وتسعيرة لباقة مُجيب التعريفية بسعر 599 ر.ع.',
-    hero:{eyebrow:'اتصالات أذكى. أعمال أقوى.',product:'تعرّف على مُجيب · وكيل FSS الذكي',headline:'أدر اتصالات عملائك',accent:'من أي مكان.',sub:'مُجيب جهاز استقبال ذكي خاص بك يعمل بنظام Ubuntu للأعمال النامية في عُمان. احتفظ بخطك الحالي المتوافق، وأضف هاتفاً مكتبياً بتقنية IP، واشترك في الخدمات السحابية فقط عندما تحتاج إليها.',offerCta:'شاهد عرض 599 ر.ع',demoCta:'سجّل اهتمامك أو اطلب عرضاً توضيحياً',whatsappCta:'تواصل عبر واتساب',status:'مرحلة ما قبل الإطلاق: يستعد مُجيب للإطلاق في عُمان. سجّل اهتمامك أو احجز عرضاً توضيحياً، وسيتم تأكيد الطلبات ومواعيد التسليم عند الإطلاق.',badges:['العربية والإنجليزية','جهاز محلي خاص بك','بدون رسوم ترخيص دورية'],visualLabel:'رسم توضيحي لمسار مكالمة واردة عبر مُجيب ثم متابعة العميل.'},
+    hero:{eyebrow:'اتصالات أذكى. أعمال أقوى.',product:'تعرّف على مُجيب · وكيل FSS الذكي',headline:'أدر اتصالات عملائك',accent:'من أي مكان.',sub:'مُجيب جهاز استقبال ذكي خاص بك يعمل بنظام Ubuntu للأعمال النامية في عُمان. احتفظ بخطك الحالي المتوافق، وأضف هاتفاً مكتبياً بتقنية IP، واشترك في الخدمات السحابية فقط عندما تحتاج إليها.',offerCta:'شاهد عرض 599 ر.ع',demoCta:'سجّل اهتمامك أو اطلب عرضاً توضيحياً',whatsappCta:'اتصل بنا',status:'مرحلة ما قبل الإطلاق: يستعد مُجيب للإطلاق في عُمان. سجّل اهتمامك أو احجز عرضاً توضيحياً، وسيتم تأكيد الطلبات ومواعيد التسليم عند الإطلاق.',badges:['العربية والإنجليزية','جهاز محلي خاص بك','بدون رسوم ترخيص دورية'],visualLabel:'رسم توضيحي لمسار مكالمة واردة عبر مُجيب ثم متابعة العميل.'},
     visual:{status:'مُجيب جاهز',incoming:'مكالمة عميل واردة',incomingSub:'عبر خط هاتفك المتوافق',aiLabel:'مُجيب · وكيلك الذكي',agent:'مُجيب في خدمتك',agentDesc:'يرد · يوثّق · يدعم المتابعة',followup:'محادثة العميل',context:'جاهز للمتابعة',footer:'يتولى جهاز مُجيب استقبال المكالمات',language:'العربية + الإنجليزية'},
     trust:{aria:'مميزات المنتج',items:[{title:'احتفظ برقمك',sub:'متى كان خطك متوافقاً'},{title:'جهاز خاص بك',sub:'خادم مُجيب يعمل بنظام Ubuntu داخل مقرك'},{title:'العربية + الإنجليزية',sub:'تواصل مع عدد أكبر من العملاء'}]},
     offer:{eyebrow:'باقة البداية من مُجيب',title:'كل ما تحتاجه لتبدأ بذكاء.',sub:'امتلك الحل المحلي الأساسي: جهاز مُجيب الذكي وبوابة لخط الهاتف وهاتفاً مكتبياً بتقنية IP في باقة تعريفية واحدة.',
       ribbon:'عرض تعريفي خاص',heroNote:'غير شامل الضريبة · لمرة واحدة',priceIntro:'سعر تعريفي خاص',once:'باقة الجهاز لمرة واحدة · غير شامل ضريبة القيمة المضافة',
       rows:[{label:'باقة بداية مُجيب',value:'599.000'},{label:'التركيب الاحترافي الاختياري (10%)',value:'59.900'},{label:'الباقة مع التركيب الاعتيادي',value:'658.900',total:true}],
       vatNote:'جميع الأسعار غير شاملة ضريبة القيمة المضافة، وتُضاف الضريبة حيثما تنطبق.',
-      quoteCta:'استفسر عن العرض عبر واتساب',
+      quoteCta:'اتصل بنا للاستفسار عن العرض',
       terms:'يُضاف التركيب (10%) ورسوم مزوّدي الذكاء الاصطناعي وأعمال تجهيز الشبكة أو الإنترنت ورسوم مزوّد الاتصالات وخدمات بوابة FSS السحابية الاختيارية حيثما تنطبق. يشترط للتركيب الاعتيادي توفر شبكة LAN قائمة وخدمة ADSL متوافقة. وتُؤكَّد الشروط والتوافق في عرض السعر.',
       includedLabel:'محتويات العرض',includedTitle:'ثلاثة عناصر. حل ذكي واحد.',demoCta:'سجّل اهتمامك بهذه الباقة',
       items:[{icon:'server',title:'جهاز مُجيب الذكي',sub:'خادم محلي خاص بك يعمل بنظام Ubuntu Server ويشغّل وكيل FSS الذكي.'},{icon:'gateway',title:'بوابة Grandstream HT813',sub:'تربط خط هاتف تناظري واحد متوافق بالنظام عبر SIP.'},{icon:'deskphone',title:'هاتف مكتبي واحد بتقنية IP',sub:'لاستقبال المكالمات ومعاودة الاتصال عبر النظام المُهيّأ.'}],
@@ -290,7 +287,7 @@ const messages = {
         {q:'ما الضمان المقدم؟',a:'يتمتع جهاز مُجيب بضمان استبدال لمدة شهر واحد وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.'},
         {q:'هل يمكنني الطلب الآن؟ وهل تتوفر تجربة مجانية؟',a:'مُجيب في مرحلة ما قبل الإطلاق. يمكنك الآن تسجيل اهتمامك وحجز عرض توضيحي مباشر، وسيتم تأكيد الطلبات ومواعيد التسليم عند الإطلاق. ولا تتوفر تجربة مجانية حالياً.'}
       ]},
-    final:{eyebrow:'عملاؤك يتصلون الآن',title:'هل أنت جاهز لتجربة استقبال أذكى؟',sub:'سجّل اهتمامك بمُجيب واحجز عرضاً توضيحياً مباشراً قبل الإطلاق.',demoCta:'سجّل اهتمامك أو اطلب عرضاً توضيحياً',whatsappLabel:'واتساب'}
+    final:{eyebrow:'عملاؤك يتصلون الآن',title:'هل أنت جاهز لتجربة استقبال أذكى؟',sub:'سجّل اهتمامك بمُجيب واحجز عرضاً توضيحياً مباشراً قبل الإطلاق.',demoCta:'سجّل اهتمامك أو اطلب عرضاً توضيحياً',whatsappLabel:'اتصل بنا'}
   }
 }
 

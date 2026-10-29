@@ -46,9 +46,9 @@ export function useContactSubmit() {
 const ERRORS = {
   en: {
     invalid: 'Please check the highlighted details and try again.',
-    rate_limited: 'Too many requests were sent from this connection. Please try again later or contact us on WhatsApp.',
-    network: 'We could not reach our server. Please check your connection and try again, or contact us on WhatsApp.',
-    server: 'Your request could not be sent. Please try again or contact us on WhatsApp.',
+    rate_limited: 'Too many requests were sent from this connection. Please try again later or call us on +968 2420 2829.',
+    network: 'We could not reach our server. Please check your connection and try again, or call us on +968 2420 2829.',
+    server: 'Your request could not be sent. Please try again or call us on +968 2420 2829.',
     name: 'Please enter your name.',
     email: 'Please enter a valid email address.',
     message: `Please write at least ${MIN_MESSAGE_LENGTH} characters.`,
@@ -56,9 +56,9 @@ const ERRORS = {
   },
   ar: {
     invalid: 'يرجى مراجعة البيانات المحددة والمحاولة مرة أخرى.',
-    rate_limited: 'تم إرسال عدد كبير من الطلبات من هذا الاتصال. يرجى المحاولة لاحقاً أو التواصل معنا عبر واتساب.',
-    network: 'تعذّر الاتصال بالخادم. يرجى التحقق من اتصالك والمحاولة مرة أخرى، أو التواصل معنا عبر واتساب.',
-    server: 'تعذّر إرسال طلبك. يرجى المحاولة مرة أخرى أو التواصل معنا عبر واتساب.',
+    rate_limited: 'تم إرسال عدد كبير من الطلبات من هذا الاتصال. يرجى المحاولة لاحقاً أو الاتصال بنا على الرقم 24202829.',
+    network: 'تعذّر الاتصال بالخادم. يرجى التحقق من اتصالك والمحاولة مرة أخرى، أو الاتصال بنا على الرقم 24202829.',
+    server: 'تعذّر إرسال طلبك. يرجى المحاولة مرة أخرى أو الاتصال بنا على الرقم 24202829.',
     name: 'يرجى إدخال الاسم.',
     email: 'يرجى إدخال بريد إلكتروني صحيح.',
     message: `يرجى كتابة ${MIN_MESSAGE_LENGTH} حرفاً على الأقل.`,
