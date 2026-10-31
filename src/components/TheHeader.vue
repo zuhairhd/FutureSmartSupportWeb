@@ -7,11 +7,11 @@
         <span class="brand-product">{{ c.product }}</span>
       </router-link>
       <nav id="fss-primary-navigation" class="site-nav" :class="{ open: menuOpen }" :aria-label="c.navLabel">
-        <router-link :to="{path:'/',hash:'#solution'}" @click="closeMenu">{{ c.solution }}</router-link>
-        <router-link :to="{path:'/',hash:'#how'}" @click="closeMenu">{{ c.how }}</router-link>
         <router-link :to="{path:'/',hash:'#features'}" @click="closeMenu">{{ c.benefits }}</router-link>
+        <router-link :to="{path:'/',hash:'#package'}" @click="closeMenu">{{ c.pkg }}</router-link>
+        <router-link :to="{path:'/',hash:'#how'}" @click="closeMenu">{{ c.how }}</router-link>
         <router-link :to="{path:'/',hash:'#offer'}" @click="closeMenu">{{ c.offer }}</router-link>
-        <router-link :to="{path:'/',hash:'#cloud'}" @click="closeMenu">{{ c.cloud }}</router-link>
+        <router-link :to="{path:'/',hash:'#faq'}" @click="closeMenu">{{ c.faq }}</router-link>
         <router-link class="header-demo" :to="{path: route.path === '/voicegate-demo' ? '/voicegate-demo' : '/', hash:'#demo'}" @click="closeMenu">{{ c.demo }}</router-link>
       </nav>
       <div class="header-controls">
@@ -36,8 +36,8 @@ const route = useRoute()
 const menuOpen = ref(false)
 const scrolled = ref(false)
 const c = computed(() => lang.value === 'ar'
-  ? {skip:'انتقل إلى المحتوى',product:'مُجيب',navLabel:'القائمة الرئيسية',solution:'الحل',how:'كيف يعمل',benefits:'المزايا',offer:'العرض',cloud:'البوابة السحابية',demo:'اطلب تجربة',switchLabel:'Switch language to English',switchText:'English',menu:'فتح القائمة'}
-  : {skip:'Skip to content',product:'Mojeeb AI',navLabel:'Main navigation',solution:'Solution',how:'How it works',benefits:'Benefits',offer:'Offer',cloud:'Cloud portal',demo:'Request demo',switchLabel:'التبديل إلى العربية',switchText:'العربية',menu:'Toggle navigation'})
+  ? {skip:'انتقل إلى المحتوى',product:'مُجيب',navLabel:'القائمة الرئيسية',benefits:'المزايا',pkg:'الباقة',how:'كيف يعمل',offer:'العرض',faq:'الأسئلة الشائعة',demo:'اطلب عرضًا توضيحيًا',switchLabel:'Switch language to English',switchText:'English',menu:'فتح القائمة'}
+  : {skip:'Skip to content',product:'MOJEEB',navLabel:'Main navigation',benefits:'Benefits',pkg:'Package',how:'How it works',offer:'Offer',faq:'FAQ',demo:'Request a Demo',switchLabel:'التبديل إلى العربية',switchText:'العربية',menu:'Toggle navigation'})
 function closeMenu() { menuOpen.value = false }
 function toggleLanguage() { setLang(lang.value === 'ar' ? 'en' : 'ar'); closeMenu() }
 function onScroll() { scrolled.value = window.scrollY > 8 }

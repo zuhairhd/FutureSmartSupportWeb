@@ -6,7 +6,7 @@
       <p class="vg-hero-sub">{{ c.sub }}</p>
       <div class="vg-action-row">
         <router-link :to="{path:'/voicegate-demo',hash:'#demo'}" class="btn btn-primary">{{ c.demo }}</router-link>
-        <a :href="PHONE_URL" class="btn vg-secondary">{{ c.call }}</a>
+        <a :href="phoneHref()" class="btn vg-secondary">{{ c.call }}</a>
       </div>
       <div class="vg-badges"><span>{{ c.badge1 }}</span><span>{{ c.badge2 }}</span><span>{{ c.badge3 }}</span></div>
     </div>
@@ -15,11 +15,12 @@
 <script setup>
 import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { PHONE_URL } from '../constants.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, omr, phoneHref } from '../pricing.js'
 const { lang } = useLanguage()
+const P = omr(PACKAGE), I = omr(INSTALLATION), M = PORTAL_FREE_MONTHS, V = omr(PORTAL_VALUE)
 const c = computed(()=>lang.value==='ar'
- ? {kicker:'Future Smart Support · مُجيب',title:'تعرّف على مُجيب',accent:'وشاهده يعمل لنشاطك.',sub:'جهاز استقبال ذكي خاص بك للتعامل مع مكالمات العملاء داخل مقرك، مع بوابة سحابية اختيارية للمتابعة عن بُعد.',demo:'اطلب عرضاً مباشراً',call:'اتصل بنا',badge1:'العربية + الإنجليزية',badge2:'جهاز خاص بك',badge3:'حل للأعمال الصغيرة'}
- : {kicker:'FUTURE SMART SUPPORT · MOJEEB AI',title:'Meet Mojeeb AI.',accent:'Hear the difference.',sub:'Your own AI receptionist appliance for customer calls, with an optional cloud portal for remote follow-up.',demo:'Request a live demo',call:'Call us',badge1:'Arabic + English',badge2:'Your own appliance',badge3:'Made for small businesses'})
+ ? {kicker:'Future Smart Support · مُجيب',title:'كل مكالمة فائتة',accent:'قد تعني خسارة صفقة',sub:`مُجيب يرد على عملائك ويسجّل التفاصيل لتتابع فرصك، مع نظام PBX مدمج يربط فريقك. باقة مُجيب الكاملة ${P} ر.ع لمرة واحدة، مع التركيب الاحترافي مجاناً (بقيمة ${I} ر.ع) واشتراك البوابة مجاناً لمدة ${M} أشهر (بقيمة ${V} ر.ع).`,demo:'اطلب عرضاً توضيحياً',call:'اتصل بنا',badge1:'عرض لفترة محدودة',badge2:'نظام PBX مدمج مشمول',badge3:'العربية والإنجليزية'}
+ : {kicker:'FUTURE SMART SUPPORT · MOJEEB',title:'Never Miss',accent:'Another Customer',sub:`Every missed call could be a lost deal. MOJEEB answers your calls 24/7, handles customer inquiries, and helps your business grow — in Arabic and English. Complete MOJEEB package: OMR ${P} one-time, with FREE professional installation (worth OMR ${I}) and a FREE ${M}-month portal subscription (worth OMR ${V}).`,demo:'Request a Demo',call:'Call us',badge1:'Limited-time offer',badge2:'Built-in PBX included',badge3:'Arabic & English'})
 </script>
 <style scoped>
 .vg-hero { padding:92px 0 82px; background:radial-gradient(circle at 76% 7%,#174e70,transparent 40%),linear-gradient(125deg,#061b30,#103a57) !important; color:#fff; border-bottom:4px solid #1ad1c7; }

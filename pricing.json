@@ -1,0 +1,25 @@
+{
+  "_readme": "Single source of truth for the current MOJEEB campaign: price, free benefits, inclusions and VAT wording. installationPrice is the fixed regular price of standard installation; the site copy currently presents it as FREE during the limited-time offer (installationFreeDuringOffer); when the offer ends, update the FREE wording in the page copy as well. portalFreeValue is the stated value of the free portal months. Amounts are in Omani Rials. After editing, run `npm run build` and redeploy. {threshold} is replaced with vat.threshold.",
+  "packagePrice": 599,
+  "installationPrice": 30,
+  "installationFreeDuringOffer": true,
+  "portalFreeMonths": 6,
+  "portalFreeValue": 45,
+  "includedIpPhones": 1,
+  "vat": {
+    "added": false,
+    "threshold": 38000,
+    "statement": {
+      "en": "FSS currently does not add VAT while its total taxable sales remain below OMR {threshold}.",
+      "ar": "لا تضيف شركة Future Smart Support ضريبة القيمة المضافة حالياً ما دامت مبيعاتها الخاضعة للضريبة دون {threshold} ر.ع."
+    },
+    "short": {
+      "en": "VAT not currently added",
+      "ar": "لا تُضاف ضريبة القيمة المضافة حالياً"
+    },
+    "detail": {
+      "en": "OMR {threshold} is a company-level threshold based on FSS's total taxable sales. It is not a per-customer or per-order exemption. If FSS's VAT registration or tax status changes, the VAT treatment will be updated and stated in your written quotation and invoice.",
+      "ar": "حدّ {threshold} ر.ع يتعلق بإجمالي مبيعات الشركة الخاضعة للضريبة، وليس إعفاءً لكل عميل أو لكل طلب. وفي حال تغيّر تسجيل الشركة في ضريبة القيمة المضافة أو وضعها الضريبي، ستُحدَّث معاملة الضريبة وتُبيَّن في عرض السعر والفاتورة المكتوبين."
+    }
+  }
+}

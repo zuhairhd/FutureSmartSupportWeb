@@ -1,171 +1,180 @@
 <template>
-  <div class="brochure-home">
-    <!-- Brochure-inspired opening: navy, teal, clear value proposition -->
-    <section class="marketing-hero" id="solution">
-      <div class="hero-halo hero-halo-one" aria-hidden="true"></div>
-      <div class="hero-halo hero-halo-two" aria-hidden="true"></div>
+  <div class="campaign-home">
+    <!-- A. Hero: brochure headline, MOJEEB + built-in PBX value, offer and actions -->
+    <section class="hero" id="solution" aria-labelledby="hero-title">
+      <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="hero-eyebrow"><span class="eyebrow-pulse"></span>{{ s.hero.eyebrow }}</div>
-          <p class="hero-product">{{ s.hero.product }}</p>
-          <h1>{{ s.hero.headline }} <span>{{ s.hero.accent }}</span></h1>
+          <p class="missed-pill"><MarketingIcon name="missed" :size="16" />{{ s.hero.eyebrow }}</p>
+          <h1 id="hero-title">{{ s.hero.headline }} <span>{{ s.hero.accent }}</span></h1>
           <p class="hero-sub">{{ s.hero.sub }}</p>
-          <router-link class="hero-price" :to="{ path: '/', hash: '#offer' }">
-            <span class="hero-price-tag">{{ s.offer.ribbon }}</span>
-            <span class="hero-price-amount"><strong>599</strong> {{ currency }}</span>
-            <span class="hero-price-once">{{ s.offer.heroNote }}</span>
+          <p class="hero-value"><strong>{{ s.value.title }}</strong> {{ s.value.sub }}</p>
+          <ul class="feature-row" :aria-label="s.features.aria">
+            <li v-for="f in s.features.items" :key="f.text"><MarketingIcon :name="f.icon" :size="15" />{{ f.text }}</li>
+          </ul>
+          <router-link class="hero-offer" :to="{ path: '/', hash: '#offer' }" :aria-label="s.hero.offerAria">
+            <!-- TODO(owner): "50% OFF" badge / original price only after the reference price is confirmed. -->
+            <span class="offer-tag">{{ s.limited }}</span>
+            <span class="hero-offer-price"><bdi><strong>{{ P }}</strong> {{ currency }}</bdi> <small>{{ s.oneTime }}</small></span>
+            <span class="hero-free-list">
+              <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.install }} <em>{{ s.worthInstall }}</em></span>
+              <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.portal }} <em>{{ s.worthPortal }}</em></span>
+            </span>
           </router-link>
           <div class="hero-actions">
-            <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.hero.demoCta }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
-            <router-link class="btn hero-outline" :to="{ path: '/', hash: '#offer' }">{{ s.hero.offerCta }}</router-link>
-            <a class="btn hero-whatsapp" :href="PHONE_URL"><MarketingIcon name="phone" :size="18" />{{ s.hero.whatsappCta }}</a>
+            <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
+            <a class="btn btn-wa" :href="phoneLink"><MarketingIcon name="phone" :size="18" />{{ s.cta.whatsapp }}</a>
           </div>
-          <div class="hero-badges">
-            <span v-for="badge in s.hero.badges" :key="badge"><MarketingIcon name="check" :size="15" />{{ badge }}</span>
-          </div>
-          <p class="hero-status"><span class="hero-status-dot" aria-hidden="true"></span>{{ s.hero.status }}</p>
+          <p class="hero-tagline">{{ s.hero.tagline }}</p>
+          <!-- TODO(owner): keep or drop the pre-launch status; it conflicts with "Get MOJEEB today before the offer ends". -->
+          <p class="hero-status"><span class="status-dot" aria-hidden="true"></span>{{ s.hero.status }}</p>
         </div>
-        <div class="hero-art" role="img" :aria-label="s.hero.visualLabel">
-          <div class="art-grid" aria-hidden="true"></div>
-          <div class="art-top"><span class="art-live"><i></i> {{ s.visual.status }}</span><span>FSS / MOJEEB AI</span></div>
-          <div class="art-incoming">
-            <div class="art-icon incoming-icon"><MarketingIcon name="phone" :size="25" /></div>
-            <div><b>{{ s.visual.incoming }}</b><small>{{ s.visual.incomingSub }}</small></div>
-            <span class="incoming-pulse" aria-hidden="true"></span>
-          </div>
-          <div class="art-connector" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="art-agent">
-            <div class="art-icon bot-icon"><MarketingIcon name="bot" :size="34" /></div>
-            <div class="art-agent-copy"><span class="art-kicker">{{ s.visual.aiLabel }}</span><b>{{ s.visual.agent }}</b><small>{{ s.visual.agentDesc }}</small></div>
-            <div class="audio-bars" aria-hidden="true"><i v-for="n in 9" :key="n"></i></div>
-          </div>
-          <div class="art-events">
-            <div class="event-label"><MarketingIcon name="messages" :size="18" /> {{ s.visual.followup }}</div>
-            <div class="event-chip"><MarketingIcon name="check" :size="14" /> {{ s.visual.context }}</div>
-          </div>
-          <div class="art-bottom"><MarketingIcon name="shield" :size="15" /> {{ s.visual.footer }}</div>
-          <div class="floating-label"><MarketingIcon name="globe" :size="16" /> {{ s.visual.language }}</div>
-        </div>
-      </div>
-      <div class="hero-bottom-rule"></div>
-    </section>
 
-    <section class="trust-row" :aria-label="s.trust.aria">
-      <div class="container trust-content">
-        <div v-for="(item, i) in s.trust.items" :key="i" class="trust-item">
-          <span class="trust-icon"><MarketingIcon :name="['phone', 'server', 'globe'][i]" :size="22" /></span>
-          <span><b>{{ item.title }}</b><small>{{ item.sub }}</small></span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section offer-section" id="offer">
-      <div class="container">
-        <div class="section-heading offer-heading">
-          <div><p class="section-label">{{ s.offer.eyebrow }}</p><h2 class="section-title">{{ s.offer.title }}</h2><p class="section-sub">{{ s.offer.sub }}</p></div>
-          <span class="limited-pill"><MarketingIcon name="clock" :size="17" />{{ s.offer.ribbon }}</span>
-        </div>
-        <div class="offer-layout">
-          <div class="price-panel">
-            <div class="price-kicker">{{ s.offer.priceIntro }}</div>
-            <div class="price-main"><strong>599</strong><span class="currency">{{ currency }}</span></div>
-            <div class="price-once">{{ s.offer.once }}</div>
-            <dl class="price-rows">
-              <div v-for="row in s.offer.rows" :key="row.label" :class="{ total: row.total }"><dt>{{ row.label }}</dt><dd><bdi>{{ row.value }}</bdi> {{ currency }}</dd></div>
-            </dl>
-            <p class="price-vat">{{ s.offer.vatNote }}</p>
-            <a class="price-whatsapp" :href="PHONE_URL">
-              <span class="pw-label"><MarketingIcon name="phone" :size="18" />{{ s.offer.quoteCta }}</span> <MarketingIcon name="arrow" :size="18" class="flip-rtl" />
-            </a>
-            <p class="price-terms">{{ s.offer.terms }}</p>
+        <figure class="hero-visual" :aria-label="s.visual.label">
+          <div class="visual-card visual-missed">
+            <span class="visual-icon icon-red"><MarketingIcon name="missed" :size="22" /></span>
+            <div><b>{{ s.visual.missed }}</b><small>{{ s.visual.missedSub }}</small></div>
           </div>
-          <div class="package-panel">
-            <div class="package-heading"><div><p class="section-label">{{ s.offer.includedLabel }}</p><h3>{{ s.offer.includedTitle }}</h3></div><span class="package-pill">MOJEEB AI STARTER</span></div>
-            <div class="package-list">
-              <div class="package-item" v-for="item in s.offer.items" :key="item.title">
-                <span class="package-icon"><MarketingIcon :name="item.icon" :size="27" /></span>
-                <div><h4>{{ item.title }}</h4><p>{{ item.sub }}</p></div>
-                <MarketingIcon name="check" class="package-check" :size="18" />
-              </div>
+          <div class="visual-link" aria-hidden="true"></div>
+          <div class="visual-card visual-agent">
+            <span class="visual-icon icon-brand"><MarketingIcon name="bot" :size="26" /></span>
+            <div><span class="visual-kicker">MOJEEB · مُجيب</span><b>{{ s.visual.answer }}</b><small>{{ s.visual.answerSub }}</small></div>
+            <div class="wave" aria-hidden="true"><i v-for="n in 7" :key="n"></i></div>
+          </div>
+          <div class="visual-link" aria-hidden="true"></div>
+          <div class="visual-card visual-details">
+            <span class="visual-icon icon-soft"><MarketingIcon name="form" :size="22" /></span>
+            <div><b>{{ s.visual.details }}</b>
+              <ul><li v-for="d in s.visual.detailItems" :key="d"><MarketingIcon name="check" :size="13" />{{ d }}</li></ul>
             </div>
-            <ul class="package-facts">
-              <li v-for="fact in s.offer.facts" :key="fact.text"><MarketingIcon :name="fact.icon" :size="19" /><span>{{ fact.text }}</span></li>
-            </ul>
-            <router-link class="btn btn-primary package-cta" :to="{ path: '/', hash: '#demo' }">{{ s.offer.demoCta }}</router-link>
           </div>
-        </div>
-        <div class="requirements">
-          <h3 class="req-title">{{ s.offer.reqTitle }}</h3>
-          <div class="req-grid">
-            <div class="req-item" v-for="req in s.offer.reqs" :key="req.title"><span class="req-icon"><MarketingIcon :name="req.icon" :size="21" /></span><div><b>{{ req.title }}</b><p>{{ req.desc }}</p></div></div>
-          </div>
+          <div class="visual-pbx"><MarketingIcon name="network" :size="18" />{{ s.visual.pbx }}</div>
+          <figcaption class="visual-note">{{ s.visual.note }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Trust row (brochure footer strip) -->
+    <section class="trust" :aria-label="s.trust.aria">
+      <div class="container trust-grid">
+        <div class="trust-item" v-for="t in s.trust.items" :key="t.title">
+          <span class="trust-icon"><MarketingIcon :name="t.icon" :size="22" /></span>
+          <div><b>{{ t.title }}</b><small>{{ t.sub }}</small></div>
         </div>
       </div>
     </section>
 
-    <section class="section how-section" id="how">
+    <!-- B. Business benefits -->
+    <section class="section benefits" id="features">
       <div class="container">
-        <div class="section-heading centered"><p class="section-label">{{ s.how.eyebrow }}</p><h2 class="section-title">{{ s.how.title }}</h2><p class="section-sub">{{ s.how.sub }}</p></div>
-        <div class="how-cards">
-          <template v-for="(step, i) in s.how.steps" :key="step.title">
-            <div class="how-card" :class="{ 'how-card-optional': step.tag }">
-              <div class="step-heading"><span class="step-number">0{{ i+1 }}</span><span class="step-icon"><MarketingIcon :name="step.icon" :size="31" /></span></div>
-              <h3>{{ step.title }} <span v-if="step.tag" class="step-tag">{{ step.tag }}</span></h3><p>{{ step.desc }}</p>
-            </div>
-            <div v-if="i < s.how.steps.length - 1" class="how-arrow" aria-hidden="true"><MarketingIcon name="arrow" :size="23" /></div>
-          </template>
-        </div>
-        <div class="how-zones">
-          <div class="how-zone"><MarketingIcon name="server" :size="20" /><div><b>{{ s.how.localTitle }}</b><p>{{ s.how.localDesc }}</p></div></div>
-          <div class="how-zone how-zone-cloud"><MarketingIcon name="cloud" :size="20" /><div><b>{{ s.how.cloudTitle }}</b><p>{{ s.how.cloudDesc }}</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section benefits-section" id="features">
-      <div class="container">
-        <div class="section-heading"><p class="section-label">{{ s.benefits.eyebrow }}</p><h2 class="section-title">{{ s.benefits.title }}</h2><p class="section-sub">{{ s.benefits.sub }}</p></div>
-        <div class="benefits-grid">
-          <article class="benefit-card" v-for="item in s.benefits.items" :key="item.title">
-            <div class="benefit-icon"><MarketingIcon :name="item.icon" :size="27" /></div>
-            <h3>{{ item.title }}</h3><p>{{ item.desc }}</p>
+        <div class="heading"><p class="section-label">{{ s.benefits.eyebrow }}</p><h2 class="section-title">{{ s.benefits.title }}</h2></div>
+        <div class="benefit-grid">
+          <article class="benefit" v-for="b in s.benefits.items" :key="b.title">
+            <span class="benefit-icon"><MarketingIcon :name="b.icon" :size="26" /></span>
+            <h3>{{ b.title }}</h3><p>{{ b.desc }}</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section cloud-section" id="cloud">
-      <div class="container cloud-grid">
-        <div class="cloud-copy">
-          <div class="cloud-tag"><MarketingIcon name="cloud" :size="19" />{{ s.cloud.badge }}</div>
-          <h2>{{ s.cloud.title }} <span>{{ s.cloud.accent }}</span></h2>
-          <p>{{ s.cloud.desc }}</p>
-          <div class="cloud-points"><div v-for="item in s.cloud.items" :key="item.title"><span><MarketingIcon :name="item.icon" :size="20" /></span><div><b>{{ item.title }}</b><small>{{ item.sub }}</small></div></div></div>
-          <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cloud.cta }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
-          <p class="cloud-disclaimer">{{ s.cloud.disclaimer }}</p>
+    <!-- C. What the package includes -->
+    <section class="section package" id="package">
+      <div class="container">
+        <div class="heading"><p class="section-label">{{ s.pkg.eyebrow }}</p><h2 class="section-title">{{ s.pkg.title }}</h2><p class="section-sub">{{ s.pkg.sub }}</p></div>
+        <div class="include-grid">
+          <article class="include" v-for="item in s.pkg.items" :key="item.title" :class="{ 'include-pbx': item.pbx }">
+            <span class="include-icon"><MarketingIcon :name="item.icon" :size="30" /></span>
+            <span class="include-badge"><MarketingIcon name="check" :size="13" />{{ s.included }}</span>
+            <h3>{{ item.title }}</h3><p>{{ item.desc }}</p>
+          </article>
         </div>
-        <div class="portal-window" :aria-label="s.cloud.illustrationLabel" role="img">
-          <div class="portal-window-top"><span class="portal-brand"><span>F</span> FSS Cloud Portal</span><span class="portal-dot-row"><i></i><i></i><i></i></span></div>
-          <div class="portal-window-inner"><p class="portal-eyebrow">{{ s.cloud.preview }}</p><h3>{{ s.cloud.dashboardTitle }}</h3>
-            <div class="portal-kpis"><div v-for="(kpi,i) in s.cloud.kpis" :key="kpi.label"><span class="kpi-icon"><MarketingIcon :name="['phone','bell','messages'][i]" :size="22" /></span><small>{{ kpi.label }}</small><strong>{{ kpi.value }}</strong></div></div>
-            <div class="portal-feed"><div class="portal-feed-top"><span>{{ s.cloud.activity }}</span><span class="status-tiny"><i></i>{{ s.cloud.ready }}</span></div>
-              <div class="portal-feed-row" v-for="(activity,i) in s.cloud.activities" :key="i"><span class="feed-status"><MarketingIcon :name="i===1 ? 'bell' : 'phone'" :size="16" /></span><span>{{ activity }}</span><span class="feed-check"><MarketingIcon name="check" :size="15" /></span></div>
+        <div class="free-row">
+          <div class="free-card"><span class="free-icon"><MarketingIcon name="tool" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.install }} <em class="worth">{{ s.worthInstall }}</em></b><small>{{ s.pkg.installNote }}</small></div></div>
+          <div class="free-card"><span class="free-icon"><MarketingIcon name="cloud" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.portal }} <em class="worth">{{ s.worthPortal }}</em></b><small>{{ s.pkg.portalNote }}</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- D. Built-in PBX: one included phone, more phones can be added (not included) -->
+    <section class="section pbx" id="pbx">
+      <div class="container pbx-grid">
+        <div>
+          <p class="section-label">{{ s.pbx.eyebrow }}</p>
+          <h2 class="section-title">{{ s.pbx.title }}</h2>
+          <p class="pbx-text">{{ s.pbx.body }}</p>
+          <ul class="pbx-bullets">
+            <li v-for="b in s.pbx.bullets" :key="b"><MarketingIcon name="check" :size="18" />{{ b }}</li>
+          </ul>
+          <p class="pbx-note">{{ phonesNote }}</p>
+        </div>
+        <figure class="pbx-diagram" :aria-label="s.pbx.diagramLabel">
+          <div class="pbx-node"><MarketingIcon name="network" :size="22" /><span>{{ s.pbx.node }}</span></div>
+          <div class="pbx-lines" aria-hidden="true"></div>
+          <div class="pbx-phones">
+            <div class="pbx-phone included"><MarketingIcon name="deskphone" :size="34" /><b>{{ s.pbx.includedPhone }}</b><small>{{ s.pbx.qtyOne }}</small></div>
+            <div class="pbx-extra">
+              <div class="pbx-phone extra"><MarketingIcon name="deskphone" :size="30" /></div>
+              <div class="pbx-phone extra"><MarketingIcon name="deskphone" :size="30" /></div>
+              <b>{{ s.pbx.extraPhones }}</b>
             </div>
+          </div>
+          <figcaption class="visually-hidden">{{ phonesNote }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- E. How it works -->
+    <section class="section how" id="how">
+      <div class="container">
+        <div class="heading centered"><p class="section-label">{{ s.how.eyebrow }}</p><h2 class="section-title">{{ s.how.title }}</h2></div>
+        <ol class="steps">
+          <li v-for="(step, i) in s.how.steps" :key="step.title" class="step">
+            <span class="step-icon"><MarketingIcon :name="step.icon" :size="28" /></span>
+            <span class="step-num" aria-hidden="true">{{ i + 1 }}</span>
+            <h3>{{ step.title }}</h3><p>{{ step.desc }}</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- F. Offer panel with value stack -->
+    <section class="section offer" id="offer" aria-labelledby="offer-title">
+      <div class="container">
+        <div class="offer-panel">
+          <div class="offer-price">
+            <!-- TODO(owner): "50% OFF" badge / original price only after the reference price is confirmed. Offer end date also unconfirmed. -->
+            <span class="offer-tag">{{ s.limited }}</span>
+            <h2 id="offer-title">{{ s.offer.title }}</h2>
+            <p class="offer-amount"><bdi><strong>{{ P }}</strong><span>{{ currency }}</span></bdi></p>
+            <p class="offer-once">{{ s.oneTime }}</p>
+          </div>
+          <div class="offer-details">
+            <dl class="value-stack">
+              <div v-for="row in s.offer.stack" :key="row.label" :class="{ free: row.free }">
+                <dt><MarketingIcon :name="row.free ? 'gift' : 'check'" :size="18" />{{ row.label }}</dt>
+                <dd><b>{{ row.value }}</b><small v-if="row.note">{{ row.note }}</small></dd>
+              </div>
+            </dl>
+            <p class="offer-phones">{{ phonesNote }}</p>
+            <p class="offer-closing">{{ s.offer.closing }}</p>
+            <div class="offer-actions">
+              <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }}</router-link>
+              <a class="btn btn-wa-light" :href="phoneLink"><MarketingIcon name="phone" :size="18" />{{ s.cta.whatsapp }} <bdi dir="ltr">+968 2420 2829</bdi></a>
+            </div>
+          </div>
+          <div class="offer-terms">
+            <p>{{ summary }}</p>
+            <p>{{ vat.detail }}</p>
+            <p>{{ s.offer.terms }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section sectors-section" id="industries">
-      <div class="container sectors-grid">
-        <div><p class="section-label">{{ s.sectors.eyebrow }}</p><h2 class="section-title">{{ s.sectors.title }}</h2><p class="section-sub">{{ s.sectors.sub }}</p></div>
-        <div class="sectors-tags"><span v-for="industry in s.sectors.items" :key="industry"><MarketingIcon name="check" :size="17" /> {{ industry }}</span></div>
-      </div>
-    </section>
-
-    <section class="section faq-section" id="faq">
+    <!-- G. FAQ -->
+    <section class="section faq" id="faq">
       <div class="container faq-grid">
-        <div><p class="section-label">{{ s.faq.eyebrow }}</p><h2 class="section-title">{{ s.faq.title }}</h2><p class="section-sub">{{ s.faq.sub }}</p></div>
+        <div><p class="section-label">{{ s.faq.eyebrow }}</p><h2 class="section-title">{{ s.faq.title }}</h2></div>
         <div class="faq-list">
           <details v-for="(item, i) in s.faq.items" :key="i" class="faq-item">
             <summary><span>{{ item.q }}</span><span class="faq-toggle" aria-hidden="true"></span></summary>
@@ -175,246 +184,486 @@
       </div>
     </section>
 
-    <section class="pre-contact-section">
-      <div class="container">
-        <div class="cta-ribbon"><div><p class="cta-eyebrow">{{ s.final.eyebrow }}</p><h2>{{ s.final.title }}</h2><p>{{ s.final.sub }}</p></div>
-          <div class="cta-ribbon-actions"><router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.final.demoCta }}</router-link><a :href="PHONE_URL" class="btn cta-outline"><MarketingIcon name="phone" :size="18" />{{ s.final.whatsappLabel }} <bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></a></div>
-        </div>
-      </div>
-    </section>
     <VoicegateDemoSection />
     <ContactSection />
+
+    <!-- Compact mobile contact bar; hidden while the hero, demo form, contact form or footer is on screen -->
+    <div class="sticky-cta" :class="{ show: stickyVisible }" :aria-hidden="!stickyVisible">
+      <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }" :tabindex="stickyVisible ? 0 : -1">{{ s.cta.demo }}</router-link>
+      <a class="btn btn-wa" :href="phoneLink" :aria-label="s.cta.whatsapp" :tabindex="stickyVisible ? 0 : -1"><MarketingIcon name="phone" :size="20" /></a>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { PHONE_URL, PHONE_DISPLAY } from '../constants.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, phoneHref } from '../pricing.js'
 import MarketingIcon from '../components/MarketingIcon.vue'
 import ContactSection from '../components/ContactSection.vue'
 import VoicegateDemoSection from '../components/VoicegateDemoSection.vue'
 
 const { lang } = useLanguage()
 const s = computed(() => messages[lang.value] || messages.en)
-const currency = computed(() => (lang.value === 'ar' ? 'ر.ع' : 'R.O'))
+const currency = computed(() => (lang.value === 'ar' ? 'ر.ع' : 'OMR'))
+const summary = computed(() => OFFER_SUMMARY[lang.value])
+const vat = computed(() => VAT[lang.value])
+const phonesNote = computed(() => PHONES_NOTE[lang.value])
+const phoneLink = phoneHref()
+const P = omr(PACKAGE)
+const I = omr(INSTALLATION)
+const M = PORTAL_FREE_MONTHS
+const V = omr(PORTAL_VALUE)
+
+// Mobile sticky bar: visible only between the hero and the demo/contact/footer area.
+const stickyVisible = ref(false)
+let observer
+onMounted(() => {
+  const hidden = new Set()
+  observer = new IntersectionObserver(entries => {
+    for (const e of entries) e.isIntersecting ? hidden.add(e.target) : hidden.delete(e.target)
+    stickyVisible.value = hidden.size === 0
+  })
+  for (const sel of ['#solution', '#demo', '#contact', '.fss-footer']) {
+    const el = document.querySelector(sel)
+    if (el) observer.observe(el)
+  }
+})
+onUnmounted(() => observer?.disconnect())
 
 const messages = {
   en: {
+    limited: 'Limited-time offer',
+    free: 'FREE',
+    included: 'Included',
+    oneTime: 'One-time cost',
+    install: 'Professional installation',
+    portal: `${M}-month portal subscription`,
+    worthInstall: `(worth OMR ${I})`,
+    worthPortal: `(worth OMR ${V})`,
+    cta: { demo: 'Request a Demo', whatsapp: 'Call us' },
+    value: { title: 'AI answering + a built-in PBX.', sub: `Included in your OMR ${P} package.` },
     hero: {
-      eyebrow: 'SMART COMMUNICATIONS. STRONGER BUSINESSES.', product: 'Introducing Mojeeb AI · FSS AI Agent',
-      headline: 'Manage your customer communications', accent: 'from anywhere.',
-      sub: 'Meet Mojeeb AI: your own Ubuntu-based AI receptionist appliance for growing businesses in Oman. Keep your compatible existing line, add one IP desk phone, and add cloud services only when you need them.',
-      offerCta: 'View the 599 R.O offer', demoCta: 'Register interest or request a demo', whatsappCta: 'Call us',
-      status: 'Pre-launch: Mojeeb AI is preparing for launch in Oman. Register your interest or book a demonstration; orders and delivery dates will be confirmed at launch.',
-      badges: ['Arabic & English', 'Your own local appliance', 'No recurring licence fee'],
-      visualLabel: 'Illustrative call flow showing an incoming call, the Mojeeb AI agent and follow-up.'
+      eyebrow: 'Turn every call into an opportunity',
+      headline: 'Never Miss', accent: 'Another Customer',
+      sub: 'Every missed call could be a lost deal. MOJEEB answers your calls 24/7, handles customer inquiries, and helps your business grow — in Arabic and English.',
+      tagline: 'Same number. Smarter business.',
+      offerAria: `Limited-time offer: OMR ${P} one-time, free professional installation worth OMR ${I} and a free ${M}-month portal subscription worth OMR ${V}. View the offer.`,
+      status: 'Pre-launch: book a demonstration now. Orders and delivery dates are confirmed in writing at launch.',
     },
-    visual: { status:'AI agent ready', incoming:'Incoming customer call', incomingSub:'Via your compatible telephone line', aiLabel:'YOUR AI RECEPTIONIST', agent:'Mojeeb is here to help', agentDesc:'Answers · captures context · assists with follow-up', followup:'Customer conversation', context:'Follow-up ready', footer:'Calls handled by your Mojeeb appliance', language:'Arabic + English' },
-    trust: { aria:'Product highlights', items:[{title:'Keep your number',sub:'Where your line is compatible'},{title:'Your own appliance',sub:'Ubuntu-based Mojeeb AI server on-site'},{title:'Arabic + English',sub:'Communicate with more customers'}] },
+    features: { aria: 'Key features', items: [{ icon: 'globe', text: 'Arabic & English' }, { icon: 'form', text: 'Call details captured' }, { icon: 'cloud', text: 'Follow-up in the portal' }] },
+    visual: {
+      label: 'Illustration: a customer call is answered by MOJEEB, the details are captured, and the team follows up.',
+      missed: 'Customer calling', missedSub: 'Your team is busy or out of office',
+      answer: 'MOJEEB answers', answerSub: 'In Arabic or English',
+      details: 'Details captured for follow-up', detailItems: ['Caller number', 'Customer request', 'Follow-up task in the portal'],
+      pbx: 'Built-in PBX connects your team', note: 'Illustration',
+    },
+    trust: {
+      aria: 'Why businesses choose MOJEEB',
+      items: [
+        { icon: 'tool', title: 'Easy setup', sub: 'We install it for you — FREE' },
+        { icon: 'clock', title: 'Reliable 24/7', sub: 'Answers calls around the clock' },
+        { icon: 'people', title: 'More customers', sub: 'Turn calls into sales opportunities' },
+        { icon: 'wallet', title: 'Cost effective', sub: 'Professional solution at a special price' },
+        { icon: 'shield', title: 'Reliable & secure', sub: 'Runs on your own local server' },
+        { icon: 'globe', title: 'Local support', sub: 'Oman-based team' },
+      ],
+    },
+    benefits: {
+      eyebrow: 'How MOJEEB helps your business', title: 'Answer more calls. Follow up on more opportunities.',
+      items: [
+        { icon: 'clock', title: 'Answers calls 24/7', desc: 'MOJEEB greets callers and handles common questions, including when your team is busy or outside office hours.' },
+        { icon: 'form', title: 'Captures customer details and follow-ups', desc: 'Caller details and requests are recorded, so your team knows who called, what they needed and who to call back.' },
+        { icon: 'chart', title: 'Helps you grow your business', desc: `Review calls and follow-ups in the FSS portal — free for the first ${M} months — and respond to more enquiries.` },
+        { icon: 'globe', title: 'Arabic & English', desc: 'Natural, professional conversations with callers in Arabic or English.' },
+      ],
+    },
+    pkg: {
+      eyebrow: 'Package includes', title: 'Everything you need to get started.', sub: `One package, one price: OMR ${P} one-time, with a two-year MOJEEB hardware warranty.`,
+      items: [
+        { icon: 'server', title: 'MOJEEB AI appliance', desc: 'AI voice assistant and PBX system. Answers customer calls in Arabic and English and records caller details.' },
+        { icon: 'network', pbx: true, title: 'Built-in PBX system', desc: 'Built into the MOJEEB appliance. Set up internal extensions and add more IP phones on the same PBX.' },
+        { icon: 'gateway', title: 'Grandstream HT813', desc: 'Converts your analog phone line to SIP, so customers keep calling your usual number.' },
+        { icon: 'deskphone', title: '1 IP phone', desc: 'Ready to use for your team to take and return calls. One phone is included.' },
+      ],
+      installNote: `FREE within the offer (worth OMR ${I}). Requires an existing LAN and a compatible ADSL connection; cabling, network setup, internet activation and other non-standard work are quoted separately.`,
+      portalNote: `FREE for the first ${M} months (worth OMR ${V}), then renewed according to the selected plan.`,
+    },
+    pbx: {
+      eyebrow: 'Built-in PBX', title: 'You also get a built-in PBX system',
+      body: 'The package includes a full PBX system. The included IP phone is just the first one — add more IP phones anytime on the same PBX.',
+      bullets: ['Use multiple IP phones in your office', 'Connect branches and departments', 'Professional and flexible communication', 'All included in the same package'],
+      node: 'PBX', diagramLabel: 'Diagram: the built-in PBX connects to one included IP phone. More phones can be added but are not included.',
+      includedPhone: 'Included phone', qtyOne: '1 unit', extraPhones: 'Additional phones — not included',
+    },
+    how: {
+      eyebrow: 'How MOJEEB works', title: 'Simple. Secure. Effective.',
+      steps: [
+        { icon: 'phone', title: 'Customer calls your number', desc: 'Customers keep calling your usual business number on your compatible line.' },
+        { icon: 'bot', title: 'MOJEEB answers', desc: 'MOJEEB answers in Arabic or English and handles common questions.' },
+        { icon: 'form', title: 'Captures details and follows up', desc: 'Caller details and requests are recorded and follow-up tasks are created for your team.' },
+        { icon: 'chart', title: 'You get reports and grow', desc: 'Review calls and follow-ups in the portal and grow your business.' },
+      ],
+    },
     offer: {
-      eyebrow:'THE MOJEEB AI STARTER PACKAGE', title:'Everything you need to get started.', sub:'Own the core local solution: the Mojeeb AI appliance, a line gateway and an IP desk phone in one introductory package.',
-      ribbon:'Special introductory offer', heroNote:'excl. VAT · one-time', priceIntro:'SPECIAL INTRODUCTORY PRICE', once:'One-time appliance package · excl. VAT',
-      rows:[{label:'Mojeeb AI starter package',value:'599.000'},{label:'Optional professional installation (10%)',value:'59.900'},{label:'Package + standard installation',value:'658.900',total:true}],
-      vatNote:'All prices exclude VAT. VAT is added where applicable.',
-      quoteCta:'Call us about this offer',
-      terms:'Installation (10%), AI provider charges, network or internet readiness work, telecom-provider fees and optional FSS Cloud Portal services are additional where applicable. Standard installation requires an existing LAN and a compatible ADSL service. Terms and compatibility are confirmed in your quotation.',
-      includedLabel:'WHAT IS INCLUDED', includedTitle:'Three essentials. One smart solution.', demoCta:'Register interest in this package',
-      items:[{icon:'server',title:'Mojeeb AI appliance',sub:'Your own physical local server running Ubuntu Server and the FSS AI agent.'},{icon:'gateway',title:'Grandstream HT813 gateway',sub:'Connects one compatible analog telephone line to the system over SIP.'},{icon:'deskphone',title:'One IP desk phone',sub:'For your team to take and return calls through the configured system.'}],
-      facts:[{icon:'wallet',text:'No recurring Mojeeb software licence fee for the appliance.'},{icon:'bot',text:'AI provider charges are not included. Mojeeb uses external AI services for speech recognition, AI replies and voice. You normally use your own AI provider account and pay the provider directly; our technicians can help you create the account and configure your API key securely.'},{icon:'shield',text:'One-month replacement warranty on the Mojeeb appliance, subject to FSS warranty terms.'},{icon:'cloud',text:'The optional FSS Cloud Portal is not included and is priced separately.'}],
-      reqTitle:'Before you buy: installation, site and line requirements',
-      reqs:[{icon:'tool',title:'Optional professional installation',desc:'10% of the package price (currently 59.900 R.O excl. VAT). New cabling, LAN setup, internet activation and other non-standard work are quoted separately.'},{icon:'network',title:'LAN and ADSL required',desc:'Standard installation needs a working local network (LAN) and a compatible, active ADSL internet connection. Other connection types are checked case by case.'},{icon:'phone',title:'Your number and Caller ID',desc:'Keep your existing business number where the line and provider service are compatible. Caller ID works when your provider enables it and the line supports it; provider fees may apply.'}]
+      title: 'Complete MOJEEB package',
+      stack: [
+        { label: 'Complete MOJEEB package', value: `OMR ${P}`, note: 'one-time' },
+        { label: 'Professional installation', value: 'FREE', note: `worth OMR ${I}`, free: true },
+        { label: `${M}-month portal subscription`, value: 'FREE', note: `worth OMR ${V}`, free: true },
+        { label: 'Built-in PBX system', value: 'Included' },
+        { label: '1 IP phone', value: 'Included' },
+      ],
+      closing: 'Get MOJEEB today before the offer ends!',
+      terms: 'Standard installation requires an existing LAN and a compatible ADSL service. Final availability, compatibility, delivery and any non-standard work are confirmed in writing.',
     },
-    how: { eyebrow:'HOW MOJEEB AI WORKS',title:'Your current phone line. A smarter way to work.',sub:'We connect Mojeeb to your compatible telephone line through the gateway. The Mojeeb AI appliance at your premises handles the calls, and your team follows up on the IP desk phone.',
-      localTitle:'On your premises',localDesc:'The gateway, the IP desk phone and the Mojeeb AI appliance sit at your premises and handle your calls. AI speech and language features use connected AI services over your internet connection.',
-      cloudTitle:'Optional, in the cloud',cloudDesc:'With a separately priced cloud-portal plan, your team can review calls, notifications and follow-ups remotely.',
-      steps:[{icon:'phone',title:'Compatible phone line',desc:'Customers keep calling your business number on a compatible analog line from your provider.'},{icon:'gateway',title:'HT813 gateway',desc:'Connects the analog line to the system over SIP. It is the line interface, not the AI.'},{icon:'server',title:'Mojeeb AI appliance',desc:'Greets callers in Arabic or English, answers common questions and captures requests.'},{icon:'cloud',title:'Follow-up & cloud portal',tag:'Optional',desc:'Your team follows up on the IP desk phone. The optional cloud portal adds remote visibility.'}] },
-    benefits: { eyebrow:'WHY MOJEEB AI',title:'More than answering the phone.',sub:'Give every customer a more consistent first contact — and your team the context to respond.',items:[{icon:'bot',title:'AI-assisted call answering',desc:'Mojeeb can greet callers and handle common questions when your team is busy or outside office hours.'},{icon:'globe',title:'Arabic + English',desc:'Welcome callers and answer common questions in both languages.'},{icon:'phone',title:'Keep your number',desc:'Use your existing business number where the line is compatible, with Caller ID where your provider enables it.'},{icon:'deskphone',title:'One IP desk phone',desc:'A modern IP handset is included so your team can take and return calls.'},{icon:'messages',title:'Improved follow-up',desc:'Caller details captured by Mojeeb help your team respond to enquiries more consistently.'},{icon:'server',title:'Your own appliance',desc:'A dedicated Ubuntu-based Mojeeb AI server at your premises, not a cloud-only app.'},{icon:'wallet',title:'No recurring licence fee',desc:'No recurring Mojeeb software licence fee for the appliance. AI provider charges and optional cloud services are separate.'},{icon:'people',title:'Built for SMEs',desc:'A practical fit for growing teams that need a professional phone presence.'}] },
-    cloud: { badge:'OPTIONAL CLOUD PORTAL',title:'Stay close to your customers,',accent:'wherever you work.',desc:'Add the optional FSS Cloud Portal to view calls handled by Mojeeb away from the office and to use the monitoring, maintenance and notification services in your plan.',cta:'Request a demo',disclaimer:'Illustrative dashboard. The cloud portal is optional, is not included in the 599 R.O package and requires a separately priced plan. Features and support terms are defined in your cloud-service plan.',illustrationLabel:'Illustrative FSS cloud portal interface',preview:'ILLUSTRATIVE PORTAL PREVIEW',dashboardTitle:'Customer communications',
-      items:[{icon:'cloud',title:'Remote call activity',sub:'Review calls handled by Mojeeb: caller number, time, duration and outcome.'},{icon:'bell',title:'Portal notifications',sub:'See missed-call and voicemail notifications when you log in.'},{icon:'phone',title:'Missed-call follow-up',sub:'Missed calls and voicemails can create follow-up tasks for your team.'},{icon:'tool',title:'Connected maintenance and updates',sub:'Maintenance and Mojeeb software updates are provided according to your selected plan.'}],
-      kpis:[{label:'Call activity',value:'View'},{label:'Notifications',value:'Portal'},{label:'Follow-ups',value:'Track'}],activity:'Call activity',ready:'Connected',activities:['Incoming call handled','Missed-call notification','Follow-up task created'] },
-    sectors:{eyebrow:'WHO IS IT FOR?',title:'Built for small and medium businesses in Oman.',sub:'From first enquiries to follow-up, Mojeeb fits customer-facing businesses that rely on the phone.',items:['Clinics & health services','Restaurants & cafés','Retail stores','Professional offices','Home-service businesses','Other SMEs']},
-    faq:{eyebrow:'QUESTIONS & ANSWERS',title:'Good to know before you buy.',sub:'Clear answers about the package, pricing, requirements and optional services.',
-      items:[
-        {q:'What does the 599 R.O package include?',a:'The Mojeeb AI appliance (a physical local server running Ubuntu Server and the FSS AI agent), one Grandstream HT813 analog-to-SIP gateway and one IP desk phone. The price is 599.000 R.O excluding VAT.'},
-        {q:'Is VAT included?',a:'No. The introductory price excludes VAT. VAT is added where applicable, and the final amount is shown in your quotation.'},
-        {q:'Is installation included?',a:'Professional installation is optional and charged at 10% of the package price: currently 59.900 R.O excluding VAT, or 658.900 R.O for the package with standard installation. Standard installation assumes a working LAN and a compatible ADSL connection. Extra network or cabling work is quoted separately.'},
-        {q:'Can I keep my business number? What about Caller ID?',a:'You can keep your existing business landline number, or a voice number supplied with a compatible ADSL service (for example from Omantel), when the line and provider service are compatible. Caller ID can be configured when your provider enables it and the line supports it; provider fees may apply. We check compatibility before installation.'},
-        {q:'Are there recurring fees?',a:'There is no recurring Mojeeb software licence fee for the appliance. AI provider charges are separate: you normally use your own AI provider account and pay the provider directly, according to how much Mojeeb is used. Your telephone line, internet connection, the optional FSS Cloud Portal and other separately contracted services may also have ongoing charges.'},
-        {q:'Does Mojeeb AI need an internet connection?',a:'Yes. A compatible ADSL internet connection is required. Call handling runs on the appliance at your premises, while speech recognition, AI responses and voice generation use external AI services over the internet. Mojeeb AI does not offer fully offline AI conversations.'},
-        {q:'Can I see my calls without the cloud portal?',a:'Yes. The appliance includes an on-site web dashboard, available on your office network, for calls, voicemails and follow-ups. The optional FSS Cloud Portal adds access from outside the office.'},
-        {q:'What does the optional cloud portal add?',a:'With a separately priced FSS Cloud Portal plan, your team can log in to review calls handled by Mojeeb, see missed-call and voicemail notifications, and manage follow-up tasks. Connected maintenance, software-update services and other options will be defined in each plan.'},
-        {q:'What warranty is provided?',a:'The Mojeeb appliance has a one-month replacement warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.'},
-        {q:'Can I order now? Is there a free trial?',a:'Mojeeb AI is in pre-launch. You can register your interest and book a live demonstration now; orders and delivery dates will be confirmed at launch. No free trial is currently offered.'}
-      ]},
-    final:{eyebrow:'YOUR CUSTOMERS ARE CALLING',title:'Ready for a smarter first impression?',sub:'Register your interest in Mojeeb AI and book a live demonstration ahead of launch.',demoCta:'Register interest or request a demo',whatsappLabel:'Call us'}
+    faq: {
+      eyebrow: 'Questions & answers', title: 'Good to know before you buy.',
+      items: [
+        { q: `What does the OMR ${P} package include?`, a: `The MOJEEB AI appliance (AI voice assistant with a built-in PBX), one Grandstream HT813 gateway and one IP phone, plus free professional installation (worth OMR ${I}) and a free ${M}-month portal subscription (worth OMR ${V}). External AI-provider usage, telecom charges and additional phones are not included.` },
+        { q: 'Is installation included?', a: `Yes. Standard professional installation is free within this limited-time offer (worth OMR ${I}). It requires an existing LAN and a compatible ADSL connection; extra cabling, network setup, internet activation and other non-standard work are quoted separately.` },
+        { q: 'Is the PBX included?', a: `Yes. MOJEEB includes a built-in PBX as part of the OMR ${P} package, so your team can use internal extensions.` },
+        { q: 'How many phones are included?', a: 'One IP phone is included in the package.' },
+        { q: 'Can I add more phones?', a: `Yes. MOJEEB includes a built-in PBX: the package includes one IP phone, and you can add more IP phones and extensions on the same PBX and connect branches and departments. Additional phones are not included in the package price; compatibility and pricing are confirmed in your quotation.` },
+        { q: 'Are there recurring fees?', a: `There is no recurring software licence fee for the MOJEEB appliance. AI-provider usage is separate: you normally use your own AI-provider account and pay the provider directly. The portal subscription is free for the first ${M} months, then renewed according to the selected plan. Your telephone line and internet connection are billed by your providers.` },
+        { q: 'What does the portal add?', a: `The first ${M} months of the FSS portal subscription are free (worth OMR ${V}). In the portal your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks from outside the office. After the free period it is renewed according to the selected plan; the appliance’s on-site dashboard remains available on your office network.` },
+        { q: 'How can my business request a demonstration?', a: 'Fill in the demo request form on this page, visit futuresmartsupport.com/voicegate-demo, or call us on +968 2420 2829.' },
+        { q: 'Is VAT added to the price?', a: `${VAT.en.statement} ${VAT.en.detail}` },
+        { q: 'Can I keep my business number? What about Caller ID?', a: 'You can keep your existing business landline number, or a voice number supplied with a compatible ADSL service (for example from Omantel), when the line and provider service are compatible. Caller ID can be configured when your provider enables it and the line supports it; provider fees may apply. We check compatibility before installation.' },
+        { q: 'Does MOJEEB need an internet connection?', a: 'Yes. A compatible ADSL internet connection is required. Speech recognition, AI responses and voice use external AI services over the internet, so MOJEEB does not offer offline AI conversations.' },
+        { q: 'What warranty is provided?', a: 'The MOJEEB appliance hardware has a two-year warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.' },
+      ],
+    },
   },
   ar: {
-    hero:{eyebrow:'اتصالات أذكى. أعمال أقوى.',product:'تعرّف على مُجيب · وكيل FSS الذكي',headline:'أدر اتصالات عملائك',accent:'من أي مكان.',sub:'مُجيب جهاز استقبال ذكي خاص بك يعمل بنظام Ubuntu للأعمال النامية في عُمان. احتفظ بخطك الحالي المتوافق، وأضف هاتفاً مكتبياً بتقنية IP، واشترك في الخدمات السحابية فقط عندما تحتاج إليها.',offerCta:'شاهد عرض 599 ر.ع',demoCta:'سجّل اهتمامك أو اطلب عرضاً توضيحياً',whatsappCta:'اتصل بنا',status:'مرحلة ما قبل الإطلاق: يستعد مُجيب للإطلاق في عُمان. سجّل اهتمامك أو احجز عرضاً توضيحياً، وسيتم تأكيد الطلبات ومواعيد التسليم عند الإطلاق.',badges:['العربية والإنجليزية','جهاز محلي خاص بك','بدون رسوم ترخيص دورية'],visualLabel:'رسم توضيحي لمسار مكالمة واردة عبر مُجيب ثم متابعة العميل.'},
-    visual:{status:'مُجيب جاهز',incoming:'مكالمة عميل واردة',incomingSub:'عبر خط هاتفك المتوافق',aiLabel:'مُجيب · وكيلك الذكي',agent:'مُجيب في خدمتك',agentDesc:'يرد · يوثّق · يدعم المتابعة',followup:'محادثة العميل',context:'جاهز للمتابعة',footer:'يتولى جهاز مُجيب استقبال المكالمات',language:'العربية + الإنجليزية'},
-    trust:{aria:'مميزات المنتج',items:[{title:'احتفظ برقمك',sub:'متى كان خطك متوافقاً'},{title:'جهاز خاص بك',sub:'خادم مُجيب يعمل بنظام Ubuntu داخل مقرك'},{title:'العربية + الإنجليزية',sub:'تواصل مع عدد أكبر من العملاء'}]},
-    offer:{eyebrow:'باقة البداية من مُجيب',title:'كل ما تحتاجه لتبدأ بذكاء.',sub:'امتلك الحل المحلي الأساسي: جهاز مُجيب الذكي وبوابة لخط الهاتف وهاتفاً مكتبياً بتقنية IP في باقة تعريفية واحدة.',
-      ribbon:'عرض تعريفي خاص',heroNote:'غير شامل الضريبة · لمرة واحدة',priceIntro:'سعر تعريفي خاص',once:'باقة الجهاز لمرة واحدة · غير شامل ضريبة القيمة المضافة',
-      rows:[{label:'باقة بداية مُجيب',value:'599.000'},{label:'التركيب الاحترافي الاختياري (10%)',value:'59.900'},{label:'الباقة مع التركيب الاعتيادي',value:'658.900',total:true}],
-      vatNote:'جميع الأسعار غير شاملة ضريبة القيمة المضافة، وتُضاف الضريبة حيثما تنطبق.',
-      quoteCta:'اتصل بنا للاستفسار عن العرض',
-      terms:'يُضاف التركيب (10%) ورسوم مزوّدي الذكاء الاصطناعي وأعمال تجهيز الشبكة أو الإنترنت ورسوم مزوّد الاتصالات وخدمات بوابة FSS السحابية الاختيارية حيثما تنطبق. يشترط للتركيب الاعتيادي توفر شبكة LAN قائمة وخدمة ADSL متوافقة. وتُؤكَّد الشروط والتوافق في عرض السعر.',
-      includedLabel:'محتويات العرض',includedTitle:'ثلاثة عناصر. حل ذكي واحد.',demoCta:'سجّل اهتمامك بهذه الباقة',
-      items:[{icon:'server',title:'جهاز مُجيب الذكي',sub:'خادم محلي خاص بك يعمل بنظام Ubuntu Server ويشغّل وكيل FSS الذكي.'},{icon:'gateway',title:'بوابة Grandstream HT813',sub:'تربط خط هاتف تناظري واحد متوافق بالنظام عبر SIP.'},{icon:'deskphone',title:'هاتف مكتبي واحد بتقنية IP',sub:'لاستقبال المكالمات ومعاودة الاتصال عبر النظام المُهيّأ.'}],
-      facts:[{icon:'wallet',text:'لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب.'},{icon:'bot',text:'رسوم مزوّدي الذكاء الاصطناعي غير مشمولة. يستخدم مُجيب خدمات ذكاء اصطناعي خارجية للتعرّف على الكلام والردود والصوت. وعادةً تستخدم حساب مزوّد الذكاء الاصطناعي الخاص بك وتدفع للمزوّد مباشرة، ويمكن لفنيّينا مساعدتك في إنشاء الحساب وإعداد مفتاح API بشكل آمن.'},{icon:'shield',text:'ضمان استبدال جهاز مُجيب لمدة شهر واحد، وفق شروط الضمان من FSS.'},{icon:'cloud',text:'بوابة FSS السحابية الاختيارية غير مشمولة وتُسعّر بشكل منفصل.'}],
-      reqTitle:'قبل الشراء: متطلبات التركيب والموقع والخط',
-      reqs:[{icon:'tool',title:'التركيب الاحترافي الاختياري',desc:'بنسبة 10% من سعر الباقة (حالياً 59.900 ر.ع غير شامل ضريبة القيمة المضافة). يُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.'},{icon:'network',title:'شبكة LAN واتصال ADSL',desc:'يتطلب التركيب الاعتيادي شبكة محلية (LAN) جاهزة واتصال إنترنت ADSL متوافقاً وفعّالاً. تُدرس أنواع الاتصال الأخرى لكل حالة على حدة.'},{icon:'phone',title:'رقمك وخدمة إظهار رقم المتصل',desc:'احتفظ برقم نشاطك الحالي متى كان الخط وخدمة المزوّد متوافقين. تعمل خدمة إظهار رقم المتصل (Caller ID) عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد.'}]
+    limited: 'عرض لفترة محدودة',
+    free: 'مجاناً',
+    included: 'مشمول',
+    oneTime: 'لمرة واحدة',
+    install: 'التركيب الاحترافي',
+    portal: `اشتراك البوابة لمدة ${M} أشهر`,
+    worthInstall: `(بقيمة ${I} ر.ع)`,
+    worthPortal: `(بقيمة ${V} ر.ع)`,
+    cta: { demo: 'اطلب عرضاً توضيحياً', whatsapp: 'اتصل بنا' },
+    value: { title: 'مُجيب يردّ على عملائك… ونظام PBX مدمج يربط فريقك.', sub: `كلاهما ضمن باقة ${P} ريالاً عُمانياً.` },
+    hero: {
+      eyebrow: 'حوّل كل مكالمة إلى فرصة',
+      headline: 'كل مكالمة فائتة', accent: 'قد تعني خسارة صفقة',
+      sub: 'مُجيب يرد على عملائك ويسجّل التفاصيل لتتابع فرصك.',
+      tagline: 'نفس الرقم. أعمال أذكى.',
+      offerAria: `عرض لفترة محدودة: ${P} ر.ع لمرة واحدة، مع التركيب الاحترافي مجاناً بقيمة ${I} ر.ع واشتراك البوابة مجاناً لمدة ${M} أشهر بقيمة ${V} ر.ع. شاهد العرض.`,
+      status: 'مرحلة ما قبل الإطلاق: احجز عرضاً توضيحياً الآن، وتُؤكَّد الطلبات ومواعيد التسليم كتابياً عند الإطلاق.',
     },
-    how:{eyebrow:'كيف يعمل مُجيب',title:'خط هاتفك الحالي. تجربة أعمال أكثر ذكاءً.',sub:'نربط مُجيب بخط هاتفك المتوافق عبر البوابة، ويتولى جهاز مُجيب داخل مقرك التعامل مع المكالمات، ويتابع فريقك عبر هاتف IP المكتبي.',
-      localTitle:'داخل مقر عملك',localDesc:'تُركَّب البوابة وهاتف IP المكتبي وجهاز مُجيب داخل مقرك وتتولى التعامل مع مكالماتك. وتستخدم مزايا الكلام واللغة الذكية خدمات ذكاء اصطناعي متصلة عبر الإنترنت.',
-      cloudTitle:'اختياري عبر السحابة',cloudDesc:'مع خطة اشتراك منفصلة في البوابة السحابية، يمكن لفريقك مراجعة المكالمات والتنبيهات والمتابعات عن بُعد.',
-      steps:[{icon:'phone',title:'خط هاتف متوافق',desc:'يواصل العملاء الاتصال برقم نشاطك على خط تناظري متوافق من مزوّد الخدمة.'},{icon:'gateway',title:'بوابة HT813',desc:'تربط الخط التناظري بالنظام عبر SIP، وهي واجهة الخط وليست الذكاء الاصطناعي.'},{icon:'server',title:'جهاز مُجيب الذكي',desc:'يرحّب بالمتصلين بالعربية أو الإنجليزية، ويجيب عن الأسئلة الشائعة ويسجّل الطلبات.'},{icon:'cloud',title:'المتابعة والبوابة السحابية',tag:'اختياري',desc:'يتابع فريقك عبر هاتف IP المكتبي، وتضيف البوابة السحابية الاختيارية المتابعة عن بُعد.'}]},
-    benefits:{eyebrow:'لماذا مُجيب؟',title:'أكثر من مجرد الرد على الهاتف.',sub:'امنح كل عميل تجربة استقبال أفضل، وزوّد فريقك بالمعلومات اللازمة للمتابعة.',items:[{icon:'bot',title:'رد ذكي على المكالمات',desc:'يرحّب مُجيب بالمتصلين ويتعامل مع الأسئلة الشائعة عند انشغال فريقك أو خارج أوقات الدوام.'},{icon:'globe',title:'العربية والإنجليزية',desc:'الترحيب بالمتصلين والإجابة عن الأسئلة الشائعة باللغتين.'},{icon:'phone',title:'احتفظ برقمك',desc:'استخدم رقم نشاطك الحالي متى كان الخط متوافقاً، مع إظهار رقم المتصل حيث يفعّله مزوّد الخدمة.'},{icon:'deskphone',title:'هاتف IP مكتبي واحد',desc:'هاتف IP حديث ضمن الباقة لاستقبال المكالمات ومعاودة الاتصال.'},{icon:'messages',title:'متابعة أفضل للعملاء',desc:'تساعد بيانات المتصلين التي يسجّلها مُجيب فريقك على الرد على الاستفسارات بانتظام.'},{icon:'server',title:'جهاز خاص بك',desc:'خادم مُجيب مخصص يعمل بنظام Ubuntu داخل مقرك، وليس تطبيقاً سحابياً فقط.'},{icon:'wallet',title:'بدون رسوم ترخيص دورية',desc:'لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. ورسوم مزوّدي الذكاء الاصطناعي والخدمات السحابية الاختيارية منفصلة.'},{icon:'people',title:'مصمم للمؤسسات الصغيرة والمتوسطة',desc:'حل عملي للفرق التي تحتاج إلى حضور احترافي عبر الهاتف.'}]},
-    cloud:{badge:'بوابة سحابية اختيارية',title:'ابقَ قريباً من عملائك',accent:'أينما كنت.',desc:'أضف بوابة FSS السحابية الاختيارية لمتابعة المكالمات التي يتعامل معها مُجيب من خارج المكتب، والاستفادة من خدمات المتابعة والصيانة والتنبيهات المشمولة في خطتك.',cta:'اطلب عرضاً تجريبياً',disclaimer:'واجهة توضيحية. البوابة السحابية اختيارية وليست ضمن باقة 599 ر.ع وتتطلب خطة اشتراك منفصلة، وتُحدَّد المزايا وشروط الدعم في خطة الخدمة السحابية.',illustrationLabel:'واجهة توضيحية لبوابة FSS السحابية',preview:'عرض توضيحي للبوابة',dashboardTitle:'إدارة اتصالات العملاء',
-      items:[{icon:'cloud',title:'نشاط المكالمات عن بُعد',sub:'راجع المكالمات التي تعامل معها مُجيب: رقم المتصل والوقت والمدة والنتيجة.'},{icon:'bell',title:'تنبيهات داخل البوابة',sub:'اطّلع على تنبيهات المكالمات الفائتة والرسائل الصوتية عند تسجيل الدخول.'},{icon:'phone',title:'متابعة المكالمات الفائتة',sub:'يمكن أن تُنشئ المكالمات الفائتة والرسائل الصوتية مهام متابعة لفريقك.'},{icon:'tool',title:'صيانة وتحديثات متصلة',sub:'تُقدَّم الصيانة وتحديثات برنامج مُجيب وفق خطة الاشتراك التي تختارها.'}],
-      kpis:[{label:'نشاط المكالمات',value:'عرض'},{label:'التنبيهات',value:'البوابة'},{label:'المتابعات',value:'تتبّع'}],activity:'نشاط الاتصالات',ready:'متصل',activities:['تم التعامل مع مكالمة واردة','تنبيه مكالمة فائتة','إنشاء مهمة متابعة']},
-    sectors:{eyebrow:'لمن هذا الحل؟',title:'مصمم للمؤسسات الصغيرة والمتوسطة في عُمان.',sub:'من الاستفسار الأول إلى المتابعة، يخدم مُجيب الأعمال التي تعتمد على الهاتف في التواصل مع عملائها.',items:['العيادات والخدمات الصحية','المطاعم والمقاهي','متاجر التجزئة','المكاتب المهنية','شركات الخدمات المنزلية','مؤسسات صغيرة ومتوسطة أخرى']},
-    faq:{eyebrow:'أسئلة وأجوبة',title:'معلومات مهمة قبل الشراء.',sub:'إجابات واضحة عن الباقة والأسعار والمتطلبات والخدمات الاختيارية.',
-      items:[
-        {q:'ماذا تشمل باقة 599 ر.ع؟',a:'جهاز مُجيب الذكي (خادم محلي يعمل بنظام Ubuntu Server ويشغّل وكيل FSS الذكي)، وبوابة Grandstream HT813 لتحويل الخط التناظري إلى SIP، وهاتفاً مكتبياً واحداً بتقنية IP. السعر 599.000 ر.ع غير شامل ضريبة القيمة المضافة.'},
-        {q:'هل السعر شامل ضريبة القيمة المضافة؟',a:'لا. السعر التعريفي غير شامل ضريبة القيمة المضافة، وتُضاف الضريبة حيثما تنطبق ويظهر المبلغ النهائي في عرض السعر.'},
-        {q:'هل التركيب مشمول؟',a:'التركيب الاحترافي اختياري ويُحتسب بنسبة 10% من سعر الباقة: حالياً 59.900 ر.ع غير شامل ضريبة القيمة المضافة، أو 658.900 ر.ع للباقة مع التركيب الاعتيادي. يفترض التركيب الاعتيادي وجود شبكة LAN جاهزة واتصال ADSL متوافق، وتُقدَّم أعمال الشبكة أو الكابلات الإضافية بعرض سعر منفصل.'},
-        {q:'هل يمكنني الاحتفاظ برقم نشاطي؟ وماذا عن إظهار رقم المتصل؟',a:'يمكنك الاحتفاظ برقم هاتفك الأرضي الحالي، أو رقم الهاتف المقدم ضمن خدمة ADSL متوافقة (مثلاً من عُمانتل)، متى كان الخط وخدمة المزوّد متوافقين. ويمكن تهيئة خدمة إظهار رقم المتصل عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد. نتحقق من التوافق قبل التركيب.'},
-        {q:'هل توجد رسوم دورية؟',a:'لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. ورسوم مزوّدي الذكاء الاصطناعي منفصلة: عادةً تستخدم حساب مزوّد الذكاء الاصطناعي الخاص بك وتدفع للمزوّد مباشرة حسب حجم استخدام مُجيب. وقد تترتب أيضاً رسوم مستمرة على خط الهاتف واتصال الإنترنت وبوابة FSS السحابية الاختيارية وأي خدمات أخرى يتم التعاقد عليها بشكل منفصل.'},
-        {q:'هل يحتاج مُجيب إلى اتصال بالإنترنت؟',a:'نعم، يلزم اتصال إنترنت ADSL متوافق. يتم التعامل مع المكالمات على الجهاز داخل مقرك، بينما يعتمد التعرّف على الكلام والردود الذكية وتوليد الصوت على خدمات ذكاء اصطناعي خارجية عبر الإنترنت. ولا يقدّم مُجيب محادثات ذكية دون اتصال بالإنترنت.'},
-        {q:'هل يمكنني الاطلاع على مكالماتي دون البوابة السحابية؟',a:'نعم. يتضمن الجهاز لوحة معلومات على شبكة مكتبك المحلية لعرض المكالمات والرسائل الصوتية والمتابعات، وتضيف بوابة FSS السحابية الاختيارية إمكانية الوصول من خارج المكتب.'},
-        {q:'ماذا تضيف البوابة السحابية الاختيارية؟',a:'مع خطة اشتراك منفصلة في بوابة FSS السحابية، يمكن لفريقك تسجيل الدخول لمراجعة المكالمات التي تعامل معها مُجيب، والاطلاع على تنبيهات المكالمات الفائتة والرسائل الصوتية، وإدارة مهام المتابعة. وسيتم تحديد خدمات الصيانة المتصلة والتحديثات البرمجية والخيارات الأخرى ضمن كل خطة.'},
-        {q:'ما الضمان المقدم؟',a:'يتمتع جهاز مُجيب بضمان استبدال لمدة شهر واحد وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.'},
-        {q:'هل يمكنني الطلب الآن؟ وهل تتوفر تجربة مجانية؟',a:'مُجيب في مرحلة ما قبل الإطلاق. يمكنك الآن تسجيل اهتمامك وحجز عرض توضيحي مباشر، وسيتم تأكيد الطلبات ومواعيد التسليم عند الإطلاق. ولا تتوفر تجربة مجانية حالياً.'}
-      ]},
-    final:{eyebrow:'عملاؤك يتصلون الآن',title:'هل أنت جاهز لتجربة استقبال أذكى؟',sub:'سجّل اهتمامك بمُجيب واحجز عرضاً توضيحياً مباشراً قبل الإطلاق.',demoCta:'سجّل اهتمامك أو اطلب عرضاً توضيحياً',whatsappLabel:'اتصل بنا'}
-  }
+    features: { aria: 'المزايا الرئيسية', items: [{ icon: 'globe', text: 'العربية والإنجليزية' }, { icon: 'form', text: 'تسجيل تفاصيل المكالمات' }, { icon: 'cloud', text: 'متابعة عبر البوابة' }] },
+    visual: {
+      label: 'رسم توضيحي: مكالمة عميل يرد عليها مُجيب، وتُسجَّل التفاصيل، ثم يتابع الفريق.',
+      missed: 'عميل يتصل', missedSub: 'فريقك مشغول أو خارج الدوام',
+      answer: 'مُجيب يرد', answerSub: 'بالعربية أو الإنجليزية',
+      details: 'تسجيل التفاصيل للمتابعة', detailItems: ['رقم المتصل', 'طلب العميل', 'مهمة متابعة في البوابة'],
+      pbx: 'نظام PBX مدمج يربط فريقك', note: 'رسم توضيحي',
+    },
+    trust: {
+      aria: 'لماذا تختار الشركات مُجيب',
+      items: [
+        { icon: 'tool', title: 'تركيب سهل', sub: 'نركّبه لك مجاناً' },
+        { icon: 'clock', title: 'موثوق على مدار الساعة', sub: 'يرد على المكالمات ليلاً ونهاراً' },
+        { icon: 'people', title: 'عملاء أكثر', sub: 'حوّل المكالمات إلى فرص بيع' },
+        { icon: 'wallet', title: 'تكلفة مناسبة', sub: 'حل احترافي بسعر خاص' },
+        { icon: 'shield', title: 'موثوق وآمن', sub: 'يعمل على خادمك المحلي' },
+        { icon: 'globe', title: 'دعم محلي', sub: 'فريق في سلطنة عُمان' },
+      ],
+    },
+    benefits: {
+      eyebrow: 'كيف يساعد مُجيب أعمالك', title: 'ردّ على مكالمات أكثر، وتابِع فرصاً أكثر.',
+      items: [
+        { icon: 'clock', title: 'يرد على المكالمات على مدار الساعة', desc: 'يرحّب مُجيب بالمتصلين ويتعامل مع الأسئلة الشائعة، حتى عند انشغال فريقك أو خارج أوقات الدوام.' },
+        { icon: 'form', title: 'يسجّل تفاصيل العملاء والمتابعات', desc: 'تُسجَّل بيانات المتصل وطلبه، ليعرف فريقك من اتصل وماذا يحتاج ومن يجب معاودة الاتصال به.' },
+        { icon: 'chart', title: 'يساعدك على تنمية أعمالك', desc: `راجع المكالمات والمتابعات في بوابة FSS — مجاناً لأول ${M} أشهر — واستجب لاستفسارات أكثر.` },
+        { icon: 'globe', title: 'العربية والإنجليزية', desc: 'محادثات طبيعية واحترافية مع المتصلين بالعربية أو الإنجليزية.' },
+      ],
+    },
+    pkg: {
+      eyebrow: 'يشمل العرض', title: 'كل ما تحتاجه لتبدأ.', sub: `باقة واحدة بسعر واحد: ${P} ر.ع لمرة واحدة، مع ضمان على جهاز مُجيب لمدة سنتين.`,
+      items: [
+        { icon: 'server', title: 'جهاز مُجيب الذكي', desc: 'مساعد صوتي ذكي ونظام PBX. يرد على مكالمات العملاء بالعربية والإنجليزية ويسجّل بيانات المتصلين.' },
+        { icon: 'network', pbx: true, title: 'نظام PBX مدمج', desc: 'مدمج في جهاز مُجيب. يتيح تركيب التحويلات الداخلية وإضافة هواتف IP أخرى على نفس النظام.' },
+        { icon: 'gateway', title: 'بوابة Grandstream HT813', desc: 'تحوّل خط الهاتف التناظري إلى SIP، ليواصل عملاؤك الاتصال برقمك المعتاد.' },
+        { icon: 'deskphone', title: 'هاتف IP واحد', desc: 'جاهز للاستخدام لاستقبال المكالمات ومعاودة الاتصال. يشمل العرض هاتفاً واحداً.' },
+      ],
+      installNote: `مجاني ضمن العرض (بقيمة ${I} ر.ع). يتطلب شبكة LAN قائمة واتصال ADSL متوافقاً، ويُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.`,
+      portalNote: `مجاني لأول ${M} أشهر (بقيمة ${V} ر.ع)، ثم يُجدَّد حسب الخطة المختارة.`,
+    },
+    pbx: {
+      eyebrow: 'نظام PBX مدمج', title: 'بهذا المبلغ تحصل أيضاً على نظام PBX',
+      body: 'يتيح تركيب التحويلات والهواتف داخل شركتك بسهولة. يشمل العرض هاتفاً واحداً، ويمكن إضافة هواتف أخرى تعمل على نفس نظام PBX.',
+      bullets: ['استخدم عدة هواتف IP في مكتبك', 'اربط الفروع والأقسام', 'اتصالات احترافية ومرنة', 'كل ذلك ضمن الباقة نفسها'],
+      node: 'PBX', diagramLabel: 'رسم توضيحي: نظام PBX المدمج متصل بهاتف IP واحد مشمول، ويمكن إضافة هواتف أخرى غير مشمولة بالعرض.',
+      includedPhone: 'الهاتف المشمول', qtyOne: 'جهاز واحد', extraPhones: 'هواتف إضافية — غير مشمولة',
+    },
+    how: {
+      eyebrow: 'كيف يعمل مُجيب', title: 'بسيط. آمن. فعّال.',
+      steps: [
+        { icon: 'phone', title: 'العميل يتصل برقمك', desc: 'يواصل عملاؤك الاتصال برقم نشاطك المعتاد عبر خطك المتوافق.' },
+        { icon: 'bot', title: 'مُجيب يرد', desc: 'يرد مُجيب بالعربية أو الإنجليزية ويتعامل مع الأسئلة الشائعة.' },
+        { icon: 'form', title: 'يسجّل التفاصيل ويتابع', desc: 'تُسجَّل بيانات المتصل وطلبه وتُنشأ مهام متابعة لفريقك.' },
+        { icon: 'chart', title: 'تحصل على التقارير وتنمو أعمالك', desc: 'راجع المكالمات والمتابعات في البوابة ونمِّ أعمالك.' },
+      ],
+    },
+    offer: {
+      title: 'باقة مُجيب الكاملة',
+      stack: [
+        { label: 'باقة مُجيب الكاملة', value: `${P} ر.ع`, note: 'لمرة واحدة' },
+        { label: 'التركيب الاحترافي', value: 'مجاناً', note: `بقيمة ${I} ر.ع`, free: true },
+        { label: `اشتراك البوابة لمدة ${M} أشهر`, value: 'مجاناً', note: `بقيمة ${V} ر.ع`, free: true },
+        { label: 'نظام PBX مدمج', value: 'مشمول' },
+        { label: 'هاتف IP واحد', value: 'مشمول' },
+      ],
+      closing: 'احصل على مُجيب اليوم قبل انتهاء العرض',
+      terms: 'يشترط للتركيب الاعتيادي توفر شبكة LAN قائمة وخدمة ADSL متوافقة. ويُؤكَّد التوفر والتوافق والتسليم وأي أعمال غير اعتيادية كتابياً.',
+    },
+    faq: {
+      eyebrow: 'أسئلة وأجوبة', title: 'معلومات مهمة قبل الشراء.',
+      items: [
+        { q: `ماذا تشمل باقة ${P} ر.ع؟`, a: `جهاز مُجيب الذكي (مساعد صوتي ذكي مع نظام PBX مدمج)، وبوابة Grandstream HT813 واحدة، وهاتف IP واحد، مع التركيب الاحترافي مجاناً (بقيمة ${I} ر.ع) واشتراك البوابة مجاناً لمدة ${M} أشهر (بقيمة ${V} ر.ع). ولا تشمل رسوم استخدام مزوّد الذكاء الاصطناعي ورسوم الاتصالات والهواتف الإضافية.` },
+        { q: 'هل التركيب مشمول؟', a: `نعم. التركيب الاحترافي الاعتيادي مجاني ضمن العرض لفترة محدودة (بقيمة ${I} ر.ع). ويتطلب شبكة LAN قائمة واتصال ADSL متوافقاً، ويُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.` },
+        { q: 'هل نظام PBX مشمول؟', a: `نعم. يتضمن مُجيب نظام PBX مدمجاً ضمن باقة ${P} ر.ع، ليستخدم فريقك التحويلات الداخلية.` },
+        { q: 'كم عدد الهواتف المشمولة؟', a: 'يشمل العرض هاتف IP واحداً.' },
+        { q: 'هل يمكنني إضافة هواتف أخرى؟', a: 'نعم. يتضمن مُجيب نظام PBX مدمجاً؛ يشمل العرض هاتف IP واحداً، ويمكنك إضافة هواتف IP وتحويلات أخرى على نفس النظام وربط الفروع والأقسام. والهواتف الإضافية غير مشمولة في سعر الباقة، ويُؤكَّد التوافق والسعر في عرض السعر.' },
+        { q: 'هل توجد رسوم دورية؟', a: `لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. ورسوم استخدام مزوّد الذكاء الاصطناعي منفصلة: عادةً تستخدم حسابك الخاص لدى المزوّد وتدفع له مباشرة. واشتراك البوابة مجاني لأول ${M} أشهر، ثم يُجدَّد حسب الخطة المختارة. ويُحاسَب خط الهاتف واتصال الإنترنت من قِبل مزوّديهما.` },
+        { q: 'ماذا تضيف البوابة؟', a: `أول ${M} أشهر من اشتراك بوابة FSS مجانية (بقيمة ${V} ر.ع). ومن خلال البوابة يراجع فريقك المكالمات التي تعامل معها مُجيب، ويطّلع على تنبيهات المكالمات الفائتة والرسائل الصوتية، ويدير مهام المتابعة من خارج المكتب. وبعد الفترة المجانية يُجدَّد الاشتراك حسب الخطة المختارة، وتبقى لوحة المعلومات المحلية في الجهاز متاحة على شبكة مكتبك.` },
+        { q: 'كيف تطلب شركتي عرضاً توضيحياً؟', a: 'املأ نموذج طلب العرض التوضيحي في هذه الصفحة، أو زر futuresmartsupport.com/voicegate-demo، أو اتصل بنا على ‎+968 2420 2829.' },
+        { q: 'هل تُضاف ضريبة القيمة المضافة إلى السعر؟', a: `${VAT.ar.statement} ${VAT.ar.detail}` },
+        { q: 'هل يمكنني الاحتفاظ برقم نشاطي؟ وماذا عن إظهار رقم المتصل؟', a: 'يمكنك الاحتفاظ برقم هاتفك الأرضي الحالي، أو رقم الهاتف المقدم ضمن خدمة ADSL متوافقة (مثلاً من عُمانتل)، متى كان الخط وخدمة المزوّد متوافقين. ويمكن تهيئة خدمة إظهار رقم المتصل عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد. نتحقق من التوافق قبل التركيب.' },
+        { q: 'هل يحتاج مُجيب إلى اتصال بالإنترنت؟', a: 'نعم، يلزم اتصال إنترنت ADSL متوافق. يعتمد التعرّف على الكلام والردود الذكية وتوليد الصوت على خدمات ذكاء اصطناعي خارجية عبر الإنترنت، لذا لا يقدّم مُجيب محادثات ذكية دون اتصال.' },
+        { q: 'ما الضمان المقدم؟', a: 'يتمتع جهاز مُجيب بضمان على الأجهزة لمدة سنتين وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.' },
+      ],
+    },
+  },
 }
-
 </script>
 
 <style scoped>
-.brochure-home { overflow: clip; }
-.marketing-hero { position:relative; isolation:isolate; background:linear-gradient(125deg,#061b30 0%,#082744 66%,#113955 100%); color:#fff; padding:100px 0 85px; overflow:hidden; }
-.hero-halo { position:absolute; border-radius:50%; background:rgba(38,132,186,.15); z-index:-1; pointer-events:none; }
-.hero-halo-one { width:540px; height:540px; right:-120px; top:-190px; }
-.hero-halo-two { width:430px; height:430px; left:-240px; bottom:-265px; }
-.hero-grid { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:clamp(36px,6vw,100px); }
-.hero-copy { position:relative; z-index:2; }
-.hero-eyebrow { display:inline-flex; align-items:center; gap:9px; color:#99d5e0; font-size:11px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; margin-bottom:25px; }
-.eyebrow-pulse { width:8px; height:8px; border-radius:50%; background:#23dbce; box-shadow:0 0 0 6px rgba(35,219,206,.1); }
-.hero-product { color:#30ddd1; font-size:14px; font-weight:800; margin:0 0 12px; }
-h1 { font-size:clamp(40px,4.7vw,68px); line-height:1.095; letter-spacing:-.045em; margin:0 0 24px; font-weight:840; }
-html[dir='rtl'] h1 { letter-spacing:0; line-height:1.35; }
-h1 span { display:inline; color:#29dcd1; }
-.hero-sub { max-width:590px; color:#c4d8e8; font-size:17px; line-height:1.86; margin:0 0 30px; }
-.hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:32px; }
-.hero-actions .btn { min-height:52px; }
-.hero-outline { color:#fff; border:1px solid #55829d; background:rgba(255,255,255,.05); }
-.hero-outline:hover { background:rgba(255,255,255,.1); }
-.hero-badges { display:flex; flex-wrap:wrap; gap:13px; }
-.hero-price { display:inline-flex; align-items:center; flex-wrap:wrap; gap:6px 14px; padding:12px 18px; margin:0 0 26px; border-radius:16px; background:linear-gradient(120deg,rgba(0,190,180,.22),rgba(35,127,228,.18)); border:1px solid rgba(64,226,215,.45); color:#fff; }
-.hero-price:hover { opacity:1; border-color:#40e2d7; }
-.hero-price-tag { background:#ffc857; color:#3b2600; font-size:11px; font-weight:900; letter-spacing:.06em; text-transform:uppercase; border-radius:999px; padding:5px 10px; }
-.hero-price-amount { font-size:18px; font-weight:800; color:#d8fffb; }
-.hero-price-amount strong { font-size:34px; font-weight:900; color:#fff; letter-spacing:-.02em; }
-.hero-price-once { font-size:13px; font-weight:700; color:#a9e9e3; }
-.hero-whatsapp { color:#fff; border:1px solid rgba(37,211,102,.55); background:rgba(37,211,102,.12); }
-.hero-whatsapp:hover { background:rgba(37,211,102,.2); }
-html[dir='rtl'] .flip-rtl { transform:scaleX(-1); }
-.pw-label { display:inline-flex; align-items:center; gap:9px; }
-.package-cta { width:100%; margin-top:16px; }
-.price-rows { position:relative; z-index:1; width:100%; margin:18px 0 0; display:grid; gap:0; border-top:1px solid rgba(255,255,255,.22); }
-.price-rows > div { display:flex; justify-content:space-between; align-items:baseline; gap:14px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.16); font-size:13px; }
-.price-rows dt { color:#d5fcff; }
-.price-rows dd { margin:0; font-weight:800; white-space:nowrap; font-variant-numeric:tabular-nums; color:#fff; }
-.price-rows .total dt, .price-rows .total dd { font-weight:850; color:#fff; }
-.price-vat { position:relative; z-index:1; margin:12px 0 20px; font-size:12px; font-weight:700; color:#e4fffd; }
-.package-facts { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
-.package-facts li { display:flex; align-items:flex-start; gap:11px; border-radius:12px; padding:12px 14px; background:#e8faf8; color:#05656c; font-size:13px; font-weight:700; line-height:1.55; }
-.package-facts svg { flex:0 0 19px; margin-top:1px; }
-.requirements { margin-top:26px; }
-.req-title { margin:0 0 14px; font-size:18px; }
-.req-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.req-item { display:flex; gap:13px; align-items:flex-start; padding:18px; border-radius:18px; background:#fff; border:1px solid #d5e9f1; }
-.req-icon { flex:0 0 42px; height:42px; display:grid; place-items:center; border-radius:13px; background:#e0f8f7; color:#006d6d; }
-.req-item b { display:block; font-size:14px; margin-bottom:4px; }
-.req-item p { margin:0; color:var(--muted); font-size:13px; line-height:1.65; }
-.faq-section { background:#fff; }
-.faq-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:56px; align-items:start; }
-.faq-list { display:grid; gap:10px; }
-.faq-item { border:1px solid #d7e9f1; border-radius:14px; background:#fbfdff; }
-.faq-item[open] { border-color:#9de0df; background:#fff; }
-.faq-item summary { display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 18px; cursor:pointer; list-style:none; font-weight:750; font-size:15px; }
-.faq-item summary::-webkit-details-marker { display:none; }
-.faq-item summary:focus-visible { outline:3px solid #31d5cf; outline-offset:2px; border-radius:14px; }
-.faq-toggle { position:relative; flex:0 0 18px; height:18px; }
-.faq-toggle::before, .faq-toggle::after { content:''; position:absolute; inset-inline-start:2px; top:8px; width:14px; height:2px; border-radius:2px; background:#00757b; transition:transform .2s; }
-.faq-toggle::after { transform:rotate(90deg); }
-.faq-item[open] .faq-toggle::after { transform:rotate(0deg); }
-.faq-item p { margin:0; padding:0 18px 16px; color:var(--muted); font-size:14px; line-height:1.75; }
-.step-tag { display:inline-block; vertical-align:middle; margin-inline-start:6px; font-size:10px; font-weight:800; letter-spacing:.04em; color:#185ea6; background:#e6f1ff; border:1px solid #c5ddfa; border-radius:999px; padding:2px 8px; }
-.how-card-optional { border-style:dashed; border-color:#a9c9ea; }
-.how-zones { display:grid; grid-template-columns:3fr 1fr; gap:14px; margin-top:22px; }
-.how-zone { display:flex; gap:12px; align-items:flex-start; padding:16px 18px; border-radius:16px; background:#fff; border:1px solid #cfe8ef; color:#08848a; }
-.how-zone-cloud { border-style:dashed; border-color:#a9c9ea; color:#1d6fc4; }
-.how-zone b { display:block; color:var(--fg); font-size:14px; margin-bottom:2px; }
-.how-zone p { margin:0; color:var(--muted); font-size:13px; line-height:1.6; }
-.how-zone svg { flex:0 0 20px; margin-top:2px; }
-.hero-badges span { display:inline-flex; align-items:center; gap:6px; color:#cceaf1; font-size:12px; font-weight:600; }
-.hero-badges svg { color:#2ee4d4; }
-.hero-status { display:flex; align-items:flex-start; gap:9px; margin:20px 0 0; max-width:590px; color:#cfe3ec; font-size:13px; line-height:1.7; }
-.hero-status-dot { flex:0 0 8px; height:8px; margin-top:7px; border-radius:50%; background:#ffc857; box-shadow:0 0 0 4px rgba(255,200,87,.15); }
-.hero-art { position:relative; min-height:445px; padding:23px 25px 18px; border-radius:28px; border:1px solid rgba(53,184,206,.35); background:linear-gradient(155deg,rgba(21,71,101,.89),rgba(8,39,65,.94)); box-shadow:0 25px 70px rgba(0,6,20,.35),inset 0 1px rgba(255,255,255,.08); }
-.art-grid { position:absolute; inset:0; opacity:.18; background-image:linear-gradient(rgba(121,211,233,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(121,211,233,.2) 1px,transparent 1px); background-size:30px 30px; mask-image:linear-gradient(#000,transparent); border-radius:inherit; pointer-events:none; }
-.art-top { display:flex; justify-content:space-between; align-items:center; position:relative; color:#99bcce; letter-spacing:.08em; font-size:10px; font-weight:800; margin-bottom:25px; }
-.art-live { display:inline-flex; align-items:center; gap:7px; color:#b4ffea; letter-spacing:0; }
-.art-live i,.status-tiny i { display:inline-block; width:7px; height:7px; background:#22db9c; border-radius:50%; box-shadow:0 0 0 3px rgba(34,219,156,.12); }
-.art-incoming,.art-agent,.art-events { position:relative; display:flex; align-items:center; gap:13px; border-radius:17px; border:1px solid rgba(147,213,231,.2); padding:16px; background:rgba(6,26,47,.7); }
-.art-incoming { width:83%; }
-.art-icon { width:48px; height:48px; display:grid; place-items:center; border-radius:13px; flex:0 0 auto; }
-.incoming-icon { background:rgba(8,207,190,.16); color:#33e4d7; }
-.art-incoming b,.art-agent b { display:block; font-size:14px; color:#f5ffff; }
-.art-incoming small,.art-agent small { display:block; color:#9cbfd0; font-size:11px; line-height:1.55; }
-.incoming-pulse { margin-inline-start:auto; width:9px; height:9px; background:#25dfcd; border-radius:50%; flex:0 0 9px; }
-.art-connector { height:30px; width:2px; background:linear-gradient(#20ddd2,#70baff); margin-inline-start:35px; display:flex; flex-direction:column; justify-content:center; gap:5px; }
-.art-connector span { width:7px; height:2px; background:#22dacf; margin-inline-start:-2px; }
-.art-agent { border-color:rgba(49,211,214,.55); background:linear-gradient(118deg,#123d58,#0d2a47); padding:18px; box-shadow:0 0 30px rgba(6,194,184,.14); }
-.bot-icon { background:linear-gradient(135deg,#1cdac9,#177dca); color:#fff; width:57px; height:57px; border-radius:17px; }
-.art-kicker { display:block; color:#40e2d7; font-weight:800; font-size:9px; letter-spacing:.08em; margin-bottom:4px; }
-.art-agent-copy { flex:1; min-width:0; }
-.audio-bars { display:flex; align-items:center; justify-content:center; gap:3px; height:28px; }
-.audio-bars i { width:3px; height:10px; background:#48e1d7; border-radius:8px; }
-.audio-bars i:nth-child(3n + 1) { height:24px; }.audio-bars i:nth-child(3n + 2) { height:15px; }
-.art-events { width:89%; margin:17px 0 0 auto; flex-direction:column; align-items:stretch; gap:9px; background:rgba(9,52,75,.66); padding:13px 16px; }
-.art-event,.event-label,.event-chip { display:flex; align-items:center; gap:9px; font-size:12px; }
-.event-label { color:#d2ebf1; }.event-chip { color:#73f3cf; font-weight:700; }
-.art-bottom { margin-top:24px; display:flex; align-items:center; gap:7px; color:#83b3c4; font-size:11px; }
-.floating-label { position:absolute; inset-inline-end:-25px; bottom:71px; display:flex; align-items:center; gap:8px; background:#fff; box-shadow:0 12px 35px rgba(0,0,0,.18); color:#0a4e67; border-radius:999px; padding:10px 15px; font-size:12px; font-weight:800; }
-.hero-bottom-rule { height:4px; position:absolute; bottom:0; inset-inline:0; background:linear-gradient(90deg,#05c9b7,#32d7d4,#2983e9); }
-.trust-row { background:#e8f5f8; border-bottom:1px solid #d4eaf0; }.trust-content { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding-block:25px; }
-.trust-item { display:flex; align-items:center; gap:14px; padding-inline:20px; border-inline-end:1px solid #cee5ed; }.trust-item:last-child { border:0; }.trust-icon { flex:0 0 44px; height:44px; display:grid; place-items:center; border:1px solid #b7e5eb; border-radius:15px; color:#009b9e; background:#fff; }
-.trust-item b { display:block; font-size:14px; color:#10304a; }.trust-item small { display:block; font-size:12px; color:#4c6577; }
-.section-heading { margin:0 0 34px; }.section-heading.centered { text-align:center; max-width:780px; margin-inline:auto; margin-bottom:44px; }.section-heading.centered .section-sub { margin-inline:auto; }
-.offer-section { background:#f8fcfe; }.offer-heading { display:flex; align-items:center; justify-content:space-between; gap:22px; }.limited-pill { display:inline-flex; align-items:center; gap:8px; background:#ddfaf7; color:#006d6d; font-size:12px; font-weight:800; border:1px solid #a9eee6; border-radius:999px; padding:9px 15px; white-space:nowrap; }
-.offer-layout { display:grid; grid-template-columns:minmax(290px,.82fr) 1.18fr; gap:24px; align-items:stretch; }
-.price-panel { position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:flex-start; padding:45px 38px 31px; color:#fff; border-radius:26px; background:radial-gradient(circle at 100% 0%,rgba(105,244,224,.45),transparent 42%),linear-gradient(130deg,#009f9f,#007d99 70%,#08678c); box-shadow:0 23px 45px rgba(0,131,151,.18); }
-.price-panel::after { content:''; position:absolute; width:290px; height:290px; background:rgba(255,255,255,.06); border-radius:50%; bottom:-170px; inset-inline-end:-130px; }
-.price-kicker { position:relative; z-index:1; color:#d3fffa; font-weight:800; letter-spacing:.11em; font-size:11px; text-transform:uppercase; }
-.price-main { display:flex; align-items:baseline; flex-direction:row; gap:10px; line-height:1; margin:16px 0 6px; }.price-main strong { font-size:clamp(86px,8vw,125px); letter-spacing:-.07em; font-weight:900; }.currency { font-size:26px; font-weight:800; }
-.price-once { font-size:18px; font-weight:800; line-height:1.4; }.price-divider { height:1px; width:100%; background:rgba(255,255,255,.25); margin:23px 0; }.price-description { font-size:15px; line-height:1.8; color:#d5fcff; margin:0 0 28px; max-width:350px; }
-.price-whatsapp { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; padding:14px 18px; background:#fff; color:#007b81; border-radius:12px; font-weight:850; position:relative; z-index:1; }.price-whatsapp:hover { opacity:1; background:#efffff; }.price-terms { font-size:11px; color:#c9eaf0; line-height:1.65; margin:17px 0 0; position:relative; z-index:1; }
-.package-panel { border-radius:26px; background:#fff; border:1px solid #d5e9f1; padding:33px; box-shadow:0 16px 60px rgba(10,57,87,.04); }
-.package-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }.package-heading h3 { margin:0; font-size:24px; line-height:1.35; }.package-pill { border:1px solid #d1e7ed; padding:5px 11px; border-radius:999px; font-size:10px; font-weight:850; white-space:nowrap; color:#296f86; }
-.package-list { display:grid; gap:0; margin:21px 0 18px; }.package-item { display:flex; align-items:center; gap:17px; padding:20px 0; border-bottom:1px solid #e5eff4; }.package-item:last-child { border:0; }
-.package-icon { flex:0 0 57px; height:57px; display:grid; place-items:center; border-radius:17px; color:#fff; background:linear-gradient(135deg,#1bd3c3,#157dd4); }.package-item h4 { margin:0 0 4px; font-size:17px; }.package-item p { margin:0; color:var(--muted); font-size:13px; line-height:1.65; }.package-check { margin-inline-start:auto; color:#03aa9f; flex:0 0 18px; }.package-highlight { display:flex; align-items:center; gap:11px; border-radius:12px; padding:13px 15px; background:#e8faf8; color:#087d87; font-size:12px; font-weight:750; }
-.how-section { background:#eef8fb; }.how-cards { display:grid; grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr; align-items:stretch; gap:10px; }.how-card { min-height:250px; background:#fff; border:1px solid #d5e7f0; border-radius:22px; padding:26px; }.step-heading { display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; }.step-number { font-size:13px; font-weight:800; color:#5a7482; }.step-icon { width:60px; height:60px; border-radius:17px; display:grid; place-items:center; background:linear-gradient(135deg,#16cbbd,#167ed3); color:#fff; }.how-card h3 { font-size:19px; margin:0 0 10px; }.how-card p { font-size:14px; line-height:1.7; color:var(--muted); margin:0; }.how-arrow { display:grid; place-items:center; color:#04b7ae; align-self:center; }html[dir='rtl'] .how-arrow svg { transform:rotate(180deg); }.how-note { margin:24px 0 0; display:flex; align-items:center; justify-content:center; gap:7px; color:#688195; font-size:12px; }
-.benefits-section { background:#fff; }.benefits-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:17px; }.benefit-card { padding:29px 25px; border-radius:20px; border:1px solid #deebf2; background:#fbfdff; transition:border-color .2s,transform .2s,box-shadow .2s; }.benefit-card:hover { transform:translateY(-3px); border-color:#9de0df; box-shadow:0 14px 30px rgba(11,69,93,.08); }.benefit-icon { display:grid; place-items:center; width:52px; height:52px; border-radius:15px; background:#e0f8f7; color:#079ea4; margin-bottom:21px; }.benefit-card:nth-child(even) .benefit-icon { color:#217cce; background:#e8f2ff; }.benefit-card h3 { margin:0 0 10px; font-size:17px; }.benefit-card p { margin:0; color:var(--muted); line-height:1.75; font-size:14px; }
-.cloud-section { background:linear-gradient(120deg,#071f37,#0c3e5a); color:#fff; border:0; }.cloud-grid { display:grid; grid-template-columns:.95fr 1.05fr; align-items:center; gap:clamp(35px,5vw,85px); }.cloud-tag { display:inline-flex; align-items:center; gap:8px; color:#49ded6; font-size:12px; font-weight:800; letter-spacing:.1em; margin-bottom:19px; }.cloud-copy h2 { font-size:clamp(30px,3.4vw,46px); line-height:1.2; margin:0 0 20px; }.cloud-copy h2 span { color:#3be0d4; }.cloud-copy>p { color:#c0d7e5; line-height:1.9; margin:0 0 26px; }.cloud-points { display:grid; gap:18px; margin-bottom:30px; }.cloud-points>div { display:flex; gap:13px; align-items:flex-start; }.cloud-points>div>span { display:grid; place-items:center; width:43px; height:43px; flex:0 0 43px; color:#45e7d4; border:1px solid rgba(45,218,209,.3); border-radius:13px; background:rgba(37,177,187,.12); }.cloud-points b,.cloud-points small { display:block; }.cloud-points b { font-size:14px; }.cloud-points small { color:#98b6c9; font-size:12px; }.cloud-copy .cloud-disclaimer { color:#95afc3; font-size:11px; margin:14px 0 0; }
-.portal-window { border-radius:20px; border:1px solid rgba(108,193,227,.25); background:#0b2a43; box-shadow:0 30px 80px rgba(0,0,0,.2); overflow:hidden; }.portal-window-top { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:16px 20px; background:#071b2c; border-bottom:1px solid rgba(255,255,255,.07); }.portal-brand { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:750; }.portal-brand span { background:linear-gradient(130deg,#15d9c4,#177cbf); border-radius:7px; width:24px; height:24px; display:grid; place-items:center; }.portal-dot-row { display:flex; gap:5px; }.portal-dot-row i { background:#2c5971; width:7px; height:7px; border-radius:50%; }.portal-window-inner { padding:24px; }.portal-eyebrow { color:#74a0b6; font-size:10px; letter-spacing:.1em; margin:0 0 3px; font-weight:800; }.portal-window h3 { font-size:20px; margin:0 0 21px; }.portal-kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin-bottom:20px; }.portal-kpis>div { background:#133a53; border:1px solid #26516b; border-radius:13px; padding:14px 10px; }.kpi-icon { display:block; color:#37d9d3; }.portal-kpis small,.portal-kpis strong { display:block; }.portal-kpis small { font-size:11px; color:#9dbbce; margin-top:8px; }.portal-kpis strong { font-size:14px; color:#fff; }.portal-feed { border:1px solid #2b526c; border-radius:14px; overflow:hidden; }.portal-feed-top { display:flex; justify-content:space-between; gap:8px; padding:14px; font-size:12px; font-weight:800; border-bottom:1px solid #2b526c; }.status-tiny { display:flex; align-items:center; gap:6px; color:#72dfc2; font-size:10px; }.portal-feed-row { display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.06); color:#c7dce9; font-size:12px; }.portal-feed-row:last-child { border:0; }.feed-status { color:#43dad1; }.feed-check { margin-inline-start:auto; color:#6fe7b8; }
-.sectors-section { background:#f7fbfd; }.sectors-grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:65px; align-items:center; }.sectors-tags { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }.sectors-tags span { display:flex; align-items:center; gap:9px; padding:16px; background:#fff; border:1px solid #d7e9f1; border-radius:14px; font-size:13px; font-weight:750; }.sectors-tags svg { color:#0eaaa7; flex:0 0 17px; }
-.pre-contact-section { padding:35px 0; background:#f7fbfd; }.cta-ribbon { display:flex; align-items:center; justify-content:space-between; gap:38px; border-radius:25px; padding:48px; background:linear-gradient(125deg,#092d48,#0d5870); color:#fff; }.cta-eyebrow { color:#55dfd3; font-size:11px; font-weight:850; letter-spacing:.13em; margin:0 0 8px; }.cta-ribbon h2 { margin:0 0 10px; font-size:clamp(24px,2.7vw,35px); }.cta-ribbon p:not(.cta-eyebrow) { color:#c2dde9; margin:0; }.cta-ribbon-actions { display:flex; flex-wrap:wrap; gap:10px; flex:0 0 auto; }.cta-outline { color:#fff; border-color:#5f9ab0; }.cta-outline:hover { background:rgba(255,255,255,.08); }
-@media(max-width:1100px){.how-cards { grid-template-columns:1fr 1fr; gap:14px; }.how-arrow { display:none; }.how-zones { grid-template-columns:1fr 1fr; }.benefits-grid { grid-template-columns:repeat(2,1fr); }.hero-grid,.cloud-grid { gap:35px; }.floating-label { inset-inline-end:-8px; }.price-panel { padding:36px 30px; }.cta-ribbon { flex-wrap:wrap; }}
-@media(max-width:900px){.req-grid { grid-template-columns:1fr; }.faq-grid { grid-template-columns:1fr; gap:26px; }.marketing-hero { padding:70px 0; }.hero-grid,.cloud-grid,.sectors-grid { grid-template-columns:1fr; }.hero-art { max-width:610px; width:100%; margin-inline:auto; }.offer-layout { grid-template-columns:1fr; }.trust-item { padding-inline:5px; }.benefits-grid { grid-template-columns:repeat(2,1fr); }.cta-ribbon { padding:36px; }}
-@media(max-width:690px){.marketing-hero { padding:55px 0 60px; }.hero-copy h1 { font-size:clamp(35px,9vw,51px); }.hero-sub { font-size:15px; }.hero-actions { flex-direction:column; align-items:stretch; }.hero-actions .btn { width:100%; }.hero-art { padding:18px 16px; min-height:390px; }.audio-bars { display:none; }.floating-label { bottom:70px; font-size:10px; padding:8px; }.trust-content { grid-template-columns:1fr; gap:0; }.trust-item { padding:15px 0; border-inline-end:0; border-bottom:1px solid #cee5ed; }.trust-item:last-child { border:0; }.offer-heading { align-items:flex-start; flex-direction:column; }.limited-pill { margin-top:0; }.price-panel { padding:32px 24px; }.price-main strong { font-size:93px; }.package-panel { padding:24px 20px; }.package-pill { display:none; }.package-item { gap:12px; }.package-icon { flex-basis:47px; height:47px; }.how-cards { grid-template-columns:1fr; gap:10px; }.how-card { min-height:0; }.how-zones { grid-template-columns:1fr; }.hero-price { width:100%; }.benefits-grid { grid-template-columns:1fr; }.benefit-card { padding:24px; }.portal-window-inner { padding:15px; }.portal-kpis { gap:6px; }.portal-kpis>div { padding:12px 8px; }.sectors-tags { grid-template-columns:1fr; }.cta-ribbon { padding:26px; }.cta-ribbon-actions { flex-direction:column; width:100%; }.cta-ribbon-actions .btn { width:100%; }}
+.campaign-home { overflow: clip; --red: #d92d31; --mint: #2fe0d2; }
+html[dir='rtl'] .flip-rtl { transform: scaleX(-1); }
+.heading { margin: 0 0 36px; max-width: 760px; }
+.heading.centered { text-align: center; margin-inline: auto; }
+.offer-tag { display: inline-flex; align-items: center; background: var(--red); color: #fff; font-size: 12px; font-weight: 850; letter-spacing: .04em; border-radius: 999px; padding: 6px 14px; }
+html[dir='rtl'] .offer-tag { letter-spacing: 0; }
+
+/* A. Hero */
+.hero { position: relative; isolation: isolate; color: #fff; padding: 88px 0 92px; background: linear-gradient(130deg, #051a2f 0%, #08294a 62%, #0d3d5e 100%); }
+.hero-glow { position: absolute; z-index: -1; width: 620px; height: 620px; inset-inline-end: -180px; top: -240px; border-radius: 50%; background: radial-gradient(circle, rgba(47,224,210,.18), transparent 65%); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(36px, 6vw, 90px); align-items: center; }
+.missed-pill { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px; padding: 7px 14px; border-radius: 999px; background: rgba(229,56,59,.16); border: 1px solid rgba(229,56,59,.55); color: #ffd6d6; font-size: 13px; font-weight: 800; }
+.missed-pill svg { color: #ff6b6e; }
+h1 { margin: 0 0 22px; font-size: clamp(38px, 4.4vw, 60px); line-height: 1.08; letter-spacing: -.035em; font-weight: 860; }
+html[dir='rtl'] h1 { letter-spacing: 0; line-height: 1.3; }
+h1 span { display: block; color: var(--mint); }
+.hero-sub { max-width: 580px; margin: 0 0 18px; color: #cfe2ee; font-size: 18px; line-height: 1.75; }
+.hero-value { max-width: 580px; margin: 0 0 26px; color: #e8fbfa; font-size: 16px; line-height: 1.6; }
+.hero-value strong { color: #fff; }
+.hero-offer { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; max-width: 600px; margin: 0 0 26px; padding: 16px 18px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(47,224,210,.45); color: #fff; }
+.hero-offer:hover { opacity: 1; border-color: var(--mint); background: rgba(255,255,255,.09); }
+.hero-offer-price { font-size: 18px; font-weight: 800; color: #d8fffb; }
+.hero-offer-price strong { font-size: 38px; font-weight: 900; color: #fff; letter-spacing: -.02em; }
+.hero-free-list { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.12); }
+.hero-free { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; color: #d9eef4; }
+.hero-free b { font-size: 16px; }
+.hero-free b { color: var(--mint); font-weight: 900; }
+.hero-free svg { color: var(--mint); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-actions .btn { min-height: 52px; font-size: 15px; }
+.btn-wa { color: #fff; border: 1px solid rgba(37,211,102,.6); background: rgba(37,211,102,.14); }
+.btn-wa:hover { background: rgba(37,211,102,.24); }
+.hero-status { display: flex; gap: 9px; margin: 22px 0 0; max-width: 580px; color: #a9c4d4; font-size: 13px; line-height: 1.65; }
+.status-dot { flex: 0 0 8px; height: 8px; margin-top: 7px; border-radius: 50%; background: #ffc857; }
+
+.hero-visual { position: relative; margin: 0; padding: 26px 26px 40px; border-radius: 28px; border: 1px solid rgba(53,184,206,.35); background: linear-gradient(155deg, rgba(21,71,101,.85), rgba(8,39,65,.95)); box-shadow: 0 30px 70px rgba(0,6,20,.35); }
+.visual-card { position: relative; display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 18px; background: rgba(6,26,47,.72); border: 1px solid rgba(147,213,231,.2); }
+.visual-card b { display: block; font-size: 15px; color: #f5ffff; }
+.visual-card small { display: block; font-size: 12px; color: #9cbfd0; }
+.visual-icon { flex: 0 0 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; }
+.icon-red { background: rgba(229,56,59,.18); color: #ff6b6e; }
+.icon-brand { background: linear-gradient(135deg, #1cdac9, #177dca); color: #fff; width: 56px; height: 56px; flex-basis: 56px; }
+.icon-soft { background: rgba(47,224,210,.14); color: var(--mint); }
+.visual-missed { width: 86%; border-color: rgba(229,56,59,.45); }
+.visual-agent { border-color: rgba(47,224,210,.6); background: linear-gradient(118deg, #123d58, #0d2a47); box-shadow: 0 0 34px rgba(6,194,184,.16); }
+.visual-agent > div:nth-child(2) { flex: 1; min-width: 0; }
+.visual-kicker { display: block; font-size: 10px; font-weight: 850; letter-spacing: .08em; color: var(--mint); margin-bottom: 2px; }
+.wave { display: flex; align-items: center; gap: 3px; height: 28px; }
+.wave i { width: 3px; height: 10px; border-radius: 4px; background: var(--mint); }
+.wave i:nth-child(odd) { height: 22px; }
+.visual-details { width: 92%; margin-inline-start: auto; align-items: flex-start; }
+.visual-details ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 5px; }
+.visual-details li { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #bfe9e4; }
+.visual-details li svg { color: var(--mint); }
+.visual-link { width: 2px; height: 22px; margin-inline-start: 38px; background: linear-gradient(var(--mint), #70baff); }
+.visual-pbx { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 9px 14px; border-radius: 999px; background: #fff; color: #0a4e67; font-size: 13px; font-weight: 800; }
+.visual-note { position: absolute; inset-inline-end: 22px; bottom: 14px; font-size: 11px; color: #8fb3c5; }
+
+/* B. Benefits */
+.benefits { background: #fff; }
+.benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.benefit { padding: 28px 24px; border-radius: 20px; border: 1px solid #deebf2; background: #fbfdff; }
+.benefit-icon { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 18px; border-radius: 16px; background: #e0f8f7; color: #068f95; }
+.benefit h3 { margin: 0 0 8px; font-size: 17px; }
+.benefit p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+
+/* C. Package */
+.package { background: #eef8fb; }
+.include-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.include { position: relative; padding: 28px 24px; border-radius: 22px; background: #fff; border: 1px solid #d5e7f0; }
+.include-pbx { border: 2px solid #11b8ad; box-shadow: 0 18px 40px rgba(0,150,150,.12); }
+.include-icon { display: grid; place-items: center; width: 62px; height: 62px; margin-bottom: 18px; border-radius: 18px; color: #fff; background: linear-gradient(135deg, #16cbbd, #167ed3); }
+.include-badge { position: absolute; top: 22px; inset-inline-end: 20px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: #dff9f5; color: #05656c; font-size: 11px; font-weight: 850; }
+.include h3 { margin: 0 0 8px; font-size: 18px; }
+.include p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.free-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+.free-card { display: flex; gap: 16px; align-items: flex-start; padding: 22px 24px; border-radius: 20px; background: #fff; border: 1px dashed #11b8ad; }
+.free-icon { flex: 0 0 50px; height: 50px; display: grid; place-items: center; border-radius: 15px; background: #e0f8f7; color: #068f95; }
+.free-word { display: block; font-size: 28px; line-height: 1.1; font-weight: 900; color: #007a73; letter-spacing: .01em; }
+.free-card b { display: block; font-size: 16px; margin: 2px 0 4px; }
+.free-card small { display: block; color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+/* D. PBX expansion */
+.pbx { background: #fff; }
+.pbx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.pbx-accent { margin: 0 0 14px; color: #007a73; font-size: 19px; font-weight: 800; }
+.pbx-text { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
+.pbx-diagram { margin: 0; padding: 30px 24px; border-radius: 24px; background: #f4fbfd; border: 1px solid #d5e9f1; text-align: center; }
+.pbx-node { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 14px; background: var(--navy); color: #fff; font-weight: 900; font-size: 18px; letter-spacing: .06em; }
+.pbx-node svg { color: var(--mint); }
+.pbx-lines { position: relative; height: 30px; margin: 22px 18% 0; border-inline: 2px solid #9fc9d8; border-top: 2px solid #9fc9d8; }
+.pbx-lines::before { content: ''; position: absolute; bottom: 100%; left: calc(50% - 1px); width: 2px; height: 22px; background: #9fc9d8; }
+.pbx-phones { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; align-items: start; }
+.pbx-phone { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 10px; border-radius: 16px; }
+.pbx-phone.included { background: #fff; border: 2px solid #11b8ad; color: #068f95; }
+.pbx-phone.included b { color: var(--fg); font-size: 14px; }
+.pbx-phone.included small { color: var(--muted); font-size: 12px; }
+.pbx-extra { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; border-radius: 16px; border: 2px dashed #b9cbd5; }
+.pbx-phone.extra { color: #8aa0ad; background: #fff; border: 1px dashed #c6d5dd; padding: 12px 8px; }
+.pbx-extra b { grid-column: 1 / -1; font-size: 13px; color: #4f6676; font-weight: 800; }
+
+/* E. How it works */
+.how { background: #eef8fb; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.step { position: relative; padding: 26px 22px; border-radius: 20px; background: #fff; border: 1px solid #d5e7f0; }
+.step-icon { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 16px; border-radius: 16px; color: #fff; background: linear-gradient(135deg, #16cbbd, #167ed3); }
+.step-num { position: absolute; top: 22px; inset-inline-end: 22px; font-size: 28px; font-weight: 900; color: #c4dde6; }
+.step h3 { margin: 0 0 8px; font-size: 18px; }
+.step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+/* F. Offer */
+.offer { background: #f8fcfe; }
+.offer-panel { display: grid; grid-template-columns: .9fr 1.1fr; border-radius: 28px; overflow: hidden; background: #fff; border: 1px solid #d5e9f1; box-shadow: 0 24px 60px rgba(10,57,87,.08); }
+.offer-price { padding: 42px 38px; color: #fff; background: radial-gradient(circle at 100% 0%, rgba(105,244,224,.35), transparent 45%), linear-gradient(140deg, #071d34, #0b3a5a); }
+.offer-price h2 { margin: 18px 0 6px; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; }
+.offer-amount { margin: 0; line-height: 1; }
+.offer-amount strong { font-size: clamp(88px, 9vw, 130px); font-weight: 900; letter-spacing: -.06em; }
+.offer-amount span { margin-inline-start: 10px; font-size: 28px; font-weight: 800; color: #c9fbf6; }
+.offer-once { margin: 8px 0 22px; color: #b5d2df; font-size: 14px; }
+.offer-free { display: grid; gap: 10px; }
+.offer-free span { display: flex; align-items: baseline; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(47,224,210,.12); border: 1px solid rgba(47,224,210,.35); color: #e4fbf9; font-size: 15px; }
+.offer-free b { color: var(--mint); font-size: 20px; font-weight: 900; }
+.offer-details { padding: 40px 38px; }
+.offer-details h3 { margin: 0 0 16px; font-size: 20px; }
+.offer-list { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 12px; }
+.offer-list li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.offer-list svg { flex: 0 0 18px; color: #0aa79d; }
+.offer-phones { margin: 0 0 20px; padding: 12px 16px; border-radius: 12px; background: #eef8fb; color: #285066; font-size: 14px; line-height: 1.65; }
+.offer-closing { margin: 0 0 18px; font-size: 20px; font-weight: 850; color: var(--navy); }
+.offer-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.offer-actions .btn { min-height: 50px; }
+.btn-wa-light { flex-wrap: wrap; color: #066b3a; border: 1px solid #8fdcb1; background: #eefcf4; }
+.btn-wa-light bdi { white-space: nowrap; }
+.btn-wa-light:hover { background: #dcf8e8; }
+.offer-terms { grid-column: 1 / -1; padding: 18px 38px 22px; background: #f4f9fc; border-top: 1px solid #e1edf3; color: #4a6578; font-size: 12.5px; line-height: 1.65; }
+.offer-terms p { margin: 0 0 6px; }
+.offer-terms p:last-child { margin: 0; }
+
+/* G. FAQ */
+.faq { background: #fff; }
+.faq-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 56px; align-items: start; }
+.faq-list { display: grid; gap: 10px; }
+.faq-item { border: 1px solid #d7e9f1; border-radius: 14px; background: #fbfdff; }
+.faq-item[open] { border-color: #9de0df; background: #fff; }
+.faq-item summary { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 18px; cursor: pointer; list-style: none; font-weight: 750; font-size: 15px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:focus-visible { outline: 3px solid #31d5cf; outline-offset: 2px; border-radius: 14px; }
+.faq-toggle { position: relative; flex: 0 0 18px; height: 18px; }
+.faq-toggle::before, .faq-toggle::after { content: ''; position: absolute; inset-inline-start: 2px; top: 8px; width: 14px; height: 2px; border-radius: 2px; background: #00757b; transition: transform .2s; }
+.faq-toggle::after { transform: rotate(90deg); }
+.faq-item[open] .faq-toggle::after { transform: rotate(0deg); }
+.faq-item p { margin: 0; padding: 0 18px 16px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+
+/* Mobile sticky contact */
+.sticky-cta { display: none; }
+
+@media (max-width: 1100px) {
+  .benefit-grid, .include-grid, .steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .hero { padding: 64px 0 70px; }
+  .hero-grid, .pbx-grid, .offer-panel, .faq-grid { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 600px; width: 100%; margin-inline: auto; }
+  .faq-grid { gap: 24px; }
+}
+@media (max-width: 690px) {
+  .hero { padding: 44px 0 54px; }
+  h1 { font-size: clamp(34px, 9.5vw, 48px); }
+  .hero-sub { font-size: 16px; }
+  .hero-offer-price strong { font-size: 34px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-visual { padding: 18px 18px 36px; }
+  .visual-missed, .visual-details { width: 100%; }
+  .wave { display: none; }
+  .benefit-grid, .include-grid, .steps, .free-row { grid-template-columns: 1fr; }
+  .pbx-phones { grid-template-columns: 1fr; }
+  .pbx-lines { margin-inline: 25%; }
+  .offer-price, .offer-details { padding: 30px 22px; }
+  .offer-terms { padding: 16px 22px; }
+  .offer-actions { flex-direction: column; }
+  .offer-actions .btn { width: 100%; }
+  .sticky-cta { position: fixed; z-index: 40; inset-inline: 12px; bottom: 12px; display: flex; gap: 8px; padding: 8px; border-radius: 16px; background: rgba(7,29,52,.94); box-shadow: 0 12px 30px rgba(0,0,0,.25); transform: translateY(140%); visibility: hidden; transition: transform .25s ease, visibility .25s; }
+  .sticky-cta.show { transform: none; visibility: visible; }
+  .sticky-cta .btn-primary { flex: 1; min-height: 46px; padding: 10px 14px; }
+  .sticky-cta .btn-wa { flex: 0 0 52px; min-height: 46px; padding: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
+</style>
+
+<style scoped>
+/* Brochure campaign additions: feature row, trust strip, value stack, PBX bullets */
+.feature-row { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: -8px 0 24px; padding: 0; color: #bfe9e4; font-size: 14px; font-weight: 700; }
+.feature-row li { display: inline-flex; align-items: center; gap: 6px; }
+.feature-row svg { color: var(--mint); }
+.hero-offer-price small { margin-inline-start: 6px; font-size: 13px; font-weight: 700; color: #a9c9d8; }
+.hero-free em, .worth { font-style: normal; font-weight: 600; opacity: .8; }
+.hero-tagline { margin: 18px 0 0; color: var(--mint); font-weight: 800; font-size: 15px; }
+.trust { background: #e8f5f8; border-bottom: 1px solid #d4eaf0; }
+.trust-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; padding-block: 24px; }
+.trust-item { display: flex; align-items: center; gap: 12px; }
+.trust-icon { flex: 0 0 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; border: 1px solid #b7e5eb; background: #fff; color: #00888b; }
+.trust-item b { display: block; font-size: 13.5px; color: #10304a; line-height: 1.35; }
+.trust-item small { display: block; font-size: 12px; color: #4a6578; line-height: 1.45; }
+.pbx-bullets { list-style: none; margin: 18px 0; padding: 0; display: grid; gap: 10px; }
+.pbx-bullets li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.pbx-bullets svg { flex: 0 0 18px; color: #0aa79d; }
+.pbx-note { margin: 0; padding: 12px 16px; border-radius: 12px; background: #eef8fb; color: #285066; font-size: 14px; line-height: 1.65; }
+.value-stack { margin: 0 0 18px; display: grid; border-top: 1px solid #e1edf3; }
+.value-stack > div { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #e1edf3; }
+.value-stack dt { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.value-stack dt svg { flex: 0 0 18px; color: #0aa79d; }
+.value-stack dd { margin: 0; text-align: end; white-space: nowrap; }
+.value-stack dd b { font-size: 16px; color: var(--navy); }
+.value-stack dd small { display: block; font-size: 12px; color: var(--muted); }
+.value-stack .free dd b { color: #007a73; font-size: 18px; font-weight: 900; }
+.value-stack .free dt svg { color: #d92d31; }
+@media (max-width: 1100px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 690px) {
+  .trust-grid { grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+  .trust-icon { flex-basis: 36px; height: 36px; }
+  .value-stack dd { white-space: normal; }
+}
 </style>
