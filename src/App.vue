@@ -9,6 +9,8 @@ import { useRoute } from 'vue-router'
 import TheHeader from './components/TheHeader.vue'
 import TheFooter from './components/TheFooter.vue'
 import { useLanguage } from './composables/useLanguage.js'
+import { PACKAGE, omr } from './pricing.js'
+const P = omr(PACKAGE)
 const { lang, setLang } = useLanguage()
 const route = useRoute()
 onMounted(() => {
@@ -17,8 +19,8 @@ onMounted(() => {
 })
 watch([lang, () => route.path], ([l, path]) => {
   document.title = path === '/voicegate-demo'
-    ? (l === 'ar' ? 'اطلب تجربة مُجيب | Future Smart Support' : 'Request a Mojeeb AI Demo | Future Smart Support')
-    : (l === 'ar' ? 'مُجيب | اتصالات أعمال ذكية في عُمان | Future Smart Support' : 'Mojeeb AI | Smart Business Telephony in Oman | Future Smart Support')
+    ? (l === 'ar' ? 'اطلب تجربة مُجيب | Future Smart Support' : 'Request a MOJEEB Demo | Future Smart Support')
+    : (l === 'ar' ? `مُجيب | مساعد صوتي ذكي ونظام PBX مدمج بـ ${P} ر.ع | Future Smart Support` : `MOJEEB | AI Call Answering + Built-in PBX for OMR ${P} | Future Smart Support`)
 }, { immediate: true })
 </script>
 <style>

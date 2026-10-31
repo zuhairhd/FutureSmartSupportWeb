@@ -6,13 +6,13 @@
         <h2 class="section-title">{{ t('voicegateDemo.demo.title') }}</h2>
         <p class="vg-demo-text">{{ t('voicegateDemo.demo.text') }}</p>
         <div class="vg-offer-note">
-          <span class="vg-offer-price" dir="ltr">599 <small>{{ lang === 'ar' ? 'ر.ع' : 'R.O' }}</small></span>
-          <span>{{ lang === 'ar' ? 'عرض تعريفي خاص · غير شامل ضريبة القيمة المضافة' : 'Special introductory offer · excl. VAT' }}</span>
+          <span class="vg-offer-price" dir="ltr">{{ omr(PACKAGE) }} <small>{{ lang === 'ar' ? 'ر.ع' : 'OMR' }}</small></span>
+          <span>{{ lang === 'ar' ? `عرض لفترة محدودة · مُجيب مع نظام PBX مدمج · التركيب مجاناً (بقيمة ${omr(INSTALLATION)} ر.ع) · البوابة مجاناً لمدة ${PORTAL_FREE_MONTHS} أشهر (بقيمة ${omr(PORTAL_VALUE)} ر.ع)` : `Limited-time offer · MOJEEB with built-in PBX · FREE installation (worth OMR ${omr(INSTALLATION)}) · ${PORTAL_FREE_MONTHS}-month portal FREE (worth OMR ${omr(PORTAL_VALUE)})` }}</span>
         </div>
         <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري اتصل بنا، وسيرد عليك مُجيب.' : 'For an immediate enquiry, call us. Mojeeb answers.' }}</p>
-        <a :href="PHONE_URL" class="btn btn-ghost vg-wa">
+        <a :href="phoneHref()" class="btn btn-ghost vg-wa">
           <MarketingIcon name="phone" :size="18" />
-          <span>{{ lang === 'ar' ? 'اتصل بنا' : 'Call us' }} <bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></span>
+          <span>{{ lang === 'ar' ? 'اتصل بنا' : 'Call us' }} <bdi dir="ltr">+968 2420 2829</bdi></span>
         </a>
       </div>
       <div class="card form-card">
@@ -76,7 +76,7 @@
 import { ref, nextTick } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { useContactSubmit, formError, EMAIL_RE } from '../composables/useContactSubmit.js'
-import { PHONE_URL, PHONE_DISPLAY } from '../constants.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, omr, phoneHref } from '../pricing.js'
 import MarketingIcon from './MarketingIcon.vue'
 
 const { t, lang } = useLanguage()
@@ -116,7 +116,7 @@ async function handleSubmit() {
     name: f.name,
     email: f.email,
     company: f.company,
-    message: `Mojeeb AI interest / demo request (pre-launch, 599 R.O introductory package)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
+    message: `MOJEEB demo request (pre-launch; OMR ${omr(PACKAGE)} MOJEEB + PBX package, free standard installation (normally OMR ${omr(INSTALLATION)}), ${PORTAL_FREE_MONTHS} months free portal)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
     website: f.website,
     language: lang.value,
     source: 'marketing_website',
