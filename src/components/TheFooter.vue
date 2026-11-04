@@ -17,6 +17,7 @@
       <div class="footer-column"><b>{{ c.contact }}</b>
         <a :href="phoneHref()">{{ c.phone }} <bdi dir="ltr">+968 2420 2829</bdi></a>
         <a href="mailto:majid@FutureSmartSupport.com">majid@FutureSmartSupport.com</a>
+        <a class="footer-social" :href="INSTAGRAM_URL" target="_blank" rel="noopener" :aria-label="c.instagram"><MarketingIcon name="instagram" :size="18" /><bdi dir="ltr">{{ INSTAGRAM_HANDLE }}</bdi></a>
         <span>{{ c.location }}</span>
       </div>
     </div>
@@ -30,12 +31,14 @@
 import { computed } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { phoneHref } from '../pricing.js'
+import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../constants.js'
+import MarketingIcon from './MarketingIcon.vue'
 import logoUrl from '../../assets/FSS_Logo_light.png'
 const { lang } = useLanguage()
 const year = new Date().getFullYear()
 const c = computed(() => lang.value === 'ar'
-  ? {tagline:'مُجيب · مساعد صوتي ذكي ونظام PBX مدمج',description:'أشخاص. تقنية. غدٌ أذكى. من أجل عُمان أذكى.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'كيف يعمل',pbx:'ماذا تحصل',demo:'اطلب عرضًا توضيحيًا',mojebPage:'صفحة العرض التوضيحي',contactForm:'نموذج التواصل',phone:'هاتف',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
-  : {tagline:'MOJEEB · AI voice assistant + built-in PBX',description:'People. Technology. A Smarter Tomorrow. For a Smarter Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'How it works',pbx:'What’s in the box',demo:'Request a Demo',mojebPage:'MOJEEB demo page',contactForm:'Contact form',phone:'Phone',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
+  ? {instagram:'تابعنا على إنستغرام (يفتح في نافذة جديدة)',tagline:'مُجيب · مساعد صوتي ذكي ونظام PBX مدمج',description:'أشخاص. تقنية. غدٌ أذكى. من أجل عُمان أذكى.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'كيف يعمل',pbx:'ماذا تحصل',demo:'اطلب عرضًا توضيحيًا',mojebPage:'صفحة العرض التوضيحي',contactForm:'نموذج التواصل',phone:'هاتف',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
+  : {instagram:'Follow us on Instagram (opens in a new tab)',tagline:'MOJEEB · AI voice assistant + built-in PBX',description:'People. Technology. A Smarter Tomorrow. For a Smarter Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'How it works',pbx:'What’s in the box',demo:'Request a Demo',mojebPage:'MOJEEB demo page',contactForm:'Contact form',phone:'Phone',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
 </script>
 <style scoped>
 .fss-footer { background:#05192e; color:#fff; padding:57px 0 21px; }
@@ -47,4 +50,5 @@ const c = computed(() => lang.value === 'ar'
 .footer-bottom { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:18px; color:#84a4b6; border-top:1px solid rgba(173,210,226,.15); padding-top:20px; font-size:12px; }.footer-bottom nav { display:flex; gap:22px; }.footer-bottom a:hover { color:#4be3d7; }
 @media(max-width:800px) { .footer-main { grid-template-columns:1fr 1fr; gap:35px; }.footer-brand { grid-column:1/-1; } }
 @media(max-width:520px) { .footer-main { grid-template-columns:1fr; gap:30px; }.footer-brand { grid-column:1; }.footer-bottom { flex-direction:column; align-items:flex-start; } }
+.footer-social { display:inline-flex; align-items:center; gap:8px; }
 </style>

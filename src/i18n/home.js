@@ -137,6 +137,7 @@ export default {
       title: 'Hear Mojeeb answer, right now.',
       sub: 'Call our company number. Mojeeb will pick up, in Arabic or English.',
       demo: 'Or request a demo at your office',
+      instagram: 'Follow us on Instagram',
     },
   },
 
@@ -273,6 +274,7 @@ export default {
       title: 'اسمع مُجيب يرد، الآن.',
       sub: 'اتصل برقم شركتنا وسيرد عليك مُجيب بالعربية أو الإنجليزية.',
       demo: 'أو اطلب عرضاً توضيحياً في مكتبك',
+      instagram: 'تابعنا على إنستغرام',
     },
   },
 }

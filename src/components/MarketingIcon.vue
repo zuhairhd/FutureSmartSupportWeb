@@ -23,6 +23,7 @@
     <g v-else-if="name === 'gift'"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-1.5-3-5.5-3.5-5.5-1S10 8 12 8Zm0 0c1.5-3 5.5-3.5 5.5-1S14 8 12 8Z"/></g>
     <g v-else-if="name === 'missed'"><path d="M22 16.5v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 11.2 18 19.5 19.5 0 0 1 5 11.8 19.8 19.8 0 0 1 1.5 3.18 2 2 0 0 1 3.5 1h3a2 2 0 0 1 2 1.72c.13.96.37 1.91.7 2.81a2 2 0 0 1-.45 2.11L7.5 8.9a16 16 0 0 0 7.6 7.6l1.26-1.25a2 2 0 0 1 2.11-.45c.9.33 1.85.57 2.81.7A2 2 0 0 1 22 16.5Z"/><path d="m16 2 6 6m0-6-6 6"/></g>
     <g v-else-if="name === 'form'"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></g>
+    <g v-else-if="name === 'instagram'"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></g>
     <g v-else-if="name === 'play'"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor" stroke="none"/></g>
     <g v-else-if="name === 'info'"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></g>
     <g v-else-if="name === 'x'"><path d="M6 6l12 12M18 6 6 18"/></g>
