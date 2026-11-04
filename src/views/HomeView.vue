@@ -1,182 +1,204 @@
 <template>
-  <div class="campaign-home">
-    <!-- A. Hero: brochure headline, MOJEEB + built-in PBX value, offer and actions -->
-    <section class="hero" id="solution" aria-labelledby="hero-title">
-      <div class="hero-glow" aria-hidden="true"></div>
+  <div class="home">
+    <!-- Hero: message, one-time price, and the intro video -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span><span class="grid-lines"></span></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="missed-pill"><MarketingIcon name="missed" :size="16" />{{ s.hero.eyebrow }}</p>
-          <h1 id="hero-title">{{ s.hero.headline }} <span>{{ s.hero.accent }}</span></h1>
+          <p class="eyebrow-pill"><span class="live-dot" aria-hidden="true"></span>{{ s.hero.eyebrow }}</p>
+          <h1 id="hero-title">{{ s.hero.title1 }} <span class="grad">{{ s.hero.title2 }}</span></h1>
           <p class="hero-sub">{{ s.hero.sub }}</p>
-          <p class="hero-value"><strong>{{ s.value.title }}</strong> {{ s.value.sub }}</p>
-          <ul class="feature-row" :aria-label="s.features.aria">
-            <li v-for="f in s.features.items" :key="f.text"><MarketingIcon :name="f.icon" :size="15" />{{ f.text }}</li>
-          </ul>
-          <router-link class="hero-offer" :to="{ path: '/', hash: '#offer' }" :aria-label="s.hero.offerAria">
-            <!-- TODO(owner): "50% OFF" badge / original price only after the reference price is confirmed. -->
-            <span class="offer-tag">{{ s.limited }}</span>
-            <span class="hero-offer-price"><bdi><strong>{{ P }}</strong> {{ currency }}</bdi> <small>{{ s.oneTime }}</small></span>
-            <span class="hero-free-list">
-              <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.install }} <em>{{ s.worthInstall }}</em></span>
-              <span class="hero-free"><MarketingIcon name="check" :size="15" /><b>{{ s.free }}</b> {{ s.portal }} <em>{{ s.worthPortal }}</em></span>
-            </span>
+
+          <router-link class="price-chip" :to="{ path: '/', hash: '#offer' }" :aria-label="`${s.hero.priceLead}: ${P} ${s.currency}. ${s.hero.priceNote}`">
+            <span class="price-chip-amount"><bdi><b>{{ P }}</b> {{ s.currency }}</bdi></span>
+            <span class="price-chip-text"><b>{{ s.hero.priceLead }}</b><small><MarketingIcon name="check" :size="14" />{{ s.hero.priceNote }}</small></span>
           </router-link>
+
           <div class="hero-actions">
-            <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }} <MarketingIcon name="arrow" :size="17" class="flip-rtl" /></router-link>
-            <a class="btn btn-wa" :href="phoneLink"><MarketingIcon name="phone" :size="18" />{{ s.cta.whatsapp }}</a>
+            <router-link class="btn btn-primary btn-lg" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }} <MarketingIcon name="arrow" :size="18" class="flip-rtl" /></router-link>
+            <a class="btn btn-glass btn-lg" :href="phoneLink"><MarketingIcon name="phone" :size="18" />{{ s.cta.call }}</a>
           </div>
-          <p class="hero-tagline">{{ s.hero.tagline }}</p>
-          <!-- TODO(owner): keep or drop the pre-launch status; it conflicts with "Get MOJEEB today before the offer ends". -->
-          <p class="hero-status"><span class="status-dot" aria-hidden="true"></span>{{ s.hero.status }}</p>
-        </div>
-
-        <figure class="hero-visual" :aria-label="s.visual.label">
-          <div class="visual-card visual-missed">
-            <span class="visual-icon icon-red"><MarketingIcon name="missed" :size="22" /></span>
-            <div><b>{{ s.visual.missed }}</b><small>{{ s.visual.missedSub }}</small></div>
-          </div>
-          <div class="visual-link" aria-hidden="true"></div>
-          <div class="visual-card visual-agent">
-            <span class="visual-icon icon-brand"><MarketingIcon name="bot" :size="26" /></span>
-            <div><span class="visual-kicker">MOJEEB · مُجيب</span><b>{{ s.visual.answer }}</b><small>{{ s.visual.answerSub }}</small></div>
-            <div class="wave" aria-hidden="true"><i v-for="n in 7" :key="n"></i></div>
-          </div>
-          <div class="visual-link" aria-hidden="true"></div>
-          <div class="visual-card visual-details">
-            <span class="visual-icon icon-soft"><MarketingIcon name="form" :size="22" /></span>
-            <div><b>{{ s.visual.details }}</b>
-              <ul><li v-for="d in s.visual.detailItems" :key="d"><MarketingIcon name="check" :size="13" />{{ d }}</li></ul>
-            </div>
-          </div>
-          <div class="visual-pbx"><MarketingIcon name="network" :size="18" />{{ s.visual.pbx }}</div>
-          <figcaption class="visual-note">{{ s.visual.note }}</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- Trust row (brochure footer strip) -->
-    <section class="trust" :aria-label="s.trust.aria">
-      <div class="container trust-grid">
-        <div class="trust-item" v-for="t in s.trust.items" :key="t.title">
-          <span class="trust-icon"><MarketingIcon :name="t.icon" :size="22" /></span>
-          <div><b>{{ t.title }}</b><small>{{ t.sub }}</small></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- B. Business benefits -->
-    <section class="section benefits" id="features">
-      <div class="container">
-        <div class="heading"><p class="section-label">{{ s.benefits.eyebrow }}</p><h2 class="section-title">{{ s.benefits.title }}</h2></div>
-        <div class="benefit-grid">
-          <article class="benefit" v-for="b in s.benefits.items" :key="b.title">
-            <span class="benefit-icon"><MarketingIcon :name="b.icon" :size="26" /></span>
-            <h3>{{ b.title }}</h3><p>{{ b.desc }}</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- C. What the package includes -->
-    <section class="section package" id="package">
-      <div class="container">
-        <div class="heading"><p class="section-label">{{ s.pkg.eyebrow }}</p><h2 class="section-title">{{ s.pkg.title }}</h2><p class="section-sub">{{ s.pkg.sub }}</p></div>
-        <div class="include-grid">
-          <article class="include" v-for="item in s.pkg.items" :key="item.title" :class="{ 'include-pbx': item.pbx }">
-            <span class="include-icon"><MarketingIcon :name="item.icon" :size="30" /></span>
-            <span class="include-badge"><MarketingIcon name="check" :size="13" />{{ s.included }}</span>
-            <h3>{{ item.title }}</h3><p>{{ item.desc }}</p>
-          </article>
-        </div>
-        <div class="free-row">
-          <div class="free-card"><span class="free-icon"><MarketingIcon name="tool" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.install }} <em class="worth">{{ s.worthInstall }}</em></b><small>{{ s.pkg.installNote }}</small></div></div>
-          <div class="free-card"><span class="free-icon"><MarketingIcon name="cloud" :size="24" /></span><div><span class="free-word">{{ s.free }}</span><b>{{ s.portal }} <em class="worth">{{ s.worthPortal }}</em></b><small>{{ s.pkg.portalNote }}</small></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- D. Built-in PBX: one included phone, more phones can be added (not included) -->
-    <section class="section pbx" id="pbx">
-      <div class="container pbx-grid">
-        <div>
-          <p class="section-label">{{ s.pbx.eyebrow }}</p>
-          <h2 class="section-title">{{ s.pbx.title }}</h2>
-          <p class="pbx-text">{{ s.pbx.body }}</p>
-          <ul class="pbx-bullets">
-            <li v-for="b in s.pbx.bullets" :key="b"><MarketingIcon name="check" :size="18" />{{ b }}</li>
+          <ul class="hero-points">
+            <li v-for="p in s.hero.points" :key="p"><MarketingIcon name="check" :size="15" />{{ p }}</li>
           </ul>
-          <p class="pbx-note">{{ phonesNote }}</p>
         </div>
-        <figure class="pbx-diagram" :aria-label="s.pbx.diagramLabel">
-          <div class="pbx-node"><MarketingIcon name="network" :size="22" /><span>{{ s.pbx.node }}</span></div>
-          <div class="pbx-lines" aria-hidden="true"></div>
-          <div class="pbx-phones">
-            <div class="pbx-phone included"><MarketingIcon name="deskphone" :size="34" /><b>{{ s.pbx.includedPhone }}</b><small>{{ s.pbx.qtyOne }}</small></div>
-            <div class="pbx-extra">
-              <div class="pbx-phone extra"><MarketingIcon name="deskphone" :size="30" /></div>
-              <div class="pbx-phone extra"><MarketingIcon name="deskphone" :size="30" /></div>
-              <b>{{ s.pbx.extraPhones }}</b>
-            </div>
+
+        <figure class="video-card" id="video" :aria-label="s.video.title">
+          <div class="video-frame">
+            <video ref="videoEl" class="video" :src="videoSrc" :poster="posterSrc" preload="none" playsinline
+                   :controls="playing" @play="playing = true" @ended="playing = false" :aria-label="s.video.title"></video>
+            <button v-if="!playing" type="button" class="video-play" @click="playVideo" :aria-label="s.video.play">
+              <span class="play-ring" aria-hidden="true"><MarketingIcon name="play" :size="30" /></span>
+              <span class="play-text"><small>{{ s.video.kicker }}</small><b>{{ s.video.title }}</b></span>
+            </button>
           </div>
-          <figcaption class="visually-hidden">{{ phonesNote }}</figcaption>
+          <figcaption class="video-caption"><MarketingIcon name="play" :size="12" />{{ s.video.caption }}</figcaption>
         </figure>
+      </div>
+
+      <div class="container">
+        <ul class="trust">
+          <li v-for="t in s.trust" :key="t.title"><span class="trust-icon"><MarketingIcon :name="t.icon" :size="20" /></span><span><b>{{ t.title }}</b><small>{{ t.sub }}</small></span></li>
+        </ul>
       </div>
     </section>
 
-    <!-- E. How it works -->
-    <section class="section how" id="how">
+    <!-- The problem -->
+    <section class="section problem" id="problem" aria-labelledby="problem-title">
       <div class="container">
-        <div class="heading centered"><p class="section-label">{{ s.how.eyebrow }}</p><h2 class="section-title">{{ s.how.title }}</h2></div>
-        <ol class="steps">
-          <li v-for="(step, i) in s.how.steps" :key="step.title" class="step">
-            <span class="step-icon"><MarketingIcon :name="step.icon" :size="28" /></span>
-            <span class="step-num" aria-hidden="true">{{ i + 1 }}</span>
-            <h3>{{ step.title }}</h3><p>{{ step.desc }}</p>
+        <div class="heading">
+          <p class="kicker">{{ s.problem.eyebrow }}</p>
+          <h2 id="problem-title" class="title">{{ s.problem.title }}</h2>
+          <p class="lead">{{ s.problem.sub }}</p>
+        </div>
+        <div class="problem-grid">
+          <article v-for="(p, i) in s.problem.items" :key="p.title" class="problem-card reveal" :style="{ '--d': i }">
+            <span class="icon-tile danger"><MarketingIcon :name="p.icon" :size="24" /></span>
+            <h3>{{ p.title }}</h3><p>{{ p.desc }}</p>
+          </article>
+        </div>
+        <p class="punch"><MarketingIcon name="bot" :size="22" />{{ s.problem.punch }}</p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section how" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="heading center">
+          <p class="kicker">{{ s.how.eyebrow }}</p>
+          <h2 id="how-title" class="title">{{ s.how.title }}</h2>
+        </div>
+        <ol class="flow">
+          <li v-for="(st, i) in s.how.steps" :key="st.title" class="flow-step reveal" :style="{ '--d': i }">
+            <span class="flow-num" aria-hidden="true">{{ i + 1 }}</span>
+            <span class="icon-tile"><MarketingIcon :name="st.icon" :size="26" /></span>
+            <h3>{{ st.title }}</h3><p>{{ st.desc }}</p>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- F. Offer panel with value stack -->
-    <section class="section offer" id="offer" aria-labelledby="offer-title">
+    <!-- What's in the box -->
+    <section class="section box" id="box" aria-labelledby="box-title">
+      <span id="package" class="anchor" aria-hidden="true"></span>
       <div class="container">
-        <div class="offer-panel">
-          <div class="offer-price">
-            <!-- TODO(owner): "50% OFF" badge / original price only after the reference price is confirmed. Offer end date also unconfirmed. -->
-            <span class="offer-tag">{{ s.limited }}</span>
-            <h2 id="offer-title">{{ s.offer.title }}</h2>
-            <p class="offer-amount"><bdi><strong>{{ P }}</strong><span>{{ currency }}</span></bdi></p>
-            <p class="offer-once">{{ s.oneTime }}</p>
-          </div>
-          <div class="offer-details">
-            <dl class="value-stack">
-              <div v-for="row in s.offer.stack" :key="row.label" :class="{ free: row.free }">
-                <dt><MarketingIcon :name="row.free ? 'gift' : 'check'" :size="18" />{{ row.label }}</dt>
-                <dd><b>{{ row.value }}</b><small v-if="row.note">{{ row.note }}</small></dd>
-              </div>
-            </dl>
-            <p class="offer-phones">{{ phonesNote }}</p>
-            <p class="offer-closing">{{ s.offer.closing }}</p>
-            <div class="offer-actions">
-              <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }}</router-link>
-              <a class="btn btn-wa-light" :href="phoneLink"><MarketingIcon name="phone" :size="18" />{{ s.cta.whatsapp }} <bdi dir="ltr">+968 2420 2829</bdi></a>
-            </div>
-          </div>
-          <div class="offer-terms">
-            <p>{{ summary }}</p>
-            <p>{{ vat.detail }}</p>
-            <p>{{ s.offer.terms }}</p>
+        <div class="heading">
+          <p class="kicker">{{ s.box.eyebrow }}</p>
+          <h2 id="box-title" class="title">{{ s.box.title }}</h2>
+          <p class="lead">{{ s.box.sub }}</p>
+        </div>
+        <div class="box-grid">
+          <article v-for="(b, i) in s.box.items" :key="b.title" class="box-item reveal" :style="{ '--d': i }">
+            <span class="icon-tile big"><MarketingIcon :name="b.icon" :size="30" /></span>
+            <div><h3>{{ b.title }}</h3><p>{{ b.desc }}</p></div>
+          </article>
+        </div>
+        <div class="free-row">
+          <div v-for="f in s.box.freeItems" :key="f.title" class="free-card">
+            <span class="free-badge">{{ s.box.free }}</span>
+            <MarketingIcon :name="f.icon" :size="22" />
+            <span><b>{{ f.title }}</b><small>{{ f.note }}</small></span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- G. FAQ -->
-    <section class="section faq" id="faq">
+    <!-- Price: one-time cost illustrated -->
+    <section class="section offer" id="offer" aria-labelledby="offer-title">
+      <div class="container">
+        <div class="heading center light">
+          <p class="kicker">{{ s.offer.eyebrow }}</p>
+          <h2 id="offer-title" class="title">{{ s.offer.title }}</h2>
+          <p class="lead">{{ s.offer.sub }}</p>
+        </div>
+
+        <div class="offer-grid">
+          <div class="price-card">
+            <span class="tag">{{ s.offer.limited }}</span>
+            <p class="price"><bdi><b>{{ P }}</b><span>{{ s.currency }}</span></bdi></p>
+            <p class="price-once">{{ s.offer.once }}</p>
+            <ul class="ledger">
+              <li v-for="row in s.offer.ledger" :key="row.title" :class="row.kind">
+                <span class="ledger-mark" aria-hidden="true"><MarketingIcon :name="ledgerIcon(row.kind)" :size="15" /></span>
+                <span><b>{{ row.title }}</b><small>{{ row.desc }}</small></span>
+              </li>
+            </ul>
+            <router-link class="btn btn-primary btn-block" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }}</router-link>
+            <p class="fine">{{ s.offer.vat }}</p>
+          </div>
+
+          <div class="once-card">
+            <h3>{{ s.offer.chartTitle }}</h3>
+            <div class="bars" role="img" :aria-label="`${s.offer.chartFirst}: ${P} ${s.currency}. ${s.offer.chartRest}: ${s.offer.chartZero}.`">
+              <div v-for="m in 12" :key="m" class="bar-col" :class="{ first: m === 1 }">
+                <span class="bar" :style="{ height: m === 1 ? '100%' : '3%' }"></span>
+                <small>{{ m }}</small>
+              </div>
+            </div>
+            <div class="bar-legend">
+              <span><i class="sw sw-pay"></i>{{ s.offer.chartFirst }}: <bdi><b>{{ P }} {{ s.currency }}</b></bdi></span>
+              <span><i class="sw sw-zero"></i>{{ s.offer.chartRest }}: <b>{{ s.offer.chartZero }}</b></span>
+            </div>
+
+            <div class="spread">
+              <p class="spread-label">{{ s.offer.spreadLabel }}</p>
+              <div class="seg" role="radiogroup" :aria-label="s.offer.spreadLabel">
+                <button v-for="y in YEARS" :key="y" type="button" role="radio" :aria-checked="years === y" :class="{ on: years === y }" @click="years = y">{{ s.offer.years(y) }}</button>
+              </div>
+              <p class="spread-result" aria-live="polite">
+                {{ s.offer.spreadIs }} <bdi v-if="lang === 'ar'"><b>{{ perMonth }}</b> {{ s.currency }}</bdi><bdi v-else>{{ s.currency }} <b>{{ perMonth }}</b></bdi> {{ s.offer.perMonth }}
+              </p>
+              <p class="fine">{{ s.offer.spreadNote }}</p>
+            </div>
+          </div>
+        </div>
+        <p class="terms">{{ s.offer.terms }}</p>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section class="section who" id="who" aria-labelledby="who-title">
+      <div class="container">
+        <div class="heading center">
+          <p class="kicker">{{ s.who.eyebrow }}</p>
+          <h2 id="who-title" class="title">{{ s.who.title }}</h2>
+        </div>
+        <ul class="who-grid">
+          <li v-for="(w, i) in s.who.items" :key="w.title" class="who-item reveal" :style="{ '--d': i % 4 }">
+            <span class="icon-tile"><MarketingIcon :name="w.icon" :size="24" /></span>
+            <b>{{ w.title }}</b><small>{{ w.desc }}</small>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Honest limits -->
+    <section class="section limits" id="limits" aria-labelledby="limits-title">
+      <div class="container">
+        <div class="heading">
+          <p class="kicker">{{ s.limits.eyebrow }}</p>
+          <h2 id="limits-title" class="title">{{ s.limits.title }}</h2>
+          <p class="lead">{{ s.limits.sub }}</p>
+        </div>
+        <div class="limits-grid">
+          <article v-for="l in s.limits.items" :key="l.title" class="limit">
+            <span class="icon-tile warn"><MarketingIcon :name="l.icon" :size="22" /></span>
+            <div><h3>{{ l.title }}</h3><p>{{ l.desc }}</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
       <div class="container faq-grid">
-        <div><p class="section-label">{{ s.faq.eyebrow }}</p><h2 class="section-title">{{ s.faq.title }}</h2></div>
+        <div class="heading">
+          <p class="kicker">{{ s.faq.eyebrow }}</p>
+          <h2 id="faq-title" class="title">{{ s.faq.title }}</h2>
+          <a class="btn btn-outline" :href="phoneLink"><MarketingIcon name="phone" :size="17" /><bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></a>
+        </div>
         <div class="faq-list">
-          <details v-for="(item, i) in s.faq.items" :key="i" class="faq-item">
+          <details v-for="(item, i) in s.faq.items" :key="i" class="faq-item" :open="i === 0">
             <summary><span>{{ item.q }}</span><span class="faq-toggle" aria-hidden="true"></span></summary>
             <p>{{ item.a }}</p>
           </details>
@@ -184,13 +206,27 @@
       </div>
     </section>
 
+    <!-- Call to try it -->
+    <section class="try" aria-labelledby="try-title">
+      <div class="container try-inner">
+        <div>
+          <h2 id="try-title">{{ s.final.title }}</h2>
+          <p>{{ s.final.sub }}</p>
+        </div>
+        <div class="try-actions">
+          <a class="btn btn-primary btn-lg" :href="phoneLink"><MarketingIcon name="phone" :size="18" /><bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></a>
+          <router-link class="try-link" :to="{ path: '/', hash: '#demo' }">{{ s.final.demo }} <MarketingIcon name="arrow" :size="15" class="flip-rtl" /></router-link>
+        </div>
+      </div>
+    </section>
+
     <VoicegateDemoSection />
     <ContactSection />
 
-    <!-- Compact mobile contact bar; hidden while the hero, demo form, contact form or footer is on screen -->
+    <!-- Mobile action bar; hidden over the hero, the forms and the footer -->
     <div class="sticky-cta" :class="{ show: stickyVisible }" :aria-hidden="!stickyVisible">
       <router-link class="btn btn-primary" :to="{ path: '/', hash: '#demo' }" :tabindex="stickyVisible ? 0 : -1">{{ s.cta.demo }}</router-link>
-      <a class="btn btn-wa" :href="phoneLink" :aria-label="s.cta.whatsapp" :tabindex="stickyVisible ? 0 : -1"><MarketingIcon name="phone" :size="20" /></a>
+      <a class="btn btn-call" :href="phoneLink" :aria-label="s.cta.call" :tabindex="stickyVisible ? 0 : -1"><MarketingIcon name="phone" :size="20" /></a>
     </div>
   </div>
 </template>
@@ -198,472 +234,287 @@
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, phoneHref } from '../pricing.js'
+import { PACKAGE, omr, phoneHref } from '../pricing.js'
+import { PHONE_DISPLAY } from '../constants.js'
+import messages from '../i18n/home.js'
 import MarketingIcon from '../components/MarketingIcon.vue'
 import ContactSection from '../components/ContactSection.vue'
 import VoicegateDemoSection from '../components/VoicegateDemoSection.vue'
 
+// The intro video is served as-is from public/video (Vite copies public/ into dist/).
+const videoSrc = '/video/mojeeb-intro.mp4'
+const posterSrc = '/video/mojeeb-intro-poster.jpg'
+
 const { lang } = useLanguage()
 const s = computed(() => messages[lang.value] || messages.en)
-const currency = computed(() => (lang.value === 'ar' ? 'ر.ع' : 'OMR'))
-const summary = computed(() => OFFER_SUMMARY[lang.value])
-const vat = computed(() => VAT[lang.value])
-const phonesNote = computed(() => PHONES_NOTE[lang.value])
 const phoneLink = phoneHref()
 const P = omr(PACKAGE)
-const I = omr(INSTALLATION)
-const M = PORTAL_FREE_MONTHS
-const V = omr(PORTAL_VALUE)
 
-// Mobile sticky bar: visible only between the hero and the demo/contact/footer area.
+const YEARS = [1, 3, 5]
+const years = ref(3)
+// OMR has 3 decimals (baisa).
+const perMonth = computed(() => (PACKAGE / (years.value * 12)).toFixed(3))
+
+const ledgerIcon = kind => ({ pay: 'wallet', free: 'gift', zero: 'check', direct: 'info' }[kind] || 'check')
+
+const videoEl = ref(null)
+const playing = ref(false)
+function playVideo() {
+  playing.value = true
+  const v = videoEl.value
+  if (!v) return
+  const p = v.play()
+  if (p && p.catch) p.catch(() => { /* autoplay refused: native controls are now shown */ })
+  v.focus()
+}
+
 const stickyVisible = ref(false)
-let observer
+let observer, revealer
 onMounted(() => {
   const hidden = new Set()
   observer = new IntersectionObserver(entries => {
     for (const e of entries) e.isIntersecting ? hidden.add(e.target) : hidden.delete(e.target)
     stickyVisible.value = hidden.size === 0
   })
-  for (const sel of ['#solution', '#demo', '#contact', '.fss-footer']) {
+  for (const sel of ['#top', '#demo', '#contact', '.fss-footer']) {
     const el = document.querySelector(sel)
     if (el) observer.observe(el)
   }
+  const els = document.querySelectorAll('.home .reveal')
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(el => el.classList.add('in'))
+    return
+  }
+  revealer = new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); revealer.unobserve(e.target) }
+  }, { rootMargin: '0px 0px -8% 0px' })
+  els.forEach(el => revealer.observe(el))
 })
-onUnmounted(() => observer?.disconnect())
-
-const messages = {
-  en: {
-    limited: 'Limited-time offer',
-    free: 'FREE',
-    included: 'Included',
-    oneTime: 'One-time cost',
-    install: 'Professional installation',
-    portal: `${M}-month portal subscription`,
-    worthInstall: `(worth OMR ${I})`,
-    worthPortal: `(worth OMR ${V})`,
-    cta: { demo: 'Request a Demo', whatsapp: 'Call us' },
-    value: { title: 'AI answering + a built-in PBX.', sub: `Included in your OMR ${P} package.` },
-    hero: {
-      eyebrow: 'Turn every call into an opportunity',
-      headline: 'Never Miss', accent: 'Another Customer',
-      sub: 'Every missed call could be a lost deal. MOJEEB answers your calls 24/7, handles customer inquiries, and helps your business grow — in Arabic and English.',
-      tagline: 'Same number. Smarter business.',
-      offerAria: `Limited-time offer: OMR ${P} one-time, free professional installation worth OMR ${I} and a free ${M}-month portal subscription worth OMR ${V}. View the offer.`,
-      status: 'Pre-launch: book a demonstration now. Orders and delivery dates are confirmed in writing at launch.',
-    },
-    features: { aria: 'Key features', items: [{ icon: 'globe', text: 'Arabic & English' }, { icon: 'form', text: 'Call details captured' }, { icon: 'cloud', text: 'Follow-up in the portal' }] },
-    visual: {
-      label: 'Illustration: a customer call is answered by MOJEEB, the details are captured, and the team follows up.',
-      missed: 'Customer calling', missedSub: 'Your team is busy or out of office',
-      answer: 'MOJEEB answers', answerSub: 'In Arabic or English',
-      details: 'Details captured for follow-up', detailItems: ['Caller number', 'Customer request', 'Follow-up task in the portal'],
-      pbx: 'Built-in PBX connects your team', note: 'Illustration',
-    },
-    trust: {
-      aria: 'Why businesses choose MOJEEB',
-      items: [
-        { icon: 'tool', title: 'Easy setup', sub: 'We install it for you — FREE' },
-        { icon: 'clock', title: 'Reliable 24/7', sub: 'Answers calls around the clock' },
-        { icon: 'people', title: 'More customers', sub: 'Turn calls into sales opportunities' },
-        { icon: 'wallet', title: 'Cost effective', sub: 'Professional solution at a special price' },
-        { icon: 'shield', title: 'Reliable & secure', sub: 'Runs on your own local server' },
-        { icon: 'globe', title: 'Local support', sub: 'Oman-based team' },
-      ],
-    },
-    benefits: {
-      eyebrow: 'How MOJEEB helps your business', title: 'Answer more calls. Follow up on more opportunities.',
-      items: [
-        { icon: 'clock', title: 'Answers calls 24/7', desc: 'MOJEEB greets callers and handles common questions, including when your team is busy or outside office hours.' },
-        { icon: 'form', title: 'Captures customer details and follow-ups', desc: 'Caller details and requests are recorded, so your team knows who called, what they needed and who to call back.' },
-        { icon: 'chart', title: 'Helps you grow your business', desc: `Review calls and follow-ups in the FSS portal — free for the first ${M} months — and respond to more enquiries.` },
-        { icon: 'globe', title: 'Arabic & English', desc: 'Natural, professional conversations with callers in Arabic or English.' },
-      ],
-    },
-    pkg: {
-      eyebrow: 'Package includes', title: 'Everything you need to get started.', sub: `One package, one price: OMR ${P} one-time, with a two-year MOJEEB hardware warranty.`,
-      items: [
-        { icon: 'server', title: 'MOJEEB AI appliance', desc: 'AI voice assistant and PBX system. Answers customer calls in Arabic and English and records caller details.' },
-        { icon: 'network', pbx: true, title: 'Built-in PBX system', desc: 'Built into the MOJEEB appliance. Set up internal extensions and add more IP phones on the same PBX.' },
-        { icon: 'gateway', title: 'Grandstream HT813', desc: 'Converts your analog phone line to SIP, so customers keep calling your usual number.' },
-        { icon: 'deskphone', title: '1 IP phone', desc: 'Ready to use for your team to take and return calls. One phone is included.' },
-      ],
-      installNote: `FREE within the offer (worth OMR ${I}). Requires an existing LAN and a compatible ADSL connection; cabling, network setup, internet activation and other non-standard work are quoted separately.`,
-      portalNote: `FREE for the first ${M} months (worth OMR ${V}), then renewed according to the selected plan.`,
-    },
-    pbx: {
-      eyebrow: 'Built-in PBX', title: 'You also get a built-in PBX system',
-      body: 'The package includes a full PBX system. The included IP phone is just the first one — add more IP phones anytime on the same PBX.',
-      bullets: ['Use multiple IP phones in your office', 'Connect branches and departments', 'Professional and flexible communication', 'All included in the same package'],
-      node: 'PBX', diagramLabel: 'Diagram: the built-in PBX connects to one included IP phone. More phones can be added but are not included.',
-      includedPhone: 'Included phone', qtyOne: '1 unit', extraPhones: 'Additional phones — not included',
-    },
-    how: {
-      eyebrow: 'How MOJEEB works', title: 'Simple. Secure. Effective.',
-      steps: [
-        { icon: 'phone', title: 'Customer calls your number', desc: 'Customers keep calling your usual business number on your compatible line.' },
-        { icon: 'bot', title: 'MOJEEB answers', desc: 'MOJEEB answers in Arabic or English and handles common questions.' },
-        { icon: 'form', title: 'Captures details and follows up', desc: 'Caller details and requests are recorded and follow-up tasks are created for your team.' },
-        { icon: 'chart', title: 'You get reports and grow', desc: 'Review calls and follow-ups in the portal and grow your business.' },
-      ],
-    },
-    offer: {
-      title: 'Complete MOJEEB package',
-      stack: [
-        { label: 'Complete MOJEEB package', value: `OMR ${P}`, note: 'one-time' },
-        { label: 'Professional installation', value: 'FREE', note: `worth OMR ${I}`, free: true },
-        { label: `${M}-month portal subscription`, value: 'FREE', note: `worth OMR ${V}`, free: true },
-        { label: 'Built-in PBX system', value: 'Included' },
-        { label: '1 IP phone', value: 'Included' },
-      ],
-      closing: 'Get MOJEEB today before the offer ends!',
-      terms: 'Standard installation requires an existing LAN and a compatible ADSL service. Final availability, compatibility, delivery and any non-standard work are confirmed in writing.',
-    },
-    faq: {
-      eyebrow: 'Questions & answers', title: 'Good to know before you buy.',
-      items: [
-        { q: `What does the OMR ${P} package include?`, a: `The MOJEEB AI appliance (AI voice assistant with a built-in PBX), one Grandstream HT813 gateway and one IP phone, plus free professional installation (worth OMR ${I}) and a free ${M}-month portal subscription (worth OMR ${V}). External AI-provider usage, telecom charges and additional phones are not included.` },
-        { q: 'Is installation included?', a: `Yes. Standard professional installation is free within this limited-time offer (worth OMR ${I}). It requires an existing LAN and a compatible ADSL connection; extra cabling, network setup, internet activation and other non-standard work are quoted separately.` },
-        { q: 'Is the PBX included?', a: `Yes. MOJEEB includes a built-in PBX as part of the OMR ${P} package, so your team can use internal extensions.` },
-        { q: 'How many phones are included?', a: 'One IP phone is included in the package.' },
-        { q: 'Can I add more phones?', a: `Yes. MOJEEB includes a built-in PBX: the package includes one IP phone, and you can add more IP phones and extensions on the same PBX and connect branches and departments. Additional phones are not included in the package price; compatibility and pricing are confirmed in your quotation.` },
-        { q: 'Are there recurring fees?', a: `There is no recurring software licence fee for the MOJEEB appliance. AI-provider usage is separate: you normally use your own AI-provider account and pay the provider directly. The portal subscription is free for the first ${M} months, then renewed according to the selected plan. Your telephone line and internet connection are billed by your providers.` },
-        { q: 'What does the portal add?', a: `The first ${M} months of the FSS portal subscription are free (worth OMR ${V}). In the portal your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks from outside the office. After the free period it is renewed according to the selected plan; the appliance’s on-site dashboard remains available on your office network.` },
-        { q: 'How can my business request a demonstration?', a: 'Fill in the demo request form on this page, visit futuresmartsupport.com/voicegate-demo, or call us on +968 2420 2829.' },
-        { q: 'Is VAT added to the price?', a: `${VAT.en.statement} ${VAT.en.detail}` },
-        { q: 'Can I keep my business number? What about Caller ID?', a: 'You can keep your existing business landline number, or a voice number supplied with a compatible ADSL service (for example from Omantel), when the line and provider service are compatible. Caller ID can be configured when your provider enables it and the line supports it; provider fees may apply. We check compatibility before installation.' },
-        { q: 'Does MOJEEB need an internet connection?', a: 'Yes. A compatible ADSL internet connection is required. Speech recognition, AI responses and voice use external AI services over the internet, so MOJEEB does not offer offline AI conversations.' },
-        { q: 'What warranty is provided?', a: 'The MOJEEB appliance hardware has a two-year warranty, subject to FSS written warranty terms. Warranty arrangements for the gateway and IP phone are confirmed in your quotation.' },
-      ],
-    },
-  },
-  ar: {
-    limited: 'عرض لفترة محدودة',
-    free: 'مجاناً',
-    included: 'مشمول',
-    oneTime: 'لمرة واحدة',
-    install: 'التركيب الاحترافي',
-    portal: `اشتراك البوابة لمدة ${M} أشهر`,
-    worthInstall: `(بقيمة ${I} ر.ع)`,
-    worthPortal: `(بقيمة ${V} ر.ع)`,
-    cta: { demo: 'اطلب عرضاً توضيحياً', whatsapp: 'اتصل بنا' },
-    value: { title: 'مُجيب يردّ على عملائك… ونظام PBX مدمج يربط فريقك.', sub: `كلاهما ضمن باقة ${P} ريالاً عُمانياً.` },
-    hero: {
-      eyebrow: 'حوّل كل مكالمة إلى فرصة',
-      headline: 'كل مكالمة فائتة', accent: 'قد تعني خسارة صفقة',
-      sub: 'مُجيب يرد على عملائك ويسجّل التفاصيل لتتابع فرصك.',
-      tagline: 'نفس الرقم. أعمال أذكى.',
-      offerAria: `عرض لفترة محدودة: ${P} ر.ع لمرة واحدة، مع التركيب الاحترافي مجاناً بقيمة ${I} ر.ع واشتراك البوابة مجاناً لمدة ${M} أشهر بقيمة ${V} ر.ع. شاهد العرض.`,
-      status: 'مرحلة ما قبل الإطلاق: احجز عرضاً توضيحياً الآن، وتُؤكَّد الطلبات ومواعيد التسليم كتابياً عند الإطلاق.',
-    },
-    features: { aria: 'المزايا الرئيسية', items: [{ icon: 'globe', text: 'العربية والإنجليزية' }, { icon: 'form', text: 'تسجيل تفاصيل المكالمات' }, { icon: 'cloud', text: 'متابعة عبر البوابة' }] },
-    visual: {
-      label: 'رسم توضيحي: مكالمة عميل يرد عليها مُجيب، وتُسجَّل التفاصيل، ثم يتابع الفريق.',
-      missed: 'عميل يتصل', missedSub: 'فريقك مشغول أو خارج الدوام',
-      answer: 'مُجيب يرد', answerSub: 'بالعربية أو الإنجليزية',
-      details: 'تسجيل التفاصيل للمتابعة', detailItems: ['رقم المتصل', 'طلب العميل', 'مهمة متابعة في البوابة'],
-      pbx: 'نظام PBX مدمج يربط فريقك', note: 'رسم توضيحي',
-    },
-    trust: {
-      aria: 'لماذا تختار الشركات مُجيب',
-      items: [
-        { icon: 'tool', title: 'تركيب سهل', sub: 'نركّبه لك مجاناً' },
-        { icon: 'clock', title: 'موثوق على مدار الساعة', sub: 'يرد على المكالمات ليلاً ونهاراً' },
-        { icon: 'people', title: 'عملاء أكثر', sub: 'حوّل المكالمات إلى فرص بيع' },
-        { icon: 'wallet', title: 'تكلفة مناسبة', sub: 'حل احترافي بسعر خاص' },
-        { icon: 'shield', title: 'موثوق وآمن', sub: 'يعمل على خادمك المحلي' },
-        { icon: 'globe', title: 'دعم محلي', sub: 'فريق في سلطنة عُمان' },
-      ],
-    },
-    benefits: {
-      eyebrow: 'كيف يساعد مُجيب أعمالك', title: 'ردّ على مكالمات أكثر، وتابِع فرصاً أكثر.',
-      items: [
-        { icon: 'clock', title: 'يرد على المكالمات على مدار الساعة', desc: 'يرحّب مُجيب بالمتصلين ويتعامل مع الأسئلة الشائعة، حتى عند انشغال فريقك أو خارج أوقات الدوام.' },
-        { icon: 'form', title: 'يسجّل تفاصيل العملاء والمتابعات', desc: 'تُسجَّل بيانات المتصل وطلبه، ليعرف فريقك من اتصل وماذا يحتاج ومن يجب معاودة الاتصال به.' },
-        { icon: 'chart', title: 'يساعدك على تنمية أعمالك', desc: `راجع المكالمات والمتابعات في بوابة FSS — مجاناً لأول ${M} أشهر — واستجب لاستفسارات أكثر.` },
-        { icon: 'globe', title: 'العربية والإنجليزية', desc: 'محادثات طبيعية واحترافية مع المتصلين بالعربية أو الإنجليزية.' },
-      ],
-    },
-    pkg: {
-      eyebrow: 'يشمل العرض', title: 'كل ما تحتاجه لتبدأ.', sub: `باقة واحدة بسعر واحد: ${P} ر.ع لمرة واحدة، مع ضمان على جهاز مُجيب لمدة سنتين.`,
-      items: [
-        { icon: 'server', title: 'جهاز مُجيب الذكي', desc: 'مساعد صوتي ذكي ونظام PBX. يرد على مكالمات العملاء بالعربية والإنجليزية ويسجّل بيانات المتصلين.' },
-        { icon: 'network', pbx: true, title: 'نظام PBX مدمج', desc: 'مدمج في جهاز مُجيب. يتيح تركيب التحويلات الداخلية وإضافة هواتف IP أخرى على نفس النظام.' },
-        { icon: 'gateway', title: 'بوابة Grandstream HT813', desc: 'تحوّل خط الهاتف التناظري إلى SIP، ليواصل عملاؤك الاتصال برقمك المعتاد.' },
-        { icon: 'deskphone', title: 'هاتف IP واحد', desc: 'جاهز للاستخدام لاستقبال المكالمات ومعاودة الاتصال. يشمل العرض هاتفاً واحداً.' },
-      ],
-      installNote: `مجاني ضمن العرض (بقيمة ${I} ر.ع). يتطلب شبكة LAN قائمة واتصال ADSL متوافقاً، ويُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.`,
-      portalNote: `مجاني لأول ${M} أشهر (بقيمة ${V} ر.ع)، ثم يُجدَّد حسب الخطة المختارة.`,
-    },
-    pbx: {
-      eyebrow: 'نظام PBX مدمج', title: 'بهذا المبلغ تحصل أيضاً على نظام PBX',
-      body: 'يتيح تركيب التحويلات والهواتف داخل شركتك بسهولة. يشمل العرض هاتفاً واحداً، ويمكن إضافة هواتف أخرى تعمل على نفس نظام PBX.',
-      bullets: ['استخدم عدة هواتف IP في مكتبك', 'اربط الفروع والأقسام', 'اتصالات احترافية ومرنة', 'كل ذلك ضمن الباقة نفسها'],
-      node: 'PBX', diagramLabel: 'رسم توضيحي: نظام PBX المدمج متصل بهاتف IP واحد مشمول، ويمكن إضافة هواتف أخرى غير مشمولة بالعرض.',
-      includedPhone: 'الهاتف المشمول', qtyOne: 'جهاز واحد', extraPhones: 'هواتف إضافية — غير مشمولة',
-    },
-    how: {
-      eyebrow: 'كيف يعمل مُجيب', title: 'بسيط. آمن. فعّال.',
-      steps: [
-        { icon: 'phone', title: 'العميل يتصل برقمك', desc: 'يواصل عملاؤك الاتصال برقم نشاطك المعتاد عبر خطك المتوافق.' },
-        { icon: 'bot', title: 'مُجيب يرد', desc: 'يرد مُجيب بالعربية أو الإنجليزية ويتعامل مع الأسئلة الشائعة.' },
-        { icon: 'form', title: 'يسجّل التفاصيل ويتابع', desc: 'تُسجَّل بيانات المتصل وطلبه وتُنشأ مهام متابعة لفريقك.' },
-        { icon: 'chart', title: 'تحصل على التقارير وتنمو أعمالك', desc: 'راجع المكالمات والمتابعات في البوابة ونمِّ أعمالك.' },
-      ],
-    },
-    offer: {
-      title: 'باقة مُجيب الكاملة',
-      stack: [
-        { label: 'باقة مُجيب الكاملة', value: `${P} ر.ع`, note: 'لمرة واحدة' },
-        { label: 'التركيب الاحترافي', value: 'مجاناً', note: `بقيمة ${I} ر.ع`, free: true },
-        { label: `اشتراك البوابة لمدة ${M} أشهر`, value: 'مجاناً', note: `بقيمة ${V} ر.ع`, free: true },
-        { label: 'نظام PBX مدمج', value: 'مشمول' },
-        { label: 'هاتف IP واحد', value: 'مشمول' },
-      ],
-      closing: 'احصل على مُجيب اليوم قبل انتهاء العرض',
-      terms: 'يشترط للتركيب الاعتيادي توفر شبكة LAN قائمة وخدمة ADSL متوافقة. ويُؤكَّد التوفر والتوافق والتسليم وأي أعمال غير اعتيادية كتابياً.',
-    },
-    faq: {
-      eyebrow: 'أسئلة وأجوبة', title: 'معلومات مهمة قبل الشراء.',
-      items: [
-        { q: `ماذا تشمل باقة ${P} ر.ع؟`, a: `جهاز مُجيب الذكي (مساعد صوتي ذكي مع نظام PBX مدمج)، وبوابة Grandstream HT813 واحدة، وهاتف IP واحد، مع التركيب الاحترافي مجاناً (بقيمة ${I} ر.ع) واشتراك البوابة مجاناً لمدة ${M} أشهر (بقيمة ${V} ر.ع). ولا تشمل رسوم استخدام مزوّد الذكاء الاصطناعي ورسوم الاتصالات والهواتف الإضافية.` },
-        { q: 'هل التركيب مشمول؟', a: `نعم. التركيب الاحترافي الاعتيادي مجاني ضمن العرض لفترة محدودة (بقيمة ${I} ر.ع). ويتطلب شبكة LAN قائمة واتصال ADSL متوافقاً، ويُقدَّم تمديد الكابلات وتأسيس الشبكة وتفعيل الإنترنت والأعمال غير الاعتيادية بعرض سعر منفصل.` },
-        { q: 'هل نظام PBX مشمول؟', a: `نعم. يتضمن مُجيب نظام PBX مدمجاً ضمن باقة ${P} ر.ع، ليستخدم فريقك التحويلات الداخلية.` },
-        { q: 'كم عدد الهواتف المشمولة؟', a: 'يشمل العرض هاتف IP واحداً.' },
-        { q: 'هل يمكنني إضافة هواتف أخرى؟', a: 'نعم. يتضمن مُجيب نظام PBX مدمجاً؛ يشمل العرض هاتف IP واحداً، ويمكنك إضافة هواتف IP وتحويلات أخرى على نفس النظام وربط الفروع والأقسام. والهواتف الإضافية غير مشمولة في سعر الباقة، ويُؤكَّد التوافق والسعر في عرض السعر.' },
-        { q: 'هل توجد رسوم دورية؟', a: `لا توجد رسوم ترخيص برمجي دورية على جهاز مُجيب. ورسوم استخدام مزوّد الذكاء الاصطناعي منفصلة: عادةً تستخدم حسابك الخاص لدى المزوّد وتدفع له مباشرة. واشتراك البوابة مجاني لأول ${M} أشهر، ثم يُجدَّد حسب الخطة المختارة. ويُحاسَب خط الهاتف واتصال الإنترنت من قِبل مزوّديهما.` },
-        { q: 'ماذا تضيف البوابة؟', a: `أول ${M} أشهر من اشتراك بوابة FSS مجانية (بقيمة ${V} ر.ع). ومن خلال البوابة يراجع فريقك المكالمات التي تعامل معها مُجيب، ويطّلع على تنبيهات المكالمات الفائتة والرسائل الصوتية، ويدير مهام المتابعة من خارج المكتب. وبعد الفترة المجانية يُجدَّد الاشتراك حسب الخطة المختارة، وتبقى لوحة المعلومات المحلية في الجهاز متاحة على شبكة مكتبك.` },
-        { q: 'كيف تطلب شركتي عرضاً توضيحياً؟', a: 'املأ نموذج طلب العرض التوضيحي في هذه الصفحة، أو زر futuresmartsupport.com/voicegate-demo، أو اتصل بنا على ‎+968 2420 2829.' },
-        { q: 'هل تُضاف ضريبة القيمة المضافة إلى السعر؟', a: `${VAT.ar.statement} ${VAT.ar.detail}` },
-        { q: 'هل يمكنني الاحتفاظ برقم نشاطي؟ وماذا عن إظهار رقم المتصل؟', a: 'يمكنك الاحتفاظ برقم هاتفك الأرضي الحالي، أو رقم الهاتف المقدم ضمن خدمة ADSL متوافقة (مثلاً من عُمانتل)، متى كان الخط وخدمة المزوّد متوافقين. ويمكن تهيئة خدمة إظهار رقم المتصل عند تفعيلها من المزوّد ودعم الخط لها، وقد تنطبق رسوم من المزوّد. نتحقق من التوافق قبل التركيب.' },
-        { q: 'هل يحتاج مُجيب إلى اتصال بالإنترنت؟', a: 'نعم، يلزم اتصال إنترنت ADSL متوافق. يعتمد التعرّف على الكلام والردود الذكية وتوليد الصوت على خدمات ذكاء اصطناعي خارجية عبر الإنترنت، لذا لا يقدّم مُجيب محادثات ذكية دون اتصال.' },
-        { q: 'ما الضمان المقدم؟', a: 'يتمتع جهاز مُجيب بضمان على الأجهزة لمدة سنتين وفق شروط الضمان المكتوبة من FSS. وتُؤكَّد ترتيبات الضمان الخاصة بالبوابة والهاتف في عرض السعر.' },
-      ],
-    },
-  },
-}
+onUnmounted(() => { observer?.disconnect(); revealer?.disconnect() })
 </script>
 
 <style scoped>
-.campaign-home { overflow: clip; --red: #d92d31; --mint: #2fe0d2; }
-html[dir='rtl'] .flip-rtl { transform: scaleX(-1); }
-.heading { margin: 0 0 36px; max-width: 760px; }
-.heading.centered { text-align: center; margin-inline: auto; }
-.offer-tag { display: inline-flex; align-items: center; background: var(--red); color: #fff; font-size: 12px; font-weight: 850; letter-spacing: .04em; border-radius: 999px; padding: 6px 14px; }
-html[dir='rtl'] .offer-tag { letter-spacing: 0; }
+.home { --ink: #071d34; --ink-2: #0c2b4b; --teal: #00bdb5; --teal-d: #007a80; --sky: #237fe4; --warn: #c27a12; --danger: #d0464a; }
 
-/* A. Hero */
-.hero { position: relative; isolation: isolate; color: #fff; padding: 88px 0 92px; background: linear-gradient(130deg, #051a2f 0%, #08294a 62%, #0d3d5e 100%); }
-.hero-glow { position: absolute; z-index: -1; width: 620px; height: 620px; inset-inline-end: -180px; top: -240px; border-radius: 50%; background: radial-gradient(circle, rgba(47,224,210,.18), transparent 65%); pointer-events: none; }
-.hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(36px, 6vw, 90px); align-items: center; }
-.missed-pill { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px; padding: 7px 14px; border-radius: 999px; background: rgba(229,56,59,.16); border: 1px solid rgba(229,56,59,.55); color: #ffd6d6; font-size: 13px; font-weight: 800; }
-.missed-pill svg { color: #ff6b6e; }
-h1 { margin: 0 0 22px; font-size: clamp(38px, 4.4vw, 60px); line-height: 1.08; letter-spacing: -.035em; font-weight: 860; }
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(1200px 600px at 85% -10%, #12406b 0%, transparent 60%), linear-gradient(180deg, #061a2f 0%, var(--ink) 55%, #0a2742 100%); padding: 56px 0 28px; }
+.hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; }
+.orb-a { width: 420px; height: 420px; background: #00bdb5; inset-inline-start: -140px; top: 120px; opacity: .22; }
+.orb-b { width: 520px; height: 520px; background: #237fe4; inset-inline-end: -160px; top: -200px; opacity: .25; }
+.grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%); }
+.hero-grid { position: relative; display: grid; gap: 36px; align-items: center; }
+.eyebrow-pill { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(126,208,230,.22); color: #bfeff0; font-size: 13px; font-weight: 700; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: #3ee6a8; box-shadow: 0 0 0 0 rgba(62,230,168,.6); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(62,230,168,0); } 100% { box-shadow: 0 0 0 0 rgba(62,230,168,0); } }
+h1 { margin: 0 0 18px; font-size: clamp(34px, 6.2vw, 62px); line-height: 1.08; letter-spacing: -.035em; font-weight: 850; }
 html[dir='rtl'] h1 { letter-spacing: 0; line-height: 1.3; }
-h1 span { display: block; color: var(--mint); }
-.hero-sub { max-width: 580px; margin: 0 0 18px; color: #cfe2ee; font-size: 18px; line-height: 1.75; }
-.hero-value { max-width: 580px; margin: 0 0 26px; color: #e8fbfa; font-size: 16px; line-height: 1.6; }
-.hero-value strong { color: #fff; }
-.hero-offer { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; max-width: 600px; margin: 0 0 26px; padding: 16px 18px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(47,224,210,.45); color: #fff; }
-.hero-offer:hover { opacity: 1; border-color: var(--mint); background: rgba(255,255,255,.09); }
-.hero-offer-price { font-size: 18px; font-weight: 800; color: #d8fffb; }
-.hero-offer-price strong { font-size: 38px; font-weight: 900; color: #fff; letter-spacing: -.02em; }
-.hero-free-list { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.12); }
-.hero-free { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; color: #d9eef4; }
-.hero-free b { font-size: 16px; }
-.hero-free b { color: var(--mint); font-weight: 900; }
-.hero-free svg { color: var(--mint); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-actions .btn { min-height: 52px; font-size: 15px; }
-.btn-wa { color: #fff; border: 1px solid rgba(37,211,102,.6); background: rgba(37,211,102,.14); }
-.btn-wa:hover { background: rgba(37,211,102,.24); }
-.hero-status { display: flex; gap: 9px; margin: 22px 0 0; max-width: 580px; color: #a9c4d4; font-size: 13px; line-height: 1.65; }
-.status-dot { flex: 0 0 8px; height: 8px; margin-top: 7px; border-radius: 50%; background: #ffc857; }
+.grad { display: block; background: linear-gradient(100deg, #5ff3e8 0%, #33c7ff 55%, #8fb8ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-sub { margin: 0 0 24px; max-width: 590px; color: #c7d8e6; font-size: clamp(16px, 1.6vw, 18.5px); line-height: 1.7; }
 
-.hero-visual { position: relative; margin: 0; padding: 26px 26px 40px; border-radius: 28px; border: 1px solid rgba(53,184,206,.35); background: linear-gradient(155deg, rgba(21,71,101,.85), rgba(8,39,65,.95)); box-shadow: 0 30px 70px rgba(0,6,20,.35); }
-.visual-card { position: relative; display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 18px; background: rgba(6,26,47,.72); border: 1px solid rgba(147,213,231,.2); }
-.visual-card b { display: block; font-size: 15px; color: #f5ffff; }
-.visual-card small { display: block; font-size: 12px; color: #9cbfd0; }
-.visual-icon { flex: 0 0 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; }
-.icon-red { background: rgba(229,56,59,.18); color: #ff6b6e; }
-.icon-brand { background: linear-gradient(135deg, #1cdac9, #177dca); color: #fff; width: 56px; height: 56px; flex-basis: 56px; }
-.icon-soft { background: rgba(47,224,210,.14); color: var(--mint); }
-.visual-missed { width: 86%; border-color: rgba(229,56,59,.45); }
-.visual-agent { border-color: rgba(47,224,210,.6); background: linear-gradient(118deg, #123d58, #0d2a47); box-shadow: 0 0 34px rgba(6,194,184,.16); }
-.visual-agent > div:nth-child(2) { flex: 1; min-width: 0; }
-.visual-kicker { display: block; font-size: 10px; font-weight: 850; letter-spacing: .08em; color: var(--mint); margin-bottom: 2px; }
-.wave { display: flex; align-items: center; gap: 3px; height: 28px; }
-.wave i { width: 3px; height: 10px; border-radius: 4px; background: var(--mint); }
-.wave i:nth-child(odd) { height: 22px; }
-.visual-details { width: 92%; margin-inline-start: auto; align-items: flex-start; }
-.visual-details ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 5px; }
-.visual-details li { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #bfe9e4; }
-.visual-details li svg { color: var(--mint); }
-.visual-link { width: 2px; height: 22px; margin-inline-start: 38px; background: linear-gradient(var(--mint), #70baff); }
-.visual-pbx { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 9px 14px; border-radius: 999px; background: #fff; color: #0a4e67; font-size: 13px; font-weight: 800; }
-.visual-note { position: absolute; inset-inline-end: 22px; bottom: 14px; font-size: 11px; color: #8fb3c5; }
+.price-chip { display: inline-flex; align-items: stretch; margin-bottom: 26px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(95,243,232,.35); background: rgba(255,255,255,.06); transition: transform .2s, border-color .2s; }
+.price-chip:hover { transform: translateY(-2px); border-color: rgba(95,243,232,.7); opacity: 1; }
+.price-chip-amount { display: grid; place-items: center; padding: 10px 18px; background: linear-gradient(135deg, #3cdbd0, #05c0b6); color: #062336; font-size: 15px; font-weight: 800; }
+.price-chip-amount b { font-size: 28px; letter-spacing: -.02em; }
+.price-chip-text { display: grid; align-content: center; padding: 8px 16px; line-height: 1.35; }
+.price-chip-text b { font-size: 15.5px; }
+.price-chip-text small { display: inline-flex; align-items: center; gap: 6px; color: #8ff0e6; font-size: 13.5px; font-weight: 700; }
 
-/* B. Benefits */
-.benefits { background: #fff; }
-.benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.benefit { padding: 28px 24px; border-radius: 20px; border: 1px solid #deebf2; background: #fbfdff; }
-.benefit-icon { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 18px; border-radius: 16px; background: #e0f8f7; color: #068f95; }
-.benefit h3 { margin: 0 0 8px; font-size: 17px; }
-.benefit p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.btn-lg { padding: 15px 24px; font-size: 15px; }
+.btn-glass { color: #fff; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); }
+.btn-glass:hover { background: rgba(255,255,255,.14); }
+.hero-points { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 0; list-style: none; color: #b4c8d8; font-size: 14px; }
+.hero-points li { display: inline-flex; align-items: center; gap: 7px; }
+.hero-points :deep(svg) { color: #5ff3e8; }
 
-/* C. Package */
-.package { background: #eef8fb; }
-.include-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.include { position: relative; padding: 28px 24px; border-radius: 22px; background: #fff; border: 1px solid #d5e7f0; }
-.include-pbx { border: 2px solid #11b8ad; box-shadow: 0 18px 40px rgba(0,150,150,.12); }
-.include-icon { display: grid; place-items: center; width: 62px; height: 62px; margin-bottom: 18px; border-radius: 18px; color: #fff; background: linear-gradient(135deg, #16cbbd, #167ed3); }
-.include-badge { position: absolute; top: 22px; inset-inline-end: 20px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: #dff9f5; color: #05656c; font-size: 11px; font-weight: 850; }
-.include h3 { margin: 0 0 8px; font-size: 18px; }
-.include p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
-.free-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
-.free-card { display: flex; gap: 16px; align-items: flex-start; padding: 22px 24px; border-radius: 20px; background: #fff; border: 1px dashed #11b8ad; }
-.free-icon { flex: 0 0 50px; height: 50px; display: grid; place-items: center; border-radius: 15px; background: #e0f8f7; color: #068f95; }
-.free-word { display: block; font-size: 28px; line-height: 1.1; font-weight: 900; color: #007a73; letter-spacing: .01em; }
-.free-card b { display: block; font-size: 16px; margin: 2px 0 4px; }
-.free-card small { display: block; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.video-card { margin: 0; }
+.video-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; background: #02101e; box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(126,208,230,.22); }
+.video-frame::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+.video { display: block; width: 100%; height: 100%; object-fit: cover; background: #02101e; }
+.video-play { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-start; gap: 14px; padding: 20px; border: 0; color: #fff; text-align: start; background: linear-gradient(180deg, rgba(2,16,30,0) 35%, rgba(2,16,30,.82) 100%); cursor: pointer; }
+.play-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 82px; height: 82px; border-radius: 50%; color: #062336; background: linear-gradient(135deg, #5ff3e8, #05c0b6); box-shadow: 0 0 0 10px rgba(95,243,232,.18), 0 14px 40px rgba(0,0,0,.4); transition: transform .2s; }
+.play-ring :deep(svg) { margin-inline-start: 4px; }
+html[dir='rtl'] .play-ring :deep(svg) { margin-inline-start: 0; margin-inline-end: 4px; }
+.video-play:hover .play-ring, .video-play:focus-visible .play-ring { transform: translate(-50%, -50%) scale(1.07); }
+.play-text { display: grid; line-height: 1.35; }
+.play-text small { color: #8ff0e6; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+html[dir='rtl'] .play-text small { letter-spacing: 0; text-transform: none; }
+.play-text b { font-size: 17px; }
+.video-caption { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; color: #93abc0; font-size: 13px; }
 
-/* D. PBX expansion */
-.pbx { background: #fff; }
-.pbx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
-.pbx-accent { margin: 0 0 14px; color: #007a73; font-size: 19px; font-weight: 800; }
-.pbx-text { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
-.pbx-diagram { margin: 0; padding: 30px 24px; border-radius: 24px; background: #f4fbfd; border: 1px solid #d5e9f1; text-align: center; }
-.pbx-node { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 14px; background: var(--navy); color: #fff; font-weight: 900; font-size: 18px; letter-spacing: .06em; }
-.pbx-node svg { color: var(--mint); }
-.pbx-lines { position: relative; height: 30px; margin: 22px 18% 0; border-inline: 2px solid #9fc9d8; border-top: 2px solid #9fc9d8; }
-.pbx-lines::before { content: ''; position: absolute; bottom: 100%; left: calc(50% - 1px); width: 2px; height: 22px; background: #9fc9d8; }
-.pbx-phones { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; align-items: start; }
-.pbx-phone { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 10px; border-radius: 16px; }
-.pbx-phone.included { background: #fff; border: 2px solid #11b8ad; color: #068f95; }
-.pbx-phone.included b { color: var(--fg); font-size: 14px; }
-.pbx-phone.included small { color: var(--muted); font-size: 12px; }
-.pbx-extra { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; border-radius: 16px; border: 2px dashed #b9cbd5; }
-.pbx-phone.extra { color: #8aa0ad; background: #fff; border: 1px dashed #c6d5dd; padding: 12px 8px; }
-.pbx-extra b { grid-column: 1 / -1; font-size: 13px; color: #4f6676; font-weight: 800; }
+.trust { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 40px 0 0; padding: 0; list-style: none; }
+.trust li { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(126,208,230,.14); }
+.trust b { display: block; font-size: 15px; }
+.trust small { color: #9db4c7; font-size: 12.5px; }
+.trust-icon { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; color: #5ff3e8; background: rgba(95,243,232,.1); }
 
-/* E. How it works */
-.how { background: #eef8fb; }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.step { position: relative; padding: 26px 22px; border-radius: 20px; background: #fff; border: 1px solid #d5e7f0; }
-.step-icon { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 16px; border-radius: 16px; color: #fff; background: linear-gradient(135deg, #16cbbd, #167ed3); }
-.step-num { position: absolute; top: 22px; inset-inline-end: 22px; font-size: 28px; font-weight: 900; color: #c4dde6; }
-.step h3 { margin: 0 0 8px; font-size: 18px; }
-.step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+/* ---------- Shared section pieces ---------- */
+.section { position: relative; padding: 64px 0; border-top: 0; }
+.anchor { position: absolute; top: 0; }
+.heading { max-width: 760px; margin-bottom: 34px; }
+.heading.center { margin-inline: auto; text-align: center; }
+.kicker { display: inline-block; margin: 0 0 12px; color: var(--teal-d); font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+html[dir='rtl'] .kicker { letter-spacing: 0; font-size: 14px; }
+.title { margin: 0 0 14px; font-size: clamp(27px, 4vw, 42px); line-height: 1.18; letter-spacing: -.028em; font-weight: 820; color: var(--ink); }
+html[dir='rtl'] .title { letter-spacing: 0; line-height: 1.4; }
+.lead { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; }
+.icon-tile { flex: none; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 14px; color: var(--teal-d); background: linear-gradient(135deg, #e3faf8, #e4f0fd); }
+.icon-tile.big { width: 62px; height: 62px; border-radius: 18px; }
+.icon-tile.danger { color: var(--danger); background: #fdecec; }
+.icon-tile.warn { color: var(--warn); background: #fdf3e2; }
+h3 { margin: 16px 0 8px; font-size: 18.5px; line-height: 1.35; color: var(--ink); }
+p { margin: 0; }
 
-/* F. Offer */
-.offer { background: #f8fcfe; }
-.offer-panel { display: grid; grid-template-columns: .9fr 1.1fr; border-radius: 28px; overflow: hidden; background: #fff; border: 1px solid #d5e9f1; box-shadow: 0 24px 60px rgba(10,57,87,.08); }
-.offer-price { padding: 42px 38px; color: #fff; background: radial-gradient(circle at 100% 0%, rgba(105,244,224,.35), transparent 45%), linear-gradient(140deg, #071d34, #0b3a5a); }
-.offer-price h2 { margin: 18px 0 6px; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; }
-.offer-amount { margin: 0; line-height: 1; }
-.offer-amount strong { font-size: clamp(88px, 9vw, 130px); font-weight: 900; letter-spacing: -.06em; }
-.offer-amount span { margin-inline-start: 10px; font-size: 28px; font-weight: 800; color: #c9fbf6; }
-.offer-once { margin: 8px 0 22px; color: #b5d2df; font-size: 14px; }
-.offer-free { display: grid; gap: 10px; }
-.offer-free span { display: flex; align-items: baseline; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(47,224,210,.12); border: 1px solid rgba(47,224,210,.35); color: #e4fbf9; font-size: 15px; }
-.offer-free b { color: var(--mint); font-size: 20px; font-weight: 900; }
-.offer-details { padding: 40px 38px; }
-.offer-details h3 { margin: 0 0 16px; font-size: 20px; }
-.offer-list { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 12px; }
-.offer-list li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.offer-list svg { flex: 0 0 18px; color: #0aa79d; }
-.offer-phones { margin: 0 0 20px; padding: 12px 16px; border-radius: 12px; background: #eef8fb; color: #285066; font-size: 14px; line-height: 1.65; }
-.offer-closing { margin: 0 0 18px; font-size: 20px; font-weight: 850; color: var(--navy); }
-.offer-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.offer-actions .btn { min-height: 50px; }
-.btn-wa-light { flex-wrap: wrap; color: #066b3a; border: 1px solid #8fdcb1; background: #eefcf4; }
-.btn-wa-light bdi { white-space: nowrap; }
-.btn-wa-light:hover { background: #dcf8e8; }
-.offer-terms { grid-column: 1 / -1; padding: 18px 38px 22px; background: #f4f9fc; border-top: 1px solid #e1edf3; color: #4a6578; font-size: 12.5px; line-height: 1.65; }
-.offer-terms p { margin: 0 0 6px; }
-.offer-terms p:last-child { margin: 0; }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--d, 0) * 90ms); }
+.reveal.in { opacity: 1; transform: none; }
 
-/* G. FAQ */
-.faq { background: #fff; }
-.faq-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 56px; align-items: start; }
+/* ---------- Problem ---------- */
+.problem { background: #fff; }
+.problem-grid { display: grid; gap: 16px; }
+.problem-card { padding: 26px; border-radius: 22px; background: #fbfdfe; border: 1px solid var(--line); }
+.problem-card p { color: var(--muted); }
+.punch { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 30px; padding: 18px 22px; border-radius: 18px; color: #fff; font-size: clamp(17px, 2vw, 21px); font-weight: 800; text-align: center; background: linear-gradient(110deg, var(--ink), #0e3d66 60%, #0b6670); }
+.punch :deep(svg) { color: #5ff3e8; flex: none; }
+
+/* ---------- How ---------- */
+.how { background: linear-gradient(180deg, #eef7fb, #f6fbfd); }
+.flow { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+.flow-step { position: relative; padding: 26px; border-radius: 22px; background: #fff; border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(13,52,82,.05); }
+.flow-step p { color: var(--muted); }
+.flow-num { position: absolute; top: 18px; inset-inline-end: 20px; font-size: 44px; font-weight: 900; line-height: 1; color: #e2eef5; }
+
+/* ---------- Box ---------- */
+.box { background: #fff; }
+.box-grid { display: grid; gap: 16px; }
+.box-item { display: flex; gap: 18px; align-items: flex-start; padding: 24px; border-radius: 22px; border: 1px solid var(--line); background: linear-gradient(180deg, #fff, #f8fcfe); transition: transform .2s, box-shadow .2s, border-color .2s; }
+.box-item:hover { transform: translateY(-3px); border-color: #a9dfe0; box-shadow: 0 18px 40px rgba(13,52,82,.08); }
+.box-item h3 { margin-top: 2px; }
+.box-item p { color: var(--muted); }
+.free-row { display: grid; gap: 12px; margin-top: 18px; }
+.free-card { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; border: 1.5px dashed #6fd6cf; background: #effcfa; color: var(--teal-d); }
+.free-card b { display: block; color: var(--ink); }
+.free-card small { color: var(--muted); }
+.free-badge { flex: none; padding: 6px 12px; border-radius: 999px; color: #fff; background: var(--teal-d); font-size: 12.5px; font-weight: 850; letter-spacing: .06em; }
+
+/* ---------- Offer ---------- */
+.offer { color: #fff; background: radial-gradient(900px 500px at 15% 0%, rgba(0,189,181,.18), transparent 60%), linear-gradient(180deg, var(--ink), #0a2a48); }
+.heading.light .title { color: #fff; }
+.heading.light .lead { color: #b9cddd; }
+.heading.light .kicker { color: #5ff3e8; }
+.offer-grid { display: grid; gap: 18px; align-items: start; }
+.price-card, .once-card { border-radius: 26px; padding: 28px 24px; }
+.price-card { position: relative; color: var(--fg); background: #fff; box-shadow: 0 30px 70px rgba(0,0,0,.3); }
+.tag { display: inline-block; padding: 6px 12px; border-radius: 999px; color: #8a4b00; background: #ffeccc; font-size: 12.5px; font-weight: 800; }
+.price { margin: 14px 0 0; color: var(--ink); line-height: 1; }
+.price b { font-size: clamp(64px, 10vw, 88px); font-weight: 900; letter-spacing: -.045em; }
+.price span { margin-inline-start: 8px; font-size: 22px; font-weight: 800; color: var(--muted); }
+.price-once { margin: 8px 0 20px; color: var(--teal-d); font-weight: 800; font-size: 16px; }
+.ledger { display: grid; gap: 12px; margin: 0 0 22px; padding: 18px 0 0; list-style: none; border-top: 1px solid var(--line); }
+.ledger li { display: flex; gap: 12px; align-items: flex-start; }
+.ledger b { display: block; font-size: 15.5px; color: var(--ink); }
+.ledger small { display: block; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+.ledger-mark { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; margin-top: 1px; }
+.ledger .pay .ledger-mark { color: #fff; background: var(--ink); }
+.ledger .free .ledger-mark { color: #fff; background: var(--teal-d); }
+.ledger .zero .ledger-mark { color: #fff; background: #079b7c; }
+.ledger .zero b { color: #067a62; }
+.ledger .direct .ledger-mark { color: #4a6578; background: #e8f0f5; }
+.btn-block { width: 100%; }
+.fine { margin-top: 12px; color: var(--muted); font-size: 12.5px; line-height: 1.6; }
+
+.once-card { background: rgba(255,255,255,.05); border: 1px solid rgba(126,208,230,.2); }
+.once-card h3 { margin: 0 0 22px; color: #fff; font-size: 17px; }
+.bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; height: 190px; align-items: end; }
+.bar-col { display: grid; grid-template-rows: 1fr auto; gap: 6px; height: 100%; text-align: center; }
+.bar-col small { color: #7f9ab0; font-size: 11px; }
+.bar { align-self: end; display: block; width: 100%; min-height: 4px; border-radius: 6px 6px 3px 3px; background: rgba(95,243,232,.28); }
+.bar-col.first .bar { background: linear-gradient(180deg, #5ff3e8, #05a8a1); box-shadow: 0 0 24px rgba(95,243,232,.35); }
+.bar-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; color: #c8d9e6; font-size: 14px; }
+.bar-legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 4px; }
+.sw-pay { background: #5ff3e8; }
+.sw-zero { background: rgba(95,243,232,.28); }
+.spread { margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(126,208,230,.18); }
+.spread-label { margin-bottom: 10px; color: #9db4c7; font-size: 14px; }
+.seg { display: inline-flex; padding: 4px; border-radius: 14px; background: rgba(0,0,0,.25); border: 1px solid rgba(126,208,230,.18); }
+.seg button { min-width: 78px; padding: 9px 14px; border: 0; border-radius: 10px; color: #c8d9e6; background: transparent; font-weight: 700; font-size: 14px; }
+.seg button.on { color: #062336; background: #5ff3e8; }
+.spread-result { margin-top: 14px; color: #dbe8f2; font-size: 17px; }
+.spread-result b { color: #5ff3e8; font-size: 30px; font-weight: 900; }
+.once-card .fine { color: #8ea7bb; }
+.terms { max-width: 860px; margin: 22px auto 0; color: #8ea7bb; font-size: 13px; text-align: center; line-height: 1.7; }
+
+/* ---------- Who ---------- */
+.who { background: #f6fbfd; }
+.who-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.who-item { display: grid; gap: 4px; padding: 20px; border-radius: 20px; background: #fff; border: 1px solid var(--line); }
+.who-item .icon-tile { margin-bottom: 10px; width: 46px; height: 46px; }
+.who-item b { color: var(--ink); font-size: 16px; }
+.who-item small { color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+
+/* ---------- Limits ---------- */
+.limits { background: #fff; }
+.limits-grid { display: grid; gap: 14px; }
+.limit { display: flex; gap: 16px; padding: 22px; border-radius: 20px; background: #fffcf6; border: 1px solid #f3e3c4; }
+.limit h3 { margin: 2px 0 6px; font-size: 17px; }
+.limit p { color: var(--muted); font-size: 15px; }
+
+/* ---------- FAQ ---------- */
+.faq { background: #f6fbfd; }
+.faq-grid { display: grid; gap: 10px; }
+.faq .btn-outline { margin-top: 8px; color: var(--ink); border-color: #b9d3e0; background: #fff; }
 .faq-list { display: grid; gap: 10px; }
-.faq-item { border: 1px solid #d7e9f1; border-radius: 14px; background: #fbfdff; }
-.faq-item[open] { border-color: #9de0df; background: #fff; }
-.faq-item summary { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 18px; cursor: pointer; list-style: none; font-weight: 750; font-size: 15px; }
+.faq-item { border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+.faq-item[open] { border-color: #9edbd8; box-shadow: 0 12px 30px rgba(13,52,82,.06); }
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; cursor: pointer; list-style: none; font-weight: 750; color: var(--ink); }
 .faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary:focus-visible { outline: 3px solid #31d5cf; outline-offset: 2px; border-radius: 14px; }
-.faq-toggle { position: relative; flex: 0 0 18px; height: 18px; }
-.faq-toggle::before, .faq-toggle::after { content: ''; position: absolute; inset-inline-start: 2px; top: 8px; width: 14px; height: 2px; border-radius: 2px; background: #00757b; transition: transform .2s; }
-.faq-toggle::after { transform: rotate(90deg); }
-.faq-item[open] .faq-toggle::after { transform: rotate(0deg); }
-.faq-item p { margin: 0; padding: 0 18px 16px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+.faq-item p { padding: 0 20px 18px; color: var(--muted); line-height: 1.75; }
+.faq-toggle { position: relative; flex: none; width: 26px; height: 26px; border-radius: 50%; background: #e7f4f8; }
+.faq-toggle::before, .faq-toggle::after { content: ''; position: absolute; top: 50%; left: 50%; width: 11px; height: 2px; background: var(--teal-d); transform: translate(-50%, -50%); transition: transform .2s; }
+.faq-toggle::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq-item[open] .faq-toggle::after { transform: translate(-50%, -50%) rotate(0); }
 
-/* Mobile sticky contact */
-.sticky-cta { display: none; }
+/* ---------- Try it ---------- */
+.try { padding: 8px 0 72px; background: #f6fbfd; }
+.try-inner { display: grid; gap: 22px; padding: 34px 26px; border-radius: 28px; color: #fff; background: radial-gradient(600px 300px at 90% 0%, rgba(95,243,232,.25), transparent 60%), linear-gradient(120deg, #0b2c4d, var(--ink)); transform: translateY(-1px); }
+.try h2 { margin: 0 0 8px; font-size: clamp(25px, 3.4vw, 36px); line-height: 1.25; }
+.try p { color: #b9cddd; }
+.try-actions { display: grid; gap: 14px; justify-items: start; align-content: center; }
+.try-link { display: inline-flex; align-items: center; gap: 8px; color: #8ff0e6; font-weight: 700; }
 
-@media (max-width: 1100px) {
-  .benefit-grid, .include-grid, .steps { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 900px) {
-  .hero { padding: 64px 0 70px; }
-  .hero-grid, .pbx-grid, .offer-panel, .faq-grid { grid-template-columns: 1fr; }
-  .hero-visual { max-width: 600px; width: 100%; margin-inline: auto; }
-  .faq-grid { gap: 24px; }
-}
-@media (max-width: 690px) {
-  .hero { padding: 44px 0 54px; }
-  h1 { font-size: clamp(34px, 9.5vw, 48px); }
-  .hero-sub { font-size: 16px; }
-  .hero-offer-price strong { font-size: 34px; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-visual { padding: 18px 18px 36px; }
-  .visual-missed, .visual-details { width: 100%; }
-  .wave { display: none; }
-  .benefit-grid, .include-grid, .steps, .free-row { grid-template-columns: 1fr; }
-  .pbx-phones { grid-template-columns: 1fr; }
-  .pbx-lines { margin-inline: 25%; }
-  .offer-price, .offer-details { padding: 30px 22px; }
-  .offer-terms { padding: 16px 22px; }
-  .offer-actions { flex-direction: column; }
-  .offer-actions .btn { width: 100%; }
-  .sticky-cta { position: fixed; z-index: 40; inset-inline: 12px; bottom: 12px; display: flex; gap: 8px; padding: 8px; border-radius: 16px; background: rgba(7,29,52,.94); box-shadow: 0 12px 30px rgba(0,0,0,.25); transform: translateY(140%); visibility: hidden; transition: transform .25s ease, visibility .25s; }
-  .sticky-cta.show { transform: none; visibility: visible; }
-  .sticky-cta .btn-primary { flex: 1; min-height: 46px; padding: 10px 14px; }
-  .sticky-cta .btn-wa { flex: 0 0 52px; min-height: 46px; padding: 0; }
-}
-@media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
-</style>
+/* ---------- Mobile action bar ---------- */
+.sticky-cta { position: fixed; inset-inline: 12px; bottom: 12px; z-index: 90; display: flex; gap: 10px; padding: 10px; border-radius: 18px; background: rgba(7,29,52,.94); backdrop-filter: blur(12px); box-shadow: 0 18px 40px rgba(0,0,0,.3); transform: translateY(140%); transition: transform .25s ease; }
+.sticky-cta.show { transform: none; }
+.sticky-cta .btn-primary { flex: 1; }
+.btn-call { flex: none; width: 52px; padding: 0; color: #fff; border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.08); }
 
-<style scoped>
-/* Brochure campaign additions: feature row, trust strip, value stack, PBX bullets */
-.feature-row { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: -8px 0 24px; padding: 0; color: #bfe9e4; font-size: 14px; font-weight: 700; }
-.feature-row li { display: inline-flex; align-items: center; gap: 6px; }
-.feature-row svg { color: var(--mint); }
-.hero-offer-price small { margin-inline-start: 6px; font-size: 13px; font-weight: 700; color: #a9c9d8; }
-.hero-free em, .worth { font-style: normal; font-weight: 600; opacity: .8; }
-.hero-tagline { margin: 18px 0 0; color: var(--mint); font-weight: 800; font-size: 15px; }
-.trust { background: #e8f5f8; border-bottom: 1px solid #d4eaf0; }
-.trust-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; padding-block: 24px; }
-.trust-item { display: flex; align-items: center; gap: 12px; }
-.trust-icon { flex: 0 0 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; border: 1px solid #b7e5eb; background: #fff; color: #00888b; }
-.trust-item b { display: block; font-size: 13.5px; color: #10304a; line-height: 1.35; }
-.trust-item small { display: block; font-size: 12px; color: #4a6578; line-height: 1.45; }
-.pbx-bullets { list-style: none; margin: 18px 0; padding: 0; display: grid; gap: 10px; }
-.pbx-bullets li { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.pbx-bullets svg { flex: 0 0 18px; color: #0aa79d; }
-.pbx-note { margin: 0; padding: 12px 16px; border-radius: 12px; background: #eef8fb; color: #285066; font-size: 14px; line-height: 1.65; }
-.value-stack { margin: 0 0 18px; display: grid; border-top: 1px solid #e1edf3; }
-.value-stack > div { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #e1edf3; }
-.value-stack dt { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.value-stack dt svg { flex: 0 0 18px; color: #0aa79d; }
-.value-stack dd { margin: 0; text-align: end; white-space: nowrap; }
-.value-stack dd b { font-size: 16px; color: var(--navy); }
-.value-stack dd small { display: block; font-size: 12px; color: var(--muted); }
-.value-stack .free dd b { color: #007a73; font-size: 18px; font-weight: 900; }
-.value-stack .free dt svg { color: #d92d31; }
-@media (max-width: 1100px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 690px) {
-  .trust-grid { grid-template-columns: 1fr 1fr; gap: 16px 12px; }
-  .trust-icon { flex-basis: 36px; height: 36px; }
-  .value-stack dd { white-space: normal; }
+
+/* ---------- Larger screens ---------- */
+@media (min-width: 640px) {
+  .trust { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .problem-grid { grid-template-columns: repeat(3, 1fr); }
+  .flow { grid-template-columns: repeat(2, 1fr); }
+  .box-grid, .free-row, .limits-grid { grid-template-columns: repeat(2, 1fr); }
+  .who-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 960px) {
+  .hero { padding: 84px 0 40px; }
+  .hero-grid { grid-template-columns: 1.02fr 1fr; gap: 56px; }
+  .section { padding: 96px 0; }
+  .flow { grid-template-columns: repeat(4, 1fr); }
+  .flow-step:not(:last-child)::after { content: ''; position: absolute; top: 50px; inset-inline-end: -14px; width: 12px; height: 12px; border-top: 2px solid #9edbd8; border-inline-end: 2px solid #9edbd8; transform: rotate(45deg); }
+  html[dir='rtl'] .flow-step:not(:last-child)::after { transform: rotate(-45deg); }
+  .offer-grid { grid-template-columns: 1fr 1.15fr; gap: 24px; }
+  .price-card, .once-card { padding: 36px; }
+  .limits-grid { grid-template-columns: repeat(3, 1fr); }
+  .faq-grid { grid-template-columns: .8fr 1.4fr; gap: 48px; align-items: start; }
+  .faq .heading { position: sticky; top: 100px; }
+  .try-inner { grid-template-columns: 1.4fr 1fr; padding: 46px 52px; }
+  .sticky-cta { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .live-dot { animation: none; }
 }
 </style>

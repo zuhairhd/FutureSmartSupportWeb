@@ -7,8 +7,8 @@
       </div>
       <div class="footer-column"><b>{{ c.explore }}</b>
         <router-link :to="{path:'/',hash:'#offer'}">{{ c.offer }}</router-link>
-        <router-link :to="{path:'/',hash:'#features'}">{{ c.benefits }}</router-link>
-        <router-link :to="{path:'/',hash:'#pbx'}">{{ c.pbx }}</router-link>
+        <router-link :to="{path:'/',hash:'#how'}">{{ c.benefits }}</router-link>
+        <router-link :to="{path:'/',hash:'#box'}">{{ c.pbx }}</router-link>
         <router-link :to="{path:'/',hash:'#faq'}">{{ c.faq }}</router-link>
         <router-link :to="{path:'/',hash:'#demo'}">{{ c.demo }}</router-link>
         <router-link to="/voicegate-demo">{{ c.mojebPage }}</router-link>
@@ -34,8 +34,8 @@ import logoUrl from '../../assets/FSS_Logo_light.png'
 const { lang } = useLanguage()
 const year = new Date().getFullYear()
 const c = computed(() => lang.value === 'ar'
-  ? {tagline:'مُجيب · مساعد صوتي ذكي ونظام PBX مدمج',description:'أشخاص. تقنية. غدٌ أذكى. من أجل عُمان أذكى.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'المزايا',pbx:'نظام PBX المدمج',demo:'اطلب عرضًا توضيحيًا',mojebPage:'صفحة العرض التوضيحي',contactForm:'نموذج التواصل',phone:'هاتف',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
-  : {tagline:'MOJEEB · AI voice assistant + built-in PBX',description:'People. Technology. A Smarter Tomorrow. For a Smarter Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'Benefits',pbx:'Built-in PBX',demo:'Request a Demo',mojebPage:'MOJEEB demo page',contactForm:'Contact form',phone:'Phone',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
+  ? {tagline:'مُجيب · مساعد صوتي ذكي ونظام PBX مدمج',description:'أشخاص. تقنية. غدٌ أذكى. من أجل عُمان أذكى.',explore:'استكشف',faq:'الأسئلة الشائعة',offer:'العرض',benefits:'كيف يعمل',pbx:'ماذا تحصل',demo:'اطلب عرضًا توضيحيًا',mojebPage:'صفحة العرض التوضيحي',contactForm:'نموذج التواصل',phone:'هاتف',contact:'تواصل معنا',location:'مسقط، سلطنة عُمان',rights:'جميع الحقوق محفوظة.',privacy:'الخصوصية',terms:'الشروط والأحكام',legal:'الروابط القانونية'}
+  : {tagline:'MOJEEB · AI voice assistant + built-in PBX',description:'People. Technology. A Smarter Tomorrow. For a Smarter Oman.',explore:'Explore',faq:'FAQ',offer:'The offer',benefits:'How it works',pbx:'What’s in the box',demo:'Request a Demo',mojebPage:'MOJEEB demo page',contactForm:'Contact form',phone:'Phone',contact:'Get in touch',location:'Muscat, Sultanate of Oman',rights:'All rights reserved.',privacy:'Privacy',terms:'Terms',legal:'Legal links'})
 </script>
 <style scoped>
 .fss-footer { background:#05192e; color:#fff; padding:57px 0 21px; }
