@@ -287,7 +287,7 @@ export default {
       },
       portal: {
         title: `FSS Portal (${PORTAL_FREE_MONTHS} months FREE)`,
-        desc: `A secure portal where your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks. Free for the first ${PORTAL_FREE_MONTHS} months; then renewed according to the selected plan.`,
+        desc: `A secure portal where your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks. Free for the first ${PORTAL_FREE_MONTHS} months; optional after that.`,
       },
       points: [
         'AI-assisted call answering, including outside office hours',
@@ -324,7 +324,7 @@ export default {
     portalPreview: {
       label: 'FSS Portal',
       title: 'Your Calls and Follow-ups in One Place',
-      sub: `With the FSS portal, free for the first ${PORTAL_FREE_MONTHS} months, your team can review calls and follow-ups from one secure portal. After the free period it is renewed according to the selected plan.`,
+      sub: `With the FSS portal, free for the first ${PORTAL_FREE_MONTHS} months, your team can review calls and follow-ups from one secure portal. After the free period it is optional.`,
       cards: [
         { icon: 'file',   title: 'Call Activity',        desc: 'Review calls handled by Mojeeb AI: caller number, time, duration and outcome.' },
         { icon: 'layout', title: 'Portal Notifications', desc: 'See missed-call and voicemail notifications when you log in.' },
@@ -423,7 +423,7 @@ export default {
 
   terms: {
     title: 'Terms of Service',
-    lastUpdated: 'Last updated: 21 October 2026',
+    lastUpdated: 'Last updated: 4 November 2026',
     intro: 'These Terms of Service ("Terms") govern your access to and use of the website, products and services provided by Future Smart Support ("FSS"). By using our services, you agree to be bound by these Terms.',
     sections: [
       {
@@ -436,7 +436,7 @@ export default {
       },
       {
         title: '3. Promotional benefits and separately priced services',
-        body: `Standard installation has a fixed price of OMR ${omr3(INSTALLATION)}. Under the current limited-time offer, standard installation is provided free of charge, and the FSS portal subscription is free for the first ${PORTAL_FREE_MONTHS} months (worth OMR ${omr(PORTAL_VALUE)}), then renewed according to the selected plan. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; continued portal access after the free period; charges for the external AI services that power MOJEEB conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
+        body: `Standard installation has a fixed price of OMR ${omr3(INSTALLATION)}. Under the current limited-time offer, standard installation is provided free of charge, and the FSS portal subscription is free for the first ${PORTAL_FREE_MONTHS} months (worth OMR ${omr(PORTAL_VALUE)}). After the free period the portal is optional: it continues only if the customer chooses a paid plan, and the on-site dashboard on the MOJEEB appliance remains available without a subscription. There is no recurring licence or subscription fee to FSS for the MOJEEB appliance. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; continued portal access after the free period; charges for the external AI services that power MOJEEB conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
       },
       {
         title: '4. Prices and taxes',

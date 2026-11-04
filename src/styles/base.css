@@ -84,3 +84,6 @@ img { display: block; }
 @media (max-width: 900px) { .section { padding: 66px 0; } }
 @media (max-width: 640px) { .container { width: min(100% - 32px,1200px); } .section { padding: 52px 0; } .section-title { font-size: 27px; } .btn { padding: 13px 18px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+
+/* Directional icons (arrows) point the reading way in Arabic. */
+html[dir='rtl'] .flip-rtl { transform: scaleX(-1); }
