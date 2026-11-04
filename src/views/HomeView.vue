@@ -216,6 +216,7 @@
         <div class="try-actions">
           <a class="btn btn-primary btn-lg" :href="phoneLink"><MarketingIcon name="phone" :size="18" /><bdi dir="ltr">{{ PHONE_DISPLAY }}</bdi></a>
           <router-link class="try-link" :to="{ path: '/', hash: '#demo' }">{{ s.final.demo }} <MarketingIcon name="arrow" :size="15" class="flip-rtl" /></router-link>
+          <a class="try-link" :href="INSTAGRAM_URL" target="_blank" rel="noopener"><MarketingIcon name="instagram" :size="16" />{{ s.final.instagram }} <bdi dir="ltr">{{ INSTAGRAM_HANDLE }}</bdi></a>
         </div>
       </div>
     </section>
@@ -235,7 +236,7 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { PACKAGE, omr, phoneHref } from '../pricing.js'
-import { PHONE_DISPLAY } from '../constants.js'
+import { PHONE_DISPLAY, INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../constants.js'
 import messages from '../i18n/home.js'
 import MarketingIcon from '../components/MarketingIcon.vue'
 import ContactSection from '../components/ContactSection.vue'
