@@ -12,9 +12,14 @@
       <p class="last-updated">{{ t('privacy.lastUpdated') }}</p>
       <p class="intro">{{ t('privacy.intro') }}</p>
 
-      <div v-for="section in t('privacy.sections', [])" :key="section.title" class="legal-section">
+      <div v-for="section in t('privacy.sections', [])" :key="section.title" :id="section.id" class="legal-section">
         <h2>{{ section.title }}</h2>
-        <p>{{ section.body }}</p>
+        <p v-for="(para, i) in [].concat(section.body)" :key="i">{{ para }}</p>
+        <ul v-if="section.links" class="legal-links">
+          <li v-for="link in section.links" :key="link.href">
+            <a :href="link.href" target="_blank" rel="noopener noreferrer">{{ link.text }}</a>
+          </li>
+        </ul>
       </div>
 
       <div class="contact-box">
@@ -108,4 +113,7 @@ h1 {
   text-decoration: underline;
   font-size: 14px;
 }
+.legal-section p + p { margin-top: 12px; }
+.legal-links { margin: 12px 0 0; padding-inline-start: 20px; }
+.legal-links a { color: var(--brand); text-decoration: underline; }
 </style>
