@@ -371,7 +371,7 @@ export default {
 
   privacy: {
     title: 'Privacy Policy',
-    lastUpdated: 'Last updated: 29 October 2026',
+    lastUpdated: 'Last updated: 6 November 2026',
     intro: 'This policy explains how Future Smart Support ("FSS") handles information through this website and in connection with Mojeeb AI. It distinguishes between the Mojeeb AI appliance installed at your premises, the connected AI services it uses, and the optional FSS Cloud Portal.',
     sections: [
       {
@@ -413,6 +413,22 @@ export default {
       {
         title: '10. Your rights',
         body: 'You may ask to access, correct or delete personal information we hold about you. To make a request, contact us at the email address below.',
+      },
+      {
+        id: "google-data",
+        title: "11. Google account data (Mojeeb daily briefing)",
+        body: [
+          "Mojeeb AI's optional daily briefing is a phone call that tells a person about their day. It can include that person's Google Calendar events and Google Tasks, but only if that person connects their own Google account: they open a one-time link, see what will be read, and sign in with Google themselves.",
+          "What we access: read-only access to Google Calendar events (calendar.events.readonly) and Google Tasks (tasks.readonly), plus the email address of the connected Google account so the Mojeeb Portal can show which account is connected. We never create, change or delete calendar events or tasks.",
+          "How we use it: once a day, at the time the person chose, or when a briefing is requested, we read that day's events from their primary calendar (title and start time) and their open tasks that are due that day or overdue (title and due date). We remove links and special characters, shorten each title, use at most five events and five tasks, and turn them into a short summary that Mojeeb AI reads to that person in a phone call. We use this data only to provide this briefing to that person.",
+          "Storage and sharing: the Google sign-in token is stored encrypted on FSS cloud servers and is never sent to the Mojeeb AI appliance. The appliance receives only the day's short summary, which is kept with the briefing history and call records on the appliance at your premises. To produce the call audio, the summary text is sent to the text-to-speech service the appliance uses. We do not sell this data, use it for advertising, or use it to develop, improve or train artificial-intelligence or machine-learning models. People do not read it, except with the person's permission, when needed for security or to comply with the law.",
+          "Disconnecting: the person or the business can press Disconnect in the Mojeeb Portal at any time, or remove the person from the daily briefing. We then revoke the Google access and delete the stored token. Access can also be removed at any time from the Google Account permissions page.",
+          "Mojeeb AI's use and transfer to any other app of information received from Google APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements.",
+        ],
+        links: [
+          { text: "Google API Services User Data Policy", href: "https://developers.google.com/terms/api-services-user-data-policy" },
+          { text: "Google Account permissions", href: "https://myaccount.google.com/permissions" },
+        ],
       },
     ],
     contactTitle: 'Contact Us',

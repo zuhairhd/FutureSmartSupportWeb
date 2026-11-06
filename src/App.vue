@@ -14,7 +14,9 @@ const P = omr(PACKAGE)
 const { lang, setLang } = useLanguage()
 const route = useRoute()
 onMounted(() => {
-  const saved = localStorage.getItem('fss-lang')
+  // ?lang=en / ?lang=ar opens the site in that language (e.g. a link for Google's reviewers).
+  const asked = new URLSearchParams(window.location.search).get('lang')
+  const saved = asked === 'en' || asked === 'ar' ? asked : localStorage.getItem('fss-lang')
   setLang(saved === 'en' ? 'en' : 'ar')
 })
 watch([lang, () => route.path], ([l, path]) => {
