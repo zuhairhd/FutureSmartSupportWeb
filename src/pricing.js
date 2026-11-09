@@ -8,7 +8,10 @@ export const PACKAGE = pricing.packagePrice
 export const INSTALLATION = pricing.installationPrice
 export const INSTALLATION_FREE = pricing.installationFreeDuringOffer
 export const PORTAL_FREE_MONTHS = pricing.portalFreeMonths
-export const PORTAL_VALUE = pricing.portalFreeValue
+export const PORTAL_MONTHLY = pricing.portalMonthly
+export const AI_PLAN_MONTHLY = pricing.aiPlanMonthly
+export const AI_PLAN_MINUTES = pricing.aiPlanMinutes
+export const PRICE_GUARANTEE_MONTHS = pricing.priceGuaranteeMonths
 export const INCLUDED_PHONES = pricing.includedIpPhones
 export const VAT_ADDED = pricing.vat.added
 
@@ -25,12 +28,12 @@ export const VAT = {
   ar: { statement: fill(pricing.vat.statement.ar), short: pricing.vat.short.ar, detail: fill(pricing.vat.detail.ar) },
 }
 
-const P = omr(PACKAGE), I = omr(INSTALLATION), M = PORTAL_FREE_MONTHS, V = omr(PORTAL_VALUE)
+const P = omr(PACKAGE), M = PORTAL_FREE_MONTHS, PM = omr(PORTAL_MONTHLY), A = omr(AI_PLAN_MONTHLY), MIN = AI_PLAN_MINUTES
 
 // Complete offer in one sentence group, reused by the offer panel, Terms and the demo section.
 export const OFFER_SUMMARY = {
-  en: `Complete MOJEEB package: OMR ${P}, one-time. Includes the MOJEEB AI appliance (AI voice assistant with a built-in PBX), one Grandstream HT813 gateway and one IP desk phone. Professional installation: FREE during this limited-time offer (worth OMR ${I}). FSS portal subscription: FREE for the first ${M} months (worth OMR ${V}); after that it is optional and renewed only if you choose a plan. There is no monthly subscription fee to FSS for the MOJEEB appliance. ${VAT.en.statement} Additional phones, non-standard network or cabling work, external AI-provider usage and telecommunications charges are priced separately where applicable.`,
-  ar: `باقة مُجيب الكاملة: ${P} ر.ع لمرة واحدة. تشمل جهاز مُجيب الذكي (مساعد صوتي ذكي مع نظام PBX مدمج) وبوابة Grandstream HT813 واحدة وهاتف IP مكتبياً واحداً. التركيب الاحترافي: مجاناً ضمن العرض لفترة محدودة (بقيمة ${I} ر.ع). اشتراك بوابة FSS: مجاناً لأول ${M} أشهر (بقيمة ${V} ر.ع)، وبعدها اختياري ولا يُجدَّد إلا إذا اخترت خطة. ولا توجد رسوم اشتراك شهرية لشركة FSS على جهاز مُجيب. ${VAT.ar.statement} وتُسعّر الهواتف الإضافية وأعمال الشبكة أو الكابلات غير الاعتيادية ورسوم مزوّد الذكاء الاصطناعي ورسوم الاتصالات بشكل منفصل عند انطباقها.`,
+  en: `MOJEEB package: OMR ${P} one-time, no VAT added, standard installation free. Includes the MOJEEB appliance, phone-line gateway and one IP desk phone with in-house PBX. Business Portal + CRM: ${M} months free, then OMR ${PM} a month with remote technical support. AI plan: OMR ${A} a month for ${MIN} minutes, or use your own AI account. ${VAT.en.statement} Extra phones, cabling and non-standard work are quoted separately.`,
+  ar: `باقة مُجيب: ${P} ر.ع. دفعة واحدة، دون ضريبة مضافة، والتركيب القياسي مجاني. تشمل جهاز مُجيب وبوابة خط الهاتف وهاتفاً مكتبياً واحداً مع سنترال داخلي. بوابة الأعمال + CRM: ${M} أشهر مجاناً، ثم ${PM} ر.ع. شهرياً مع الدعم الفني عن بُعد. خطة الذكاء الاصطناعي: ${A} ر.ع. شهرياً لكل ${MIN} دقيقة، أو استخدم حسابك الخاص. ${VAT.ar.statement} الهواتف الإضافية والتمديدات والأعمال غير القياسية تُسعَّر منفصلة.`,
 }
 
 // Approved one-phone wording (brochure campaign).

@@ -1,4 +1,4 @@
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, omr3 } from '../pricing.js'
+import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_MONTHLY, AI_PLAN_MONTHLY, AI_PLAN_MINUTES, PRICE_GUARANTEE_MONTHS, VAT, OFFER_SUMMARY, PHONES_NOTE, omr, omr3 } from '../pricing.js'
 
 export default {
   nav: {
@@ -287,7 +287,7 @@ export default {
       },
       portal: {
         title: `FSS Portal (${PORTAL_FREE_MONTHS} months FREE)`,
-        desc: `A secure portal where your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks. Free for the first ${PORTAL_FREE_MONTHS} months; optional after that.`,
+        desc: `A secure portal where your team can review calls handled by MOJEEB, see missed-call and voicemail notifications, and manage follow-up tasks. Free for the first ${PORTAL_FREE_MONTHS} months, then OMR ${omr(PORTAL_MONTHLY)} a month with remote technical support.`,
       },
       points: [
         'AI-assisted call answering, including outside office hours',
@@ -300,7 +300,7 @@ export default {
     demo: {
       label: 'Request a Demo',
       title: 'See MOJEEB Working for Your Business',
-      text: `MOJEEB is in pre-launch. Request a live demonstration of the OMR ${omr(PACKAGE)} MOJEEB + PBX package, with FREE standard installation (regular fixed price OMR ${omr(INSTALLATION)}) and ${PORTAL_FREE_MONTHS} months of portal access FREE. Orders and delivery dates are confirmed in writing at launch; AI-provider usage is separate, and no free trial is currently available.`,
+      text: `MOJEEB is in pre-launch. Request a live demonstration of the OMR ${omr(PACKAGE)} MOJEEB + PBX package, with standard installation free and the Business Portal and CRM free for ${PORTAL_FREE_MONTHS} months. AI plan: OMR ${omr(AI_PLAN_MONTHLY)} a month for ${AI_PLAN_MINUTES} minutes, or use your own AI account. Orders and delivery dates are confirmed in writing at launch, and no free trial is currently available.`,
       nameLabel: 'Full Name',
       companyLabel: 'Company / Business Name',
       phoneLabel: 'Phone Number',
@@ -324,7 +324,7 @@ export default {
     portalPreview: {
       label: 'FSS Portal',
       title: 'Your Calls and Follow-ups in One Place',
-      sub: `With the FSS portal, free for the first ${PORTAL_FREE_MONTHS} months, your team can review calls and follow-ups from one secure portal. After the free period it is optional.`,
+      sub: `With the FSS portal, free for the first ${PORTAL_FREE_MONTHS} months, your team can review calls and follow-ups from one secure portal. After that it is OMR ${omr(PORTAL_MONTHLY)} a month with remote technical support.`,
       cards: [
         { icon: 'file',   title: 'Call Activity',        desc: 'Review calls handled by Mojeeb AI: caller number, time, duration and outcome.' },
         { icon: 'layout', title: 'Portal Notifications', desc: 'See missed-call and voicemail notifications when you log in.' },
@@ -452,11 +452,11 @@ export default {
       },
       {
         title: '3. Promotional benefits and separately priced services',
-        body: `Standard installation has a fixed price of OMR ${omr3(INSTALLATION)}. Under the current limited-time offer, standard installation is provided free of charge, and the FSS portal subscription is free for the first ${PORTAL_FREE_MONTHS} months (worth OMR ${omr(PORTAL_VALUE)}). After the free period the portal is optional: it continues only if the customer chooses a paid plan, and the on-site dashboard on the MOJEEB appliance remains available without a subscription. There is no recurring licence or subscription fee to FSS for the MOJEEB appliance. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; continued portal access after the free period; charges for the external AI services that power MOJEEB conversations, which are normally paid by the customer directly to the AI provider under the customer’s own account; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
+        body: `Standard installation has a fixed price of OMR ${omr3(INSTALLATION)}. Under the current launch offer, standard installation is provided free of charge, and the Business Portal and CRM are free for the first ${PORTAL_FREE_MONTHS} months. After the free period the Business Portal costs OMR ${omr(PORTAL_MONTHLY)} a month, including remote technical support; it continues only if the customer chooses to keep it, and the on-site dashboard on the MOJEEB appliance remains available without a subscription. Staff-phone ringing, transfer, voicemail and the call log work without a subscription. There is no recurring licence fee to FSS for the MOJEEB appliance. Standard installation requires an operational local network (LAN) and a compatible ADSL internet connection. The following are not included in the package price and are provided only when separately agreed: additional IP phones; the Business Portal after the free period; AI conversations, which require either the FSS AI plan (OMR ${omr(AI_PLAN_MONTHLY)} a month for ${AI_PLAN_MINUTES} minutes) or the customer's own AI account, whose charges the customer pays directly to the AI provider; and network, cabling, internet or other non-standard installation work, which requires a separate quotation.`,
       },
       {
         title: '4. Prices and taxes',
-        body: `Advertised prices are in Omani Rials. The MOJEEB package is OMR ${omr3(PACKAGE)}. ${VAT.en.statement} ${VAT.en.detail} Final availability, compatibility, delivery, price, scope and any non-standard work are confirmed in writing.`,
+        body: `Advertised prices are in Omani Rials. The MOJEEB package is OMR ${omr3(PACKAGE)}. Payment is 50% on order and 50% once MOJEEB works at the customer's site. Launch-offer prices are guaranteed for ${PRICE_GUARANTEE_MONTHS} months from installation. ${VAT.en.statement} ${VAT.en.detail} Final availability, compatibility, delivery, price, scope and any non-standard work are confirmed in writing.`,
       },
       {
         title: '5. Software licence and ongoing charges',
