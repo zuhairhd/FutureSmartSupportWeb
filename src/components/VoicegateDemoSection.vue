@@ -7,7 +7,7 @@
         <p class="vg-demo-text">{{ t('voicegateDemo.demo.text') }}</p>
         <div class="vg-offer-note">
           <span class="vg-offer-price" dir="ltr">{{ omr(PACKAGE) }} <small>{{ lang === 'ar' ? 'ر.ع' : 'OMR' }}</small></span>
-          <span>{{ lang === 'ar' ? `عرض لفترة محدودة · مُجيب مع نظام PBX مدمج · التركيب مجاناً (بقيمة ${omr(INSTALLATION)} ر.ع) · البوابة مجاناً لمدة ${PORTAL_FREE_MONTHS} أشهر (بقيمة ${omr(PORTAL_VALUE)} ر.ع)` : `Limited-time offer · MOJEEB with built-in PBX · FREE installation (worth OMR ${omr(INSTALLATION)}) · ${PORTAL_FREE_MONTHS}-month portal FREE (worth OMR ${omr(PORTAL_VALUE)})` }}</span>
+          <span>{{ lang === 'ar' ? `عرض الإطلاق · باقة مُجيب · التركيب القياسي مجاني · بوابة الأعمال وCRM مجاناً لمدة ${PORTAL_FREE_MONTHS} أشهر` : `Launch offer · MOJEEB package · Standard installation free · Business Portal and CRM free for ${PORTAL_FREE_MONTHS} months` }}</span>
         </div>
         <p class="vg-demo-support">{{ lang === 'ar' ? 'للاستفسار الفوري اتصل بنا، وسيرد عليك مُجيب.' : 'For an immediate enquiry, call us. Mojeeb answers.' }}</p>
         <a :href="phoneHref()" class="btn btn-ghost vg-wa">
@@ -76,7 +76,7 @@
 import { ref, nextTick } from 'vue'
 import { useLanguage } from '../composables/useLanguage.js'
 import { useContactSubmit, formError, EMAIL_RE } from '../composables/useContactSubmit.js'
-import { PACKAGE, INSTALLATION, PORTAL_FREE_MONTHS, PORTAL_VALUE, omr, phoneHref } from '../pricing.js'
+import { PACKAGE, PORTAL_FREE_MONTHS, omr, phoneHref } from '../pricing.js'
 import MarketingIcon from './MarketingIcon.vue'
 
 const { t, lang } = useLanguage()
@@ -116,7 +116,7 @@ async function handleSubmit() {
     name: f.name,
     email: f.email,
     company: f.company,
-    message: `MOJEEB demo request (pre-launch; OMR ${omr(PACKAGE)} MOJEEB + PBX package, free standard installation (normally OMR ${omr(INSTALLATION)}), ${PORTAL_FREE_MONTHS} months free portal)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
+    message: `MOJEEB demo request (pre-launch; OMR ${omr(PACKAGE)} MOJEEB package, standard installation free, ${PORTAL_FREE_MONTHS} months free Business Portal and CRM)\nPhone: ${f.phone}\nBusiness type: ${f.businessType}\nMessage: ${f.message || '-'}`,
     website: f.website,
     language: lang.value,
     source: 'marketing_website',

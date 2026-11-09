@@ -61,6 +61,26 @@
       </div>
     </section>
 
+    <!-- One assistant: the three brochure cards -->
+    <section class="section assistant" id="assistant" aria-labelledby="assistant-title">
+      <div class="container">
+        <div class="heading center">
+          <h2 id="assistant-title" class="title">{{ s.assistant.title }}</h2>
+        </div>
+        <div class="assistant-grid">
+          <article v-for="(c, i) in s.assistant.cards" :key="c.kicker" class="assistant-card reveal" :style="{ '--d': i }">
+            <span class="icon-tile"><MarketingIcon :name="c.icon" :size="24" /></span>
+            <p class="assistant-kicker">{{ c.kicker }}</p>
+            <h3>{{ c.title }}</h3>
+            <ul class="ticks">
+              <li v-for="item in c.items" :key="item"><MarketingIcon name="check" :size="16" /><span>{{ item }}</span></li>
+            </ul>
+            <p class="assistant-note">{{ c.note }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- How it works -->
     <section class="section how" id="how" aria-labelledby="how-title">
       <div class="container">
@@ -103,53 +123,33 @@
       </div>
     </section>
 
-    <!-- Price: one-time cost illustrated -->
+    <!-- Price: launch offer and running costs -->
     <section class="section offer" id="offer" aria-labelledby="offer-title">
       <div class="container">
         <div class="heading center light">
           <p class="kicker">{{ s.offer.eyebrow }}</p>
           <h2 id="offer-title" class="title">{{ s.offer.title }}</h2>
-          <p class="lead">{{ s.offer.sub }}</p>
         </div>
 
         <div class="offer-grid">
           <div class="price-card">
-            <span class="tag">{{ s.offer.limited }}</span>
             <p class="price"><bdi><b>{{ P }}</b><span>{{ s.currency }}</span></bdi></p>
             <p class="price-once">{{ s.offer.once }}</p>
             <ul class="ledger">
-              <li v-for="row in s.offer.ledger" :key="row.title" :class="row.kind">
-                <span class="ledger-mark" aria-hidden="true"><MarketingIcon :name="ledgerIcon(row.kind)" :size="15" /></span>
-                <span><b>{{ row.title }}</b><small>{{ row.desc }}</small></span>
+              <li v-for="item in s.offer.includes" :key="item">
+                <span class="ledger-mark" aria-hidden="true"><MarketingIcon name="check" :size="15" /></span>
+                <span><b>{{ item }}</b></span>
               </li>
             </ul>
             <router-link class="btn btn-primary btn-block" :to="{ path: '/', hash: '#demo' }">{{ s.cta.demo }}</router-link>
-            <p class="fine">{{ s.offer.vat }}</p>
+            <p class="fine">{{ s.offer.pay }}</p>
           </div>
 
-          <div class="once-card">
-            <h3>{{ s.offer.chartTitle }}</h3>
-            <div class="bars" role="img" :aria-label="`${s.offer.chartFirst}: ${P} ${s.currency}. ${s.offer.chartRest}: ${s.offer.chartZero}.`">
-              <div v-for="m in 12" :key="m" class="bar-col" :class="{ first: m === 1 }">
-                <span class="bar" :style="{ height: m === 1 ? '100%' : '3%' }"></span>
-                <small>{{ m }}</small>
-              </div>
-            </div>
-            <div class="bar-legend">
-              <span><i class="sw sw-pay"></i>{{ s.offer.chartFirst }}: <bdi><b>{{ P }} {{ s.currency }}</b></bdi></span>
-              <span><i class="sw sw-zero"></i>{{ s.offer.chartRest }}: <b>{{ s.offer.chartZero }}</b></span>
-            </div>
-
-            <div class="spread">
-              <p class="spread-label">{{ s.offer.spreadLabel }}</p>
-              <div class="seg" role="radiogroup" :aria-label="s.offer.spreadLabel">
-                <button v-for="y in YEARS" :key="y" type="button" role="radio" :aria-checked="years === y" :class="{ on: years === y }" @click="years = y">{{ s.offer.years(y) }}</button>
-              </div>
-              <p class="spread-result" aria-live="polite">
-                {{ s.offer.spreadIs }} <bdi v-if="lang === 'ar'"><b>{{ perMonth }}</b> {{ s.currency }}</bdi><bdi v-else>{{ s.currency }} <b>{{ perMonth }}</b></bdi> {{ s.offer.perMonth }}
-              </p>
-              <p class="fine">{{ s.offer.spreadNote }}</p>
-            </div>
+          <div class="plans">
+            <article v-for="p in s.offer.plans" :key="p.title" class="plan">
+              <h3>{{ p.title }}</h3>
+              <p>{{ p.desc }}</p>
+            </article>
           </div>
         </div>
         <p class="terms">{{ s.offer.terms }}</p>
@@ -251,13 +251,6 @@ const s = computed(() => messages[lang.value] || messages.en)
 const phoneLink = phoneHref()
 const P = omr(PACKAGE)
 
-const YEARS = [1, 3, 5]
-const years = ref(3)
-// OMR has 3 decimals (baisa).
-const perMonth = computed(() => (PACKAGE / (years.value * 12)).toFixed(3))
-
-const ledgerIcon = kind => ({ pay: 'wallet', free: 'gift', zero: 'check', direct: 'info' }[kind] || 'check')
-
 const videoEl = ref(null)
 const playing = ref(false)
 function playVideo() {
@@ -309,7 +302,7 @@ onUnmounted(() => { observer?.disconnect(); revealer?.disconnect() })
 .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #3ee6a8; box-shadow: 0 0 0 0 rgba(62,230,168,.6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(62,230,168,0); } 100% { box-shadow: 0 0 0 0 rgba(62,230,168,0); } }
 h1 { margin: 0 0 18px; font-size: clamp(34px, 6.2vw, 62px); line-height: 1.08; letter-spacing: -.035em; font-weight: 850; }
-html[dir='rtl'] h1 { letter-spacing: 0; line-height: 1.3; }
+html[dir='rtl'] h1 { letter-spacing: 0; line-height: 1.3; font-size: clamp(30px, 3.6vw, 50px); }
 .grad { display: block; background: linear-gradient(100deg, #5ff3e8 0%, #33c7ff 55%, #8fb8ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero-sub { margin: 0 0 24px; max-width: 590px; color: #c7d8e6; font-size: clamp(16px, 1.6vw, 18.5px); line-height: 1.7; }
 
@@ -385,6 +378,18 @@ p { margin: 0; }
 .flow-step p { color: var(--muted); }
 .flow-num { position: absolute; top: 18px; inset-inline-end: 20px; font-size: 44px; font-weight: 900; line-height: 1; color: #e2eef5; }
 
+/* ---------- Assistant cards ---------- */
+.assistant { background: #f6fbfd; }
+.assistant-grid { display: grid; gap: 16px; }
+.assistant-card { display: flex; flex-direction: column; padding: 26px; border-radius: 22px; background: #fff; border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(13,52,82,.05); }
+.assistant-kicker { margin-top: 14px; color: var(--teal-d); font-size: 12.5px; font-weight: 800; letter-spacing: .1em; }
+html[dir='rtl'] .assistant-kicker { letter-spacing: 0; font-size: 14px; }
+.assistant-card h3 { margin-top: 6px; }
+.ticks { display: grid; gap: 10px; margin: 0 0 18px; padding: 0; list-style: none; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.ticks li { display: flex; gap: 10px; align-items: flex-start; }
+.ticks :deep(svg) { flex: none; margin-top: 4px; color: #079b7c; }
+.assistant-note { margin-top: auto; padding: 12px 14px; border-radius: 14px; color: var(--teal-d); background: #effcfa; font-size: 14px; font-weight: 700; line-height: 1.55; }
+
 /* ---------- Box ---------- */
 .box { background: #fff; }
 .box-grid { display: grid; gap: 16px; }
@@ -404,9 +409,7 @@ p { margin: 0; }
 .heading.light .lead { color: #b9cddd; }
 .heading.light .kicker { color: #5ff3e8; }
 .offer-grid { display: grid; gap: 18px; align-items: start; }
-.price-card, .once-card { border-radius: 26px; padding: 28px 24px; }
-.price-card { position: relative; color: var(--fg); background: #fff; box-shadow: 0 30px 70px rgba(0,0,0,.3); }
-.tag { display: inline-block; padding: 6px 12px; border-radius: 999px; color: #8a4b00; background: #ffeccc; font-size: 12.5px; font-weight: 800; }
+.price-card { border-radius: 26px; padding: 28px 24px; position: relative; color: var(--fg); background: #fff; box-shadow: 0 30px 70px rgba(0,0,0,.3); }
 .price { margin: 14px 0 0; color: var(--ink); line-height: 1; }
 .price b { font-size: clamp(64px, 10vw, 88px); font-weight: 900; letter-spacing: -.045em; }
 .price span { margin-inline-start: 8px; font-size: 22px; font-weight: 800; color: var(--muted); }
@@ -416,34 +419,14 @@ p { margin: 0; }
 .ledger b { display: block; font-size: 15.5px; color: var(--ink); }
 .ledger small { display: block; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
 .ledger-mark { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; margin-top: 1px; }
-.ledger .pay .ledger-mark { color: #fff; background: var(--ink); }
-.ledger .free .ledger-mark { color: #fff; background: var(--teal-d); }
-.ledger .zero .ledger-mark { color: #fff; background: #079b7c; }
-.ledger .zero b { color: #067a62; }
-.ledger .direct .ledger-mark { color: #4a6578; background: #e8f0f5; }
+.ledger-mark { color: #fff; background: var(--teal-d); }
 .btn-block { width: 100%; }
 .fine { margin-top: 12px; color: var(--muted); font-size: 12.5px; line-height: 1.6; }
 
-.once-card { background: rgba(255,255,255,.05); border: 1px solid rgba(126,208,230,.2); }
-.once-card h3 { margin: 0 0 22px; color: #fff; font-size: 17px; }
-.bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; height: 190px; align-items: end; }
-.bar-col { display: grid; grid-template-rows: 1fr auto; gap: 6px; height: 100%; text-align: center; }
-.bar-col small { color: #7f9ab0; font-size: 11px; }
-.bar { align-self: end; display: block; width: 100%; min-height: 4px; border-radius: 6px 6px 3px 3px; background: rgba(95,243,232,.28); }
-.bar-col.first .bar { background: linear-gradient(180deg, #5ff3e8, #05a8a1); box-shadow: 0 0 24px rgba(95,243,232,.35); }
-.bar-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; color: #c8d9e6; font-size: 14px; }
-.bar-legend span { display: inline-flex; align-items: center; gap: 8px; }
-.sw { display: inline-block; width: 12px; height: 12px; border-radius: 4px; }
-.sw-pay { background: #5ff3e8; }
-.sw-zero { background: rgba(95,243,232,.28); }
-.spread { margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(126,208,230,.18); }
-.spread-label { margin-bottom: 10px; color: #9db4c7; font-size: 14px; }
-.seg { display: inline-flex; padding: 4px; border-radius: 14px; background: rgba(0,0,0,.25); border: 1px solid rgba(126,208,230,.18); }
-.seg button { min-width: 78px; padding: 9px 14px; border: 0; border-radius: 10px; color: #c8d9e6; background: transparent; font-weight: 700; font-size: 14px; }
-.seg button.on { color: #062336; background: #5ff3e8; }
-.spread-result { margin-top: 14px; color: #dbe8f2; font-size: 17px; }
-.spread-result b { color: #5ff3e8; font-size: 30px; font-weight: 900; }
-.once-card .fine { color: #8ea7bb; }
+.plans { display: grid; gap: 14px; }
+.plan { padding: 24px; border-radius: 22px; background: rgba(255,255,255,.05); border: 1px solid rgba(126,208,230,.2); }
+.plan h3 { margin: 0 0 8px; color: #fff; font-size: 18px; }
+.plan p { color: #c8d9e6; font-size: 15px; line-height: 1.7; }
 .terms { max-width: 860px; margin: 22px auto 0; color: #8ea7bb; font-size: 13px; text-align: center; line-height: 1.7; }
 
 /* ---------- Who ---------- */
@@ -507,7 +490,8 @@ p { margin: 0; }
   .flow-step:not(:last-child)::after { content: ''; position: absolute; top: 50px; inset-inline-end: -14px; width: 12px; height: 12px; border-top: 2px solid #9edbd8; border-inline-end: 2px solid #9edbd8; transform: rotate(45deg); }
   html[dir='rtl'] .flow-step:not(:last-child)::after { transform: rotate(-45deg); }
   .offer-grid { grid-template-columns: 1fr 1.15fr; gap: 24px; }
-  .price-card, .once-card { padding: 36px; }
+  .price-card { padding: 36px; }
+  .assistant-grid { grid-template-columns: repeat(3, 1fr); }
   .limits-grid { grid-template-columns: repeat(3, 1fr); }
   .faq-grid { grid-template-columns: .8fr 1.4fr; gap: 48px; align-items: start; }
   .faq .heading { position: sticky; top: 100px; }
